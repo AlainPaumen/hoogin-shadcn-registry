@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "hoogin",
-  "homepage": "https://github.com/hoogin/hoogin-shadcn-registry",
+  "homepage": "https://github.com/alainpaumen/hoogin-shadcn-registry",
   "include": ["registry/ui/registry.json"]
 }
