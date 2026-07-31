@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "hoogin",
+  "homepage": "https://github.com/hoogin/hoogin-shadcn-registry",
+  "items": [
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "description": "A lightweight loading spinner with no runtime dependencies.",
+      "files": [
+        {
+          "path": "registry/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "type": "registry:ui"
+    }
+  ]
+}
