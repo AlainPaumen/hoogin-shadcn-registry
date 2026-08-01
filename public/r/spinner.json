@@ -7,7 +7,8 @@
     {
       "path": "registry/ui/spinner.tsx",
       "content": "import type { ComponentProps } from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nfunction Spinner({ className, ...props }: ComponentProps<\"span\">) {\n  return (\n    <span\n      aria-hidden=\"true\"\n      data-slot=\"spinner\"\n      className={cn(\n        \"size-4 animate-spin rounded-full border-2 border-current border-t-transparent\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Spinner }\n",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "target": "hoogin/ui/spinner.tsx"
     }
   ],
   "type": "registry:ui"

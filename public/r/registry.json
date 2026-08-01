@@ -10,7 +10,30 @@
       "files": [
         {
           "path": "registry/ui/spinner.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "hoogin/ui/spinner.tsx"
+        }
+      ],
+      "type": "registry:ui"
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "description": "A collapsible sidebar that persists its state in localStorage.",
+      "registryDependencies": [
+        "button",
+        "input",
+        "separator",
+        "sheet",
+        "skeleton",
+        "tooltip",
+        "use-mobile"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/sidebar.tsx"
         }
       ],
       "type": "registry:ui"
