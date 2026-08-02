@@ -74,9 +74,9 @@ function DataTableToolbar<TData>({
             <SelectValue />
           </SelectTrigger>
           <SelectContent align="start">
-            <SelectItem value={ALL_COLUMNS}>All columns</SelectItem>
+            <SelectItem value={ALL_COLUMNS} label="All columns">All columns</SelectItem>
             {columns.map((column) => (
-              <SelectItem key={column.id} value={column.id}>
+              <SelectItem key={column.id} value={column.id} label={column.caption}>
                 {column.caption}
               </SelectItem>
             ))}
