@@ -16,6 +16,9 @@ import { Route as DocsIntroductionRouteImport } from './routes/docs/introduction
 import { Route as DocsBlocksSidebarLayoutRouteImport } from './routes/docs/blocks/sidebar-layout'
 import { Route as DocsComponentsIndexRouteImport } from './routes/docs/components/index'
 import { Route as DocsComponentsAppSidebarRouteImport } from './routes/docs/components/app-sidebar'
+import { Route as DocsComponentsDataTableRouteImport } from './routes/docs/components/data-table'
+import { Route as DocsComponentsDataTableCellsRouteImport } from './routes/docs/components/data-table-cells'
+import { Route as DocsComponentsDataTableViewOptionsRouteImport } from './routes/docs/components/data-table-view-options'
 import { Route as DocsComponentsSidebarRouteImport } from './routes/docs/components/sidebar'
 import { Route as DocsComponentsSpinnerRouteImport } from './routes/docs/components/spinner'
 import { Route as DocsComponentsThemeProviderRouteImport } from './routes/docs/components/theme-provider'
@@ -57,6 +60,23 @@ const DocsComponentsAppSidebarRoute =
     path: '/docs/components/app-sidebar',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DocsComponentsDataTableRoute = DocsComponentsDataTableRouteImport.update({
+  id: '/docs/components/data-table',
+  path: '/docs/components/data-table',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsComponentsDataTableCellsRoute =
+  DocsComponentsDataTableCellsRouteImport.update({
+    id: '/docs/components/data-table-cells',
+    path: '/docs/components/data-table-cells',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsDataTableViewOptionsRoute =
+  DocsComponentsDataTableViewOptionsRouteImport.update({
+    id: '/docs/components/data-table-view-options',
+    path: '/docs/components/data-table-view-options',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DocsComponentsSidebarRoute = DocsComponentsSidebarRouteImport.update({
   id: '/docs/components/sidebar',
   path: '/docs/components/sidebar',
@@ -87,6 +107,9 @@ export interface FileRoutesByFullPath {
   '/docs/': typeof DocsIndexRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/data-table': typeof DocsComponentsDataTableRoute
+  '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
+  '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -100,6 +123,9 @@ export interface FileRoutesByTo {
   '/docs': typeof DocsIndexRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/data-table': typeof DocsComponentsDataTableRoute
+  '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
+  '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -114,6 +140,9 @@ export interface FileRoutesById {
   '/docs/': typeof DocsIndexRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/data-table': typeof DocsComponentsDataTableRoute
+  '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
+  '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -129,6 +158,9 @@ export interface FileRouteTypes {
     | '/docs/'
     | '/docs/blocks/sidebar-layout'
     | '/docs/components/app-sidebar'
+    | '/docs/components/data-table'
+    | '/docs/components/data-table-cells'
+    | '/docs/components/data-table-view-options'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -142,6 +174,9 @@ export interface FileRouteTypes {
     | '/docs'
     | '/docs/blocks/sidebar-layout'
     | '/docs/components/app-sidebar'
+    | '/docs/components/data-table'
+    | '/docs/components/data-table-cells'
+    | '/docs/components/data-table-view-options'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -155,6 +190,9 @@ export interface FileRouteTypes {
     | '/docs/'
     | '/docs/blocks/sidebar-layout'
     | '/docs/components/app-sidebar'
+    | '/docs/components/data-table'
+    | '/docs/components/data-table-cells'
+    | '/docs/components/data-table-view-options'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -169,6 +207,9 @@ export interface RootRouteChildren {
   DocsIndexRoute: typeof DocsIndexRoute
   DocsBlocksSidebarLayoutRoute: typeof DocsBlocksSidebarLayoutRoute
   DocsComponentsAppSidebarRoute: typeof DocsComponentsAppSidebarRoute
+  DocsComponentsDataTableRoute: typeof DocsComponentsDataTableRoute
+  DocsComponentsDataTableCellsRoute: typeof DocsComponentsDataTableCellsRoute
+  DocsComponentsDataTableViewOptionsRoute: typeof DocsComponentsDataTableViewOptionsRoute
   DocsComponentsSidebarRoute: typeof DocsComponentsSidebarRoute
   DocsComponentsSpinnerRoute: typeof DocsComponentsSpinnerRoute
   DocsComponentsThemeProviderRoute: typeof DocsComponentsThemeProviderRoute
@@ -227,6 +268,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsComponentsAppSidebarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/components/data-table': {
+      id: '/docs/components/data-table'
+      path: '/docs/components/data-table'
+      fullPath: '/docs/components/data-table'
+      preLoaderRoute: typeof DocsComponentsDataTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/data-table-cells': {
+      id: '/docs/components/data-table-cells'
+      path: '/docs/components/data-table-cells'
+      fullPath: '/docs/components/data-table-cells'
+      preLoaderRoute: typeof DocsComponentsDataTableCellsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/data-table-view-options': {
+      id: '/docs/components/data-table-view-options'
+      path: '/docs/components/data-table-view-options'
+      fullPath: '/docs/components/data-table-view-options'
+      preLoaderRoute: typeof DocsComponentsDataTableViewOptionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs/components/sidebar': {
       id: '/docs/components/sidebar'
       path: '/docs/components/sidebar'
@@ -265,6 +327,10 @@ const rootRouteChildren: RootRouteChildren = {
   DocsIndexRoute: DocsIndexRoute,
   DocsBlocksSidebarLayoutRoute: DocsBlocksSidebarLayoutRoute,
   DocsComponentsAppSidebarRoute: DocsComponentsAppSidebarRoute,
+  DocsComponentsDataTableRoute: DocsComponentsDataTableRoute,
+  DocsComponentsDataTableCellsRoute: DocsComponentsDataTableCellsRoute,
+  DocsComponentsDataTableViewOptionsRoute:
+    DocsComponentsDataTableViewOptionsRoute,
   DocsComponentsSidebarRoute: DocsComponentsSidebarRoute,
   DocsComponentsSpinnerRoute: DocsComponentsSpinnerRoute,
   DocsComponentsThemeProviderRoute: DocsComponentsThemeProviderRoute,

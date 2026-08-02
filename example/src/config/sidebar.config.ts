@@ -52,6 +52,18 @@ export const sidebarData = {
           url: "/docs/components/spinner",
         },
         {
+          title: "Data Table",
+          url: "/docs/components/data-table",
+        },
+        {
+          title: "Data Table Cells",
+          url: "/docs/components/data-table-cells",
+        },
+        {
+          title: "Data Table View Options",
+          url: "/docs/components/data-table-view-options",
+        },
+        {
           title: "Sidebar",
           url: "/docs/components/sidebar",
         },

@@ -75,6 +75,7 @@ async function generateRegistryConfig() {
     "  type: string",
     "  title: string",
     "  description: string",
+    "  dependencies?: string[]",
     "  registryDependencies?: string[]",
     "  files: RegistryItemFile[]",
     "}",

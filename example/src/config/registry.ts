@@ -12,6 +12,7 @@ export type RegistryItem = {
   type: string
   title: string
   description: string
+  dependencies?: string[]
   registryDependencies?: string[]
   files: RegistryItemFile[]
 }
@@ -123,6 +124,117 @@ export const registryItems: RegistryItem[] = [
         "path": "theme-toggle.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/theme-toggle.tsx"
+      }
+    ]
+  },
+  {
+    "name": "data-table",
+    "type": "registry:ui",
+    "title": "Data Table",
+    "description": "A sortable, paginated, selectable data table built on TanStack Table.",
+    "dependencies": [
+      "@tanstack/react-table",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "@hoogin/data-table-cells",
+      "@hoogin/data-table-view-options",
+      "table",
+      "button",
+      "select",
+      "checkbox",
+      "dropdown-menu"
+    ],
+    "files": [
+      {
+        "path": "data-table.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/data-table.tsx"
+      },
+      {
+        "path": "data-table-pagination.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/data-table-pagination.tsx"
+      },
+      {
+        "path": "data-table.types.ts",
+        "type": "registry:file",
+        "target": "hoogin/ui/data-table.types.ts"
+      }
+    ]
+  },
+  {
+    "name": "data-table-cells",
+    "type": "registry:ui",
+    "title": "Data Table Cells",
+    "description": "Cell components for displaying typed values (text, email, date, currency) in data tables.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "badge"
+    ],
+    "files": [
+      {
+        "path": "formatted.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/formatted.cell.tsx"
+      },
+      {
+        "path": "text.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/text.cell.tsx"
+      },
+      {
+        "path": "email.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/email.cell.tsx"
+      },
+      {
+        "path": "date.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/date.cell.tsx"
+      },
+      {
+        "path": "currency.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/currency.cell.tsx"
+      },
+      {
+        "path": "checkbox.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/checkbox.cell.tsx"
+      },
+      {
+        "path": "badge.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/badge.cell.tsx"
+      },
+      {
+        "path": "formatters.utils.tsx",
+        "type": "registry:file",
+        "target": "hoogin/ui/formatters.utils.tsx"
+      }
+    ]
+  },
+  {
+    "name": "data-table-view-options",
+    "type": "registry:ui",
+    "title": "Data Table View Options",
+    "description": "A dropdown menu to toggle column visibility for a data table.",
+    "dependencies": [
+      "@tanstack/react-table",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "button",
+      "dropdown-menu"
+    ],
+    "files": [
+      {
+        "path": "view-options.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/view-options.tsx"
       }
     ]
   },
