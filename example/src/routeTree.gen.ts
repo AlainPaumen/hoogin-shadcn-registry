@@ -10,33 +10,170 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DocsIndexRouteImport } from './routes/docs/index'
+import { Route as DocsInstallationRouteImport } from './routes/docs/installation'
+import { Route as DocsIntroductionRouteImport } from './routes/docs/introduction'
+import { Route as DocsBlocksSidebarLayoutRouteImport } from './routes/docs/blocks/sidebar-layout'
+import { Route as DocsComponentsIndexRouteImport } from './routes/docs/components/index'
+import { Route as DocsComponentsAppSidebarRouteImport } from './routes/docs/components/app-sidebar'
+import { Route as DocsComponentsSidebarRouteImport } from './routes/docs/components/sidebar'
+import { Route as DocsComponentsSpinnerRouteImport } from './routes/docs/components/spinner'
+import { Route as DocsComponentsThemeProviderRouteImport } from './routes/docs/components/theme-provider'
+import { Route as DocsComponentsThemeToggleRouteImport } from './routes/docs/components/theme-toggle'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsIndexRoute = DocsIndexRouteImport.update({
+  id: '/docs/',
+  path: '/docs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsInstallationRoute = DocsInstallationRouteImport.update({
+  id: '/docs/installation',
+  path: '/docs/installation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsIntroductionRoute = DocsIntroductionRouteImport.update({
+  id: '/docs/introduction',
+  path: '/docs/introduction',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsBlocksSidebarLayoutRoute = DocsBlocksSidebarLayoutRouteImport.update({
+  id: '/docs/blocks/sidebar-layout',
+  path: '/docs/blocks/sidebar-layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsComponentsIndexRoute = DocsComponentsIndexRouteImport.update({
+  id: '/docs/components/',
+  path: '/docs/components/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsComponentsAppSidebarRoute =
+  DocsComponentsAppSidebarRouteImport.update({
+    id: '/docs/components/app-sidebar',
+    path: '/docs/components/app-sidebar',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsSidebarRoute = DocsComponentsSidebarRouteImport.update({
+  id: '/docs/components/sidebar',
+  path: '/docs/components/sidebar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsComponentsSpinnerRoute = DocsComponentsSpinnerRouteImport.update({
+  id: '/docs/components/spinner',
+  path: '/docs/components/spinner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsComponentsThemeProviderRoute =
+  DocsComponentsThemeProviderRouteImport.update({
+    id: '/docs/components/theme-provider',
+    path: '/docs/components/theme-provider',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsThemeToggleRoute =
+  DocsComponentsThemeToggleRouteImport.update({
+    id: '/docs/components/theme-toggle',
+    path: '/docs/components/theme-toggle',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docs/installation': typeof DocsInstallationRoute
+  '/docs/introduction': typeof DocsIntroductionRoute
+  '/docs/': typeof DocsIndexRoute
+  '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
+  '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
+  '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
+  '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
+  '/docs/components/theme-toggle': typeof DocsComponentsThemeToggleRoute
+  '/docs/components/': typeof DocsComponentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docs/installation': typeof DocsInstallationRoute
+  '/docs/introduction': typeof DocsIntroductionRoute
+  '/docs': typeof DocsIndexRoute
+  '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
+  '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
+  '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
+  '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
+  '/docs/components/theme-toggle': typeof DocsComponentsThemeToggleRoute
+  '/docs/components': typeof DocsComponentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/docs/installation': typeof DocsInstallationRoute
+  '/docs/introduction': typeof DocsIntroductionRoute
+  '/docs/': typeof DocsIndexRoute
+  '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
+  '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
+  '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
+  '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
+  '/docs/components/theme-toggle': typeof DocsComponentsThemeToggleRoute
+  '/docs/components/': typeof DocsComponentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/docs/installation'
+    | '/docs/introduction'
+    | '/docs/'
+    | '/docs/blocks/sidebar-layout'
+    | '/docs/components/app-sidebar'
+    | '/docs/components/sidebar'
+    | '/docs/components/spinner'
+    | '/docs/components/theme-provider'
+    | '/docs/components/theme-toggle'
+    | '/docs/components/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/docs/installation'
+    | '/docs/introduction'
+    | '/docs'
+    | '/docs/blocks/sidebar-layout'
+    | '/docs/components/app-sidebar'
+    | '/docs/components/sidebar'
+    | '/docs/components/spinner'
+    | '/docs/components/theme-provider'
+    | '/docs/components/theme-toggle'
+    | '/docs/components'
+  id:
+    | '__root__'
+    | '/'
+    | '/docs/installation'
+    | '/docs/introduction'
+    | '/docs/'
+    | '/docs/blocks/sidebar-layout'
+    | '/docs/components/app-sidebar'
+    | '/docs/components/sidebar'
+    | '/docs/components/spinner'
+    | '/docs/components/theme-provider'
+    | '/docs/components/theme-toggle'
+    | '/docs/components/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocsInstallationRoute: typeof DocsInstallationRoute
+  DocsIntroductionRoute: typeof DocsIntroductionRoute
+  DocsIndexRoute: typeof DocsIndexRoute
+  DocsBlocksSidebarLayoutRoute: typeof DocsBlocksSidebarLayoutRoute
+  DocsComponentsAppSidebarRoute: typeof DocsComponentsAppSidebarRoute
+  DocsComponentsSidebarRoute: typeof DocsComponentsSidebarRoute
+  DocsComponentsSpinnerRoute: typeof DocsComponentsSpinnerRoute
+  DocsComponentsThemeProviderRoute: typeof DocsComponentsThemeProviderRoute
+  DocsComponentsThemeToggleRoute: typeof DocsComponentsThemeToggleRoute
+  DocsComponentsIndexRoute: typeof DocsComponentsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +185,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/': {
+      id: '/docs/'
+      path: '/docs'
+      fullPath: '/docs/'
+      preLoaderRoute: typeof DocsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/installation': {
+      id: '/docs/installation'
+      path: '/docs/installation'
+      fullPath: '/docs/installation'
+      preLoaderRoute: typeof DocsInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/introduction': {
+      id: '/docs/introduction'
+      path: '/docs/introduction'
+      fullPath: '/docs/introduction'
+      preLoaderRoute: typeof DocsIntroductionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/blocks/sidebar-layout': {
+      id: '/docs/blocks/sidebar-layout'
+      path: '/docs/blocks/sidebar-layout'
+      fullPath: '/docs/blocks/sidebar-layout'
+      preLoaderRoute: typeof DocsBlocksSidebarLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/': {
+      id: '/docs/components/'
+      path: '/docs/components'
+      fullPath: '/docs/components/'
+      preLoaderRoute: typeof DocsComponentsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/app-sidebar': {
+      id: '/docs/components/app-sidebar'
+      path: '/docs/components/app-sidebar'
+      fullPath: '/docs/components/app-sidebar'
+      preLoaderRoute: typeof DocsComponentsAppSidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/sidebar': {
+      id: '/docs/components/sidebar'
+      path: '/docs/components/sidebar'
+      fullPath: '/docs/components/sidebar'
+      preLoaderRoute: typeof DocsComponentsSidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/spinner': {
+      id: '/docs/components/spinner'
+      path: '/docs/components/spinner'
+      fullPath: '/docs/components/spinner'
+      preLoaderRoute: typeof DocsComponentsSpinnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/theme-provider': {
+      id: '/docs/components/theme-provider'
+      path: '/docs/components/theme-provider'
+      fullPath: '/docs/components/theme-provider'
+      preLoaderRoute: typeof DocsComponentsThemeProviderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/theme-toggle': {
+      id: '/docs/components/theme-toggle'
+      path: '/docs/components/theme-toggle'
+      fullPath: '/docs/components/theme-toggle'
+      preLoaderRoute: typeof DocsComponentsThemeToggleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocsInstallationRoute: DocsInstallationRoute,
+  DocsIntroductionRoute: DocsIntroductionRoute,
+  DocsIndexRoute: DocsIndexRoute,
+  DocsBlocksSidebarLayoutRoute: DocsBlocksSidebarLayoutRoute,
+  DocsComponentsAppSidebarRoute: DocsComponentsAppSidebarRoute,
+  DocsComponentsSidebarRoute: DocsComponentsSidebarRoute,
+  DocsComponentsSpinnerRoute: DocsComponentsSpinnerRoute,
+  DocsComponentsThemeProviderRoute: DocsComponentsThemeProviderRoute,
+  DocsComponentsThemeToggleRoute: DocsComponentsThemeToggleRoute,
+  DocsComponentsIndexRoute: DocsComponentsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

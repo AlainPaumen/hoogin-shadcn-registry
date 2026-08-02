@@ -24,9 +24,21 @@ jobs:
           bun-version: latest
       - name: Build registry
         run: bunx --bun shadcn@latest build
+      - name: Install example dependencies
+        run: bun install
+        working-directory: example
+      - name: Build docs site
+        run: bun run build
+        working-directory: example
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -r public/. _site/
+          cp -r example/dist/. _site/
+          cp _site/index.html _site/404.html
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: ./public
+          path: ./_site
 
   deploy:
     environment:

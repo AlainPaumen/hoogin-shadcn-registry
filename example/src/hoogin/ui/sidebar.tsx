@@ -52,6 +52,7 @@ function useSidebar() {
 
 function SidebarProvider({
   defaultOpen = true,
+  storageKey = SIDEBAR_STORAGE_KEY,
   open: openProp,
   onOpenChange: setOpenProp,
   className,
@@ -60,6 +61,7 @@ function SidebarProvider({
   ...props
 }: React.ComponentProps<"div"> & {
   defaultOpen?: boolean
+  storageKey?: string
   open?: boolean
   onOpenChange?: (open: boolean) => void
 }) {
@@ -69,7 +71,7 @@ function SidebarProvider({
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
   const [_open, _setOpen] = React.useState(() => {
-    const stored = localStorage.getItem(SIDEBAR_STORAGE_KEY)
+    const stored = localStorage.getItem(storageKey)
     return stored === null ? defaultOpen : stored === "true"
   })
   const open = openProp ?? _open
@@ -83,9 +85,9 @@ function SidebarProvider({
       }
 
       // This sets the sidebar state in localStorage.
-      localStorage.setItem(SIDEBAR_STORAGE_KEY, String(openState))
+      localStorage.setItem(storageKey, String(openState))
     },
-    [setOpenProp, open]
+    [setOpenProp, open, storageKey]
   )
 
   // Helper to toggle the sidebar.

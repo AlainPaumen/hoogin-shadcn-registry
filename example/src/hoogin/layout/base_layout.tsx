@@ -1,4 +1,5 @@
-import { Outlet } from "@tanstack/react-router"
+import { Fragment } from "react"
+import { Link, Outlet, useMatches } from "@tanstack/react-router"
 
 import {
   Breadcrumb,
@@ -10,31 +11,42 @@ import {
 } from "@/components/ui/breadcrumb"
 import { sidebarData } from "@/config/sidebar.config"
 import { SidebarLayout } from "@/hoogin/blocks/sidebar-layout/sidebar-layout"
+import { getBreadcrumbs } from "@/hoogin/docs/breadcrumbs"
 
 export function BaseLayout() {
+  const matches = useMatches()
+  const fullPath = matches[matches.length - 1]?.fullPath ?? ""
+  const crumbs = getBreadcrumbs(fullPath)
+
   return (
     <SidebarLayout
       brand={sidebarData.brand}
-      user={sidebarData.user}
       dataMain={sidebarData.navMain}
       dataSecondary={sidebarData.navSecondary}
-      dataProjects={sidebarData.projects}
       dataMainLabel={sidebarData.navMainLabel}
-      dataProjectsLabel={sidebarData.projectsLabel}
-      dataProjectsMore={sidebarData.projectsMore}
-      dataUserMenu={sidebarData.navUserMenu}
       breadcrumb={
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink href="#">Build Your Application</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="hidden md:block" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        crumbs.length ? (
+          <Breadcrumb>
+            <BreadcrumbList>
+              {crumbs.map((crumb, index) => (
+                <Fragment key={crumb.label}>
+                  {index > 0 ? (
+                    <BreadcrumbSeparator className="hidden md:block" />
+                  ) : null}
+                  <BreadcrumbItem className="hidden md:block">
+                    {crumb.to ? (
+                      <BreadcrumbLink render={<Link to={crumb.to} />}>
+                        {crumb.label}
+                      </BreadcrumbLink>
+                    ) : (
+                      <BreadcrumbPage>{crumb.label}</BreadcrumbPage>
+                    )}
+                  </BreadcrumbItem>
+                </Fragment>
+              ))}
+            </BreadcrumbList>
+          </Breadcrumb>
+        ) : null
       }
     >
       <Outlet />

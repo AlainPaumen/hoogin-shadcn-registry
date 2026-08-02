@@ -28,10 +28,10 @@ import { BlocksIcon } from "lucide-react"
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   brand: SidebarBrand
-  user: SidebarUser
+  user?: SidebarUser
   dataMain: SidebarNavItem[]
-  dataSecondary: SidebarSecondaryItem[]
-  dataProjects: SidebarProject[]
+  dataSecondary?: SidebarSecondaryItem[]
+  dataProjects?: SidebarProject[]
   dataMainLabel?: string
   dataProjectsLabel?: string
   dataProjectsMore?: SidebarMore
@@ -77,16 +77,22 @@ export function AppSidebar({
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={dataMain} label={dataMainLabel} />
-        <NavProjects
-          projects={dataProjects}
-          label={dataProjectsLabel}
-          more={dataProjectsMore}
-        />
-        <NavSecondary items={dataSecondary} className="mt-auto" />
+        {dataProjects?.length ? (
+          <NavProjects
+            projects={dataProjects}
+            label={dataProjectsLabel}
+            more={dataProjectsMore}
+          />
+        ) : null}
+        {dataSecondary?.length ? (
+          <NavSecondary items={dataSecondary} className="mt-auto" />
+        ) : null}
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={user} menu={dataUserMenu} />
-      </SidebarFooter>
+      {user ? (
+        <SidebarFooter>
+          <NavUser user={user} menu={dataUserMenu} />
+        </SidebarFooter>
+      ) : null}
     </Sidebar>
   )
 }

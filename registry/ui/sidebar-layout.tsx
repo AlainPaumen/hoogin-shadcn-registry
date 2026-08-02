@@ -25,14 +25,17 @@ type SidebarLayoutProps = {
   children: React.ReactNode
   breadcrumb?: React.ReactNode
   brand: SidebarBrand
-  user: SidebarUser
+  user?: SidebarUser
   dataMain: SidebarNavItem[]
-  dataSecondary: SidebarSecondaryItem[]
-  dataProjects: SidebarProject[]
+  dataSecondary?: SidebarSecondaryItem[]
+  dataProjects?: SidebarProject[]
   dataMainLabel?: string
   dataProjectsLabel?: string
   dataProjectsMore?: SidebarMore
   dataUserMenu?: SidebarUserMenu
+  storageKey?: string
+  collapsible?: "offcanvas" | "icon" | "none"
+  className?: string
 }
 
 export function SidebarLayout({
@@ -47,10 +50,13 @@ export function SidebarLayout({
   dataProjectsLabel,
   dataProjectsMore,
   dataUserMenu,
+  storageKey,
+  collapsible,
+  className,
 }: SidebarLayoutProps) {
   return (
     <TooltipProvider>
-      <SidebarProvider>
+      <SidebarProvider storageKey={storageKey} className={className}>
         <AppSidebar
           brand={brand}
           user={user}
@@ -61,6 +67,7 @@ export function SidebarLayout({
           dataProjectsLabel={dataProjectsLabel}
           dataProjectsMore={dataProjectsMore}
           dataUserMenu={dataUserMenu}
+          collapsible={collapsible}
         />
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2">
