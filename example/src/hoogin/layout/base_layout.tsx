@@ -20,7 +20,6 @@ export function BaseLayout() {
 
   return (
     <SidebarLayout
-      collapsible="none"
       brand={sidebarData.brand}
       dataMain={sidebarData.navMain}
       dataSecondary={sidebarData.navSecondary}
