@@ -24,13 +24,21 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
-import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
+import type {
+  DataTableColumnDef,
+  FilterableColumn,
+} from "@/hoogin/ui/data-table.types"
 import { DataTablePagination } from "@/hoogin/ui/data-table-pagination"
-import { DataTableViewOptions } from "@/hoogin/ui/view-options"
+import {
+  DataTableToolbar,
+  type GlobalFilterValue,
+} from "@/hoogin/ui/table-toolbar"
 
 type DataTableProps<TData, TValue> = {
   columns: DataTableColumnDef<TData, TValue>[]
   data: TData[]
+  filterPlaceholder?: string
+  filterableColumns?: FilterableColumn[]
   initialSorting?: SortingState
   initialPageSize?: number
   pageSizeOptions?: number[]
@@ -44,6 +52,8 @@ type DataTableProps<TData, TValue> = {
 function DataTable<TData, TValue>({
   columns,
   data,
+  filterPlaceholder,
+  filterableColumns,
   initialSorting,
   initialPageSize = 10,
   pageSizeOptions,
@@ -54,6 +64,10 @@ function DataTable<TData, TValue>({
   tableProps,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>(initialSorting ?? [])
+  const [globalFilter, setGlobalFilter] = useState<GlobalFilterValue>({
+    value: "",
+    columns: [],
+  })
 
   const selectionColumn = useMemo<DataTableColumnDef<TData, unknown>>(
     () => ({
@@ -89,8 +103,32 @@ function DataTable<TData, TValue>({
     data,
     columns: allColumns,
     getRowId,
-    state: { sorting },
+    state: { sorting, globalFilter },
     onSortingChange: setSorting,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: (row, _columnId, filterValue) => {
+      const filter = (filterValue as GlobalFilterValue | undefined) ?? {
+        value: "",
+        columns: [],
+      }
+      if (!filter.value) return true
+      const query = filter.value.toLowerCase()
+      const cells = row
+        .getAllCells()
+        .filter((cell) => cell.column.getCanGlobalFilter())
+        .filter(
+          (cell) =>
+            !filterableColumns ||
+            filterableColumns.some((filterable) => filterable.column === cell.column.id)
+        )
+      const targets =
+        filter.columns.length > 0
+          ? cells.filter((cell) => filter.columns.includes(cell.column.id))
+          : cells
+      return targets.some((cell) =>
+        String(cell.getValue() ?? "").toLowerCase().includes(query)
+      )
+    },
     initialState: {
       sorting: initialSorting,
       pagination: { pageSize: initialPageSize },
@@ -104,9 +142,11 @@ function DataTable<TData, TValue>({
 
   return (
     <div className={cn("w-full space-y-3", className)}>
-      <div className="flex">
-        <DataTableViewOptions table={table} />
-      </div>
+      <DataTableToolbar
+        table={table}
+        filterableColumns={filterableColumns}
+        placeholder={filterPlaceholder}
+      />
       <div className="rounded-lg border">
         <Table {...tableProps}>
           <TableHeader>

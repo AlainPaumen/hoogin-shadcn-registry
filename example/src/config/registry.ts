@@ -143,7 +143,8 @@ export const registryItems: RegistryItem[] = [
       "button",
       "select",
       "checkbox",
-      "dropdown-menu"
+      "dropdown-menu",
+      "input"
     ],
     "files": [
       {
@@ -160,6 +161,11 @@ export const registryItems: RegistryItem[] = [
         "path": "data-table.types.ts",
         "type": "registry:file",
         "target": "hoogin/ui/data-table.types.ts"
+      },
+      {
+        "path": "table-toolbar.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/table-toolbar.tsx"
       }
     ]
   },

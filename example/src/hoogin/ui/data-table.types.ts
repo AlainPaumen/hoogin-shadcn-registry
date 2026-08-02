@@ -4,3 +4,8 @@ export type DataTableColumnDef<TData, TValue = unknown> = ColumnDef<
   TData,
   TValue
 >
+
+export type FilterableColumn = {
+  caption: string
+  column: string
+}

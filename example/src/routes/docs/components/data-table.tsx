@@ -102,6 +102,12 @@ export function App() {
     <DataTable
       columns={columns}
       data={payments}
+      filterableColumns={[
+        { caption: "Username", column: "username" },
+        { caption: "Email", column: "email" },
+        { caption: "Amount", column: "amount"}
+      ]}
+      filterPlaceholder="Search payments..."
       enableRowSelection
       initialPageSize={10}
     />
@@ -116,6 +122,12 @@ function DataTablePage() {
           <DataTable
             columns={columns}
             data={payments}
+            filterableColumns={[
+              { caption: "Username", column: "username" },
+              { caption: "Email", column: "email" },
+              { caption: "Amount", column: "amount"}
+            ]}
+            filterPlaceholder="Search payments..."
             enableRowSelection
             initialPageSize={10}
           />
@@ -123,7 +135,14 @@ function DataTablePage() {
       </DocSection>
       <DocSection
         title="Usage"
-        description="Define your columns as DataTableColumnDef objects in a separate file, then pass them along with your data to the DataTable component."
+        description="Define your columns as DataTableColumnDef objects in a separate file, then pass them along with your data to the DataTable component. The toolbar filters while you type and lets you pick which columns to search across. Pass filterableColumns to limit the searchable columns and set their display captions."
+      >
+        <CodeBlock language="tsx" code={columnsSource} />
+        <CodeBlock language="tsx" code={usageSource} />
+      </DocSection>
+      <DocSection
+        title="Usage"
+        description="Define your columns as DataTableColumnDef objects in a separate file, then pass them along with your data to the DataTable component. The toolbar filters while you type and lets you pick which columns to search across. Pass filterableColumns to limit the searchable columns."
       >
         <CodeBlock language="tsx" code={columnsSource} />
         <CodeBlock language="tsx" code={usageSource} />
@@ -151,6 +170,17 @@ function DataTablePage() {
               prop: "data",
               type: "TData[]",
               description: "The rows to display. Sortable and paginated client-side.",
+            },
+            {
+              prop: "filterableColumns",
+              type: "FilterableColumn[]",
+              description:
+                "Columns offered in the toolbar's column picker and searched when \"All columns\" is selected. Each entry sets the picker caption ({ caption, column }). Defaults to every visible data column.",
+            },
+            {
+              prop: "filterPlaceholder",
+              type: "string",
+              description: "Placeholder for the toolbar's filter input. Defaults to \"Filter...\".",
             },
             {
               prop: "initialSorting",

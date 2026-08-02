@@ -127,7 +127,8 @@
         "button",
         "select",
         "checkbox",
-        "dropdown-menu"
+        "dropdown-menu",
+        "input"
       ],
       "files": [
         {
@@ -144,6 +145,11 @@
           "path": "registry/ui/data-table.types.ts",
           "type": "registry:file",
           "target": "hoogin/ui/data-table.types.ts"
+        },
+        {
+          "path": "registry/ui/table-toolbar.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/table-toolbar.tsx"
         }
       ],
       "type": "registry:ui"
