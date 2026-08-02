@@ -54,6 +54,11 @@ function DataTableToolbar<TData>({
 
   const filterValue = filter.columns.length > 0 ? filter.columns[0] : ALL_COLUMNS
 
+  const items = [
+    { value: ALL_COLUMNS, label: "All columns" },
+    ...columns.map((column) => ({ value: column.id, label: column.caption })),
+  ]
+
   function updateFilter(next: GlobalFilterValue) {
     table.setGlobalFilter(next)
   }
@@ -69,15 +74,14 @@ function DataTableToolbar<TData>({
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
       <div className="flex flex-wrap items-center gap-2">
-        <Select value={filterValue} onValueChange={handleColumnChange}>
+        <Select value={filterValue} onValueChange={handleColumnChange} items={items}>
           <SelectTrigger className="h-8 w-36" aria-label="Search in columns">
             <SelectValue />
           </SelectTrigger>
           <SelectContent align="start">
-            <SelectItem value={ALL_COLUMNS} label="All columns">All columns</SelectItem>
-            {columns.map((column) => (
-              <SelectItem key={column.id} value={column.id} label={column.caption}>
-                {column.caption}
+            {items.map((item) => (
+              <SelectItem key={item.value} value={item.value} label={item.label}>
+                {item.label}
               </SelectItem>
             ))}
           </SelectContent>
