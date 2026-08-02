@@ -1,4 +1,11 @@
 import { type LucideIcon } from "lucide-react"
+import { type ReactNode } from "react"
+
+export type SidebarBrand = {
+  name: string
+  description?: string
+  logo?: ReactNode
+}
 
 export type SidebarUser = {
   name: string
@@ -33,3 +40,15 @@ export type SidebarMore = {
   label: string
   url: string
 }
+
+export type SidebarUserMenuItem = {
+  label: string
+  url: string
+  icon?: LucideIcon
+}
+
+export type SidebarUserMenuGroup = {
+  items: SidebarUserMenuItem[]
+}
+
+export type SidebarUserMenu = SidebarUserMenuGroup[]

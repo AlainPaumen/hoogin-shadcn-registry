@@ -1,5 +1,7 @@
 "use client"
 
+import { Fragment } from "react"
+
 import {
   Avatar,
   AvatarFallback,
@@ -20,13 +22,18 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/hoogin/ui/sidebar"
-import { ChevronsUpDownIcon, SparklesIcon, BadgeCheckIcon, CreditCardIcon, BellIcon, LogOutIcon } from "lucide-react"
-import type { SidebarUser } from "@/hoogin/app-sidebar/sidebar.types"
+import { ChevronsUpDownIcon } from "lucide-react"
+import type {
+  SidebarUser,
+  SidebarUserMenu,
+} from "@/hoogin/ui/sidebar.types"
 
 export function NavUser({
   user,
+  menu = [],
 }: {
   user: SidebarUser
+  menu?: SidebarUserMenu
 }) {
   const { isMobile } = useSidebar()
   return (
@@ -68,38 +75,22 @@ export function NavUser({
                 </div>
               </DropdownMenuLabel>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <SparklesIcon
-                />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheckIcon
-                />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCardIcon
-                />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <BellIcon
-                />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOutIcon
-              />
-              Log out
-            </DropdownMenuItem>
+            {menu.map((group, index) => (
+              <Fragment key={index}>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  {group.items.map((item) => (
+                    <DropdownMenuItem
+                      key={item.label}
+                      render={<a href={item.url} />}
+                    >
+                      {item.icon ? <item.icon /> : null}
+                      {item.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuGroup>
+              </Fragment>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

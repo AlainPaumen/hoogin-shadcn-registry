@@ -7,7 +7,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/hoogin/ui/sidebar"
-import type { SidebarSecondaryItem } from "@/hoogin/app-sidebar/sidebar.types"
+import type { SidebarSecondaryItem } from "@/hoogin/ui/sidebar.types"
 
 export function NavSecondary({
   items,

@@ -2,17 +2,19 @@
 
 import * as React from "react"
 
-import { NavMain } from "@/hoogin/app-sidebar/nav-main"
-import { NavProjects } from "@/hoogin/app-sidebar/nav-projects"
-import { NavSecondary } from "@/hoogin/app-sidebar/nav-secondary"
-import { NavUser } from "@/hoogin/app-sidebar/nav-user"
+import { NavMain } from "@/hoogin/ui/nav-main"
+import { NavProjects } from "@/hoogin/ui/nav-projects"
+import { NavSecondary } from "@/hoogin/ui/nav-secondary"
+import { NavUser } from "@/hoogin/ui/nav-user"
 import type {
+  SidebarBrand,
   SidebarMore,
   SidebarNavItem,
   SidebarProject,
   SidebarSecondaryItem,
   SidebarUser,
-} from "@/hoogin/app-sidebar/sidebar.types"
+  SidebarUserMenu,
+} from "@/hoogin/ui/sidebar.types"
 import {
   Sidebar,
   SidebarContent,
@@ -22,9 +24,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/hoogin/ui/sidebar"
-import favicon from "@/assets/favicon.svg"
+import { BlocksIcon } from "lucide-react"
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
+  brand: SidebarBrand
   user: SidebarUser
   dataMain: SidebarNavItem[]
   dataSecondary: SidebarSecondaryItem[]
@@ -32,9 +35,11 @@ type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   dataMainLabel?: string
   dataProjectsLabel?: string
   dataProjectsMore?: SidebarMore
+  dataUserMenu?: SidebarUserMenu
 }
 
 export function AppSidebar({
+  brand,
   user,
   dataMain,
   dataSecondary,
@@ -42,6 +47,7 @@ export function AppSidebar({
   dataMainLabel,
   dataProjectsLabel,
   dataProjectsMore,
+  dataUserMenu,
   ...props
 }: AppSidebarProps) {
   return (
@@ -51,11 +57,19 @@ export function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" render={<a href="#" />}>
               <div className="flex aspect-square size-8 items-center justify-center">
-                <img src={favicon} alt="Acme Inc" className="size-8" />
+                {typeof brand.logo === "string" ? (
+                  <img src={brand.logo} alt={brand.name} className="size-8" />
+                ) : brand.logo ? (
+                  brand.logo
+                ) : (
+                  <BlocksIcon className="size-4" />
+                )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">Acme Inc</span>
-                <span className="truncate text-xs">Enterprise</span>
+                <span className="truncate font-medium">{brand.name}</span>
+                {brand.description ? (
+                  <span className="truncate text-xs">{brand.description}</span>
+                ) : null}
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -71,7 +85,7 @@ export function AppSidebar({
         <NavSecondary items={dataSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser user={user} menu={dataUserMenu} />
       </SidebarFooter>
     </Sidebar>
   )

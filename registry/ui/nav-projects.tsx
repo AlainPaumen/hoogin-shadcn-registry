@@ -20,7 +20,7 @@ import { MoreHorizontalIcon, FolderIcon, ShareIcon, Trash2Icon } from "lucide-re
 import type {
   SidebarMore,
   SidebarProject,
-} from "@/hoogin/app-sidebar/sidebar.types"
+} from "@/hoogin/ui/sidebar.types"
 
 export function NavProjects({
   projects,

@@ -15,7 +15,7 @@ import {
   SidebarMenuSubItem,
 } from "@/hoogin/ui/sidebar"
 import { ChevronRightIcon } from "lucide-react"
-import type { SidebarNavItem } from "@/hoogin/app-sidebar/sidebar.types"
+import type { SidebarNavItem } from "@/hoogin/ui/sidebar.types"
 
 export function NavMain({
   items,

@@ -1,7 +1,7 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router"
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
+import { createRootRoute } from "@tanstack/react-router"
 
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/hoogin/ui/theme-provider"
+import { BaseLayout } from "@/hoogin/layout/base_layout"
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -10,8 +10,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <ThemeProvider>
-      <Outlet />
-      <TanStackRouterDevtools />
+      <BaseLayout/>
     </ThemeProvider>
   )
 }

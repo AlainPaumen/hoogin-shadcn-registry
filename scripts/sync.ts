@@ -5,6 +5,16 @@ import { join } from "node:path"
 const root = join(import.meta.dir, "..")
 const sourceDir = join(root, "example", "src", "hoogin", "ui")
 const targetDir = join(root, "registry", "ui")
+const blockSource = join(
+  root,
+  "example",
+  "src",
+  "hoogin",
+  "blocks",
+  "sidebar-layout",
+  "sidebar-layout.tsx"
+)
+const blockTarget = join(root, "registry", "ui", "sidebar-layout.tsx")
 
 const watchMode = process.argv.includes("--watch")
 const reverse = process.argv.includes("--reverse")
@@ -13,16 +23,36 @@ const [from, to, label] = reverse
   ? [targetDir, sourceDir, "registry → example"]
   : [sourceDir, targetDir, "example → registry"]
 
+const fileMappings = [
+  {
+    from: reverse ? blockTarget : blockSource,
+    to: reverse ? blockSource : blockTarget,
+    name: "sidebar-layout.tsx",
+  },
+]
+
 async function registeredItems(): Promise<Set<string>> {
   const raw = JSON.parse(
     await readFile(join(root, "registry", "ui", "registry.json"), "utf8")
   )
-  return new Set((raw.items ?? []).map((item: { name: string }) => item.name))
+  const names = new Set<string>()
+  for (const item of raw.items ?? []) {
+    names.add(item.name)
+    for (const file of item.files ?? []) {
+      names.add(file.path.replace(/\.(ts|tsx)$/, ""))
+    }
+  }
+  return names
 }
 
 async function syncOne(file: string) {
   await copyFile(join(from, file), join(to, file))
   console.log(`synced ${file}`)
+}
+
+async function syncFileMapping(mapping: (typeof fileMappings)[number]) {
+  await copyFile(mapping.from, mapping.to)
+  console.log(`synced ${mapping.name}`)
 }
 
 async function syncAll() {
@@ -39,7 +69,12 @@ async function syncAll() {
       }
     }
   }
-  console.log(`Synced ${files.length} file(s) (${label}).`)
+  for (const mapping of fileMappings) {
+    await syncFileMapping(mapping)
+  }
+  console.log(
+    `Synced ${files.length + fileMappings.length} file(s) (${label}).`
+  )
 }
 
 if (watchMode) {

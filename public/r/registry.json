@@ -37,6 +37,100 @@
         }
       ],
       "type": "registry:ui"
+    },
+    {
+      "name": "app-sidebar",
+      "title": "App Sidebar",
+      "description": "A config-driven application sidebar with main navigation, projects, secondary links, and a user menu.",
+      "registryDependencies": [
+        "@hoogin/sidebar",
+        "avatar",
+        "collapsible",
+        "dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/app-sidebar.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/app-sidebar.tsx"
+        },
+        {
+          "path": "registry/ui/nav-main.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/nav-main.tsx"
+        },
+        {
+          "path": "registry/ui/nav-projects.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/nav-projects.tsx"
+        },
+        {
+          "path": "registry/ui/nav-secondary.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/nav-secondary.tsx"
+        },
+        {
+          "path": "registry/ui/nav-user.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/nav-user.tsx"
+        },
+        {
+          "path": "registry/ui/sidebar.types.ts",
+          "type": "registry:file",
+          "target": "hoogin/ui/sidebar.types.ts"
+        }
+      ],
+      "type": "registry:ui"
+    },
+    {
+      "name": "theme-provider",
+      "title": "Theme Provider",
+      "description": "A theme provider with system detection, storage sync, and a keyboard shortcut.",
+      "files": [
+        {
+          "path": "registry/ui/theme-provider.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/theme-provider.tsx"
+        }
+      ],
+      "type": "registry:ui"
+    },
+    {
+      "name": "theme-toggle",
+      "title": "Theme Toggle",
+      "description": "A dark/light mode toggle button that uses the theme provider.",
+      "registryDependencies": [
+        "button",
+        "@hoogin/theme-provider"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/theme-toggle.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/theme-toggle.tsx"
+        }
+      ],
+      "type": "registry:ui"
+    },
+    {
+      "name": "sidebar-layout",
+      "title": "Sidebar Layout",
+      "description": "A full application layout with a collapsible sidebar, header, and content area.",
+      "registryDependencies": [
+        "@hoogin/sidebar",
+        "@hoogin/app-sidebar",
+        "@hoogin/theme-toggle",
+        "separator",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/sidebar-layout.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/sidebar-layout/sidebar-layout.tsx"
+        }
+      ],
+      "type": "registry:block"
     }
   ]
 }
