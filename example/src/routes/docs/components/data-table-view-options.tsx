@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
-import { DataTableViewOptions } from "@/hoogin/ui/view-options"
+import { DataTableViewOptions } from "@/hoogin/ui/data-table-view-options"
 
 export const Route = createFileRoute("/docs/components/data-table-view-options")(
   {
@@ -40,7 +40,7 @@ import { DataTable } from "@/hoogin/ui/data-table"
 <DataTable columns={columns} data={data} />
 
 // Use it standalone with any TanStack Table instance:
-import { DataTableViewOptions } from "@/hoogin/ui/view-options"
+import { DataTableViewOptions } from "@/hoogin/ui/data-table-view-options"
 
 <DataTableViewOptions table={table} />`
 

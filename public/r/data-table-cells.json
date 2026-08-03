@@ -7,7 +7,9 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "badge"
+    "badge",
+    "button",
+    "dropdown-menu"
   ],
   "files": [
     {
@@ -51,6 +53,12 @@
       "content": "import type { VariantProps } from 'class-variance-authority';\nimport { Badge, badgeVariants } from '@/components/ui/badge';\n\ntype BadgeVariant = VariantProps<typeof badgeVariants>['variant'];\n\ntype BadgeCellProps = {\n    value: string;\n    variant?: BadgeVariant;\n    variantByValue?: Record<string, BadgeVariant>;\n};\n\nexport function BadgeCell({ value, variant = 'secondary', variantByValue }: BadgeCellProps) {\n    return <Badge variant={variantByValue?.[value] ?? variant}>{value}</Badge>;\n}\n",
       "type": "registry:ui",
       "target": "hoogin/ui/badge.cell.tsx"
+    },
+    {
+      "path": "registry/ui/action.cell.tsx",
+      "content": "import { MoreHorizontalIcon, EyeIcon, PencilIcon, Trash2Icon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\n\nexport function ActionCell() {\n  return (\n    <DropdownMenu modal={false}>\n      <DropdownMenuTrigger render={<Button variant=\"ghost\" size=\"icon\" />}>\n        <MoreHorizontalIcon />\n        <span className=\"sr-only\">Open menu</span>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\" className=\"w-40\">\n        <DropdownMenuItem className=\"justify-between\">\n          Detail\n          <EyeIcon className=\"text-muted-foreground\" />\n        </DropdownMenuItem>\n        <DropdownMenuItem className=\"justify-between\">\n          Edit\n          <PencilIcon className=\"text-muted-foreground\" />\n        </DropdownMenuItem>\n        <DropdownMenuSeparator />\n        <DropdownMenuItem variant=\"destructive\" className=\"justify-between\">\n          Delete\n          <Trash2Icon />\n        </DropdownMenuItem>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "hoogin/ui/action.cell.tsx"
     },
     {
       "path": "registry/ui/formatters.utils.tsx",

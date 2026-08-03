@@ -6,6 +6,7 @@ import { DocSection } from "@/hoogin/docs/doc-section"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { BadgeCell } from "@/hoogin/ui/badge.cell"
+import { ActionCell } from "@/hoogin/ui/action.cell"
 import { CheckboxCell } from "@/hoogin/ui/checkbox.cell"
 import { CurrencyCell } from "@/hoogin/ui/currency.cell"
 import { DateCell } from "@/hoogin/ui/date.cell"
@@ -94,6 +95,7 @@ function DataTableCellsPage() {
                 variantByValue={{ failed: "destructive" }}
               />
             </div>
+            <ActionCell />
           </div>
         </Preview>
       </DocSection>

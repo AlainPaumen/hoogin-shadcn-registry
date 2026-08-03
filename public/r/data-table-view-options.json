@@ -13,10 +13,10 @@
   ],
   "files": [
     {
-      "path": "registry/ui/view-options.tsx",
+      "path": "registry/ui/data-table-view-options.tsx",
       "content": "import { type Table } from '@tanstack/react-table'\nimport { SlidersHorizontal } from 'lucide-react'\nimport { Button } from '@/components/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuCheckboxItem,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuLabel,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from '@/components/ui/dropdown-menu'\n\ntype DataTableViewOptionsProps<TData> = {\n  table: Table<TData>\n}\n\nexport function DataTableViewOptions<TData>({\n  table,\n}: DataTableViewOptionsProps<TData>) {\n  return (\n    <DropdownMenu modal={false}>\n      <DropdownMenuTrigger\n        render={\n          <Button\n            variant='outline'\n            size='sm'\n            className='ms-auto hidden h-8 lg:flex'\n          />\n        }\n      >\n        <SlidersHorizontal className='size-4' />\n        View\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align='end' className='w-37.5'>\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>\n          <DropdownMenuSeparator />\n          {table\n            .getAllColumns()\n            .filter(\n              (column) =>\n                typeof column.accessorFn !== 'undefined' && column.getCanHide()\n            )\n            .map((column) => {\n              return (\n                <DropdownMenuCheckboxItem\n                  key={column.id}\n                  className='capitalize'\n                  checked={column.getIsVisible()}\n                  onCheckedChange={(value) => column.toggleVisibility(!!value)}\n                >\n                  {column.id}\n                </DropdownMenuCheckboxItem>\n              )\n            })}\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
       "type": "registry:ui",
-      "target": "hoogin/ui/view-options.tsx"
+      "target": "hoogin/ui/data-table-view-options.tsx"
     }
   ],
   "type": "registry:ui"

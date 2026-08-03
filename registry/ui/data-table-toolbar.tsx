@@ -16,7 +16,7 @@ import {
   DataTableFacetedFilter,
   type FacetedOption,
 } from "@/hoogin/ui/data-table-faceted-filter"
-import { DataTableViewOptions } from "@/hoogin/ui/view-options"
+import { DataTableViewOptions } from "@/hoogin/ui/data-table-view-options"
 import type { FilterableColumn } from "@/hoogin/ui/data-table.types"
 
 export type GlobalFilterValue = {

@@ -163,7 +163,9 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "badge"
+        "badge",
+        "button",
+        "dropdown-menu"
       ],
       "files": [
         {
@@ -202,6 +204,11 @@
           "target": "hoogin/ui/badge.cell.tsx"
         },
         {
+          "path": "registry/ui/action.cell.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/action.cell.tsx"
+        },
+        {
           "path": "registry/ui/formatters.utils.tsx",
           "type": "registry:file",
           "target": "hoogin/ui/formatters.utils.tsx"
@@ -223,9 +230,9 @@
       ],
       "files": [
         {
-          "path": "registry/ui/view-options.tsx",
+          "path": "registry/ui/data-table-view-options.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/view-options.tsx"
+          "target": "hoogin/ui/data-table-view-options.tsx"
         }
       ],
       "type": "registry:ui"

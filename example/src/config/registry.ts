@@ -179,7 +179,9 @@ export const registryItems: RegistryItem[] = [
       "lucide-react"
     ],
     "registryDependencies": [
-      "badge"
+      "badge",
+      "button",
+      "dropdown-menu"
     ],
     "files": [
       {
@@ -218,6 +220,11 @@ export const registryItems: RegistryItem[] = [
         "target": "hoogin/ui/badge.cell.tsx"
       },
       {
+        "path": "action.cell.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/action.cell.tsx"
+      },
+      {
         "path": "formatters.utils.tsx",
         "type": "registry:file",
         "target": "hoogin/ui/formatters.utils.tsx"
@@ -239,9 +246,9 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "view-options.tsx",
+        "path": "data-table-view-options.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/view-options.tsx"
+        "target": "hoogin/ui/data-table-view-options.tsx"
       }
     ]
   },
