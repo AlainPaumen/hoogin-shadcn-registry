@@ -139,6 +139,7 @@ export const registryItems: RegistryItem[] = [
     "registryDependencies": [
       "@hoogin/data-table-cells",
       "@hoogin/data-table-view-options",
+      "@hoogin/data-table-faceted-filter",
       "table",
       "button",
       "select",
@@ -163,9 +164,9 @@ export const registryItems: RegistryItem[] = [
         "target": "hoogin/ui/data-table.types.ts"
       },
       {
-        "path": "table-toolbar.tsx",
+        "path": "data-table-toolbar.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/table-toolbar.tsx"
+        "target": "hoogin/ui/data-table-toolbar.tsx"
       }
     ]
   },
@@ -241,6 +242,30 @@ export const registryItems: RegistryItem[] = [
         "path": "view-options.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/view-options.tsx"
+      }
+    ]
+  },
+  {
+    "name": "data-table-faceted-filter",
+    "type": "registry:ui",
+    "title": "Data Table Faceted Filter",
+    "description": "A faceted filter for data tables with searchable options, checkbox multi-select, and a clear action.",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "badge",
+      "button",
+      "checkbox",
+      "command",
+      "popover",
+      "separator"
+    ],
+    "files": [
+      {
+        "path": "data-table-faceted-filter.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/data-table-faceted-filter.tsx"
       }
     ]
   },

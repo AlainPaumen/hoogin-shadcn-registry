@@ -11,15 +11,26 @@ import { CurrencyCell } from "@/hoogin/ui/currency.cell"
 import { DateCell } from "@/hoogin/ui/date.cell"
 import { EmailCell } from "@/hoogin/ui/email.cell"
 import { TextCell } from "@/hoogin/ui/text.cell"
+import { BadgeCell } from "@/hoogin/ui/badge.cell"
 
 export const Route = createFileRoute("/docs/components/data-table")({
   component: DataTablePage,
 })
 
+const statuses = ["active", "pending", "refunded", "cancelled"] as const
+
+type Status = (typeof statuses)[number]
+
+const priorities = ["high", "medium", "low"] as const
+
+type Priority = (typeof priorities)[number]
+
 type Payment = {
   id: string
   username: string
   email: string
+  status: Status
+  priority: Priority
   createdAt: string
   amount: number
 }
@@ -28,6 +39,8 @@ const payments: Payment[] = Array.from({ length: 40 }, (_, i) => ({
   id: `P-${String(i + 1).padStart(3, "0")}`,
   username: `user${i + 1}`,
   email: `user${i + 1}@example.com`,
+  status: statuses[i % statuses.length],
+  priority: priorities[i % priorities.length],
   createdAt: new Date(Date.UTC(2025, 0, 1 + i)).toISOString(),
   amount: (((i * 137) % 95) + 5) * 100,
 }))
@@ -42,6 +55,43 @@ const columns: DataTableColumnDef<Payment>[] = [
     accessorKey: "email",
     header: "Email",
     cell: ({ row }) => <EmailCell value={row.getValue("email")} />,
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    filterFn: (row, columnId, filterValue: string[]) => {
+      if (!filterValue || filterValue.length === 0) return true
+      return filterValue.includes(row.getValue(columnId))
+    },
+    cell: ({ row }) => (
+      <BadgeCell
+        value={row.getValue("status")}
+        variantByValue={{
+          active: "default",
+          pending: "secondary",
+          refunded: "outline",
+          cancelled: "destructive",
+        }}
+      />
+    ),
+  },
+  {
+    accessorKey: "priority",
+    header: "Priority",
+    filterFn: (row, columnId, filterValue: string[]) => {
+      if (!filterValue || filterValue.length === 0) return true
+      return filterValue.includes(row.getValue(columnId))
+    },
+    cell: ({ row }) => (
+      <BadgeCell
+        value={row.getValue("priority")}
+        variantByValue={{
+          high: "destructive",
+          medium: "secondary",
+          low: "outline",
+        }}
+      />
+    ),
   },
   {
     accessorKey: "createdAt",
@@ -61,6 +111,7 @@ import { TextCell } from "@/hoogin/ui/text.cell"
 import { EmailCell } from "@/hoogin/ui/email.cell"
 import { DateCell } from "@/hoogin/ui/date.cell"
 import { CurrencyCell } from "@/hoogin/ui/currency.cell"
+import { BadgeCell } from "@/hoogin/ui/badge.cell"
 
 export const columns: DataTableColumnDef<Payment>[] = [
   {
@@ -75,6 +126,43 @@ export const columns: DataTableColumnDef<Payment>[] = [
     header: "Email",
     cell: ({ row }) => (
       <EmailCell value={row.getValue("email")} />
+    ),
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    filterFn: (row, columnId, filterValue: string[]) => {
+      if (!filterValue || filterValue.length === 0) return true
+      return filterValue.includes(row.getValue(columnId))
+    },
+    cell: ({ row }) => (
+      <BadgeCell
+        value={row.getValue("status")}
+        variantByValue={{
+          active: "default",
+          pending: "secondary",
+          refunded: "outline",
+          cancelled: "destructive",
+        }}
+      />
+    ),
+  },
+  {
+    accessorKey: "priority",
+    header: "Priority",
+    filterFn: (row, columnId, filterValue: string[]) => {
+      if (!filterValue || filterValue.length === 0) return true
+      return filterValue.includes(row.getValue(columnId))
+    },
+    cell: ({ row }) => (
+      <BadgeCell
+        value={row.getValue("priority")}
+        variantByValue={{
+          high: "destructive",
+          medium: "secondary",
+          low: "outline",
+        }}
+      />
     ),
   },
   {
@@ -107,6 +195,27 @@ export function App() {
         { caption: "Email", column: "email" },
         { caption: "Amount", column: "amount"}
       ]}
+      filters={[
+        {
+          columnId: "status",
+          title: "Status",
+          options: [
+            { label: "Active", value: "active" },
+            { label: "Pending", value: "pending" },
+            { label: "Refunded", value: "refunded" },
+            { label: "Cancelled", value: "cancelled" },
+          ],
+        },
+        {
+          columnId: "priority",
+          title: "Priority",
+          options: [
+            { label: "High", value: "high" },
+            { label: "Medium", value: "medium" },
+            { label: "Low", value: "low" },
+          ],
+        },
+      ]}
       filterPlaceholder="Search payments..."
       enableRowSelection
       initialPageSize={10}
@@ -127,6 +236,27 @@ function DataTablePage() {
               { caption: "Email", column: "email" },
               { caption: "Amount", column: "amount"}
             ]}
+            filters={[
+              {
+                columnId: "status",
+                title: "Status",
+                options: [
+                  { label: "Active", value: "active" },
+                  { label: "Pending", value: "pending" },
+                  { label: "Refunded", value: "refunded" },
+                  { label: "Cancelled", value: "cancelled" },
+                ],
+              },
+              {
+                columnId: "priority",
+                title: "Priority",
+                options: [
+                  { label: "High", value: "high" },
+                  { label: "Medium", value: "medium" },
+                  { label: "Low", value: "low" },
+                ],
+              },
+            ]}
             filterPlaceholder="Search payments..."
             enableRowSelection
             initialPageSize={10}
@@ -134,8 +264,43 @@ function DataTablePage() {
         </Preview>
       </DocSection>
       <DocSection
+        title="Single column filter"
+        description="With only one filterable column the column picker is omitted and the search input spans the toolbar."
+      >
+        <Preview title="Single column filter">
+          <DataTable
+            columns={columns}
+            data={payments}
+            filterableColumns={[{ caption: "Email", column: "email" }]}
+            filters={[
+              {
+                columnId: "status",
+                title: "Status",
+                options: [
+                  { label: "Active", value: "active" },
+                  { label: "Pending", value: "pending" },
+                  { label: "Refunded", value: "refunded" },
+                  { label: "Cancelled", value: "cancelled" },
+                ],
+              },
+              {
+                columnId: "priority",
+                title: "Priority",
+                options: [
+                  { label: "High", value: "high" },
+                  { label: "Medium", value: "medium" },
+                  { label: "Low", value: "low" },
+                ],
+              },
+            ]}
+            filterPlaceholder="Search email..."
+            initialPageSize={10}
+          />
+        </Preview>
+      </DocSection>
+      <DocSection
         title="Usage"
-        description="Define your columns as DataTableColumnDef objects in a separate file, then pass them along with your data to the DataTable component. The toolbar filters while you type and lets you pick which columns to search across. Pass filterableColumns to limit the searchable columns and set their display captions."
+        description="Define your columns as DataTableColumnDef objects in a separate file, then pass them along with your data to the DataTable component. The toolbar filters while you type and lets you pick which columns to search across. Pass filterableColumns to limit the searchable columns and set their display captions. Pass filters to render faceted filters (e.g. status) above the search row."
       >
         <CodeBlock language="tsx" code={columnsSource} />
         <CodeBlock language="tsx" code={usageSource} />
@@ -181,6 +346,12 @@ function DataTablePage() {
               prop: "filterPlaceholder",
               type: "string",
               description: "Placeholder for the toolbar's filter input. Defaults to \"Filter...\".",
+            },
+            {
+              prop: "filters",
+              type: "FacetedFilter[]",
+              description:
+                "Faceted filters rendered in a row above the search row. Each entry declares a columnId, a title, and the options ({ label, value, icon? }) shown with checkboxes. Requires the target column to have a matching filterFn.",
             },
             {
               prop: "initialSorting",

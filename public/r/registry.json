@@ -123,6 +123,7 @@
       "registryDependencies": [
         "@hoogin/data-table-cells",
         "@hoogin/data-table-view-options",
+        "@hoogin/data-table-faceted-filter",
         "table",
         "button",
         "select",
@@ -147,9 +148,9 @@
           "target": "hoogin/ui/data-table.types.ts"
         },
         {
-          "path": "registry/ui/table-toolbar.tsx",
+          "path": "registry/ui/data-table-toolbar.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/table-toolbar.tsx"
+          "target": "hoogin/ui/data-table-toolbar.tsx"
         }
       ],
       "type": "registry:ui"
@@ -225,6 +226,30 @@
           "path": "registry/ui/view-options.tsx",
           "type": "registry:ui",
           "target": "hoogin/ui/view-options.tsx"
+        }
+      ],
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-faceted-filter",
+      "title": "Data Table Faceted Filter",
+      "description": "A faceted filter for data tables with searchable options, checkbox multi-select, and a clear action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "checkbox",
+        "command",
+        "popover",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/data-table-faceted-filter.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/data-table-faceted-filter.tsx"
         }
       ],
       "type": "registry:ui"

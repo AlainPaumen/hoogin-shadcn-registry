@@ -5,6 +5,8 @@ import type { ComponentProps, ReactNode } from "react"
 import {
   flexRender,
   getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -31,14 +33,16 @@ import type {
 import { DataTablePagination } from "@/hoogin/ui/data-table-pagination"
 import {
   DataTableToolbar,
+  type FacetedFilter,
   type GlobalFilterValue,
-} from "@/hoogin/ui/table-toolbar"
+} from "@/hoogin/ui/data-table-toolbar"
 
 type DataTableProps<TData, TValue> = {
   columns: DataTableColumnDef<TData, TValue>[]
   data: TData[]
   filterPlaceholder?: string
   filterableColumns?: FilterableColumn[]
+  filters?: FacetedFilter[]
   initialSorting?: SortingState
   initialPageSize?: number
   pageSizeOptions?: number[]
@@ -54,6 +58,7 @@ function DataTable<TData, TValue>({
   data,
   filterPlaceholder,
   filterableColumns,
+  filters,
   initialSorting,
   initialPageSize = 10,
   pageSizeOptions,
@@ -136,6 +141,8 @@ function DataTable<TData, TValue>({
     enableRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
@@ -145,6 +152,7 @@ function DataTable<TData, TValue>({
       <DataTableToolbar
         table={table}
         filterableColumns={filterableColumns}
+        filters={filters}
         placeholder={filterPlaceholder}
       />
       <div className="rounded-lg border">
