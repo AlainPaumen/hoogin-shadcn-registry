@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DocsIndexRouteImport } from './routes/docs/index'
 import { Route as DocsInstallationRouteImport } from './routes/docs/installation'
 import { Route as DocsIntroductionRouteImport } from './routes/docs/introduction'
+import { Route as DocsBlocksAdminPageRouteImport } from './routes/docs/blocks/admin-page'
 import { Route as DocsBlocksSidebarLayoutRouteImport } from './routes/docs/blocks/sidebar-layout'
 import { Route as DocsComponentsIndexRouteImport } from './routes/docs/components/index'
 import { Route as DocsComponentsAppSidebarRouteImport } from './routes/docs/components/app-sidebar'
@@ -42,6 +43,11 @@ const DocsInstallationRoute = DocsInstallationRouteImport.update({
 const DocsIntroductionRoute = DocsIntroductionRouteImport.update({
   id: '/docs/introduction',
   path: '/docs/introduction',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsBlocksAdminPageRoute = DocsBlocksAdminPageRouteImport.update({
+  id: '/docs/blocks/admin-page',
+  path: '/docs/blocks/admin-page',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocsBlocksSidebarLayoutRoute = DocsBlocksSidebarLayoutRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/docs/installation': typeof DocsInstallationRoute
   '/docs/introduction': typeof DocsIntroductionRoute
   '/docs/': typeof DocsIndexRoute
+  '/docs/blocks/admin-page': typeof DocsBlocksAdminPageRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/docs/installation': typeof DocsInstallationRoute
   '/docs/introduction': typeof DocsIntroductionRoute
   '/docs': typeof DocsIndexRoute
+  '/docs/blocks/admin-page': typeof DocsBlocksAdminPageRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/docs/installation': typeof DocsInstallationRoute
   '/docs/introduction': typeof DocsIntroductionRoute
   '/docs/': typeof DocsIndexRoute
+  '/docs/blocks/admin-page': typeof DocsBlocksAdminPageRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/docs/installation'
     | '/docs/introduction'
     | '/docs/'
+    | '/docs/blocks/admin-page'
     | '/docs/blocks/sidebar-layout'
     | '/docs/components/app-sidebar'
     | '/docs/components/data-table'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/docs/installation'
     | '/docs/introduction'
     | '/docs'
+    | '/docs/blocks/admin-page'
     | '/docs/blocks/sidebar-layout'
     | '/docs/components/app-sidebar'
     | '/docs/components/data-table'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/docs/installation'
     | '/docs/introduction'
     | '/docs/'
+    | '/docs/blocks/admin-page'
     | '/docs/blocks/sidebar-layout'
     | '/docs/components/app-sidebar'
     | '/docs/components/data-table'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   DocsInstallationRoute: typeof DocsInstallationRoute
   DocsIntroductionRoute: typeof DocsIntroductionRoute
   DocsIndexRoute: typeof DocsIndexRoute
+  DocsBlocksAdminPageRoute: typeof DocsBlocksAdminPageRoute
   DocsBlocksSidebarLayoutRoute: typeof DocsBlocksSidebarLayoutRoute
   DocsComponentsAppSidebarRoute: typeof DocsComponentsAppSidebarRoute
   DocsComponentsDataTableRoute: typeof DocsComponentsDataTableRoute
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       path: '/docs/introduction'
       fullPath: '/docs/introduction'
       preLoaderRoute: typeof DocsIntroductionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/blocks/admin-page': {
+      id: '/docs/blocks/admin-page'
+      path: '/docs/blocks/admin-page'
+      fullPath: '/docs/blocks/admin-page'
+      preLoaderRoute: typeof DocsBlocksAdminPageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/docs/blocks/sidebar-layout': {
@@ -325,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsInstallationRoute: DocsInstallationRoute,
   DocsIntroductionRoute: DocsIntroductionRoute,
   DocsIndexRoute: DocsIndexRoute,
+  DocsBlocksAdminPageRoute: DocsBlocksAdminPageRoute,
   DocsBlocksSidebarLayoutRoute: DocsBlocksSidebarLayoutRoute,
   DocsComponentsAppSidebarRoute: DocsComponentsAppSidebarRoute,
   DocsComponentsDataTableRoute: DocsComponentsDataTableRoute,

@@ -278,6 +278,28 @@
           "target": "hoogin/blocks/sidebar-layout/sidebar-layout.tsx"
         }
       ]
+    },
+    {
+      "name": "admin-page",
+      "type": "registry:block",
+      "title": "Admin Page",
+      "description": "A generic CRUD admin page built on the data table with a sheet-based create, detail, edit, and delete workflow.",
+      "dependencies": [
+        "zod"
+      ],
+      "registryDependencies": [
+        "@hoogin/data-table",
+        "@hoogin/data-table-cells",
+        "sheet",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "admin-page.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/admin-page/admin-page.tsx"
+        }
+      ]
     }
   ]
 }

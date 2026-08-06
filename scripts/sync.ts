@@ -15,6 +15,16 @@ const blockSource = join(
   "sidebar-layout.tsx"
 )
 const blockTarget = join(root, "registry", "ui", "sidebar-layout.tsx")
+const adminPageSource = join(
+  root,
+  "example",
+  "src",
+  "hoogin",
+  "blocks",
+  "admin-page",
+  "admin-page.tsx"
+)
+const adminPageTarget = join(root, "registry", "ui", "admin-page.tsx")
 
 const watchMode = process.argv.includes("--watch")
 const reverse = process.argv.includes("--reverse")
@@ -28,6 +38,11 @@ const fileMappings = [
     from: reverse ? blockTarget : blockSource,
     to: reverse ? blockSource : blockTarget,
     name: "sidebar-layout.tsx",
+  },
+  {
+    from: reverse ? adminPageTarget : adminPageSource,
+    to: reverse ? adminPageSource : adminPageTarget,
+    name: "admin-page.tsx",
   },
 ]
 

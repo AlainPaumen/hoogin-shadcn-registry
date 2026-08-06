@@ -37,7 +37,7 @@ import {
   type GlobalFilterValue,
 } from "@/hoogin/ui/data-table-toolbar"
 
-type DataTableProps<TData, TValue> = {
+export type DataTableProps<TData, TValue> = {
   columns: DataTableColumnDef<TData, TValue>[]
   data: TData[]
   filterPlaceholder?: string

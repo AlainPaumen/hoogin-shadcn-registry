@@ -90,6 +90,10 @@ export const sidebarData = {
           title: "Sidebar Layout",
           url: "/docs/blocks/sidebar-layout",
         },
+        {
+          title: "Admin Page",
+          url: "/docs/blocks/admin-page",
+        },
       ],
     },
   ],
