@@ -1,18 +1,8 @@
 import { useState } from "react"
-import type { ReactNode } from "react"
 import { createFileRoute } from "@tanstack/react-router"
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { ComponentDoc } from "@/hoogin/docs/doc-page"
 import { DocSection } from "@/hoogin/docs/doc-section"
@@ -23,6 +13,18 @@ import {
   type EntityFormProps,
 } from "@/hoogin/blocks/admin-page/admin-page"
 import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
+import {
+  Form,
+  FormBody,
+  FormError,
+  FormFooter,
+} from "@/hoogin/ui/form"
+import { isRequiredField } from "@/hoogin/ui/form.utils"
+import { FormDateField } from "@/hoogin/ui/form-date.field"
+import { FormEmailField } from "@/hoogin/ui/form-email.field"
+import { FormNumberField } from "@/hoogin/ui/form-number.field"
+import { FormSelectField } from "@/hoogin/ui/form-select.field"
+import { FormTextField } from "@/hoogin/ui/form-text.field"
 import { BadgeCell } from "@/hoogin/ui/badge.cell"
 import { CurrencyCell } from "@/hoogin/ui/currency.cell"
 import { DateCell } from "@/hoogin/ui/date.cell"
@@ -111,49 +113,11 @@ const columns: DataTableColumnDef<Payment>[] = [
   },
 ]
 
-function fieldErrorMessage(error: unknown): string {
-  if (typeof error === "string") return error
-  if (typeof error === "object" && error !== null && "message" in error) {
-    const message = (error as { message: unknown }).message
-    if (typeof message === "string") return message
-    if (Array.isArray(message)) return message.map(fieldErrorMessage).join(", ")
-  }
-  return "Invalid value"
-}
-
-const isRequired = (field: keyof typeof paymentSchema.shape) =>
-  !paymentSchema.shape[field].isOptional()
-
-function FieldShell({
-  label,
-  errors,
-  required = false,
-  children,
-}: {
-  label: string
-  errors: readonly unknown[]
-  required?: boolean
-  children: ReactNode
-}) {
-  const messages = errors.map(fieldErrorMessage)
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label className="text-sm font-medium">
-        {label}
-        {required ? <span > *</span> : null}
-      </label>
-      {children}
-      {messages.length > 0 ? (
-        <p className="text-sm text-destructive">{messages.join(", ")}</p>
-      ) : null}
-    </div>
-  )
-}
-
 function PaymentForm({
   initialValues,
   readOnly,
   showActions = true,
+  error,
   onSubmit,
   onCancel,
 }: EntityFormProps<Payment>) {
@@ -172,191 +136,71 @@ function PaymentForm({
   })
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault()
-        event.stopPropagation()
-        form.handleSubmit()
-      }}
-      className="flex flex-col gap-4 px-4 pb-4"
-    >
+    <Form form={form} className="flex flex-col gap-4 px-4 pb-4">
       {initialValues ? (
-        <form.Field
+        <FormTextField
+          form={form}
           name="id"
+          label="Id"
+          required={isRequiredField(paymentSchema.shape.id)}
           validators={{ onChange: paymentSchema.shape.id }}
-        >
-          {(field) => (
-            <FieldShell
-              label="Id"
-              required={isRequired("id")}
-              errors={
-                field.state.meta.isTouched ? field.state.meta.errors : []
-              }
-            >
-              <Input
-                id={field.name}
-                name={field.name}
-                value={field.state.value}
-                onChange={(event) => field.handleChange(event.target.value)}
-                onBlur={field.handleBlur}
-                disabled={readOnly}
-              />
-            </FieldShell>
-          )}
-        </form.Field>
+          disabled={readOnly}
+        />
       ) : null}
-      <form.Field
-        name="username"
-        validators={{ onChange: paymentSchema.shape.username }}
-      >
-        {(field) => (
-          <FieldShell
-              label="Username"
-              required={isRequired("username")}
-              errors={
-              field.state.meta.isTouched ? field.state.meta.errors : []
-            }
-          >
-            <Input
-              id={field.name}
-              name={field.name}
-              value={field.state.value}
-              onChange={(event) => field.handleChange(event.target.value)}
-              onBlur={field.handleBlur}
-              disabled={readOnly}
-            />
-          </FieldShell>
-        )}
-      </form.Field>
-      <form.Field
-        name="email"
-        validators={{ onChange: paymentSchema.shape.email }}
-      >
-        {(field) => (
-          <FieldShell
-              label="Email"
-              required={isRequired("email")}
-              errors={
-              field.state.meta.isTouched ? field.state.meta.errors : []
-            }
-          >
-            <Input
-              id={field.name}
-              name={field.name}
-              type="email"
-              value={field.state.value}
-              onChange={(event) => field.handleChange(event.target.value)}
-              onBlur={field.handleBlur}
-              disabled={readOnly}
-            />
-          </FieldShell>
-        )}
-      </form.Field>
-      <form.Field
-        name="status"
-        validators={{ onChange: paymentSchema.shape.status }}
-      >
-        {(field) => (
-          <FieldShell
-              label="Status"
-              required={isRequired("status")}
-              errors={
-              field.state.meta.isTouched ? field.state.meta.errors : []
-            }
-          >
-            <Select
-              value={field.state.value}
-              onValueChange={(value) =>
-                field.handleChange(value as PaymentStatus)
-              }
-              onOpenChange={() => field.handleBlur()}
-              disabled={readOnly}
-              items={statuses.map((status) => ({ value: status, label: status }))}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {statuses.map((status) => (
-                  <SelectItem key={status} value={status} label={status}>
-                    {status}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </FieldShell>
-        )}
-      </form.Field>
-      <form.Field
-        name="createdAt"
-        validators={{ onChange: paymentSchema.shape.createdAt }}
-      >
-        {(field) => (
-          <FieldShell
-              label="Created"
-              required={isRequired("createdAt")}
-              errors={
-              field.state.meta.isTouched ? field.state.meta.errors : []
-            }
-          >
-            <Input
-              id={field.name}
-              name={field.name}
-              type="date"
-              value={field.state.value}
-              onChange={(event) => field.handleChange(event.target.value)}
-              onBlur={field.handleBlur}
-              disabled={readOnly}
-            />
-          </FieldShell>
-        )}
-      </form.Field>
-      <form.Field
-        name="amount"
-        validators={{ onChange: paymentSchema.shape.amount }}
-      >
-        {(field) => (
-          <FieldShell
-              label="Amount (cents)"
-              required={isRequired("amount")}
-              errors={
-              field.state.meta.isTouched ? field.state.meta.errors : []
-            }
-          >
-            <Input
-              id={field.name}
-              name={field.name}
-              type="number"
-              value={field.state.value}
-              onChange={(event) => field.handleChange(event.target.valueAsNumber)}
-              onBlur={field.handleBlur}
-              disabled={readOnly}
-            />
-          </FieldShell>
-        )}
-      </form.Field>
-      {showActions ? (
-        <div className="mt-2 flex justify-end gap-2">
-          <Button type="button" variant="outline" onClick={onCancel}>
-            {readOnly ? "Close" : "Cancel"}
-          </Button>
-          {!readOnly ? (
-            <form.Subscribe
-              selector={(state) => ({
-                canSubmit: state.canSubmit,
-                isSubmitting: state.isSubmitting,
-              })}
-            >
-              {({ canSubmit, isSubmitting }) => (
-                <Button type="submit" disabled={!canSubmit}>
-                  {isSubmitting ? "Saving..." : "Save"}
-                </Button>
-              )}
-            </form.Subscribe>
-          ) : null}
-        </div>
-      ) : null}
-    </form>
+      <FormBody>
+        <FormTextField
+          form={form}
+          name="username"
+          label="Username"
+          required={isRequiredField(paymentSchema.shape.username)}
+          validators={{ onChange: paymentSchema.shape.username }}
+          disabled={readOnly}
+        />
+        <FormEmailField
+          form={form}
+          name="email"
+          label="Email"
+          required={isRequiredField(paymentSchema.shape.email)}
+          validators={{ onChange: paymentSchema.shape.email }}
+          disabled={readOnly}
+        />
+        <FormSelectField
+          form={form}
+          name="status"
+          label="Status"
+          required={isRequiredField(paymentSchema.shape.status)}
+          validators={{ onChange: paymentSchema.shape.status }}
+          disabled={readOnly}
+          options={statuses.map((status) => ({
+            value: status,
+            label: status,
+          }))}
+        />
+        <FormDateField
+          form={form}
+          name="createdAt"
+          label="Created"
+          required={isRequiredField(paymentSchema.shape.createdAt)}
+          validators={{ onChange: paymentSchema.shape.createdAt }}
+          disabled={readOnly}
+        />
+        <FormNumberField
+          form={form}
+          name="amount"
+          label="Amount (cents)"
+          required={isRequiredField(paymentSchema.shape.amount)}
+          validators={{ onChange: paymentSchema.shape.amount }}
+          disabled={readOnly}
+        />
+      </FormBody>
+      <FormError form={form} error={error} />
+      <FormFooter
+        form={form}
+        onCancel={onCancel}
+        readOnly={readOnly}
+        showActions={showActions}
+      />
+    </Form>
   )
 }
 
@@ -451,53 +295,64 @@ export const paymentSchema = z.object({
 
 // admin/form.tsx
 import { useForm } from "@tanstack/react-form"
-import { Input } from "@/components/ui/input"
+import { Form, FormBody, FormError, FormFooter } from "@/hoogin/ui/form"
+import { FormTextField } from "@/hoogin/ui/form-text.field"
+import { FormEmailField } from "@/hoogin/ui/form-email.field"
+import { FormDateField } from "@/hoogin/ui/form-date.field"
+import { FormNumberField } from "@/hoogin/ui/form-number.field"
+import { FormSelectField } from "@/hoogin/ui/form-select.field"
+import { isRequiredField } from "@/hoogin/ui/form.utils"
 import type { EntityFormProps } from "@/hoogin/blocks/admin-page/admin-page"
+import { paymentSchema } from "./schema"
 
 export function PaymentForm({
   initialValues,
   readOnly,
+  showActions,
+  error,
   onSubmit,
   onCancel,
 }: EntityFormProps<Payment>) {
   const form = useForm({
-    defaultValues: initialValues ?? { username: "", email: "", status: "pending", createdAt: "", amount: 0 },
+    defaultValues: initialValues ?? {
+      username: "",
+      email: "",
+      status: "pending",
+      createdAt: "",
+      amount: 0,
+    },
     onSubmit: async ({ value }) => onSubmit(value),
   })
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        form.handleSubmit()
-      }}
-    >
-      <form.Field
-        name="username"
-        validators={{ onChange: paymentSchema.shape.username }}
-      >
-        {(field) => (
-          <Input
-            value={field.state.value}
-            onChange={(e) => field.handleChange(e.target.value)}
-            onBlur={field.handleBlur}
-            disabled={readOnly}
-          />
-        )}
-      </form.Field>
-      {/* ...rest of the fields */}
-      <Button type="button" variant="outline" onClick={onCancel}>
-        Cancel
-      </Button>
-      <form.Subscribe selector={(state) => ({ canSubmit: state.canSubmit })}>
-        {({ canSubmit }) => (
-          <Button type="submit" disabled={!canSubmit}>
-            Save
-          </Button>
-        )}
-      </form.Subscribe>
-    </form>
+    <Form form={form}>
+      <FormBody>
+        <FormTextField
+          form={form}
+          name="username"
+          label="Username"
+          required={isRequiredField(paymentSchema.shape.username)}
+          validators={{ onChange: paymentSchema.shape.username }}
+          disabled={readOnly}
+        />
+        <FormEmailField
+          form={form}
+          name="email"
+          label="Email"
+          required={isRequiredField(paymentSchema.shape.email)}
+          validators={{ onChange: paymentSchema.shape.email }}
+          disabled={readOnly}
+        />
+        {/* ...rest of the fields */}
+      </FormBody>
+      <FormError form={form} error={error} />
+      <FormFooter
+        form={form}
+        onCancel={onCancel}
+        readOnly={readOnly}
+        showActions={showActions}
+      />
+    </Form>
   )
 }
 
@@ -534,7 +389,7 @@ function AdminPagePage() {
       </DocSection>
       <DocSection
         title="Usage"
-        description="AdminPage wraps the DataTable, appends an actions column per row, and drives a sheet-based create / detail / edit / delete workflow. You provide the columns, the row data, a zod schema, and a form component built with TanStack Form. The form receives initialValues (undefined when creating), readOnly for detail and delete modes, showActions (false during delete confirmation), and onSubmit / onCancel. During delete confirmation the form renders read-only so the row can be reviewed before the destructive action."
+        description="AdminPage wraps the DataTable, appends an actions column per row, and drives a sheet-based create / detail / edit / delete workflow. You provide the columns, the row data, a zod schema, and a form component built with TanStack Form and the @hoogin form components. The form receives initialValues (undefined when creating), readOnly for detail and delete modes, showActions (false during delete confirmation), error (schema-level failures), and onSubmit / onCancel. During delete confirmation the form renders read-only so the row can be reviewed before the destructive action."
       >
         <CodeBlock language="tsx" code={usageSource} />
       </DocSection>
@@ -574,7 +429,7 @@ function AdminPagePage() {
             {
               prop: "form",
               type: "ComponentType<EntityFormProps<TData>>",
-              description: "Form component rendered in the sheet. Receives initialValues (undefined when creating), readOnly (detail mode), onSubmit, and onCancel.",
+              description: "Form component rendered in the sheet. Receives initialValues (undefined when creating), readOnly (detail and delete modes), showActions (false during delete confirmation), error (schema-level failures), onSubmit, and onCancel.",
             },
             {
               prop: "onCreate",

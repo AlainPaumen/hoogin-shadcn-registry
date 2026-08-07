@@ -262,6 +262,84 @@
       "type": "registry:ui"
     },
     {
+      "name": "form-fields",
+      "title": "Form Fields",
+      "description": "Form layout and field components for TanStack Form with zod validation.",
+      "dependencies": [
+        "@tanstack/react-form",
+        "date-fns",
+        "lucide-react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "input",
+        "checkbox",
+        "select",
+        "textarea",
+        "button",
+        "calendar",
+        "popover"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/form.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form.tsx"
+        },
+        {
+          "path": "registry/ui/form.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form.field.tsx"
+        },
+        {
+          "path": "registry/ui/form.utils.ts",
+          "type": "registry:file",
+          "target": "hoogin/ui/form.utils.ts"
+        },
+        {
+          "path": "registry/ui/form-text.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-text.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-email.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-email.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-number.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-number.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-date.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-date.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-password.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-password.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-checkbox.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-checkbox.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-select.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-select.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-textarea.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-textarea.field.tsx"
+        }
+      ],
+      "type": "registry:ui"
+    },
+    {
       "name": "sidebar-layout",
       "title": "Sidebar Layout",
       "description": "A full application layout with a collapsible sidebar, header, and content area.",

@@ -22,6 +22,7 @@ export type EntityFormProps<TData> = {
   initialValues?: TData
   readOnly?: boolean
   showActions?: boolean
+  error?: string | null
   onSubmit: (values: TData) => void | Promise<void>
   onCancel: () => void
 }
@@ -179,6 +180,7 @@ export function AdminPage<TData>({
               }
               readOnly={readOnly}
               showActions={!isDelete}
+              error={error}
               onSubmit={handleSubmit}
               onCancel={close}
             />
@@ -187,9 +189,6 @@ export function AdminPage<TData>({
             <p className="px-4 text-sm">
               Are you sure you want to delete this {entityName}?
             </p>
-          ) : null}
-          {error ? (
-            <p className="px-4 text-sm text-destructive">{error}</p>
           ) : null}
           {isDelete ? (
             <SheetFooter>

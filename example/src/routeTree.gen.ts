@@ -20,6 +20,7 @@ import { Route as DocsComponentsAppSidebarRouteImport } from './routes/docs/comp
 import { Route as DocsComponentsDataTableRouteImport } from './routes/docs/components/data-table'
 import { Route as DocsComponentsDataTableCellsRouteImport } from './routes/docs/components/data-table-cells'
 import { Route as DocsComponentsDataTableViewOptionsRouteImport } from './routes/docs/components/data-table-view-options'
+import { Route as DocsComponentsFormFieldsRouteImport } from './routes/docs/components/form-fields'
 import { Route as DocsComponentsSidebarRouteImport } from './routes/docs/components/sidebar'
 import { Route as DocsComponentsSpinnerRouteImport } from './routes/docs/components/spinner'
 import { Route as DocsComponentsThemeProviderRouteImport } from './routes/docs/components/theme-provider'
@@ -83,6 +84,12 @@ const DocsComponentsDataTableViewOptionsRoute =
     path: '/docs/components/data-table-view-options',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DocsComponentsFormFieldsRoute =
+  DocsComponentsFormFieldsRouteImport.update({
+    id: '/docs/components/form-fields',
+    path: '/docs/components/form-fields',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DocsComponentsSidebarRoute = DocsComponentsSidebarRouteImport.update({
   id: '/docs/components/sidebar',
   path: '/docs/components/sidebar',
@@ -117,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
+  '/docs/components/form-fields': typeof DocsComponentsFormFieldsRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -134,6 +142,7 @@ export interface FileRoutesByTo {
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
+  '/docs/components/form-fields': typeof DocsComponentsFormFieldsRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -152,6 +161,7 @@ export interface FileRoutesById {
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
+  '/docs/components/form-fields': typeof DocsComponentsFormFieldsRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
+    | '/docs/components/form-fields'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
+    | '/docs/components/form-fields'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -205,6 +217,7 @@ export interface FileRouteTypes {
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
+    | '/docs/components/form-fields'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -223,6 +236,7 @@ export interface RootRouteChildren {
   DocsComponentsDataTableRoute: typeof DocsComponentsDataTableRoute
   DocsComponentsDataTableCellsRoute: typeof DocsComponentsDataTableCellsRoute
   DocsComponentsDataTableViewOptionsRoute: typeof DocsComponentsDataTableViewOptionsRoute
+  DocsComponentsFormFieldsRoute: typeof DocsComponentsFormFieldsRoute
   DocsComponentsSidebarRoute: typeof DocsComponentsSidebarRoute
   DocsComponentsSpinnerRoute: typeof DocsComponentsSpinnerRoute
   DocsComponentsThemeProviderRoute: typeof DocsComponentsThemeProviderRoute
@@ -309,6 +323,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsComponentsDataTableViewOptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/components/form-fields': {
+      id: '/docs/components/form-fields'
+      path: '/docs/components/form-fields'
+      fullPath: '/docs/components/form-fields'
+      preLoaderRoute: typeof DocsComponentsFormFieldsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs/components/sidebar': {
       id: '/docs/components/sidebar'
       path: '/docs/components/sidebar'
@@ -352,6 +373,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsComponentsDataTableCellsRoute: DocsComponentsDataTableCellsRoute,
   DocsComponentsDataTableViewOptionsRoute:
     DocsComponentsDataTableViewOptionsRoute,
+  DocsComponentsFormFieldsRoute: DocsComponentsFormFieldsRoute,
   DocsComponentsSidebarRoute: DocsComponentsSidebarRoute,
   DocsComponentsSpinnerRoute: DocsComponentsSpinnerRoute,
   DocsComponentsThemeProviderRoute: DocsComponentsThemeProviderRoute,

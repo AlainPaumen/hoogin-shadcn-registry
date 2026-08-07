@@ -64,6 +64,10 @@ export const sidebarData = {
           url: "/docs/components/data-table-view-options",
         },
         {
+          title: "Form Fields",
+          url: "/docs/components/form-fields",
+        },
+        {
           title: "Sidebar",
           url: "/docs/components/sidebar",
         },
