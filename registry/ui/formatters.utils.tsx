@@ -4,9 +4,9 @@ export function checkBoxFormatter(value: boolean | undefined) {
     return value ? <SquareCheck /> : <Square />;
 }
 
-export function currencyFormatter(value: number) {
-    const symbol = import.meta.env.VITE_CURRENCY_SYMBOL ?? "€";
-    return `${symbol} ${(value / 100).toFixed(2)}`;
+export function currencyFormatter(value: number, symbol?: string) {
+    const currencySymbol = symbol ?? import.meta.env.VITE_CURRENCY_SYMBOL ?? "€";
+    return `${currencySymbol} ${(value / 100).toFixed(2)}`;
 }
 
 export function minutesFormatter(value: number) {

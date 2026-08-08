@@ -43,42 +43,38 @@ export function FormPasswordField<
       validators={validators}
       className={className}
     >
-      {(field) => {
-        const invalid =
-          field.state.meta.isTouched && field.state.meta.errors.length > 0
-        return (
-          <div className="relative">
-            <Input
-              id={field.name}
-              name={field.name}
-              type={show ? "text" : "password"}
-              value={field.state.value as string}
-              onChange={(event) =>
-                field.handleChange(
-                  event.target.value as typeof field.state.value
-                )
-              }
-              onBlur={field.handleBlur}
-              disabled={disabled}
-              autoComplete={autoComplete}
-              aria-invalid={invalid || undefined}
-              placeholder={placeholder}
-              className={cn("w-full pr-8", className)}
-            />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              tabIndex={-1}
-              aria-label={show ? "Hide password" : "Show password"}
-              onClick={() => setShow((visible) => !visible)}
-              className="absolute top-0 right-0 h-full w-8 rounded-l-none text-muted-foreground hover:bg-transparent hover:text-foreground"
-            >
-              {show ? <EyeOffIcon /> : <EyeIcon />}
-            </Button>
-          </div>
-        )
-      }}
+      {(field) => (
+        <div className="relative">
+          <Input
+            id={field.name}
+            name={field.name}
+            type={show ? "text" : "password"}
+            value={field.state.value as string}
+            onChange={(event) =>
+              field.handleChange(
+                event.target.value as typeof field.state.value
+              )
+            }
+            onBlur={field.handleBlur}
+            disabled={disabled}
+            autoComplete={autoComplete}
+            aria-invalid={field.invalid || undefined}
+            placeholder={placeholder}
+            className={cn("w-full pr-8", className)}
+          />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            tabIndex={-1}
+            aria-label={show ? "Hide password" : "Show password"}
+            onClick={() => setShow((visible) => !visible)}
+            className="absolute top-0 right-0 h-full w-8 rounded-l-none text-muted-foreground hover:bg-transparent hover:text-foreground"
+          >
+            {show ? <EyeOffIcon /> : <EyeIcon />}
+          </Button>
+        </div>
+      )}
     </FormField>
   )
 }

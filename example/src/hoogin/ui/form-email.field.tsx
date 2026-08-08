@@ -1,10 +1,25 @@
-import { Input } from "@/components/ui/input"
+import { Mail as EmailIcon, type LucideIcon } from "lucide-react"
+
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
 import {
   FormField,
   type FormFieldProps,
   type KeysOfType,
 } from "@/hoogin/ui/form.field"
+
+export type FormEmailFieldProps<
+  TFormData,
+  TName extends KeysOfType<TFormData, string>,
+> = Omit<FormFieldProps<TFormData, TName>, "children"> & {
+  emailIcon?: LucideIcon
+  disabled?: boolean
+  placeholder?: string
+}
 
 export function FormEmailField<
   TFormData,
@@ -17,12 +32,10 @@ export function FormEmailField<
   required,
   validators,
   disabled,
+  emailIcon: Icon = EmailIcon,
   placeholder,
   className,
-}: Omit<FormFieldProps<TFormData, TName>, "children"> & {
-  disabled?: boolean
-  placeholder?: string
-}) {
+}: FormEmailFieldProps<TFormData, TName>) {
   return (
     <FormField
       form={form}
@@ -33,11 +46,12 @@ export function FormEmailField<
       validators={validators}
       className={className}
     >
-      {(field) => {
-        const invalid =
-          field.state.meta.isTouched && field.state.meta.errors.length > 0
-        return (
-          <Input
+      {(field) => (
+        <InputGroup>
+          <InputGroupAddon>
+            <Icon className="text-foreground" />
+          </InputGroupAddon>
+          <InputGroupInput
             id={field.name}
             name={field.name}
             type="email"
@@ -49,12 +63,12 @@ export function FormEmailField<
             }
             onBlur={field.handleBlur}
             disabled={disabled}
-            aria-invalid={invalid || undefined}
+            aria-invalid={field.invalid || undefined}
             placeholder={placeholder}
             className={cn("w-full", className)}
           />
-        )
-      }}
+        </InputGroup>
+      )}
     </FormField>
   )
 }

@@ -17,6 +17,7 @@ export type FormFieldApi<TValue> = {
   name: string
   handleChange: (value: TValue) => void
   handleBlur: () => void
+  invalid: boolean
   state: {
     value: TValue
     meta: {
@@ -108,6 +109,8 @@ export function FormField<TFormData, TName extends DeepKeys<TFormData>>({
               name: field.name,
               handleChange: field.handleChange,
               handleBlur: field.handleBlur,
+              invalid:
+                field.state.meta.isTouched && field.state.meta.errors.length > 0,
               state: {
                 value: field.state.value,
                 meta: {

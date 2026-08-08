@@ -33,32 +33,28 @@ export function FormNumberField<
       validators={validators}
       className={className}
     >
-      {(field) => {
-        const invalid =
-          field.state.meta.isTouched && field.state.meta.errors.length > 0
-        return (
-          <Input
-            id={field.name}
-            name={field.name}
-            type="number"
-            value={
-              Number.isNaN(field.state.value as number)
-                ? ""
-                : (field.state.value as number)
-            }
-            onChange={(event) =>
-              field.handleChange(
-                event.target.valueAsNumber as typeof field.state.value
-              )
-            }
-            onBlur={field.handleBlur}
-            disabled={disabled}
-            aria-invalid={invalid || undefined}
-            placeholder={placeholder}
-            className={cn("w-full", className)}
-          />
-        )
-      }}
+      {(field) => (
+        <Input
+          id={field.name}
+          name={field.name}
+          type="number"
+          value={
+            Number.isNaN(field.state.value as number)
+              ? ""
+              : (field.state.value as number)
+          }
+          onChange={(event) =>
+            field.handleChange(
+              event.target.valueAsNumber as typeof field.state.value
+            )
+          }
+          onBlur={field.handleBlur}
+          disabled={disabled}
+          aria-invalid={field.invalid || undefined}
+          placeholder={placeholder}
+          className={cn("w-full", className)}
+        />
+      )}
     </FormField>
   )
 }

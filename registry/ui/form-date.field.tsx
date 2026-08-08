@@ -37,11 +37,13 @@ export function FormDateField<
   disabled,
   dateFormat = "PPP",
   placeholder = "Select a date",
+  showMonthYearDropdowns = false,
   className,
 }: Omit<FormFieldProps<TFormData, TName>, "children"> & {
   disabled?: boolean
   dateFormat?: string
   placeholder?: string
+  showMonthYearDropdowns?: boolean
 }) {
   const [open, setOpen] = useState(false)
 
@@ -56,8 +58,6 @@ export function FormDateField<
       className={className}
     >
       {(field) => {
-        const invalid =
-          field.state.meta.isTouched && field.state.meta.errors.length > 0
         const value = field.state.value as string
         const selected = parseDateValue(value)
         return (
@@ -75,7 +75,7 @@ export function FormDateField<
                   variant="outline"
                   id={field.name}
                   disabled={disabled}
-                  aria-invalid={invalid || undefined}
+                  aria-invalid={field.invalid || undefined}
                   data-empty={!value}
                   className={cn(
                     "w-full justify-start text-left font-normal data-[empty=true]:text-muted-foreground",
@@ -94,6 +94,7 @@ export function FormDateField<
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
+                captionLayout={showMonthYearDropdowns ? "dropdown" : "label"}
                 selected={selected}
                 onSelect={(date) => {
                   if (date) {

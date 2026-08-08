@@ -46,39 +46,35 @@ export function FormSelectField<
       validators={validators}
       className={className}
     >
-      {(field) => {
-        const invalid =
-          field.state.meta.isTouched && field.state.meta.errors.length > 0
-        return (
-          <Select
-            items={options}
-            value={(field.state.value as string) || undefined}
-            onValueChange={(value) =>
-              field.handleChange(value as typeof field.state.value)
-            }
-            onOpenChange={() => field.handleBlur()}
-            disabled={disabled}
+      {(field) => (
+        <Select
+          items={options}
+          value={(field.state.value as string) || undefined}
+          onValueChange={(value) =>
+            field.handleChange(value as typeof field.state.value)
+          }
+          onOpenChange={() => field.handleBlur()}
+          disabled={disabled}
+        >
+          <SelectTrigger
+            aria-invalid={field.invalid || undefined}
+            className={cn("w-full", className)}
           >
-            <SelectTrigger
-              aria-invalid={invalid || undefined}
-              className={cn("w-full", className)}
-            >
-              <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
-            <SelectContent>
-              {options.map((option) => (
-                <SelectItem
-                  key={option.value}
-                  value={option.value}
-                  label={option.label}
-                >
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )
-      }}
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem
+                key={option.value}
+                value={option.value}
+                label={option.label}
+              >
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
     </FormField>
   )
 }

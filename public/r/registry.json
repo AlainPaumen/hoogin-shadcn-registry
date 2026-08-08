@@ -273,6 +273,7 @@
       ],
       "registryDependencies": [
         "input",
+        "input-group",
         "checkbox",
         "select",
         "textarea",
@@ -297,6 +298,11 @@
           "target": "hoogin/ui/form.utils.ts"
         },
         {
+          "path": "registry/ui/formatters.utils.tsx",
+          "type": "registry:file",
+          "target": "hoogin/ui/formatters.utils.tsx"
+        },
+        {
           "path": "registry/ui/form-text.field.tsx",
           "type": "registry:ui",
           "target": "hoogin/ui/form-text.field.tsx"
@@ -312,9 +318,19 @@
           "target": "hoogin/ui/form-number.field.tsx"
         },
         {
+          "path": "registry/ui/form-currency.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-currency.field.tsx"
+        },
+        {
           "path": "registry/ui/form-date.field.tsx",
           "type": "registry:ui",
           "target": "hoogin/ui/form-date.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-time.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-time.field.tsx"
         },
         {
           "path": "registry/ui/form-password.field.tsx",

@@ -289,6 +289,7 @@ export const registryItems: RegistryItem[] = [
     ],
     "registryDependencies": [
       "input",
+      "input-group",
       "checkbox",
       "select",
       "textarea",
@@ -313,6 +314,11 @@ export const registryItems: RegistryItem[] = [
         "target": "hoogin/ui/form.utils.ts"
       },
       {
+        "path": "formatters.utils.tsx",
+        "type": "registry:file",
+        "target": "hoogin/ui/formatters.utils.tsx"
+      },
+      {
         "path": "form-text.field.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/form-text.field.tsx"
@@ -328,9 +334,19 @@ export const registryItems: RegistryItem[] = [
         "target": "hoogin/ui/form-number.field.tsx"
       },
       {
+        "path": "form-currency.field.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/form-currency.field.tsx"
+      },
+      {
         "path": "form-date.field.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/form-date.field.tsx"
+      },
+      {
+        "path": "form-time.field.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/form-time.field.tsx"
       },
       {
         "path": "form-password.field.tsx",

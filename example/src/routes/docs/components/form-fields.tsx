@@ -3,12 +3,13 @@ import { createFileRoute } from "@tanstack/react-router"
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
+import { toast } from "@/components/ui/toast"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { ComponentDoc } from "@/hoogin/docs/doc-page"
 import { DocSection } from "@/hoogin/docs/doc-section"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
+import { ValueList } from "@/hoogin/docs/value-list"
 import {
   Form,
   FormBody,
@@ -18,6 +19,7 @@ import {
 } from "@/hoogin/ui/form"
 import { isRequiredField } from "@/hoogin/ui/form.utils"
 import { FormCheckboxField } from "@/hoogin/ui/form-checkbox.field"
+import { FormCurrencyField } from "@/hoogin/ui/form-currency.field"
 import { FormDateField } from "@/hoogin/ui/form-date.field"
 import { FormEmailField } from "@/hoogin/ui/form-email.field"
 import { FormNumberField } from "@/hoogin/ui/form-number.field"
@@ -25,6 +27,7 @@ import { FormPasswordField } from "@/hoogin/ui/form-password.field"
 import { FormSelectField } from "@/hoogin/ui/form-select.field"
 import { FormTextareaField } from "@/hoogin/ui/form-textarea.field"
 import { FormTextField } from "@/hoogin/ui/form-text.field"
+import { FormTimeField } from "@/hoogin/ui/form-time.field"
 
 export const Route = createFileRoute("/docs/components/form-fields")({
   component: FormFieldsPage,
@@ -38,8 +41,14 @@ const signUpSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
   role: z.enum(roles),
   birthDate: z.string().min(1, "Required"),
+  startDate: z.string().optional(),
+  startTime: z.string(),
   bio: z.string().min(10, "Bio must be at least 10 characters"),
   favoriteNumber: z.number().positive("Must be greater than zero"),
+  price: z
+    .number()
+    .int("Price must be a whole number of cents")
+    .positive("Price must be greater than zero"),
   agree: z.boolean().refine((value) => value, "You must accept the terms"),
 })
 
@@ -60,8 +69,11 @@ function SignUpForm({
     password: "",
     role: "user",
     birthDate: "",
+    startDate: "",
+    startTime: "",
     bio: "",
     favoriteNumber: 0,
+    price: 0,
     agree: false,
   }
 
@@ -118,6 +130,14 @@ function SignUpForm({
           required={isRequiredField(signUpSchema.shape.birthDate)}
           validators={{ onChange: signUpSchema.shape.birthDate }}
           dateFormat="dd/MM/yyyy"
+          showMonthYearDropdowns
+        />
+        <FormDateField form={form} name="startDate" label="Start date" />
+        <FormTimeField
+          form={form}
+          name="startTime"
+          label="Start time"
+          required={isRequiredField(signUpSchema.shape.startTime)}
         />
         <FormNumberField
           form={form}
@@ -125,6 +145,14 @@ function SignUpForm({
           label="Favorite number"
           required={isRequiredField(signUpSchema.shape.favoriteNumber)}
           validators={{ onChange: signUpSchema.shape.favoriteNumber }}
+        />
+        <FormCurrencyField
+          form={form}
+          name="price"
+          label="Price"
+          required={isRequiredField(signUpSchema.shape.price)}
+          validators={{ onChange: signUpSchema.shape.price }}
+          placeholder="0,00"
         />
         <FormTextareaField
           form={form}
@@ -154,7 +182,6 @@ function SignUpForm({
 
 function FormFieldsPreview() {
   const [error, setError] = useState<string | null>(null)
-  const [done, setDone] = useState(false)
 
   const handleSubmit = (values: SignUpValues) => {
     if (values.email === "taken@example.com") {
@@ -162,21 +189,11 @@ function FormFieldsPreview() {
       return
     }
     setError(null)
-    setDone(true)
-  }
-
-  if (done) {
-    return (
-      <div className="flex w-full max-w-sm flex-col items-center gap-3 rounded-lg border p-8 text-center">
-        <p className="text-sm font-medium">Account created</p>
-        <p className="text-sm text-muted-foreground">
-          Every field component is wired to the same TanStack Form field API.
-        </p>
-        <Button variant="outline" size="sm" onClick={() => setDone(false)}>
-          Submit again
-        </Button>
-      </div>
-    )
+    toast.add({
+      type: "success",
+      title: "Account created",
+      description: <ValueList values={values} mask={["password"]} />,
+    })
   }
 
   return (
@@ -197,8 +214,10 @@ import { FormEmailField } from "@/hoogin/ui/form-email.field"
 import { FormPasswordField } from "@/hoogin/ui/form-password.field"
 import { FormSelectField } from "@/hoogin/ui/form-select.field"
 import { FormDateField } from "@/hoogin/ui/form-date.field"
+import { FormTimeField } from "@/hoogin/ui/form-time.field"
 import { FormTextareaField } from "@/hoogin/ui/form-textarea.field"
 import { FormCheckboxField } from "@/hoogin/ui/form-checkbox.field"
+import { FormCurrencyField } from "@/hoogin/ui/form-currency.field"
 import { z } from "zod"
 
 const signUpSchema = z.object({
@@ -207,8 +226,11 @@ const signUpSchema = z.object({
   password: z.string().min(8),
   role: z.enum(["user", "admin", "editor"]),
   birthDate: z.string().min(1),
+  startDate: z.string().optional(),
+  startTime: z.string(),
   bio: z.string().min(10),
   agree: z.boolean().refine((value) => value),
+  price: z.number().int().positive(),
 })
 
 export function SignUpForm({
@@ -219,7 +241,7 @@ export function SignUpForm({
   onCancel: () => void
 }) {
   const form = useForm({
-    defaultValues: { fullName: "", email: "", password: "", role: "user", birthDate: "", bio: "", agree: false },
+    defaultValues: { fullName: "", email: "", password: "", role: "user", birthDate: "", startDate: "", startTime: "", bio: "", agree: false },
     onSubmit: async ({ value }) => {
       await api.signUp(value)
     },
@@ -264,6 +286,19 @@ export function SignUpForm({
           required={isRequiredField(signUpSchema.shape.birthDate)}
           validators={{ onChange: signUpSchema.shape.birthDate }}
           dateFormat="dd/MM/yyyy"
+          showMonthYearDropdowns
+        />
+        <FormDateField form={form} name="startDate" label="Start date" />
+        <FormTimeField
+          form={form}
+          name="startTime"
+          label="Start time"
+        />
+        <FormCurrencyField
+          form={form}
+          name="price"
+          label="Price"
+          validators={{ onChange: signUpSchema.shape.price }}
         />
         <FormTextareaField
           form={form}
@@ -304,8 +339,8 @@ function FormFieldsPage() {
       >
         <p className="text-sm text-muted-foreground">
           Annotate defaultValues with your schema's inferred type so field
-          values keep their widest type: const defaultValues: SignUpValues
-          = {"{ ... }"}.
+          values keep their widest type: const defaultValues: SignUpValues ={" "}
+          {"{ ... }"}.
         </p>
       </DocSection>
       <DocSection title="Props">
@@ -314,27 +349,32 @@ function FormFieldsPage() {
             {
               prop: "form",
               type: "ReactFormExtendedApi<TFormData>",
-              description: "The TanStack Form instance. Pass the object returned by useForm. Form wires handleSubmit on the <form> element; each field component binds its own form.Field to this instance.",
+              description:
+                "The TanStack Form instance. Pass the object returned by useForm. Form wires handleSubmit on the <form> element; each field component binds its own form.Field to this instance.",
             },
             {
               prop: "name",
               type: "TName",
-              description: "A key (or dot path) of the form data. Constrained to keys whose value type matches the control, so a checkbox accepts only boolean fields.",
+              description:
+                "A key (or dot path) of the form data. Constrained to keys whose value type matches the control, so a checkbox accepts only boolean fields.",
             },
             {
               prop: "validators",
               type: "FieldValidators<TFormData, TName, TData>",
-              description: "Optional field validators. Pass a zod schema per event, e.g. { onChange: signUpSchema.shape.email }. The schema is checked against the field's value type.",
+              description:
+                "Optional field validators. Pass a zod schema per event, e.g. { onChange: signUpSchema.shape.email }. The schema is checked against the field's value type.",
             },
             {
               prop: "label",
               type: "string",
-              description: "Field label. A required marker is appended when required is true.",
+              description:
+                "Field label. A required marker is appended when required is true.",
             },
             {
               prop: "required",
               type: "boolean",
-              description: "Shows the required asterisk. Derive it with isRequiredField(yourZodSchema).",
+              description:
+                "Shows the required asterisk. Derive it with isRequiredField(yourZodSchema).",
             },
             {
               prop: "description",
@@ -349,12 +389,32 @@ function FormFieldsPage() {
             {
               prop: "dateFormat",
               type: "string",
-              description: "FormDateField display format for the selected date using date-fns tokens. Defaults to \"PPP\" (e.g. \"Aug 7, 2026\"). The stored value stays ISO yyyy-MM-dd regardless.",
+              description:
+                'FormDateField display format for the selected date using date-fns tokens. Defaults to "PPP" (e.g. "Aug 7, 2026"). The stored value stays ISO yyyy-MM-dd regardless.',
             },
             {
               prop: "placeholder",
               type: "string",
-              description: "FormDateField text shown when no date is selected. Defaults to \"Select a date\".",
+              description:
+                'FormDateField text shown when no date is selected. Defaults to "Select a date".',
+            },
+            {
+              prop: "showMonthYearDropdowns",
+              type: "boolean",
+              description:
+                "FormDateField renders month and year dropdowns in the calendar caption instead of the plain month label. Defaults to false. With dropdowns enabled the year range is 100 years back to the end of the current year.",
+            },
+            {
+              prop: "currencyIcon",
+              type: "LucideIcon",
+              description:
+                'FormCurrencyField leading icon. Defaults to the Euro icon. The icon replaces the currency symbol in the displayed amount. The stored value stays cents regardless.',
+            },
+            {
+              prop: "value",
+              type: "string",
+              description:
+                'FormTimeField stores the masked time as displayed (e.g. "14:3-" or "14:30"). Completeness is validated automatically: the field reports "Required" when empty and "Enter a valid time (HH:MM)" until a full HH:MM is set. The Clock icon opens a popover with scrollable hour (00-23) and minute (00-59) lists.',
             },
             {
               prop: "onCancel",
@@ -364,22 +424,26 @@ function FormFieldsPage() {
             {
               prop: "submitLabel",
               type: "string",
-              description: "FormFooter submit button label. Defaults to \"Save\".",
+              description:
+                'FormFooter submit button label. Defaults to "Save".',
             },
             {
               prop: "readOnly",
               type: "boolean",
-              description: "FormFooter renders only the cancel button (label \"Close\").",
+              description:
+                'FormFooter renders only the cancel button (label "Close").',
             },
             {
               prop: "showActions",
               type: "boolean",
-              description: "FormFooter renders nothing when false. Set false during destructive confirmations owned by the caller.",
+              description:
+                "FormFooter renders nothing when false. Set false during destructive confirmations owned by the caller.",
             },
             {
               prop: "error",
               type: "string",
-              description: "FormError shows this message alongside any form-level errors from the form store.",
+              description:
+                "FormError shows this message alongside any form-level errors from the form store.",
             },
           ]}
         />

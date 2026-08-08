@@ -3,22 +3,19 @@ import { createFileRoute } from "@tanstack/react-router"
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
 
+import { toast } from "@/components/ui/toast"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { ComponentDoc } from "@/hoogin/docs/doc-page"
 import { DocSection } from "@/hoogin/docs/doc-section"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
+import { ValueList } from "@/hoogin/docs/value-list"
 import {
   AdminPage,
   type EntityFormProps,
 } from "@/hoogin/blocks/admin-page/admin-page"
 import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
-import {
-  Form,
-  FormBody,
-  FormError,
-  FormFooter,
-} from "@/hoogin/ui/form"
+import { Form, FormBody, FormError, FormFooter } from "@/hoogin/ui/form"
 import { isRequiredField } from "@/hoogin/ui/form.utils"
 import { FormDateField } from "@/hoogin/ui/form-date.field"
 import { FormEmailField } from "@/hoogin/ui/form-email.field"
@@ -29,6 +26,7 @@ import { BadgeCell } from "@/hoogin/ui/badge.cell"
 import { CurrencyCell } from "@/hoogin/ui/currency.cell"
 import { DateCell } from "@/hoogin/ui/date.cell"
 import { EmailCell } from "@/hoogin/ui/email.cell"
+import { currencyFormatter } from "@/hoogin/ui/formatters.utils"
 import { TextCell } from "@/hoogin/ui/text.cell"
 
 export const Route = createFileRoute("/docs/blocks/admin-page")({
@@ -208,22 +206,44 @@ function AdminPagePreview() {
   const [payments, setPayments] = useState<Payment[]>(initialPayments)
 
   const handleCreate = (values: Payment) => {
-    setPayments((prev) => [
-      ...prev,
-      { ...values, id: `P-${String(prev.length + 1).padStart(3, "0")}` },
-    ])
+    const created: Payment = {
+      ...values,
+      id: `P-${String(payments.length + 1).padStart(3, "0")}`,
+    }
+    setPayments((prev) => [...prev, created])
+    toast.add({
+      type: "success",
+      title: "Payment created",
+      description: (
+        <ValueList
+          values={{ ...created, amount: currencyFormatter(created.amount) }}
+        />
+      ),
+    })
   }
 
   const handleUpdate = (row: Payment, values: Payment) => {
+    const updated: Payment = { ...values, id: row.id }
     setPayments((prev) =>
-      prev.map((payment) =>
-        payment.id === row.id ? { ...values, id: row.id } : payment
-      )
+      prev.map((payment) => (payment.id === row.id ? updated : payment))
     )
+    toast.add({
+      type: "success",
+      title: "Payment updated",
+      description: (
+        <ValueList
+          values={{ ...updated, amount: currencyFormatter(updated.amount) }}
+        />
+      ),
+    })
   }
 
   const handleDelete = (row: Payment) => {
     setPayments((prev) => prev.filter((payment) => payment.id !== row.id))
+    toast.add({
+      title: "Payment deleted",
+      description: `Payment ${row.id} (${row.username}) was removed.`,
+    })
   }
 
   return (
@@ -419,27 +439,32 @@ function AdminPagePage() {
             {
               prop: "getRowId",
               type: "(row: TData) => string",
-              description: "Stable id used to identify the row being edited or deleted.",
+              description:
+                "Stable id used to identify the row being edited or deleted.",
             },
             {
               prop: "schema",
               type: "z.ZodType<TData>",
-              description: "Validates submitted values before onCreate / onUpdate fire.",
+              description:
+                "Validates submitted values before onCreate / onUpdate fire.",
             },
             {
               prop: "form",
               type: "ComponentType<EntityFormProps<TData>>",
-              description: "Form component rendered in the sheet. Receives initialValues (undefined when creating), readOnly (detail and delete modes), showActions (false during delete confirmation), error (schema-level failures), onSubmit, and onCancel.",
+              description:
+                "Form component rendered in the sheet. Receives initialValues (undefined when creating), readOnly (detail and delete modes), showActions (false during delete confirmation), error (schema-level failures), onSubmit, and onCancel.",
             },
             {
               prop: "onCreate",
               type: "(values: TData) => void | Promise<void>",
-              description: "Called with validated values from the create sheet.",
+              description:
+                "Called with validated values from the create sheet.",
             },
             {
               prop: "onUpdate",
               type: "(row: TData, values: TData) => void | Promise<void>",
-              description: "Called with the original row and validated values from the edit sheet.",
+              description:
+                "Called with the original row and validated values from the edit sheet.",
             },
             {
               prop: "onDelete",
@@ -449,7 +474,8 @@ function AdminPagePage() {
             {
               prop: "entityName",
               type: "string",
-              description: "Used in the New button and sheet headings, e.g. \"payment\". Defaults to \"record\".",
+              description:
+                'Used in the New button and sheet headings, e.g. "payment". Defaults to "record".',
             },
             {
               prop: "title",

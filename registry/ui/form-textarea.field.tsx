@@ -35,28 +35,24 @@ export function FormTextareaField<
       validators={validators}
       className={className}
     >
-      {(field) => {
-        const invalid =
-          field.state.meta.isTouched && field.state.meta.errors.length > 0
-        return (
-          <Textarea
-            id={field.name}
-            name={field.name}
-            value={field.state.value as string}
-            onChange={(event) =>
-              field.handleChange(
-                event.target.value as typeof field.state.value
-              )
-            }
-            onBlur={field.handleBlur}
-            disabled={disabled}
-            aria-invalid={invalid || undefined}
-            placeholder={placeholder}
-            rows={rows}
-            className={cn("w-full", className)}
-          />
-        )
-      }}
+      {(field) => (
+        <Textarea
+          id={field.name}
+          name={field.name}
+          value={field.state.value as string}
+          onChange={(event) =>
+            field.handleChange(
+              event.target.value as typeof field.state.value
+            )
+          }
+          onBlur={field.handleBlur}
+          disabled={disabled}
+          aria-invalid={field.invalid || undefined}
+          placeholder={placeholder}
+          rows={rows}
+          className={cn("w-full", className)}
+        />
+      )}
     </FormField>
   )
 }
