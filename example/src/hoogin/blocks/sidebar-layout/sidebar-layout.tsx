@@ -54,9 +54,21 @@ export function SidebarLayout({
   collapsible,
   className,
 }: SidebarLayoutProps) {
+  const hasNestedItems = dataMain.some((item) =>
+    item.items?.some((sub) => sub.items?.length)
+  )
+
   return (
     <TooltipProvider>
-      <SidebarProvider storageKey={storageKey} className={className}>
+      <SidebarProvider
+        storageKey={storageKey}
+        className={className}
+        style={
+          hasNestedItems
+            ? ({ "--sidebar-width": "20rem" } as React.CSSProperties)
+            : undefined
+        }
+      >
         <AppSidebar
           brand={brand}
           user={user}

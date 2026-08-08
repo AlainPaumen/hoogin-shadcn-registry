@@ -50,7 +50,6 @@ function NavSubItem({
       render={<SidebarMenuSubItem />}
     >
       <SidebarMenuSubButton
-        size="sm"
         isActive={active}
         className="pr-6"
         render={<Link to={sub.url} />}

@@ -26,7 +26,7 @@ const STRONG_PASSWORD_RULES: StrongPasswordRule[] = [
   { test: (value) => value.length >= 8, message: "8+ characters" },
   { test: (value) => /\d/.test(value), message: "a number" },
   { test: (value) => /[A-Z]/.test(value), message: "an uppercase letter" },
-  { test: (value) => /[!@#$%^&*]/.test(value), message: "a special character" },
+  { test: (value) => /[!@#$%^&*()§{}]/.test(value), message: "a special character" },
 ]
 
 function strongPasswordScore(value: string): number {
