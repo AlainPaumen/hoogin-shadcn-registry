@@ -367,6 +367,11 @@ export const registryItems: RegistryItem[] = [
         "path": "form-textarea.field.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/form-textarea.field.tsx"
+      },
+      {
+        "path": "form-strong-password.field.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/form-strong-password.field.tsx"
       }
     ]
   },

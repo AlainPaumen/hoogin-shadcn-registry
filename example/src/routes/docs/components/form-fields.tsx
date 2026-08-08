@@ -336,6 +336,10 @@ function FormFieldsPage() {
             ["Text", "/docs/components/form-text-field"],
             ["Email", "/docs/components/form-email-field"],
             ["Password", "/docs/components/form-password-field"],
+            [
+              "Strong Password",
+              "/docs/components/form-strong-password-field",
+            ],
             ["Number", "/docs/components/form-number-field"],
             ["Currency", "/docs/components/form-currency-field"],
             ["Date", "/docs/components/form-date-field"],

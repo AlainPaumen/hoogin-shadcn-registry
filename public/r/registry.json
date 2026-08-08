@@ -351,6 +351,11 @@
           "path": "registry/ui/form-textarea.field.tsx",
           "type": "registry:ui",
           "target": "hoogin/ui/form-textarea.field.tsx"
+        },
+        {
+          "path": "registry/ui/form-strong-password.field.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/form-strong-password.field.tsx"
         }
       ],
       "type": "registry:ui"

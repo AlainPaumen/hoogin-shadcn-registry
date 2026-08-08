@@ -28,6 +28,7 @@ import { Route as DocsComponentsFormFieldsRouteImport } from './routes/docs/comp
 import { Route as DocsComponentsFormNumberFieldRouteImport } from './routes/docs/components/form-number-field'
 import { Route as DocsComponentsFormPasswordFieldRouteImport } from './routes/docs/components/form-password-field'
 import { Route as DocsComponentsFormSelectFieldRouteImport } from './routes/docs/components/form-select-field'
+import { Route as DocsComponentsFormStrongPasswordFieldRouteImport } from './routes/docs/components/form-strong-password-field'
 import { Route as DocsComponentsFormTextFieldRouteImport } from './routes/docs/components/form-text-field'
 import { Route as DocsComponentsFormTextareaFieldRouteImport } from './routes/docs/components/form-textarea-field'
 import { Route as DocsComponentsFormTimeFieldRouteImport } from './routes/docs/components/form-time-field'
@@ -142,6 +143,12 @@ const DocsComponentsFormSelectFieldRoute =
     path: '/docs/components/form-select-field',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DocsComponentsFormStrongPasswordFieldRoute =
+  DocsComponentsFormStrongPasswordFieldRouteImport.update({
+    id: '/docs/components/form-strong-password-field',
+    path: '/docs/components/form-strong-password-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DocsComponentsFormTextFieldRoute =
   DocsComponentsFormTextFieldRouteImport.update({
     id: '/docs/components/form-text-field',
@@ -202,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/docs/components/form-number-field': typeof DocsComponentsFormNumberFieldRoute
   '/docs/components/form-password-field': typeof DocsComponentsFormPasswordFieldRoute
   '/docs/components/form-select-field': typeof DocsComponentsFormSelectFieldRoute
+  '/docs/components/form-strong-password-field': typeof DocsComponentsFormStrongPasswordFieldRoute
   '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
   '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
   '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
@@ -230,6 +238,7 @@ export interface FileRoutesByTo {
   '/docs/components/form-number-field': typeof DocsComponentsFormNumberFieldRoute
   '/docs/components/form-password-field': typeof DocsComponentsFormPasswordFieldRoute
   '/docs/components/form-select-field': typeof DocsComponentsFormSelectFieldRoute
+  '/docs/components/form-strong-password-field': typeof DocsComponentsFormStrongPasswordFieldRoute
   '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
   '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
   '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
@@ -259,6 +268,7 @@ export interface FileRoutesById {
   '/docs/components/form-number-field': typeof DocsComponentsFormNumberFieldRoute
   '/docs/components/form-password-field': typeof DocsComponentsFormPasswordFieldRoute
   '/docs/components/form-select-field': typeof DocsComponentsFormSelectFieldRoute
+  '/docs/components/form-strong-password-field': typeof DocsComponentsFormStrongPasswordFieldRoute
   '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
   '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
   '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
@@ -289,6 +299,7 @@ export interface FileRouteTypes {
     | '/docs/components/form-number-field'
     | '/docs/components/form-password-field'
     | '/docs/components/form-select-field'
+    | '/docs/components/form-strong-password-field'
     | '/docs/components/form-text-field'
     | '/docs/components/form-textarea-field'
     | '/docs/components/form-time-field'
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/docs/components/form-number-field'
     | '/docs/components/form-password-field'
     | '/docs/components/form-select-field'
+    | '/docs/components/form-strong-password-field'
     | '/docs/components/form-text-field'
     | '/docs/components/form-textarea-field'
     | '/docs/components/form-time-field'
@@ -345,6 +357,7 @@ export interface FileRouteTypes {
     | '/docs/components/form-number-field'
     | '/docs/components/form-password-field'
     | '/docs/components/form-select-field'
+    | '/docs/components/form-strong-password-field'
     | '/docs/components/form-text-field'
     | '/docs/components/form-textarea-field'
     | '/docs/components/form-time-field'
@@ -374,6 +387,7 @@ export interface RootRouteChildren {
   DocsComponentsFormNumberFieldRoute: typeof DocsComponentsFormNumberFieldRoute
   DocsComponentsFormPasswordFieldRoute: typeof DocsComponentsFormPasswordFieldRoute
   DocsComponentsFormSelectFieldRoute: typeof DocsComponentsFormSelectFieldRoute
+  DocsComponentsFormStrongPasswordFieldRoute: typeof DocsComponentsFormStrongPasswordFieldRoute
   DocsComponentsFormTextFieldRoute: typeof DocsComponentsFormTextFieldRoute
   DocsComponentsFormTextareaFieldRoute: typeof DocsComponentsFormTextareaFieldRoute
   DocsComponentsFormTimeFieldRoute: typeof DocsComponentsFormTimeFieldRoute
@@ -519,6 +533,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsComponentsFormSelectFieldRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/components/form-strong-password-field': {
+      id: '/docs/components/form-strong-password-field'
+      path: '/docs/components/form-strong-password-field'
+      fullPath: '/docs/components/form-strong-password-field'
+      preLoaderRoute: typeof DocsComponentsFormStrongPasswordFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs/components/form-text-field': {
       id: '/docs/components/form-text-field'
       path: '/docs/components/form-text-field'
@@ -591,6 +612,8 @@ const rootRouteChildren: RootRouteChildren = {
   DocsComponentsFormNumberFieldRoute: DocsComponentsFormNumberFieldRoute,
   DocsComponentsFormPasswordFieldRoute: DocsComponentsFormPasswordFieldRoute,
   DocsComponentsFormSelectFieldRoute: DocsComponentsFormSelectFieldRoute,
+  DocsComponentsFormStrongPasswordFieldRoute:
+    DocsComponentsFormStrongPasswordFieldRoute,
   DocsComponentsFormTextFieldRoute: DocsComponentsFormTextFieldRoute,
   DocsComponentsFormTextareaFieldRoute: DocsComponentsFormTextareaFieldRoute,
   DocsComponentsFormTimeFieldRoute: DocsComponentsFormTimeFieldRoute,

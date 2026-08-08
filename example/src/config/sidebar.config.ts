@@ -84,6 +84,10 @@ export const sidebarData = {
               url: "/docs/components/form-password-field",
             },
             {
+              title: "Form Strong Password Field",
+              url: "/docs/components/form-strong-password-field",
+            },
+            {
               title: "Form Number Field",
               url: "/docs/components/form-number-field",
             },
