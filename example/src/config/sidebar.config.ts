@@ -17,7 +17,7 @@ import {
 export const sidebarData = {
   brand: {
     name: "@hoogin",
-    description: "shadcn registry",
+    description: `shadcn registry v${__LIB_VERSION__}`,
     logo: favicon,
   },
   navMainLabel: "Docs",

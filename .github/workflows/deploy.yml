@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -19,9 +19,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+      - name: Compute version
+        run: echo "LIB_VERSION=$(bun scripts/version.ts)" >> "$GITHUB_ENV"
       - name: Build registry
         run: bunx --bun shadcn@latest build
       - name: Install example dependencies
@@ -39,6 +44,12 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: ./_site
+      - name: Tag version
+        run: |
+          if ! git tag -l "v$LIB_VERSION" | grep -q .; then
+            git tag "v$LIB_VERSION"
+            git push origin "v$LIB_VERSION"
+          fi
 
   deploy:
     environment:
