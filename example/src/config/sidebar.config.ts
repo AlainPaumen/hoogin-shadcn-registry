@@ -66,6 +66,52 @@ export const sidebarData = {
         {
           title: "Form Fields",
           url: "/docs/components/form-fields",
+          items: [
+            {
+              title: "Overview",
+              url: "/docs/components/form-fields",
+            },
+            {
+              title: "Form Text Field",
+              url: "/docs/components/form-text-field",
+            },
+            {
+              title: "Form Email Field",
+              url: "/docs/components/form-email-field",
+            },
+            {
+              title: "Form Password Field",
+              url: "/docs/components/form-password-field",
+            },
+            {
+              title: "Form Number Field",
+              url: "/docs/components/form-number-field",
+            },
+            {
+              title: "Form Currency Field",
+              url: "/docs/components/form-currency-field",
+            },
+            {
+              title: "Form Date Field",
+              url: "/docs/components/form-date-field",
+            },
+            {
+              title: "Form Time Field",
+              url: "/docs/components/form-time-field",
+            },
+            {
+              title: "Form Select Field",
+              url: "/docs/components/form-select-field",
+            },
+            {
+              title: "Form Textarea Field",
+              url: "/docs/components/form-textarea-field",
+            },
+            {
+              title: "Form Checkbox Field",
+              url: "/docs/components/form-checkbox-field",
+            },
+          ],
         },
         {
           title: "Sidebar",

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Clock as ClockIcon } from "lucide-react"
 import type {
+  DeepValue,
   FieldValidateFn,
   FieldValidateOrFn,
 } from "@tanstack/react-form"
@@ -86,18 +87,20 @@ function mergeTimeValidator<
   TFormData,
   TName extends KeysOfType<TFormData, string>,
 >(
-  consumer: undefined | FieldValidateOrFn<TFormData, TName, string>
-): FieldValidateFn<TFormData, TName, string> {
+  consumer:
+    | undefined
+    | FieldValidateOrFn<TFormData, TName, DeepValue<TFormData, TName>>
+): FieldValidateFn<TFormData, TName, DeepValue<TFormData, TName>> {
   return ({ value, fieldApi }) => {
     if (value === "") return "Required"
-    if (!TIME_PATTERN.test(value)) return TIME_MESSAGE
+    if (!TIME_PATTERN.test(String(value))) return TIME_MESSAGE
     if (typeof consumer === "function") {
       return consumer({ value, fieldApi })
     }
     if (consumer) {
       const result = consumer["~standard"].validate(value)
       if ("issues" in result) {
-        return result.issues.map((issue) => issue.message)
+        return (result.issues ?? []).map((issue) => issue.message)
       }
     }
     return undefined

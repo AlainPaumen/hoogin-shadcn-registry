@@ -20,7 +20,17 @@ import { Route as DocsComponentsAppSidebarRouteImport } from './routes/docs/comp
 import { Route as DocsComponentsDataTableRouteImport } from './routes/docs/components/data-table'
 import { Route as DocsComponentsDataTableCellsRouteImport } from './routes/docs/components/data-table-cells'
 import { Route as DocsComponentsDataTableViewOptionsRouteImport } from './routes/docs/components/data-table-view-options'
+import { Route as DocsComponentsFormCheckboxFieldRouteImport } from './routes/docs/components/form-checkbox-field'
+import { Route as DocsComponentsFormCurrencyFieldRouteImport } from './routes/docs/components/form-currency-field'
+import { Route as DocsComponentsFormDateFieldRouteImport } from './routes/docs/components/form-date-field'
+import { Route as DocsComponentsFormEmailFieldRouteImport } from './routes/docs/components/form-email-field'
 import { Route as DocsComponentsFormFieldsRouteImport } from './routes/docs/components/form-fields'
+import { Route as DocsComponentsFormNumberFieldRouteImport } from './routes/docs/components/form-number-field'
+import { Route as DocsComponentsFormPasswordFieldRouteImport } from './routes/docs/components/form-password-field'
+import { Route as DocsComponentsFormSelectFieldRouteImport } from './routes/docs/components/form-select-field'
+import { Route as DocsComponentsFormTextFieldRouteImport } from './routes/docs/components/form-text-field'
+import { Route as DocsComponentsFormTextareaFieldRouteImport } from './routes/docs/components/form-textarea-field'
+import { Route as DocsComponentsFormTimeFieldRouteImport } from './routes/docs/components/form-time-field'
 import { Route as DocsComponentsSidebarRouteImport } from './routes/docs/components/sidebar'
 import { Route as DocsComponentsSpinnerRouteImport } from './routes/docs/components/spinner'
 import { Route as DocsComponentsThemeProviderRouteImport } from './routes/docs/components/theme-provider'
@@ -84,10 +94,70 @@ const DocsComponentsDataTableViewOptionsRoute =
     path: '/docs/components/data-table-view-options',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DocsComponentsFormCheckboxFieldRoute =
+  DocsComponentsFormCheckboxFieldRouteImport.update({
+    id: '/docs/components/form-checkbox-field',
+    path: '/docs/components/form-checkbox-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormCurrencyFieldRoute =
+  DocsComponentsFormCurrencyFieldRouteImport.update({
+    id: '/docs/components/form-currency-field',
+    path: '/docs/components/form-currency-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormDateFieldRoute =
+  DocsComponentsFormDateFieldRouteImport.update({
+    id: '/docs/components/form-date-field',
+    path: '/docs/components/form-date-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormEmailFieldRoute =
+  DocsComponentsFormEmailFieldRouteImport.update({
+    id: '/docs/components/form-email-field',
+    path: '/docs/components/form-email-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DocsComponentsFormFieldsRoute =
   DocsComponentsFormFieldsRouteImport.update({
     id: '/docs/components/form-fields',
     path: '/docs/components/form-fields',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormNumberFieldRoute =
+  DocsComponentsFormNumberFieldRouteImport.update({
+    id: '/docs/components/form-number-field',
+    path: '/docs/components/form-number-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormPasswordFieldRoute =
+  DocsComponentsFormPasswordFieldRouteImport.update({
+    id: '/docs/components/form-password-field',
+    path: '/docs/components/form-password-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormSelectFieldRoute =
+  DocsComponentsFormSelectFieldRouteImport.update({
+    id: '/docs/components/form-select-field',
+    path: '/docs/components/form-select-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormTextFieldRoute =
+  DocsComponentsFormTextFieldRouteImport.update({
+    id: '/docs/components/form-text-field',
+    path: '/docs/components/form-text-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormTextareaFieldRoute =
+  DocsComponentsFormTextareaFieldRouteImport.update({
+    id: '/docs/components/form-textarea-field',
+    path: '/docs/components/form-textarea-field',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsFormTimeFieldRoute =
+  DocsComponentsFormTimeFieldRouteImport.update({
+    id: '/docs/components/form-time-field',
+    path: '/docs/components/form-time-field',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DocsComponentsSidebarRoute = DocsComponentsSidebarRouteImport.update({
@@ -124,7 +194,17 @@ export interface FileRoutesByFullPath {
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
+  '/docs/components/form-checkbox-field': typeof DocsComponentsFormCheckboxFieldRoute
+  '/docs/components/form-currency-field': typeof DocsComponentsFormCurrencyFieldRoute
+  '/docs/components/form-date-field': typeof DocsComponentsFormDateFieldRoute
+  '/docs/components/form-email-field': typeof DocsComponentsFormEmailFieldRoute
   '/docs/components/form-fields': typeof DocsComponentsFormFieldsRoute
+  '/docs/components/form-number-field': typeof DocsComponentsFormNumberFieldRoute
+  '/docs/components/form-password-field': typeof DocsComponentsFormPasswordFieldRoute
+  '/docs/components/form-select-field': typeof DocsComponentsFormSelectFieldRoute
+  '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
+  '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
+  '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -142,7 +222,17 @@ export interface FileRoutesByTo {
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
+  '/docs/components/form-checkbox-field': typeof DocsComponentsFormCheckboxFieldRoute
+  '/docs/components/form-currency-field': typeof DocsComponentsFormCurrencyFieldRoute
+  '/docs/components/form-date-field': typeof DocsComponentsFormDateFieldRoute
+  '/docs/components/form-email-field': typeof DocsComponentsFormEmailFieldRoute
   '/docs/components/form-fields': typeof DocsComponentsFormFieldsRoute
+  '/docs/components/form-number-field': typeof DocsComponentsFormNumberFieldRoute
+  '/docs/components/form-password-field': typeof DocsComponentsFormPasswordFieldRoute
+  '/docs/components/form-select-field': typeof DocsComponentsFormSelectFieldRoute
+  '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
+  '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
+  '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -161,7 +251,17 @@ export interface FileRoutesById {
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
+  '/docs/components/form-checkbox-field': typeof DocsComponentsFormCheckboxFieldRoute
+  '/docs/components/form-currency-field': typeof DocsComponentsFormCurrencyFieldRoute
+  '/docs/components/form-date-field': typeof DocsComponentsFormDateFieldRoute
+  '/docs/components/form-email-field': typeof DocsComponentsFormEmailFieldRoute
   '/docs/components/form-fields': typeof DocsComponentsFormFieldsRoute
+  '/docs/components/form-number-field': typeof DocsComponentsFormNumberFieldRoute
+  '/docs/components/form-password-field': typeof DocsComponentsFormPasswordFieldRoute
+  '/docs/components/form-select-field': typeof DocsComponentsFormSelectFieldRoute
+  '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
+  '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
+  '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -181,7 +281,17 @@ export interface FileRouteTypes {
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
+    | '/docs/components/form-checkbox-field'
+    | '/docs/components/form-currency-field'
+    | '/docs/components/form-date-field'
+    | '/docs/components/form-email-field'
     | '/docs/components/form-fields'
+    | '/docs/components/form-number-field'
+    | '/docs/components/form-password-field'
+    | '/docs/components/form-select-field'
+    | '/docs/components/form-text-field'
+    | '/docs/components/form-textarea-field'
+    | '/docs/components/form-time-field'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -199,7 +309,17 @@ export interface FileRouteTypes {
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
+    | '/docs/components/form-checkbox-field'
+    | '/docs/components/form-currency-field'
+    | '/docs/components/form-date-field'
+    | '/docs/components/form-email-field'
     | '/docs/components/form-fields'
+    | '/docs/components/form-number-field'
+    | '/docs/components/form-password-field'
+    | '/docs/components/form-select-field'
+    | '/docs/components/form-text-field'
+    | '/docs/components/form-textarea-field'
+    | '/docs/components/form-time-field'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -217,7 +337,17 @@ export interface FileRouteTypes {
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
+    | '/docs/components/form-checkbox-field'
+    | '/docs/components/form-currency-field'
+    | '/docs/components/form-date-field'
+    | '/docs/components/form-email-field'
     | '/docs/components/form-fields'
+    | '/docs/components/form-number-field'
+    | '/docs/components/form-password-field'
+    | '/docs/components/form-select-field'
+    | '/docs/components/form-text-field'
+    | '/docs/components/form-textarea-field'
+    | '/docs/components/form-time-field'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -236,7 +366,17 @@ export interface RootRouteChildren {
   DocsComponentsDataTableRoute: typeof DocsComponentsDataTableRoute
   DocsComponentsDataTableCellsRoute: typeof DocsComponentsDataTableCellsRoute
   DocsComponentsDataTableViewOptionsRoute: typeof DocsComponentsDataTableViewOptionsRoute
+  DocsComponentsFormCheckboxFieldRoute: typeof DocsComponentsFormCheckboxFieldRoute
+  DocsComponentsFormCurrencyFieldRoute: typeof DocsComponentsFormCurrencyFieldRoute
+  DocsComponentsFormDateFieldRoute: typeof DocsComponentsFormDateFieldRoute
+  DocsComponentsFormEmailFieldRoute: typeof DocsComponentsFormEmailFieldRoute
   DocsComponentsFormFieldsRoute: typeof DocsComponentsFormFieldsRoute
+  DocsComponentsFormNumberFieldRoute: typeof DocsComponentsFormNumberFieldRoute
+  DocsComponentsFormPasswordFieldRoute: typeof DocsComponentsFormPasswordFieldRoute
+  DocsComponentsFormSelectFieldRoute: typeof DocsComponentsFormSelectFieldRoute
+  DocsComponentsFormTextFieldRoute: typeof DocsComponentsFormTextFieldRoute
+  DocsComponentsFormTextareaFieldRoute: typeof DocsComponentsFormTextareaFieldRoute
+  DocsComponentsFormTimeFieldRoute: typeof DocsComponentsFormTimeFieldRoute
   DocsComponentsSidebarRoute: typeof DocsComponentsSidebarRoute
   DocsComponentsSpinnerRoute: typeof DocsComponentsSpinnerRoute
   DocsComponentsThemeProviderRoute: typeof DocsComponentsThemeProviderRoute
@@ -323,11 +463,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsComponentsDataTableViewOptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/components/form-checkbox-field': {
+      id: '/docs/components/form-checkbox-field'
+      path: '/docs/components/form-checkbox-field'
+      fullPath: '/docs/components/form-checkbox-field'
+      preLoaderRoute: typeof DocsComponentsFormCheckboxFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-currency-field': {
+      id: '/docs/components/form-currency-field'
+      path: '/docs/components/form-currency-field'
+      fullPath: '/docs/components/form-currency-field'
+      preLoaderRoute: typeof DocsComponentsFormCurrencyFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-date-field': {
+      id: '/docs/components/form-date-field'
+      path: '/docs/components/form-date-field'
+      fullPath: '/docs/components/form-date-field'
+      preLoaderRoute: typeof DocsComponentsFormDateFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-email-field': {
+      id: '/docs/components/form-email-field'
+      path: '/docs/components/form-email-field'
+      fullPath: '/docs/components/form-email-field'
+      preLoaderRoute: typeof DocsComponentsFormEmailFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs/components/form-fields': {
       id: '/docs/components/form-fields'
       path: '/docs/components/form-fields'
       fullPath: '/docs/components/form-fields'
       preLoaderRoute: typeof DocsComponentsFormFieldsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-number-field': {
+      id: '/docs/components/form-number-field'
+      path: '/docs/components/form-number-field'
+      fullPath: '/docs/components/form-number-field'
+      preLoaderRoute: typeof DocsComponentsFormNumberFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-password-field': {
+      id: '/docs/components/form-password-field'
+      path: '/docs/components/form-password-field'
+      fullPath: '/docs/components/form-password-field'
+      preLoaderRoute: typeof DocsComponentsFormPasswordFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-select-field': {
+      id: '/docs/components/form-select-field'
+      path: '/docs/components/form-select-field'
+      fullPath: '/docs/components/form-select-field'
+      preLoaderRoute: typeof DocsComponentsFormSelectFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-text-field': {
+      id: '/docs/components/form-text-field'
+      path: '/docs/components/form-text-field'
+      fullPath: '/docs/components/form-text-field'
+      preLoaderRoute: typeof DocsComponentsFormTextFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-textarea-field': {
+      id: '/docs/components/form-textarea-field'
+      path: '/docs/components/form-textarea-field'
+      fullPath: '/docs/components/form-textarea-field'
+      preLoaderRoute: typeof DocsComponentsFormTextareaFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/form-time-field': {
+      id: '/docs/components/form-time-field'
+      path: '/docs/components/form-time-field'
+      fullPath: '/docs/components/form-time-field'
+      preLoaderRoute: typeof DocsComponentsFormTimeFieldRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/docs/components/sidebar': {
@@ -373,7 +583,17 @@ const rootRouteChildren: RootRouteChildren = {
   DocsComponentsDataTableCellsRoute: DocsComponentsDataTableCellsRoute,
   DocsComponentsDataTableViewOptionsRoute:
     DocsComponentsDataTableViewOptionsRoute,
+  DocsComponentsFormCheckboxFieldRoute: DocsComponentsFormCheckboxFieldRoute,
+  DocsComponentsFormCurrencyFieldRoute: DocsComponentsFormCurrencyFieldRoute,
+  DocsComponentsFormDateFieldRoute: DocsComponentsFormDateFieldRoute,
+  DocsComponentsFormEmailFieldRoute: DocsComponentsFormEmailFieldRoute,
   DocsComponentsFormFieldsRoute: DocsComponentsFormFieldsRoute,
+  DocsComponentsFormNumberFieldRoute: DocsComponentsFormNumberFieldRoute,
+  DocsComponentsFormPasswordFieldRoute: DocsComponentsFormPasswordFieldRoute,
+  DocsComponentsFormSelectFieldRoute: DocsComponentsFormSelectFieldRoute,
+  DocsComponentsFormTextFieldRoute: DocsComponentsFormTextFieldRoute,
+  DocsComponentsFormTextareaFieldRoute: DocsComponentsFormTextareaFieldRoute,
+  DocsComponentsFormTimeFieldRoute: DocsComponentsFormTimeFieldRoute,
   DocsComponentsSidebarRoute: DocsComponentsSidebarRoute,
   DocsComponentsSpinnerRoute: DocsComponentsSpinnerRoute,
   DocsComponentsThemeProviderRoute: DocsComponentsThemeProviderRoute,

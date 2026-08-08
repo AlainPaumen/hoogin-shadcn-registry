@@ -13,15 +13,18 @@ export type SidebarUser = {
   avatar: string
 }
 
+export type SidebarNavSubItem = {
+  title: string
+  url: string
+  items?: SidebarNavSubItem[]
+}
+
 export type SidebarNavItem = {
   title: string
   url: string
   icon: LucideIcon
   isActive?: boolean
-  items?: {
-    title: string
-    url: string
-  }[]
+  items?: SidebarNavSubItem[]
 }
 
 export type SidebarSecondaryItem = {

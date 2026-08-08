@@ -35,7 +35,7 @@ export function FormDateField<
   required,
   validators,
   disabled,
-  dateFormat = "PPP",
+  dateFormat = "dd/MM/yyyy",
   placeholder = "Select a date",
   showMonthYearDropdowns = false,
   className,

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
 
@@ -41,7 +41,7 @@ const signUpSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
   role: z.enum(roles),
   birthDate: z.string().min(1, "Required"),
-  startDate: z.string().optional(),
+  startDate: z.string(),
   startTime: z.string(),
   bio: z.string().min(10, "Bio must be at least 10 characters"),
   favoriteNumber: z.number().positive("Must be greater than zero"),
@@ -226,7 +226,7 @@ const signUpSchema = z.object({
   password: z.string().min(8),
   role: z.enum(["user", "admin", "editor"]),
   birthDate: z.string().min(1),
-  startDate: z.string().optional(),
+  startDate: z.string(),
   startTime: z.string(),
   bio: z.string().min(10),
   agree: z.boolean().refine((value) => value),
@@ -328,6 +328,33 @@ function FormFieldsPage() {
         </Preview>
       </DocSection>
       <DocSection
+        title="Fields"
+        description="Each field component has its own page with a preview, usage example, and full prop table."
+      >
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {[
+            ["Text", "/docs/components/form-text-field"],
+            ["Email", "/docs/components/form-email-field"],
+            ["Password", "/docs/components/form-password-field"],
+            ["Number", "/docs/components/form-number-field"],
+            ["Currency", "/docs/components/form-currency-field"],
+            ["Date", "/docs/components/form-date-field"],
+            ["Time", "/docs/components/form-time-field"],
+            ["Select", "/docs/components/form-select-field"],
+            ["Textarea", "/docs/components/form-textarea-field"],
+            ["Checkbox", "/docs/components/form-checkbox-field"],
+          ].map(([label, to]) => (
+            <Link
+              key={to}
+              to={to}
+              className="rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+      </DocSection>
+      <DocSection
         title="Usage"
         description="Each field component binds its own form.Field: pass the form, the field name, and optional validators. The component renders a label, control, optional description, error slot, and invalid visual state. Names are constrained to keys of the form data whose value type fits the control — pass a string key to a checkbox and it will not compile."
       >
@@ -380,41 +407,6 @@ function FormFieldsPage() {
               prop: "description",
               type: "string",
               description: "Optional helper text rendered under the control.",
-            },
-            {
-              prop: "options",
-              type: "{ value: string; label: string }[]",
-              description: "FormSelectField options rendered as select items.",
-            },
-            {
-              prop: "dateFormat",
-              type: "string",
-              description:
-                'FormDateField display format for the selected date using date-fns tokens. Defaults to "PPP" (e.g. "Aug 7, 2026"). The stored value stays ISO yyyy-MM-dd regardless.',
-            },
-            {
-              prop: "placeholder",
-              type: "string",
-              description:
-                'FormDateField text shown when no date is selected. Defaults to "Select a date".',
-            },
-            {
-              prop: "showMonthYearDropdowns",
-              type: "boolean",
-              description:
-                "FormDateField renders month and year dropdowns in the calendar caption instead of the plain month label. Defaults to false. With dropdowns enabled the year range is 100 years back to the end of the current year.",
-            },
-            {
-              prop: "currencyIcon",
-              type: "LucideIcon",
-              description:
-                'FormCurrencyField leading icon. Defaults to the Euro icon. The icon replaces the currency symbol in the displayed amount. The stored value stays cents regardless.',
-            },
-            {
-              prop: "value",
-              type: "string",
-              description:
-                'FormTimeField stores the masked time as displayed (e.g. "14:3-" or "14:30"). Completeness is validated automatically: the field reports "Required" when empty and "Enter a valid time (HH:MM)" until a full HH:MM is set. The Clock icon opens a popover with scrollable hour (00-23) and minute (00-59) lists.',
             },
             {
               prop: "onCancel",
