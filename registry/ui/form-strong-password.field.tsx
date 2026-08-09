@@ -1,15 +1,26 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, EyeIcon, EyeOffIcon, XIcon } from "lucide-react"
+import {
+  CheckCircle2,
+  EyeIcon,
+  EyeOffIcon,
+  KeyRound as KeyIcon,
+  XIcon,
+  type LucideIcon,
+} from "lucide-react"
 import type {
   DeepValue,
   FieldValidateFn,
   FieldValidateOrFn,
 } from "@tanstack/react-form"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
 import {
   FormField,
@@ -96,11 +107,13 @@ export function FormStrongPasswordField<
   disabled,
   placeholder,
   autoComplete = "new-password",
+  keyIcon: Icon = KeyIcon,
   className,
 }: Omit<FormFieldProps<TFormData, TName>, "children"> & {
   disabled?: boolean
   placeholder?: string
   autoComplete?: string
+  keyIcon?: LucideIcon
 }) {
   const [show, setShow] = useState(false)
 
@@ -124,8 +137,11 @@ export function FormStrongPasswordField<
         const score = strongPasswordScore(value)
         return (
           <div className="space-y-2">
-            <div className="relative">
-              <Input
+            <InputGroup>
+              <InputGroupAddon>
+                <Icon className="text-foreground" />
+              </InputGroupAddon>
+              <InputGroupInput
                 id={field.name}
                 name={field.name}
                 type={show ? "text" : "password"}
@@ -140,20 +156,17 @@ export function FormStrongPasswordField<
                 autoComplete={autoComplete}
                 aria-invalid={field.invalid || undefined}
                 placeholder={placeholder}
-                className={cn("w-full pr-8", className)}
+                className={cn("w-full", className)}
               />
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
+              <InputGroupButton
                 tabIndex={-1}
+                size="icon-xs"
                 aria-label={show ? "Hide password" : "Show password"}
                 onClick={() => setShow((visible) => !visible)}
-                className="absolute top-0 right-0 h-full w-8 rounded-l-none text-muted-foreground hover:bg-transparent hover:text-foreground"
               >
                 {show ? <EyeOffIcon /> : <EyeIcon />}
-              </Button>
-            </div>
+              </InputGroupButton>
+            </InputGroup>
             <div className="flex h-1 w-full gap-0.5">
               {Array.from({ length: STRONG_PASSWORD_RULES.length }, (_, i) => (
                 <div

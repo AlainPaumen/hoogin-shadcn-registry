@@ -1,16 +1,35 @@
 "use client"
 
 import { useState } from "react"
-import { EyeIcon, EyeOffIcon } from "lucide-react"
+import {
+  EyeIcon,
+  EyeOffIcon,
+  KeyRound as KeyIcon,
+  type LucideIcon,
+} from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
 import {
   FormField,
   type FormFieldProps,
   type KeysOfType,
 } from "@/hoogin/ui/form.field"
+
+export type FormPasswordFieldProps<
+  TFormData,
+  TName extends KeysOfType<TFormData, string>,
+> = Omit<FormFieldProps<TFormData, TName>, "children"> & {
+  keyIcon?: LucideIcon
+  disabled?: boolean
+  placeholder?: string
+  autoComplete?: string
+}
 
 export function FormPasswordField<
   TFormData,
@@ -25,12 +44,9 @@ export function FormPasswordField<
   disabled,
   placeholder,
   autoComplete = "current-password",
+  keyIcon: Icon = KeyIcon,
   className,
-}: Omit<FormFieldProps<TFormData, TName>, "children"> & {
-  disabled?: boolean
-  placeholder?: string
-  autoComplete?: string
-}) {
+}: FormPasswordFieldProps<TFormData, TName>) {
   const [show, setShow] = useState(false)
 
   return (
@@ -44,8 +60,11 @@ export function FormPasswordField<
       className={className}
     >
       {(field) => (
-        <div className="relative">
-          <Input
+        <InputGroup>
+          <InputGroupAddon>
+            <Icon className="text-foreground" />
+          </InputGroupAddon>
+          <InputGroupInput
             id={field.name}
             name={field.name}
             type={show ? "text" : "password"}
@@ -60,20 +79,17 @@ export function FormPasswordField<
             autoComplete={autoComplete}
             aria-invalid={field.invalid || undefined}
             placeholder={placeholder}
-            className={cn("w-full pr-8", className)}
+            className={cn("w-full", className)}
           />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
+          <InputGroupButton
             tabIndex={-1}
+            size="icon-xs"
             aria-label={show ? "Hide password" : "Show password"}
             onClick={() => setShow((visible) => !visible)}
-            className="absolute top-0 right-0 h-full w-8 rounded-l-none text-muted-foreground hover:bg-transparent hover:text-foreground"
           >
             {show ? <EyeOffIcon /> : <EyeIcon />}
-          </Button>
-        </div>
+          </InputGroupButton>
+        </InputGroup>
       )}
     </FormField>
   )
