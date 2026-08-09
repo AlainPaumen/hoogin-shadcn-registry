@@ -15,6 +15,8 @@ import { Route as DocsInstallationRouteImport } from './routes/docs/installation
 import { Route as DocsIntroductionRouteImport } from './routes/docs/introduction'
 import { Route as DocsBlocksAdminPageRouteImport } from './routes/docs/blocks/admin-page'
 import { Route as DocsBlocksSidebarLayoutRouteImport } from './routes/docs/blocks/sidebar-layout'
+import { Route as DocsBlocksSigninPageRouteImport } from './routes/docs/blocks/signin-page'
+import { Route as DocsBlocksSignupPageRouteImport } from './routes/docs/blocks/signup-page'
 import { Route as DocsComponentsIndexRouteImport } from './routes/docs/components/index'
 import { Route as DocsComponentsAppSidebarRouteImport } from './routes/docs/components/app-sidebar'
 import { Route as DocsComponentsDataTableRouteImport } from './routes/docs/components/data-table'
@@ -65,6 +67,16 @@ const DocsBlocksAdminPageRoute = DocsBlocksAdminPageRouteImport.update({
 const DocsBlocksSidebarLayoutRoute = DocsBlocksSidebarLayoutRouteImport.update({
   id: '/docs/blocks/sidebar-layout',
   path: '/docs/blocks/sidebar-layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsBlocksSigninPageRoute = DocsBlocksSigninPageRouteImport.update({
+  id: '/docs/blocks/signin-page',
+  path: '/docs/blocks/signin-page',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsBlocksSignupPageRoute = DocsBlocksSignupPageRouteImport.update({
+  id: '/docs/blocks/signup-page',
+  path: '/docs/blocks/signup-page',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocsComponentsIndexRoute = DocsComponentsIndexRouteImport.update({
@@ -197,6 +209,8 @@ export interface FileRoutesByFullPath {
   '/docs/': typeof DocsIndexRoute
   '/docs/blocks/admin-page': typeof DocsBlocksAdminPageRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
+  '/docs/blocks/signin-page': typeof DocsBlocksSigninPageRoute
+  '/docs/blocks/signup-page': typeof DocsBlocksSignupPageRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
@@ -226,6 +240,8 @@ export interface FileRoutesByTo {
   '/docs': typeof DocsIndexRoute
   '/docs/blocks/admin-page': typeof DocsBlocksAdminPageRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
+  '/docs/blocks/signin-page': typeof DocsBlocksSigninPageRoute
+  '/docs/blocks/signup-page': typeof DocsBlocksSignupPageRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
@@ -256,6 +272,8 @@ export interface FileRoutesById {
   '/docs/': typeof DocsIndexRoute
   '/docs/blocks/admin-page': typeof DocsBlocksAdminPageRoute
   '/docs/blocks/sidebar-layout': typeof DocsBlocksSidebarLayoutRoute
+  '/docs/blocks/signin-page': typeof DocsBlocksSigninPageRoute
+  '/docs/blocks/signup-page': typeof DocsBlocksSignupPageRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
@@ -287,6 +305,8 @@ export interface FileRouteTypes {
     | '/docs/'
     | '/docs/blocks/admin-page'
     | '/docs/blocks/sidebar-layout'
+    | '/docs/blocks/signin-page'
+    | '/docs/blocks/signup-page'
     | '/docs/components/app-sidebar'
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
@@ -316,6 +336,8 @@ export interface FileRouteTypes {
     | '/docs'
     | '/docs/blocks/admin-page'
     | '/docs/blocks/sidebar-layout'
+    | '/docs/blocks/signin-page'
+    | '/docs/blocks/signup-page'
     | '/docs/components/app-sidebar'
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
@@ -345,6 +367,8 @@ export interface FileRouteTypes {
     | '/docs/'
     | '/docs/blocks/admin-page'
     | '/docs/blocks/sidebar-layout'
+    | '/docs/blocks/signin-page'
+    | '/docs/blocks/signup-page'
     | '/docs/components/app-sidebar'
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
@@ -375,6 +399,8 @@ export interface RootRouteChildren {
   DocsIndexRoute: typeof DocsIndexRoute
   DocsBlocksAdminPageRoute: typeof DocsBlocksAdminPageRoute
   DocsBlocksSidebarLayoutRoute: typeof DocsBlocksSidebarLayoutRoute
+  DocsBlocksSigninPageRoute: typeof DocsBlocksSigninPageRoute
+  DocsBlocksSignupPageRoute: typeof DocsBlocksSignupPageRoute
   DocsComponentsAppSidebarRoute: typeof DocsComponentsAppSidebarRoute
   DocsComponentsDataTableRoute: typeof DocsComponentsDataTableRoute
   DocsComponentsDataTableCellsRoute: typeof DocsComponentsDataTableCellsRoute
@@ -440,6 +466,20 @@ declare module '@tanstack/react-router' {
       path: '/docs/blocks/sidebar-layout'
       fullPath: '/docs/blocks/sidebar-layout'
       preLoaderRoute: typeof DocsBlocksSidebarLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/blocks/signin-page': {
+      id: '/docs/blocks/signin-page'
+      path: '/docs/blocks/signin-page'
+      fullPath: '/docs/blocks/signin-page'
+      preLoaderRoute: typeof DocsBlocksSigninPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/blocks/signup-page': {
+      id: '/docs/blocks/signup-page'
+      path: '/docs/blocks/signup-page'
+      fullPath: '/docs/blocks/signup-page'
+      preLoaderRoute: typeof DocsBlocksSignupPageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/docs/components/': {
@@ -599,6 +639,8 @@ const rootRouteChildren: RootRouteChildren = {
   DocsIndexRoute: DocsIndexRoute,
   DocsBlocksAdminPageRoute: DocsBlocksAdminPageRoute,
   DocsBlocksSidebarLayoutRoute: DocsBlocksSidebarLayoutRoute,
+  DocsBlocksSigninPageRoute: DocsBlocksSigninPageRoute,
+  DocsBlocksSignupPageRoute: DocsBlocksSignupPageRoute,
   DocsComponentsAppSidebarRoute: DocsComponentsAppSidebarRoute,
   DocsComponentsDataTableRoute: DocsComponentsDataTableRoute,
   DocsComponentsDataTableCellsRoute: DocsComponentsDataTableCellsRoute,

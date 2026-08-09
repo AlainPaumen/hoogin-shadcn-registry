@@ -399,6 +399,58 @@
           "target": "hoogin/blocks/admin-page/admin-page.tsx"
         }
       ]
+    },
+    {
+      "name": "signup-page",
+      "type": "registry:block",
+      "title": "Signup Page",
+      "description": "A centered signup page with a logo, card, and a TanStack Form powered signup form with a strong password field.",
+      "dependencies": [
+        "zod"
+      ],
+      "registryDependencies": [
+        "@hoogin/form-fields",
+        "card",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "signup-page.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signup-page/signup-page.tsx"
+        },
+        {
+          "path": "signup-form.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signup-page/signup-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "signin-page",
+      "type": "registry:block",
+      "title": "Signin Page",
+      "description": "A centered signin page with a logo, card, and a TanStack Form powered signin form.",
+      "dependencies": [
+        "zod"
+      ],
+      "registryDependencies": [
+        "@hoogin/form-fields",
+        "card",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "signin-page.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signin-page/signin-page.tsx"
+        },
+        {
+          "path": "signin-form.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signin-page/signin-form.tsx"
+        }
+      ]
     }
   ]
 }

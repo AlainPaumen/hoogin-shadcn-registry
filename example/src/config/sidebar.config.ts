@@ -148,6 +148,14 @@ export const sidebarData = {
           title: "Admin Page",
           url: "/docs/blocks/admin-page",
         },
+        {
+          title: "Signup Page",
+          url: "/docs/blocks/signup-page",
+        },
+        {
+          title: "Signin Page",
+          url: "/docs/blocks/signin-page",
+        },
       ],
     },
   ],

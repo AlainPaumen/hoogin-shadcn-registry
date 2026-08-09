@@ -401,6 +401,58 @@
         }
       ],
       "type": "registry:block"
+    },
+    {
+      "name": "signup-page",
+      "title": "Signup Page",
+      "description": "A centered signup page with a logo, card, and a TanStack Form powered signup form with a strong password field.",
+      "dependencies": [
+        "zod"
+      ],
+      "registryDependencies": [
+        "@hoogin/form-fields",
+        "card",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/signup-page.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signup-page/signup-page.tsx"
+        },
+        {
+          "path": "registry/ui/signup-form.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signup-page/signup-form.tsx"
+        }
+      ],
+      "type": "registry:block"
+    },
+    {
+      "name": "signin-page",
+      "title": "Signin Page",
+      "description": "A centered signin page with a logo, card, and a TanStack Form powered signin form.",
+      "dependencies": [
+        "zod"
+      ],
+      "registryDependencies": [
+        "@hoogin/form-fields",
+        "card",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/signin-page.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signin-page/signin-page.tsx"
+        },
+        {
+          "path": "registry/ui/signin-form.tsx",
+          "type": "registry:block",
+          "target": "hoogin/blocks/signin-page/signin-form.tsx"
+        }
+      ],
+      "type": "registry:block"
     }
   ]
 }

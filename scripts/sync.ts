@@ -25,6 +25,46 @@ const adminPageSource = join(
   "admin-page.tsx"
 )
 const adminPageTarget = join(root, "registry", "ui", "admin-page.tsx")
+const signupPageSource = join(
+  root,
+  "example",
+  "src",
+  "hoogin",
+  "blocks",
+  "signup-page",
+  "signup-page.tsx"
+)
+const signupPageTarget = join(root, "registry", "ui", "signup-page.tsx")
+const signupFormSource = join(
+  root,
+  "example",
+  "src",
+  "hoogin",
+  "blocks",
+  "signup-page",
+  "signup-form.tsx"
+)
+const signupFormTarget = join(root, "registry", "ui", "signup-form.tsx")
+const signinPageSource = join(
+  root,
+  "example",
+  "src",
+  "hoogin",
+  "blocks",
+  "signin-page",
+  "signin-page.tsx"
+)
+const signinPageTarget = join(root, "registry", "ui", "signin-page.tsx")
+const signinFormSource = join(
+  root,
+  "example",
+  "src",
+  "hoogin",
+  "blocks",
+  "signin-page",
+  "signin-form.tsx"
+)
+const signinFormTarget = join(root, "registry", "ui", "signin-form.tsx")
 
 const watchMode = process.argv.includes("--watch")
 const reverse = process.argv.includes("--reverse")
@@ -43,6 +83,26 @@ const fileMappings = [
     from: reverse ? adminPageTarget : adminPageSource,
     to: reverse ? adminPageSource : adminPageTarget,
     name: "admin-page.tsx",
+  },
+  {
+    from: reverse ? signupPageTarget : signupPageSource,
+    to: reverse ? signupPageSource : signupPageTarget,
+    name: "signup-page.tsx",
+  },
+  {
+    from: reverse ? signupFormTarget : signupFormSource,
+    to: reverse ? signupFormSource : signupFormTarget,
+    name: "signup-form.tsx",
+  },
+  {
+    from: reverse ? signinPageTarget : signinPageSource,
+    to: reverse ? signinPageSource : signinPageTarget,
+    name: "signin-page.tsx",
+  },
+  {
+    from: reverse ? signinFormTarget : signinFormSource,
+    to: reverse ? signinFormSource : signinFormTarget,
+    name: "signin-form.tsx",
   },
 ]
 
