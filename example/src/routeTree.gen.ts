@@ -19,6 +19,7 @@ import { Route as DocsBlocksSigninPageRouteImport } from './routes/docs/blocks/s
 import { Route as DocsBlocksSignupPageRouteImport } from './routes/docs/blocks/signup-page'
 import { Route as DocsComponentsIndexRouteImport } from './routes/docs/components/index'
 import { Route as DocsComponentsAppSidebarRouteImport } from './routes/docs/components/app-sidebar'
+import { Route as DocsComponentsAuthProviderRouteImport } from './routes/docs/components/auth-provider'
 import { Route as DocsComponentsDataTableRouteImport } from './routes/docs/components/data-table'
 import { Route as DocsComponentsDataTableCellsRouteImport } from './routes/docs/components/data-table-cells'
 import { Route as DocsComponentsDataTableViewOptionsRouteImport } from './routes/docs/components/data-table-view-options'
@@ -88,6 +89,12 @@ const DocsComponentsAppSidebarRoute =
   DocsComponentsAppSidebarRouteImport.update({
     id: '/docs/components/app-sidebar',
     path: '/docs/components/app-sidebar',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DocsComponentsAuthProviderRoute =
+  DocsComponentsAuthProviderRouteImport.update({
+    id: '/docs/components/auth-provider',
+    path: '/docs/components/auth-provider',
     getParentRoute: () => rootRouteImport,
   } as any)
 const DocsComponentsDataTableRoute = DocsComponentsDataTableRouteImport.update({
@@ -212,6 +219,7 @@ export interface FileRoutesByFullPath {
   '/docs/blocks/signin-page': typeof DocsBlocksSigninPageRoute
   '/docs/blocks/signup-page': typeof DocsBlocksSignupPageRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/auth-provider': typeof DocsComponentsAuthProviderRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
@@ -243,6 +251,7 @@ export interface FileRoutesByTo {
   '/docs/blocks/signin-page': typeof DocsBlocksSigninPageRoute
   '/docs/blocks/signup-page': typeof DocsBlocksSignupPageRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/auth-provider': typeof DocsComponentsAuthProviderRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
@@ -275,6 +284,7 @@ export interface FileRoutesById {
   '/docs/blocks/signin-page': typeof DocsBlocksSigninPageRoute
   '/docs/blocks/signup-page': typeof DocsBlocksSignupPageRoute
   '/docs/components/app-sidebar': typeof DocsComponentsAppSidebarRoute
+  '/docs/components/auth-provider': typeof DocsComponentsAuthProviderRoute
   '/docs/components/data-table': typeof DocsComponentsDataTableRoute
   '/docs/components/data-table-cells': typeof DocsComponentsDataTableCellsRoute
   '/docs/components/data-table-view-options': typeof DocsComponentsDataTableViewOptionsRoute
@@ -308,6 +318,7 @@ export interface FileRouteTypes {
     | '/docs/blocks/signin-page'
     | '/docs/blocks/signup-page'
     | '/docs/components/app-sidebar'
+    | '/docs/components/auth-provider'
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '/docs/blocks/signin-page'
     | '/docs/blocks/signup-page'
     | '/docs/components/app-sidebar'
+    | '/docs/components/auth-provider'
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
@@ -370,6 +382,7 @@ export interface FileRouteTypes {
     | '/docs/blocks/signin-page'
     | '/docs/blocks/signup-page'
     | '/docs/components/app-sidebar'
+    | '/docs/components/auth-provider'
     | '/docs/components/data-table'
     | '/docs/components/data-table-cells'
     | '/docs/components/data-table-view-options'
@@ -402,6 +415,7 @@ export interface RootRouteChildren {
   DocsBlocksSigninPageRoute: typeof DocsBlocksSigninPageRoute
   DocsBlocksSignupPageRoute: typeof DocsBlocksSignupPageRoute
   DocsComponentsAppSidebarRoute: typeof DocsComponentsAppSidebarRoute
+  DocsComponentsAuthProviderRoute: typeof DocsComponentsAuthProviderRoute
   DocsComponentsDataTableRoute: typeof DocsComponentsDataTableRoute
   DocsComponentsDataTableCellsRoute: typeof DocsComponentsDataTableCellsRoute
   DocsComponentsDataTableViewOptionsRoute: typeof DocsComponentsDataTableViewOptionsRoute
@@ -494,6 +508,13 @@ declare module '@tanstack/react-router' {
       path: '/docs/components/app-sidebar'
       fullPath: '/docs/components/app-sidebar'
       preLoaderRoute: typeof DocsComponentsAppSidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs/components/auth-provider': {
+      id: '/docs/components/auth-provider'
+      path: '/docs/components/auth-provider'
+      fullPath: '/docs/components/auth-provider'
+      preLoaderRoute: typeof DocsComponentsAuthProviderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/docs/components/data-table': {
@@ -642,6 +663,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsBlocksSigninPageRoute: DocsBlocksSigninPageRoute,
   DocsBlocksSignupPageRoute: DocsBlocksSignupPageRoute,
   DocsComponentsAppSidebarRoute: DocsComponentsAppSidebarRoute,
+  DocsComponentsAuthProviderRoute: DocsComponentsAuthProviderRoute,
   DocsComponentsDataTableRoute: DocsComponentsDataTableRoute,
   DocsComponentsDataTableCellsRoute: DocsComponentsDataTableCellsRoute,
   DocsComponentsDataTableViewOptionsRoute:

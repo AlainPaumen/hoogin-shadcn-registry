@@ -83,6 +83,22 @@
       "type": "registry:ui"
     },
     {
+      "name": "auth-provider",
+      "title": "Auth Provider",
+      "description": "An authentication provider for TrailBase with persisted sessions and sign in, sign up, and sign out helpers.",
+      "dependencies": [
+        "trailbase"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/auth-provider.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/auth-provider.tsx"
+        }
+      ],
+      "type": "registry:ui"
+    },
+    {
       "name": "theme-provider",
       "title": "Theme Provider",
       "description": "A theme provider with system detection, storage sync, and a keyboard shortcut.",

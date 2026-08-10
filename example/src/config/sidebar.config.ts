@@ -126,6 +126,10 @@ export const sidebarData = {
           url: "/docs/components/app-sidebar",
         },
         {
+          title: "Auth Provider",
+          url: "/docs/components/auth-provider",
+        },
+        {
           title: "Theme Provider",
           url: "/docs/components/theme-provider",
         },

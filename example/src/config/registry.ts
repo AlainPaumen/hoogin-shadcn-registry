@@ -98,6 +98,22 @@ export const registryItems: RegistryItem[] = [
     ]
   },
   {
+    "name": "auth-provider",
+    "type": "registry:ui",
+    "title": "Auth Provider",
+    "description": "An authentication provider for TrailBase with persisted sessions and sign in, sign up, and sign out helpers.",
+    "dependencies": [
+      "trailbase"
+    ],
+    "files": [
+      {
+        "path": "auth-provider.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/auth-provider.tsx"
+      }
+    ]
+  },
+  {
     "name": "theme-provider",
     "type": "registry:ui",
     "title": "Theme Provider",
