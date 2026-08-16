@@ -1,7 +1,6 @@
 import { createRootRoute } from "@tanstack/react-router"
 
 import { Toaster } from "@/components/ui/toast"
-import { ThemeProvider } from "@/hoogin/ui/theme-provider"
 import { BaseLayout } from "@/hoogin/layout/base_layout"
 
 export const Route = createRootRoute({
@@ -10,9 +9,9 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <ThemeProvider>
+    <>
       <BaseLayout />
       <Toaster />
-    </ThemeProvider>
+    </>
   )
 }

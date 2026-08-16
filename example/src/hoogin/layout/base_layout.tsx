@@ -35,7 +35,11 @@ export function BaseLayout() {
                   ) : null}
                   <BreadcrumbItem className="hidden md:block">
                     {crumb.to ? (
-                      <BreadcrumbLink render={<Link to={crumb.to} />}>
+                      <BreadcrumbLink
+                        render={
+                          <Link to={crumb.to} aria-label={crumb.label} />
+                        }
+                      >
                         {crumb.label}
                       </BreadcrumbLink>
                     ) : (

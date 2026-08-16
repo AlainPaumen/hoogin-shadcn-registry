@@ -41,6 +41,7 @@ export function FormCheckboxField<
             onBlur={field.handleBlur}
             disabled={disabled}
             aria-invalid={field.invalid || undefined}
+            aria-describedby={field.invalid ? `${field.name}-error` : undefined}
           />
           <label
             htmlFor={field.name}

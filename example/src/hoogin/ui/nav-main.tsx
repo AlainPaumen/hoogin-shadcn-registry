@@ -37,7 +37,10 @@ function NavSubItem({
   if (!sub.items?.length) {
     return (
       <SidebarMenuSubItem>
-        <SidebarMenuSubButton isActive={active} render={<Link to={sub.url} />}>
+        <SidebarMenuSubButton
+          isActive={active}
+          render={<Link to={sub.url} aria-label={sub.title} />}
+        >
           <span>{sub.title}</span>
         </SidebarMenuSubButton>
       </SidebarMenuSubItem>
@@ -52,7 +55,7 @@ function NavSubItem({
       <SidebarMenuSubButton
         isActive={active}
         className="pr-6"
-        render={<Link to={sub.url} />}
+        render={<Link to={sub.url} aria-label={sub.title} />}
       >
         <span>{sub.title}</span>
       </SidebarMenuSubButton>
@@ -108,7 +111,7 @@ export function NavMain({
             >
               <SidebarMenuButton
                 tooltip={item.title}
-                render={<Link to={item.url} />}
+                render={<Link to={item.url} aria-label={item.title} />}
               >
                 <item.icon />
                 <span>{item.title}</span>

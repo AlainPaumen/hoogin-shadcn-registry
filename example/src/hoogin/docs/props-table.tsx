@@ -18,7 +18,17 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
+          {rows.length === 0 ? (
+            <tr>
+              <td
+                colSpan={4}
+                className="px-4 py-8 text-center text-muted-foreground"
+              >
+                No props documented.
+              </td>
+            </tr>
+          ) : (
+            rows.map((row) => (
             <tr key={row.prop} className="border-b last:border-b-0">
               <td className="px-4 py-2 font-mono text-xs">{row.prop}</td>
               <td className="px-4 py-2 font-mono text-xs text-muted-foreground">
@@ -31,7 +41,8 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
                 {row.description ?? ""}
               </td>
             </tr>
-          ))}
+            ))
+          )}
         </tbody>
       </table>
     </div>

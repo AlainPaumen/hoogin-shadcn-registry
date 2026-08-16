@@ -69,7 +69,7 @@ function SidebarPage() {
                 <SidebarMenu>
                   {["Home", "Inbox", "Sent"].map((label) => (
                     <SidebarMenuItem key={label}>
-                      <SidebarMenuButton render={<a href="#" />}>
+                      <SidebarMenuButton render={<a href="#" aria-label={label} />}>
                         {label}
                       </SidebarMenuButton>
                     </SidebarMenuItem>

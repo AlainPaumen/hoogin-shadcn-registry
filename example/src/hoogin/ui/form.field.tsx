@@ -100,7 +100,7 @@ export function FormField<TFormData, TName extends DeepKeys<TFormData>>({
         return (
           <div className={cn("flex flex-col gap-1.5", className)}>
             {label ? (
-              <label htmlFor={name} className="text-sm font-medium">
+              <label htmlFor={name} id={`${name}-label`} className="text-sm font-medium">
                 {label}
                 {required ? <span> *</span> : null}
               </label>
@@ -123,7 +123,13 @@ export function FormField<TFormData, TName extends DeepKeys<TFormData>>({
               <p className="text-sm text-muted-foreground">{description}</p>
             ) : null}
             {messages.length > 0 ? (
-              <p className="text-sm text-destructive">{messages.join(", ")}</p>
+              <p
+                id={`${name}-error`}
+                role="alert"
+                className="text-sm text-destructive"
+              >
+                {messages.join(", ")}
+              </p>
             ) : null}
           </div>
         )

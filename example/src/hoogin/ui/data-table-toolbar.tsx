@@ -138,6 +138,7 @@ function DataTableToolbar<TData>({
             value={filter.value}
             onChange={(event) => updateFilter({ ...filter, value: event.target.value })}
             placeholder={placeholder}
+            aria-label="Filter"
             className="h-8 w-48 sm:w-64"
           />
           {showReset ? (

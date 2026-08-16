@@ -29,10 +29,14 @@ function HomeComponent() {
           install them with one command.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button render={<Link to="/docs/introduction" />}>Get started</Button>
+          <Button
+            render={<Link to="/docs/introduction" aria-label="Get started" />}
+          >
+            Get started
+          </Button>
           <Button
             variant="outline"
-            render={<Link to="/docs/components" />}
+            render={<Link to="/docs/components" aria-label="Browse components" />}
           >
             Browse components
           </Button>

@@ -55,7 +55,10 @@ export function AppSidebar({
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" render={<a href="#" />}>
+            <SidebarMenuButton
+              size="lg"
+              render={<a href="#" aria-label={brand.name} />}
+            >
               <div className="flex aspect-square size-8 items-center justify-center">
                 {typeof brand.logo === "string" ? (
                   <img src={brand.logo} alt={brand.name} className="size-8" />

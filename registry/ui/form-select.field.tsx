@@ -58,6 +58,8 @@ export function FormSelectField<
         >
           <SelectTrigger
             aria-invalid={field.invalid || undefined}
+            aria-labelledby={label ? `${field.name}-label` : undefined}
+            aria-describedby={field.invalid ? `${field.name}-error` : undefined}
             className={cn("w-full", className)}
           >
             <SelectValue placeholder={placeholder} />

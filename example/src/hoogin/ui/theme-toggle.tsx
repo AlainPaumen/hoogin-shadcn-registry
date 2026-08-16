@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { MoonIcon, SunIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -10,6 +11,26 @@ export function ThemeToggle() {
     theme === "dark" ||
     (theme === "system" &&
       window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement ||
+        event.target instanceof HTMLSelectElement ||
+        (event.target instanceof HTMLElement && event.target.isContentEditable)
+      ) {
+        return
+      }
+
+      if (event.key.toLowerCase() === "d") {
+        setTheme(isDark ? "light" : "dark")
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [isDark, setTheme])
 
   return (
     <Button

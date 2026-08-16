@@ -82,7 +82,7 @@ export function NavUser({
                   {group.items.map((item) => (
                     <DropdownMenuItem
                       key={item.label}
-                      render={<a href={item.url} />}
+                      render={<a href={item.url} aria-label={item.label} />}
                     >
                       {item.icon ? <item.icon /> : null}
                       {item.label}

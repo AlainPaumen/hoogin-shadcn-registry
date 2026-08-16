@@ -63,6 +63,8 @@ export function FormTextField<
           onBlur={field.handleBlur}
           disabled={disabled}
           aria-invalid={field.invalid || undefined}
+          aria-labelledby={label ? `${field.name}-label` : undefined}
+          aria-describedby={field.invalid ? `${field.name}-error` : undefined}
           placeholder={placeholder}
           className={cn("w-full", className)}
         />

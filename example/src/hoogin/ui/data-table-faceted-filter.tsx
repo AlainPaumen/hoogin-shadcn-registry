@@ -127,6 +127,7 @@ function DataTableFacetedFilter({
                     <Checkbox
                       checked={selectedValues.has(option.value)}
                       onCheckedChange={() => handleSelect(option.value)}
+                      aria-label={option.label}
                     />
                   </div>
                   {option.icon && (
