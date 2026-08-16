@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://shadcn.hoogin.be/</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/installation</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/introduction</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/app-sidebar</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/auth-provider</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/data-table</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/data-table-cells</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/data-table-view-options</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-checkbox-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-currency-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-date-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-email-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-fields</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-number-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-password-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-select-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-strong-password-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-textarea-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-text-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-time-field</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/sidebar</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/spinner</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/theme-provider</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/theme-toggle</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/admin-page</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/sidebar-layout</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/signin-page</loc></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/signup-page</loc></url>
+</urlset>

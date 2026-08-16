@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -126,11 +127,13 @@ function DataTableToolbar<TData>({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent align="start">
-                {items.map((item) => (
-                  <SelectItem key={item.value} value={item.value} label={item.label}>
-                    {item.optionLabel}
-                  </SelectItem>
-                ))}
+                <SelectGroup>
+                  {items.map((item) => (
+                    <SelectItem key={item.value} value={item.value} label={item.label}>
+                      {item.optionLabel}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
               </SelectContent>
             </Select>
           ) : null}

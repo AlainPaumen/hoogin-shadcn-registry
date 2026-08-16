@@ -200,7 +200,7 @@ export function AdminPage<TData>({
                 onClick={handleDelete}
                 disabled={pending}
               >
-                Delete
+                {pending ? "Deleting..." : "Delete"}
               </Button>
             </SheetFooter>
           ) : null}

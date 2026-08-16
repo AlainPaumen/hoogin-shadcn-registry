@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -22,23 +23,27 @@ export function ActionCell({ onDetail, onEdit, onDelete }: ActionCellProps) {
         <span className="sr-only">Open menu</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40">
-        <DropdownMenuItem className="justify-between" onClick={onDetail}>
-          Detail
-          <EyeIcon className="text-muted-foreground" />
-        </DropdownMenuItem>
-        <DropdownMenuItem className="justify-between" onClick={onEdit}>
-          Edit
-          <PencilIcon className="text-muted-foreground" />
-        </DropdownMenuItem>
+        <DropdownMenuGroup>
+          <DropdownMenuItem className="justify-between" onClick={onDetail}>
+            Detail
+            <EyeIcon className="text-muted-foreground" />
+          </DropdownMenuItem>
+          <DropdownMenuItem className="justify-between" onClick={onEdit}>
+            Edit
+            <PencilIcon className="text-muted-foreground" />
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          variant="destructive"
-          className="justify-between"
-          onClick={onDelete}
-        >
-          Delete
-          <Trash2Icon />
-        </DropdownMenuItem>
+        <DropdownMenuGroup>
+          <DropdownMenuItem
+            variant="destructive"
+            className="justify-between"
+            onClick={onDelete}
+          >
+            Delete
+            <Trash2Icon />
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   )

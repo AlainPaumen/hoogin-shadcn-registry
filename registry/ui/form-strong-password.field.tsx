@@ -172,7 +172,7 @@ export function FormStrongPasswordField<
                 <div
                   key={i}
                   className={cn(
-                    "h-full flex-1 rounded-full transition-colors duration-300",
+                    "h-full flex-1 rounded-full transition-colors duration-300 motion-reduce:transition-none",
                     i < score ? strengthColor(score) : "bg-secondary"
                   )}
                 />
