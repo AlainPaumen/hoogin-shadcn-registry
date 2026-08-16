@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OpenCode Skill Usage Dashboard</title>
+<style>
+  :root {
+    --bg: #0d0f14; --panel: #151822; --border: #262b38; --text: #e6e8ee;
+    --muted: #8a90a3; --accent: #6ea8fe; --accent-dim: #2f4a7a;
+    --good: #4ade80; --warn: #f59e0b; --purple: #c084fc;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    background: var(--bg); color: var(--text); padding: 40px 24px 80px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 32px; }
+  .stats { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 20px; flex: 1; min-width: 140px; }
+  .stat .num { font-size: 1.6rem; font-weight: 600; }
+  .stat .label { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 1.1rem; margin-bottom: 4px; }
+  .section-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--muted); padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  td { padding: 12px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .skill-name { font-weight: 600; }
+  .skill-id { color: var(--muted); font-size: 0.78rem; font-family: ui-monospace, monospace; margin-top: 2px; }
+  .skill-desc { color: var(--muted); font-size: 0.82rem; margin-top: 6px; max-width: 460px; }
+  .bar-cell { width: 150px; }
+  .bar-track { background: #1c2130; border-radius: 6px; height: 10px; overflow: hidden; }
+  .bar-fill { background: linear-gradient(90deg, var(--accent-dim), var(--accent)); height: 100%; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--text); }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .panel table tr:last-child td { border-bottom: none; }
+  .badge { display: inline-block; font-size: 0.68rem; padding: 2px 8px; border-radius: 999px; margin-left: 6px; }
+  .badge-global { background: rgba(110,168,254,0.15); color: var(--accent); }
+  .badge-local { background: rgba(192,132,252,0.15); color: var(--purple); }
+  .warn-badge { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 999px;
+    background: rgba(245,158,11,0.15); color: var(--warn); margin-left: 8px; }
+  .note { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+  code { font-family: ui-monospace, monospace; background: #1c2130; padding: 1px 5px; border-radius: 4px; }
+  .proj-list { color: var(--muted); font-size: 0.78rem; font-family: ui-monospace, monospace; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>OpenCode Skill Usage Dashboard</h1>
+  <div class="meta">Generated 2026-08-10T11:52:10.998Z · data source: <code>/home/alain/.local/share/opencode</code></div>
+
+  <div class="stats">
+    <div class="stat"><div class="num">43</div><div class="label">Global skills</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Local skills (across 0 project(s))</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Skills actually invoked</div></div>
+    <div class="stat"><div class="num">43</div><div class="label">Never invoked</div></div>
+  </div>
+
+  <section>
+    <h2>Actively used skills</h2>
+    <div class="section-sub">Global and local skills together, ranked by invocation count. A local skill is scoped to one project — the same id in another project counts separately.</div>
+    <table>
+      <thead><tr><th>Skill</th><th>Usage</th><th class="num">Count</th><th class="num">Sessions</th><th class="num">Last used</th></tr></thead>
+      <tbody><tr><td colspan="5" class="note" style="padding:24px 10px;">No skill invocations matched. Try <code>--debug</code>, or check --data-dir.</td></tr></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Never invoked<span class="warn-badge">43 candidates</span></h2>
+    <div class="section-sub">Defined (globally or in a scanned project) but never showed up as a skill-tool call. Rewrite the description to be more specific about *when* to use it, or delete it.</div>
+    <div class="panel"><table>
+      <tr>
+        <td class="name">
+          <div class="skill-name">ask-matt <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">ask-matt · agents</div>
+          <div class="skill-desc">Ask which skill or flow fits your situation. A router over the skills in this repo.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">bulletproof-react-monorepo <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">bulletproof-react-monorepo · opencode-native</div>
+          <div class="skill-desc">Use when the user is scaffolding a new app/package/feature, asking &quot;where should this go&quot; questions, setting up routing/data fetching/styling, or reviewing a React + TypeScript monorepo on bulletproof-react principles. Also covers Elysia backend apps with better-auth, bun:sqlite, and raw SQL. Triggers: &quot;bulletproof react&quot;, &quot;scaffold&quot;, &quot;where should this live&quot;, &quot;review my project structure&quot;, &quot;set up routes&quot;, &quot;set up a query&quot;, &quot;add a shadcn component&quot;, &quot;add a package&quot;, &quot;set up ESLint boundaries&quot;, &quot;add backend api&quot;, &quot;elysia backend&quot;, &quot;better-auth&quot;, &quot;add api app&quot;.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">code-review <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">code-review · agents</div>
+          <div class="skill-desc">Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo&#39;s documented coding standards?) and Spec (does the code match what the originating issue/PRD asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to &quot;review since X&quot;.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">codebase-design <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">codebase-design · agents</div>
+          <div class="skill-desc">Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module&#39;s interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">diagnosing-bugs <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">diagnosing-bugs · agents</div>
+          <div class="skill-desc">Diagnosis loop for hard bugs and performance regressions. Use when the user says &quot;diagnose&quot;/&quot;debug this&quot;, or reports something broken/throwing/failing/slow.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">domain-modeling <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">domain-modeling · agents</div>
+          <div class="skill-desc">Build and sharpen a project&#39;s domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">find-skills <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">find-skills · agents</div>
+          <div class="skill-desc">Helps users discover and install agent skills when they ask questions like &quot;how do I do X&quot;, &quot;find a skill for X&quot;, &quot;is there a skill that can...&quot;, or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">grill-me <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">grill-me · agents</div>
+          <div class="skill-desc">A relentless interview to sharpen a plan or design.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">grill-with-docs <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">grill-with-docs · agents</div>
+          <div class="skill-desc">A relentless interview to sharpen a plan or design, which also creates docs (ADR&#39;s and glossary) as we go.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">grilling <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">grilling · agents</div>
+          <div class="skill-desc">Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any &#39;grill&#39; trigger phrases.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">handoff <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">handoff · agents</div>
+          <div class="skill-desc">Compact the current conversation into a handoff document for another agent to pick up.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">implement <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">implement · agents</div>
+          <div class="skill-desc">Implement a piece of work based on a spec or set of tickets.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">improve-codebase-architecture <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">improve-codebase-architecture · agents</div>
+          <div class="skill-desc">Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">loop-me <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">loop-me · agents</div>
+          <div class="skill-desc">Grill me about specs for the workflows I want to build, within this workspace.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">prototype <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">prototype · agents</div>
+          <div class="skill-desc">Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">request-refactor-plan <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">request-refactor-plan · agents</div>
+          <div class="skill-desc">Create a detailed refactor plan with tiny commits via user interview, then file it as a GitHub issue. Use when user wants to plan a refactor, create a refactoring RFC, or break a refactor into safe incremental steps.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">research <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">research · agents</div>
+          <div class="skill-desc">Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">resolving-merge-conflicts <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">resolving-merge-conflicts · agents</div>
+          <div class="skill-desc">Use when you need to resolve an in-progress git merge/rebase conflict.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">setup-matt-pocock-skills <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">setup-matt-pocock-skills · agents</div>
+          <div class="skill-desc">Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">shadcn <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">shadcn · agents</div>
+          <div class="skill-desc">Manages shadcn components and projects — adding, searching, fixing, debugging, styling, and composing UI, including chat interfaces. Provides project context, component docs, and usage examples. Applies when working with shadcn/ui, component registries, presets, --preset codes, or any project with a components.json file. Also triggers for &quot;shadcn init&quot;, &quot;create an app with --preset&quot;, or &quot;switch to --preset&quot;.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-ai <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-ai · agents</div>
+          <div class="skill-desc">Provider-agnostic, type-safe AI SDK for streaming, tool calling, structured output, and multimodal content.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-cli <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-cli · agents</div>
+          <div class="skill-desc">Project scaffolding CLI with 30+ integrations, custom templates, and MCP server for AI agents.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-config <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-config · agents</div>
+          <div class="skill-desc">Opinionated toolkit for building, versioning, and publishing high-quality JavaScript/TypeScript packages.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-db <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-db · agents</div>
+          <div class="skill-desc">Reactive client-first store for your API with collections, live queries, and optimistic mutations.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-devtools <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-devtools · agents</div>
+          <div class="skill-desc">Centralized, extensible devtools panel for TanStack libraries with a plugin architecture.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-form <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-form · agents</div>
+          <div class="skill-desc">Headless, performant, and type-safe form state management for TS/JS, React, Vue, Angular, Solid, Lit, and Svelte.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-pacer <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-pacer · agents</div>
+          <div class="skill-desc">Framework-agnostic debouncing, throttling, rate limiting, queuing, and batching utilities.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-query <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-query · agents</div>
+          <div class="skill-desc">Powerful asynchronous state management, server-state utilities, and data fetching for TS/JS, React, Vue, Solid, Svelte &amp; Angular.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-ranger <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-ranger · agents</div>
+          <div class="skill-desc">Headless utilities for building range and multi-range sliders in TS/JS, React, Vue, Solid, Svelte &amp; Angular.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-router <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-router · agents</div>
+          <div class="skill-desc">Type-safe routing for React and Solid applications with first-class search params, data loading, and seamless integration with the React ecosystem.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-start <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-start · agents</div>
+          <div class="skill-desc">Full-stack React framework powered by TanStack Router with SSR, streaming, server functions, and deployment to any hosting provider.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-store <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-store · agents</div>
+          <div class="skill-desc">Framework-agnostic, immutable reactive data store with framework adapters for React, Vue, Solid, Angular, and Svelte.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-table <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-table · agents</div>
+          <div class="skill-desc">Headless UI for building powerful tables &amp; datagrids for TS/JS, React, Vue, Solid, Svelte, Qwik, Angular, and Lit.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tanstack-virtual <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tanstack-virtual · agents</div>
+          <div class="skill-desc">Headless UI for virtualizing large element lists at 60FPS in TS/JS, React, Vue, Solid, Svelte, Lit &amp; Angular.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">tdd <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">tdd · agents</div>
+          <div class="skill-desc">Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions &quot;red-green-refactor&quot;, or wants integration tests.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">teach <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">teach · agents</div>
+          <div class="skill-desc">Teach the user a new skill or concept, within this workspace.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">to-questionnaire <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">to-questionnaire · agents</div>
+          <div class="skill-desc">Turn a decision you can&#39;t fully answer into a questionnaire for someone else to fill in.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">to-spec <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">to-spec · agents</div>
+          <div class="skill-desc">Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you&#39;ve already discussed.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">to-tickets <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">to-tickets · agents</div>
+          <div class="skill-desc">Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker — edges as text in one file per ticket locally, or native blocking links on a real tracker.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">triage <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">triage · agents</div>
+          <div class="skill-desc">Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">ubiquitous-language <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">ubiquitous-language · agents</div>
+          <div class="skill-desc">Extract a DDD-style ubiquitous language glossary from the current conversation, flagging ambiguities and proposing canonical terms. Saves to UBIQUITOUS_LANGUAGE.md. Use when user wants to define domain terms, build a glossary, harden terminology, create a ubiquitous language, or mentions &quot;domain model&quot; or &quot;DDD&quot;.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">wayfinder <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">wayfinder · agents</div>
+          <div class="skill-desc">Plan a huge chunk of work — more than one agent session can hold — as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="name">
+          <div class="skill-name">writing-great-skills <span class="badge badge-global">Global</span></div>
+          <div class="skill-id">writing-great-skills · agents</div>
+          <div class="skill-desc">Reference for writing and editing skills well — the vocabulary and principles that make a skill predictable.</div>
+        </td>
+      </tr></table></div>
+  </section>
+
+  
+
+  <section>
+    <h2>Project roots scanned for local skills</h2>
+    <div class="panel" style="padding:14px 18px;">
+      <div class="proj-list">(none found in session history — pass --projects to add some manually)</div>
+    </div>
+  </section>
+
+  <p class="note">
+    Tip: a skill only counts here if the agent actually called it via the <code>skill</code> tool.
+    Skills with <code>opencode/autoinvoke: false</code> in frontmatter are never auto-suggested, so
+    low usage there may be by design. Local skill discovery walks up from each project directory to
+    its git worktree root (max 8 levels), mirroring OpenCode's own resolution order —
+    a local skill overrides a global one with the same id. This dashboard only sees history under
+    <code>/home/alain/.local/share/opencode</code>; sessions from other machines aren't included.
+  </p>
+</div>
+</body>
+</html>
