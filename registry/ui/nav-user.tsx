@@ -23,6 +23,7 @@ import {
   useSidebar,
 } from "@/hoogin/ui/sidebar"
 import { ChevronsUpDownIcon } from "lucide-react"
+import { Link } from "@tanstack/react-router"
 import type {
   SidebarUser,
   SidebarUserMenu,
@@ -82,7 +83,7 @@ export function NavUser({
                   {group.items.map((item) => (
                     <DropdownMenuItem
                       key={item.label}
-                      render={<a href={item.url} aria-label={item.label} />}
+                      render={<Link to={item.url} aria-label={item.label} />}
                     >
                       {item.icon ? <item.icon /> : null}
                       {item.label}

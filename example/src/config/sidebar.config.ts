@@ -2,16 +2,22 @@ import type {
   SidebarBrand,
   SidebarNavItem,
   SidebarSecondaryItem,
+  SidebarUser,
+  SidebarUserMenu,
 } from "@/hoogin/ui/sidebar.types"
 
 import favicon from "@/assets/favicon.svg"
 
 import {
   BlocksIcon,
+  BellIcon,
   CompassIcon,
+  CreditCardIcon,
   LayoutTemplateIcon,
+  LogOutIcon,
   MessageSquareIcon,
   StarIcon,
+  UserIcon,
 } from "lucide-react"
 
 export const sidebarData = {
@@ -175,9 +181,28 @@ export const sidebarData = {
       icon: MessageSquareIcon,
     },
   ],
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/me.jpg",
+  },
+  userMenu: [
+    {
+      items: [
+        { label: "Account", url: "/", icon: UserIcon },
+        { label: "Billing", url: "/", icon: CreditCardIcon },
+        { label: "Notifications", url: "/", icon: BellIcon },
+      ],
+    },
+    {
+      items: [{ label: "Log out", url: "/", icon: LogOutIcon }],
+    },
+  ],
 } satisfies {
   brand?: SidebarBrand
   navMainLabel?: string
   navMain: SidebarNavItem[]
   navSecondary?: SidebarSecondaryItem[]
+  user?: SidebarUser
+  userMenu?: SidebarUserMenu
 }

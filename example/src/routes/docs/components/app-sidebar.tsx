@@ -28,6 +28,8 @@ function AppSidebarPage() {
               dataMain={sidebarData.navMain}
               dataSecondary={sidebarData.navSecondary}
               dataMainLabel={sidebarData.navMainLabel}
+              user={sidebarData.user}
+              dataUserMenu={sidebarData.userMenu}
             />
           </SidebarProvider>
         </Preview>
