@@ -1,5 +1,5 @@
 import { sidebarData } from "@/config/sidebar.config"
-import type { SidebarNavSubItem } from "@/hoogin/ui/sidebar.types"
+import type { SidebarNavSubItem } from "@/hoogin/ui/navigation/sidebar.types"
 
 export type Crumb = {
   label: string

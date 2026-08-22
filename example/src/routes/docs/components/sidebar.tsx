@@ -14,7 +14,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-} from "@/hoogin/ui/sidebar"
+} from "@/hoogin/ui/navigation/sidebar"
 
 export const Route = createFileRoute("/docs/components/sidebar")({
   component: SidebarPage,
@@ -29,7 +29,7 @@ const DEMO_CODE = `import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-} from "@/hoogin/ui/sidebar"
+} from "@/hoogin/ui/navigation/sidebar"
 
 export function SidebarDemo() {
   return (

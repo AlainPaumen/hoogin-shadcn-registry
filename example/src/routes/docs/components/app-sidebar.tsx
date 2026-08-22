@@ -6,8 +6,8 @@ import { DocSection } from "@/hoogin/docs/doc-section"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { AppSidebar } from "@/hoogin/ui/app-sidebar"
-import { SidebarProvider } from "@/hoogin/ui/sidebar"
+import { AppSidebar } from "@/hoogin/ui/navigation/app-sidebar"
+import { SidebarProvider } from "@/hoogin/ui/navigation/sidebar"
 
 export const Route = createFileRoute("/docs/components/app-sidebar")({
   component: AppSidebarPage,
@@ -37,8 +37,8 @@ function AppSidebarPage() {
       <DocSection title="Usage">
         <CodeBlock
           language="tsx"
-          code={`import { AppSidebar } from "@/hoogin/ui/app-sidebar"
-import { SidebarProvider } from "@/hoogin/ui/sidebar"
+          code={`import { AppSidebar } from "@/hoogin/ui/navigation/app-sidebar"
+import { SidebarProvider } from "@/hoogin/ui/navigation/sidebar"
 
 <SidebarProvider>
   <AppSidebar

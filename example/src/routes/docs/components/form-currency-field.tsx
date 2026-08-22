@@ -7,15 +7,15 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormCurrencyField } from "@/hoogin/ui/form-currency.field"
+import { FormCurrencyField } from "@/hoogin/ui/forms/form-currency.field"
 
 export const Route = createFileRoute("/docs/components/form-currency-field")({
   component: FormCurrencyFieldPage,
 })
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormCurrencyField } from "@/hoogin/ui/form-currency.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormCurrencyField } from "@/hoogin/ui/forms/form-currency.field"
 
 function Example() {
   const form = useForm({

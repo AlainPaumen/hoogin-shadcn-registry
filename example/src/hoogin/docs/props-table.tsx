@@ -28,8 +28,8 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
               </td>
             </tr>
           ) : (
-            rows.map((row) => (
-            <tr key={row.prop} className="border-b last:border-b-0">
+            rows.map((row, i) => (
+            <tr key={i} className="border-b last:border-b-0">
               <td className="px-4 py-2 font-mono text-xs">{row.prop}</td>
               <td className="px-4 py-2 font-mono text-xs text-muted-foreground">
                 {row.type}

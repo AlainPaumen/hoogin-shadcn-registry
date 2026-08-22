@@ -7,15 +7,15 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormEmailField } from "@/hoogin/ui/form-email.field"
+import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
 
 export const Route = createFileRoute("/docs/components/form-email-field")({
   component: FormEmailFieldPage,
 })
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormEmailField } from "@/hoogin/ui/form-email.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
 
 function Example() {
   const form = useForm({

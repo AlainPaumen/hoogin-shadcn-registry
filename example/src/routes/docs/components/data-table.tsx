@@ -5,13 +5,13 @@ import { ComponentDoc } from "@/hoogin/docs/doc-page"
 import { DocSection } from "@/hoogin/docs/doc-section"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { DataTable } from "@/hoogin/ui/data-table"
-import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
-import { CurrencyCell } from "@/hoogin/ui/currency.cell"
-import { DateCell } from "@/hoogin/ui/date.cell"
-import { EmailCell } from "@/hoogin/ui/email.cell"
-import { TextCell } from "@/hoogin/ui/text.cell"
-import { BadgeCell } from "@/hoogin/ui/badge.cell"
+import { DataTable } from "@/hoogin/ui/data-table/data-table"
+import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
+import { CurrencyCell } from "@/hoogin/ui/data-table/cells/currency.cell"
+import { DateCell } from "@/hoogin/ui/data-table/cells/date.cell"
+import { EmailCell } from "@/hoogin/ui/data-table/cells/email.cell"
+import { TextCell } from "@/hoogin/ui/data-table/cells/text.cell"
+import { BadgeCell } from "@/hoogin/ui/data-table/cells/badge.cell"
 
 export const Route = createFileRoute("/docs/components/data-table")({
   component: DataTablePage,
@@ -106,12 +106,12 @@ const columns: DataTableColumnDef<Payment>[] = [
 ]
 
 const columnsSource = `// columns.tsx
-import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
-import { TextCell } from "@/hoogin/ui/text.cell"
-import { EmailCell } from "@/hoogin/ui/email.cell"
-import { DateCell } from "@/hoogin/ui/date.cell"
-import { CurrencyCell } from "@/hoogin/ui/currency.cell"
-import { BadgeCell } from "@/hoogin/ui/badge.cell"
+import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
+import { TextCell } from "@/hoogin/ui/data-table/cells/text.cell"
+import { EmailCell } from "@/hoogin/ui/data-table/cells/email.cell"
+import { DateCell } from "@/hoogin/ui/data-table/cells/date.cell"
+import { CurrencyCell } from "@/hoogin/ui/data-table/cells/currency.cell"
+import { BadgeCell } from "@/hoogin/ui/data-table/cells/badge.cell"
 
 export const columns: DataTableColumnDef<Payment>[] = [
   {
@@ -182,7 +182,7 @@ export const columns: DataTableColumnDef<Payment>[] = [
 ]`
 
 const usageSource = `// app.tsx
-import { DataTable } from "@/hoogin/ui/data-table"
+import { DataTable } from "@/hoogin/ui/data-table/data-table"
 import { columns } from "./columns"
 
 export function App() {

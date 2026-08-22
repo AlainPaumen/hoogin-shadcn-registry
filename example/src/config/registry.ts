@@ -47,9 +47,9 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "sidebar.tsx",
+        "path": "navigation/sidebar.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/sidebar.tsx"
+        "target": "hoogin/ui/navigation/sidebar.tsx"
       }
     ]
   },
@@ -66,34 +66,34 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "app-sidebar.tsx",
+        "path": "navigation/app-sidebar.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/app-sidebar.tsx"
+        "target": "hoogin/ui/navigation/app-sidebar.tsx"
       },
       {
-        "path": "nav-main.tsx",
+        "path": "navigation/nav-main.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/nav-main.tsx"
+        "target": "hoogin/ui/navigation/nav-main.tsx"
       },
       {
-        "path": "nav-projects.tsx",
+        "path": "navigation/nav-projects.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/nav-projects.tsx"
+        "target": "hoogin/ui/navigation/nav-projects.tsx"
       },
       {
-        "path": "nav-secondary.tsx",
+        "path": "navigation/nav-secondary.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/nav-secondary.tsx"
+        "target": "hoogin/ui/navigation/nav-secondary.tsx"
       },
       {
-        "path": "nav-user.tsx",
+        "path": "navigation/nav-user.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/nav-user.tsx"
+        "target": "hoogin/ui/navigation/nav-user.tsx"
       },
       {
-        "path": "sidebar.types.ts",
+        "path": "navigation/sidebar.types.ts",
         "type": "registry:file",
-        "target": "hoogin/ui/sidebar.types.ts"
+        "target": "hoogin/ui/navigation/sidebar.types.ts"
       }
     ]
   },
@@ -107,9 +107,9 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "auth-provider.tsx",
+        "path": "auth/auth-provider.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/auth-provider.tsx"
+        "target": "hoogin/ui/auth/auth-provider.tsx"
       }
     ]
   },
@@ -120,9 +120,9 @@ export const registryItems: RegistryItem[] = [
     "description": "A theme provider with system detection, storage sync, and a keyboard shortcut.",
     "files": [
       {
-        "path": "theme-provider.tsx",
+        "path": "theme/theme-provider.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/theme-provider.tsx"
+        "target": "hoogin/ui/theme/theme-provider.tsx"
       }
     ]
   },
@@ -137,9 +137,9 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "theme-toggle.tsx",
+        "path": "theme/theme-toggle.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/theme-toggle.tsx"
+        "target": "hoogin/ui/theme/theme-toggle.tsx"
       }
     ]
   },
@@ -165,24 +165,24 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "data-table.tsx",
+        "path": "data-table/data-table.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/data-table.tsx"
+        "target": "hoogin/ui/data-table/data-table.tsx"
       },
       {
-        "path": "data-table-pagination.tsx",
+        "path": "data-table/data-table-pagination.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/data-table-pagination.tsx"
+        "target": "hoogin/ui/data-table/data-table-pagination.tsx"
       },
       {
-        "path": "data-table.types.ts",
+        "path": "data-table/data-table.types.ts",
         "type": "registry:file",
-        "target": "hoogin/ui/data-table.types.ts"
+        "target": "hoogin/ui/data-table/data-table.types.ts"
       },
       {
-        "path": "data-table-toolbar.tsx",
+        "path": "data-table/data-table-toolbar.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/data-table-toolbar.tsx"
+        "target": "hoogin/ui/data-table/data-table-toolbar.tsx"
       }
     ]
   },
@@ -201,49 +201,49 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "formatted.cell.tsx",
+        "path": "data-table/cells/formatted.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/formatted.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/formatted.cell.tsx"
       },
       {
-        "path": "text.cell.tsx",
+        "path": "data-table/cells/text.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/text.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/text.cell.tsx"
       },
       {
-        "path": "email.cell.tsx",
+        "path": "data-table/cells/email.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/email.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/email.cell.tsx"
       },
       {
-        "path": "date.cell.tsx",
+        "path": "data-table/cells/date.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/date.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/date.cell.tsx"
       },
       {
-        "path": "currency.cell.tsx",
+        "path": "data-table/cells/currency.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/currency.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/currency.cell.tsx"
       },
       {
-        "path": "checkbox.cell.tsx",
+        "path": "data-table/cells/checkbox.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/checkbox.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/checkbox.cell.tsx"
       },
       {
-        "path": "badge.cell.tsx",
+        "path": "data-table/cells/badge.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/badge.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/badge.cell.tsx"
       },
       {
-        "path": "action.cell.tsx",
+        "path": "data-table/cells/action.cell.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/action.cell.tsx"
+        "target": "hoogin/ui/data-table/cells/action.cell.tsx"
       },
       {
-        "path": "formatters.utils.tsx",
+        "path": "data-table/cells/formatters.utils.tsx",
         "type": "registry:file",
-        "target": "hoogin/ui/formatters.utils.tsx"
+        "target": "hoogin/ui/data-table/cells/formatters.utils.tsx"
       }
     ]
   },
@@ -262,9 +262,9 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "data-table-view-options.tsx",
+        "path": "data-table/data-table-view-options.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/data-table-view-options.tsx"
+        "target": "hoogin/ui/data-table/data-table-view-options.tsx"
       }
     ]
   },
@@ -286,9 +286,9 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "data-table-faceted-filter.tsx",
+        "path": "data-table/data-table-faceted-filter.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/data-table-faceted-filter.tsx"
+        "target": "hoogin/ui/data-table/data-table-faceted-filter.tsx"
       }
     ]
   },
@@ -315,79 +315,79 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "form.tsx",
+        "path": "forms/form.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form.tsx"
+        "target": "hoogin/ui/forms/form.tsx"
       },
       {
-        "path": "form.field.tsx",
+        "path": "forms/form.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form.field.tsx"
+        "target": "hoogin/ui/forms/form.field.tsx"
       },
       {
-        "path": "form.utils.ts",
+        "path": "forms/form.utils.ts",
         "type": "registry:file",
-        "target": "hoogin/ui/form.utils.ts"
+        "target": "hoogin/ui/forms/form.utils.ts"
       },
       {
-        "path": "formatters.utils.tsx",
+        "path": "data-table/cells/formatters.utils.tsx",
         "type": "registry:file",
-        "target": "hoogin/ui/formatters.utils.tsx"
+        "target": "hoogin/ui/data-table/cells/formatters.utils.tsx"
       },
       {
-        "path": "form-text.field.tsx",
+        "path": "forms/form-text.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-text.field.tsx"
+        "target": "hoogin/ui/forms/form-text.field.tsx"
       },
       {
-        "path": "form-email.field.tsx",
+        "path": "forms/form-email.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-email.field.tsx"
+        "target": "hoogin/ui/forms/form-email.field.tsx"
       },
       {
-        "path": "form-number.field.tsx",
+        "path": "forms/form-number.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-number.field.tsx"
+        "target": "hoogin/ui/forms/form-number.field.tsx"
       },
       {
-        "path": "form-currency.field.tsx",
+        "path": "forms/form-currency.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-currency.field.tsx"
+        "target": "hoogin/ui/forms/form-currency.field.tsx"
       },
       {
-        "path": "form-date.field.tsx",
+        "path": "forms/form-date.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-date.field.tsx"
+        "target": "hoogin/ui/forms/form-date.field.tsx"
       },
       {
-        "path": "form-time.field.tsx",
+        "path": "forms/form-time.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-time.field.tsx"
+        "target": "hoogin/ui/forms/form-time.field.tsx"
       },
       {
-        "path": "form-password.field.tsx",
+        "path": "forms/form-password.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-password.field.tsx"
+        "target": "hoogin/ui/forms/form-password.field.tsx"
       },
       {
-        "path": "form-checkbox.field.tsx",
+        "path": "forms/form-checkbox.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-checkbox.field.tsx"
+        "target": "hoogin/ui/forms/form-checkbox.field.tsx"
       },
       {
-        "path": "form-select.field.tsx",
+        "path": "forms/form-select.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-select.field.tsx"
+        "target": "hoogin/ui/forms/form-select.field.tsx"
       },
       {
-        "path": "form-textarea.field.tsx",
+        "path": "forms/form-textarea.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-textarea.field.tsx"
+        "target": "hoogin/ui/forms/form-textarea.field.tsx"
       },
       {
-        "path": "form-strong-password.field.tsx",
+        "path": "forms/form-strong-password.field.tsx",
         "type": "registry:ui",
-        "target": "hoogin/ui/form-strong-password.field.tsx"
+        "target": "hoogin/ui/forms/form-strong-password.field.tsx"
       }
     ]
   },
@@ -405,7 +405,7 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "sidebar-layout.tsx",
+        "path": "blocks/sidebar-layout.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/sidebar-layout/sidebar-layout.tsx"
       }
@@ -427,7 +427,7 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "admin-page.tsx",
+        "path": "blocks/admin-page.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/admin-page/admin-page.tsx"
       }
@@ -448,12 +448,12 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "signup-page.tsx",
+        "path": "blocks/signup-page.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/signup-page/signup-page.tsx"
       },
       {
-        "path": "signup-form.tsx",
+        "path": "blocks/signup-form.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/signup-page/signup-form.tsx"
       }
@@ -474,12 +474,12 @@ export const registryItems: RegistryItem[] = [
     ],
     "files": [
       {
-        "path": "signin-page.tsx",
+        "path": "blocks/signin-page.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/signin-page/signin-page.tsx"
       },
       {
-        "path": "signin-form.tsx",
+        "path": "blocks/signin-form.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/signin-page/signin-form.tsx"
       }

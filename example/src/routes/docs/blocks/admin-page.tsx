@@ -14,20 +14,20 @@ import {
   AdminPage,
   type EntityFormProps,
 } from "@/hoogin/blocks/admin-page/admin-page"
-import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
-import { Form, FormBody, FormError, FormFooter } from "@/hoogin/ui/form"
-import { isRequiredField } from "@/hoogin/ui/form.utils"
-import { FormDateField } from "@/hoogin/ui/form-date.field"
-import { FormEmailField } from "@/hoogin/ui/form-email.field"
-import { FormNumberField } from "@/hoogin/ui/form-number.field"
-import { FormSelectField } from "@/hoogin/ui/form-select.field"
-import { FormTextField } from "@/hoogin/ui/form-text.field"
-import { BadgeCell } from "@/hoogin/ui/badge.cell"
-import { CurrencyCell } from "@/hoogin/ui/currency.cell"
-import { DateCell } from "@/hoogin/ui/date.cell"
-import { EmailCell } from "@/hoogin/ui/email.cell"
-import { currencyFormatter } from "@/hoogin/ui/formatters.utils"
-import { TextCell } from "@/hoogin/ui/text.cell"
+import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
+import { Form, FormBody, FormError, FormFooter } from "@/hoogin/ui/forms/form"
+import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
+import { FormDateField } from "@/hoogin/ui/forms/form-date.field"
+import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
+import { FormNumberField } from "@/hoogin/ui/forms/form-number.field"
+import { FormSelectField } from "@/hoogin/ui/forms/form-select.field"
+import { FormTextField } from "@/hoogin/ui/forms/form-text.field"
+import { BadgeCell } from "@/hoogin/ui/data-table/cells/badge.cell"
+import { CurrencyCell } from "@/hoogin/ui/data-table/cells/currency.cell"
+import { DateCell } from "@/hoogin/ui/data-table/cells/date.cell"
+import { EmailCell } from "@/hoogin/ui/data-table/cells/email.cell"
+import { currencyFormatter } from "@/hoogin/ui/data-table/cells/formatters.utils"
+import { TextCell } from "@/hoogin/ui/data-table/cells/text.cell"
 
 export const Route = createFileRoute("/docs/blocks/admin-page")({
   component: AdminPagePage,
@@ -281,12 +281,12 @@ function AdminPagePreview() {
 }
 
 const usageSource = `// admin/columns.tsx
-import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
-import { TextCell } from "@/hoogin/ui/text.cell"
-import { EmailCell } from "@/hoogin/ui/email.cell"
-import { BadgeCell } from "@/hoogin/ui/badge.cell"
-import { DateCell } from "@/hoogin/ui/date.cell"
-import { CurrencyCell } from "@/hoogin/ui/currency.cell"
+import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
+import { TextCell } from "@/hoogin/ui/data-table/cells/text.cell"
+import { EmailCell } from "@/hoogin/ui/data-table/cells/email.cell"
+import { BadgeCell } from "@/hoogin/ui/data-table/cells/badge.cell"
+import { DateCell } from "@/hoogin/ui/data-table/cells/date.cell"
+import { CurrencyCell } from "@/hoogin/ui/data-table/cells/currency.cell"
 
 export const columns: DataTableColumnDef<Payment>[] = [
   {
@@ -315,13 +315,13 @@ export const paymentSchema = z.object({
 
 // admin/form.tsx
 import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormError, FormFooter } from "@/hoogin/ui/form"
-import { FormTextField } from "@/hoogin/ui/form-text.field"
-import { FormEmailField } from "@/hoogin/ui/form-email.field"
-import { FormDateField } from "@/hoogin/ui/form-date.field"
-import { FormNumberField } from "@/hoogin/ui/form-number.field"
-import { FormSelectField } from "@/hoogin/ui/form-select.field"
-import { isRequiredField } from "@/hoogin/ui/form.utils"
+import { Form, FormBody, FormError, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormTextField } from "@/hoogin/ui/forms/form-text.field"
+import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
+import { FormDateField } from "@/hoogin/ui/forms/form-date.field"
+import { FormNumberField } from "@/hoogin/ui/forms/form-number.field"
+import { FormSelectField } from "@/hoogin/ui/forms/form-select.field"
+import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
 import type { EntityFormProps } from "@/hoogin/blocks/admin-page/admin-page"
 import { paymentSchema } from "./schema"
 

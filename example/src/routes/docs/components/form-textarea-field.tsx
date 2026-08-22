@@ -7,15 +7,15 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormTextareaField } from "@/hoogin/ui/form-textarea.field"
+import { FormTextareaField } from "@/hoogin/ui/forms/form-textarea.field"
 
 export const Route = createFileRoute("/docs/components/form-textarea-field")({
   component: FormTextareaFieldPage,
 })
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormTextareaField } from "@/hoogin/ui/form-textarea.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormTextareaField } from "@/hoogin/ui/forms/form-textarea.field"
 
 function Example() {
   const form = useForm({

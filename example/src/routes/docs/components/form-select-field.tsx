@@ -7,7 +7,7 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormSelectField } from "@/hoogin/ui/form-select.field"
+import { FormSelectField } from "@/hoogin/ui/forms/form-select.field"
 
 export const Route = createFileRoute("/docs/components/form-select-field")({
   component: FormSelectFieldPage,
@@ -20,8 +20,8 @@ const roles = [
 ]
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormSelectField } from "@/hoogin/ui/form-select.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormSelectField } from "@/hoogin/ui/forms/form-select.field"
 
 function Example() {
   const form = useForm({

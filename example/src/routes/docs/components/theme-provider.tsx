@@ -6,7 +6,7 @@ import { DocSection } from "@/hoogin/docs/doc-section"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { useTheme } from "@/hoogin/ui/theme-provider"
+import { useTheme } from "@/hoogin/ui/theme/theme-provider"
 
 export const Route = createFileRoute("/docs/components/theme-provider")({
   component: ThemeProviderPage,
@@ -49,7 +49,7 @@ function ThemeProviderPage() {
       <DocSection title="Usage">
         <CodeBlock
           language="tsx"
-          code={`import { ThemeProvider, useTheme } from "@/hoogin/ui/theme-provider"
+          code={`import { ThemeProvider, useTheme } from "@/hoogin/ui/theme/theme-provider"
 
 function App() {
   return (

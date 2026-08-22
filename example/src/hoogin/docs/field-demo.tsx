@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 
 import { toast } from "@/components/ui/toast"
 import { ValueList } from "@/hoogin/docs/value-list"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
 
 function useFieldDemoForm<TValues extends Record<string, unknown>>(
   defaultValues: TValues,

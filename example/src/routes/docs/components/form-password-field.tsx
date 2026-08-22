@@ -7,15 +7,15 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormPasswordField } from "@/hoogin/ui/form-password.field"
+import { FormPasswordField } from "@/hoogin/ui/forms/form-password.field"
 
 export const Route = createFileRoute("/docs/components/form-password-field")({
   component: FormPasswordFieldPage,
 })
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormPasswordField } from "@/hoogin/ui/form-password.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormPasswordField } from "@/hoogin/ui/forms/form-password.field"
 
 function Example() {
   const form = useForm({

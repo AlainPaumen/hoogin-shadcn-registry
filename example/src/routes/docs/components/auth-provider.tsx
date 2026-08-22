@@ -5,7 +5,7 @@ import { DocSection } from "@/hoogin/docs/doc-section"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { AuthProvider, useAuth } from "@/hoogin/ui/auth-provider"
+import { AuthProvider, useAuth } from "@/hoogin/ui/auth/auth-provider"
 
 export const Route = createFileRoute("/docs/components/auth-provider")({
   component: AuthProviderPage,
@@ -31,7 +31,7 @@ function AuthStatusPreview() {
   )
 }
 
-const usageSource = `import { AuthProvider, useAuth } from "@/hoogin/ui/auth-provider"
+const usageSource = `import { AuthProvider, useAuth } from "@/hoogin/ui/auth/auth-provider"
 import { SigninPage } from "@/hoogin/blocks/signin-page/signin-page"
 
 function App() {

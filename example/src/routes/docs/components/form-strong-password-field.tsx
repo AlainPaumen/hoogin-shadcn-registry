@@ -7,7 +7,7 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormStrongPasswordField } from "@/hoogin/ui/form-strong-password.field"
+import { FormStrongPasswordField } from "@/hoogin/ui/forms/form-strong-password.field"
 
 export const Route = createFileRoute(
   "/docs/components/form-strong-password-field"
@@ -16,8 +16,8 @@ export const Route = createFileRoute(
 })
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormStrongPasswordField } from "@/hoogin/ui/form-strong-password.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormStrongPasswordField } from "@/hoogin/ui/forms/form-strong-password.field"
 
 function Example() {
   const form = useForm({

@@ -7,15 +7,15 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormTimeField } from "@/hoogin/ui/form-time.field"
+import { FormTimeField } from "@/hoogin/ui/forms/form-time.field"
 
 export const Route = createFileRoute("/docs/components/form-time-field")({
   component: FormTimeFieldPage,
 })
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormTimeField } from "@/hoogin/ui/form-time.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormTimeField } from "@/hoogin/ui/forms/form-time.field"
 
 function Example() {
   const form = useForm({

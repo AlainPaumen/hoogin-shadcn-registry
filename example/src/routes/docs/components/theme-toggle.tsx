@@ -5,7 +5,7 @@ import { DocSection } from "@/hoogin/docs/doc-section"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { ThemeToggle } from "@/hoogin/ui/theme-toggle"
+import { ThemeToggle } from "@/hoogin/ui/theme/theme-toggle"
 
 export const Route = createFileRoute("/docs/components/theme-toggle")({
   component: ThemeTogglePage,
@@ -22,7 +22,7 @@ function ThemeTogglePage() {
       <DocSection title="Usage">
         <CodeBlock
           language="tsx"
-          code={`import { ThemeToggle } from "@/hoogin/ui/theme-toggle"
+          code={`import { ThemeToggle } from "@/hoogin/ui/theme/theme-toggle"
 
 <header>
   <ThemeToggle />

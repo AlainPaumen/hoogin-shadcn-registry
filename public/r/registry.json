@@ -31,9 +31,9 @@
       ],
       "files": [
         {
-          "path": "registry/ui/sidebar.tsx",
+          "path": "registry/ui/navigation/sidebar.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/sidebar.tsx"
+          "target": "hoogin/ui/navigation/sidebar.tsx"
         }
       ],
       "type": "registry:ui"
@@ -50,34 +50,34 @@
       ],
       "files": [
         {
-          "path": "registry/ui/app-sidebar.tsx",
+          "path": "registry/ui/navigation/app-sidebar.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/app-sidebar.tsx"
+          "target": "hoogin/ui/navigation/app-sidebar.tsx"
         },
         {
-          "path": "registry/ui/nav-main.tsx",
+          "path": "registry/ui/navigation/nav-main.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/nav-main.tsx"
+          "target": "hoogin/ui/navigation/nav-main.tsx"
         },
         {
-          "path": "registry/ui/nav-projects.tsx",
+          "path": "registry/ui/navigation/nav-projects.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/nav-projects.tsx"
+          "target": "hoogin/ui/navigation/nav-projects.tsx"
         },
         {
-          "path": "registry/ui/nav-secondary.tsx",
+          "path": "registry/ui/navigation/nav-secondary.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/nav-secondary.tsx"
+          "target": "hoogin/ui/navigation/nav-secondary.tsx"
         },
         {
-          "path": "registry/ui/nav-user.tsx",
+          "path": "registry/ui/navigation/nav-user.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/nav-user.tsx"
+          "target": "hoogin/ui/navigation/nav-user.tsx"
         },
         {
-          "path": "registry/ui/sidebar.types.ts",
+          "path": "registry/ui/navigation/sidebar.types.ts",
           "type": "registry:file",
-          "target": "hoogin/ui/sidebar.types.ts"
+          "target": "hoogin/ui/navigation/sidebar.types.ts"
         }
       ],
       "type": "registry:ui"
@@ -91,9 +91,9 @@
       ],
       "files": [
         {
-          "path": "registry/ui/auth-provider.tsx",
+          "path": "registry/ui/auth/auth-provider.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/auth-provider.tsx"
+          "target": "hoogin/ui/auth/auth-provider.tsx"
         }
       ],
       "type": "registry:ui"
@@ -104,9 +104,9 @@
       "description": "A theme provider with system detection, storage sync, and a keyboard shortcut.",
       "files": [
         {
-          "path": "registry/ui/theme-provider.tsx",
+          "path": "registry/ui/theme/theme-provider.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/theme-provider.tsx"
+          "target": "hoogin/ui/theme/theme-provider.tsx"
         }
       ],
       "type": "registry:ui"
@@ -121,9 +121,9 @@
       ],
       "files": [
         {
-          "path": "registry/ui/theme-toggle.tsx",
+          "path": "registry/ui/theme/theme-toggle.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/theme-toggle.tsx"
+          "target": "hoogin/ui/theme/theme-toggle.tsx"
         }
       ],
       "type": "registry:ui"
@@ -149,24 +149,24 @@
       ],
       "files": [
         {
-          "path": "registry/ui/data-table.tsx",
+          "path": "registry/ui/data-table/data-table.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/data-table.tsx"
+          "target": "hoogin/ui/data-table/data-table.tsx"
         },
         {
-          "path": "registry/ui/data-table-pagination.tsx",
+          "path": "registry/ui/data-table/data-table-pagination.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/data-table-pagination.tsx"
+          "target": "hoogin/ui/data-table/data-table-pagination.tsx"
         },
         {
-          "path": "registry/ui/data-table.types.ts",
+          "path": "registry/ui/data-table/data-table.types.ts",
           "type": "registry:file",
-          "target": "hoogin/ui/data-table.types.ts"
+          "target": "hoogin/ui/data-table/data-table.types.ts"
         },
         {
-          "path": "registry/ui/data-table-toolbar.tsx",
+          "path": "registry/ui/data-table/data-table-toolbar.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/data-table-toolbar.tsx"
+          "target": "hoogin/ui/data-table/data-table-toolbar.tsx"
         }
       ],
       "type": "registry:ui"
@@ -185,49 +185,49 @@
       ],
       "files": [
         {
-          "path": "registry/ui/formatted.cell.tsx",
+          "path": "registry/ui/data-table/cells/formatted.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/formatted.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/formatted.cell.tsx"
         },
         {
-          "path": "registry/ui/text.cell.tsx",
+          "path": "registry/ui/data-table/cells/text.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/text.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/text.cell.tsx"
         },
         {
-          "path": "registry/ui/email.cell.tsx",
+          "path": "registry/ui/data-table/cells/email.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/email.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/email.cell.tsx"
         },
         {
-          "path": "registry/ui/date.cell.tsx",
+          "path": "registry/ui/data-table/cells/date.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/date.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/date.cell.tsx"
         },
         {
-          "path": "registry/ui/currency.cell.tsx",
+          "path": "registry/ui/data-table/cells/currency.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/currency.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/currency.cell.tsx"
         },
         {
-          "path": "registry/ui/checkbox.cell.tsx",
+          "path": "registry/ui/data-table/cells/checkbox.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/checkbox.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/checkbox.cell.tsx"
         },
         {
-          "path": "registry/ui/badge.cell.tsx",
+          "path": "registry/ui/data-table/cells/badge.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/badge.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/badge.cell.tsx"
         },
         {
-          "path": "registry/ui/action.cell.tsx",
+          "path": "registry/ui/data-table/cells/action.cell.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/action.cell.tsx"
+          "target": "hoogin/ui/data-table/cells/action.cell.tsx"
         },
         {
-          "path": "registry/ui/formatters.utils.tsx",
+          "path": "registry/ui/data-table/cells/formatters.utils.tsx",
           "type": "registry:file",
-          "target": "hoogin/ui/formatters.utils.tsx"
+          "target": "hoogin/ui/data-table/cells/formatters.utils.tsx"
         }
       ],
       "type": "registry:ui"
@@ -246,9 +246,9 @@
       ],
       "files": [
         {
-          "path": "registry/ui/data-table-view-options.tsx",
+          "path": "registry/ui/data-table/data-table-view-options.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/data-table-view-options.tsx"
+          "target": "hoogin/ui/data-table/data-table-view-options.tsx"
         }
       ],
       "type": "registry:ui"
@@ -270,9 +270,9 @@
       ],
       "files": [
         {
-          "path": "registry/ui/data-table-faceted-filter.tsx",
+          "path": "registry/ui/data-table/data-table-faceted-filter.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/data-table-faceted-filter.tsx"
+          "target": "hoogin/ui/data-table/data-table-faceted-filter.tsx"
         }
       ],
       "type": "registry:ui"
@@ -299,79 +299,79 @@
       ],
       "files": [
         {
-          "path": "registry/ui/form.tsx",
+          "path": "registry/ui/forms/form.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form.tsx"
+          "target": "hoogin/ui/forms/form.tsx"
         },
         {
-          "path": "registry/ui/form.field.tsx",
+          "path": "registry/ui/forms/form.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form.field.tsx"
+          "target": "hoogin/ui/forms/form.field.tsx"
         },
         {
-          "path": "registry/ui/form.utils.ts",
+          "path": "registry/ui/forms/form.utils.ts",
           "type": "registry:file",
-          "target": "hoogin/ui/form.utils.ts"
+          "target": "hoogin/ui/forms/form.utils.ts"
         },
         {
-          "path": "registry/ui/formatters.utils.tsx",
+          "path": "registry/ui/data-table/cells/formatters.utils.tsx",
           "type": "registry:file",
-          "target": "hoogin/ui/formatters.utils.tsx"
+          "target": "hoogin/ui/data-table/cells/formatters.utils.tsx"
         },
         {
-          "path": "registry/ui/form-text.field.tsx",
+          "path": "registry/ui/forms/form-text.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-text.field.tsx"
+          "target": "hoogin/ui/forms/form-text.field.tsx"
         },
         {
-          "path": "registry/ui/form-email.field.tsx",
+          "path": "registry/ui/forms/form-email.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-email.field.tsx"
+          "target": "hoogin/ui/forms/form-email.field.tsx"
         },
         {
-          "path": "registry/ui/form-number.field.tsx",
+          "path": "registry/ui/forms/form-number.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-number.field.tsx"
+          "target": "hoogin/ui/forms/form-number.field.tsx"
         },
         {
-          "path": "registry/ui/form-currency.field.tsx",
+          "path": "registry/ui/forms/form-currency.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-currency.field.tsx"
+          "target": "hoogin/ui/forms/form-currency.field.tsx"
         },
         {
-          "path": "registry/ui/form-date.field.tsx",
+          "path": "registry/ui/forms/form-date.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-date.field.tsx"
+          "target": "hoogin/ui/forms/form-date.field.tsx"
         },
         {
-          "path": "registry/ui/form-time.field.tsx",
+          "path": "registry/ui/forms/form-time.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-time.field.tsx"
+          "target": "hoogin/ui/forms/form-time.field.tsx"
         },
         {
-          "path": "registry/ui/form-password.field.tsx",
+          "path": "registry/ui/forms/form-password.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-password.field.tsx"
+          "target": "hoogin/ui/forms/form-password.field.tsx"
         },
         {
-          "path": "registry/ui/form-checkbox.field.tsx",
+          "path": "registry/ui/forms/form-checkbox.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-checkbox.field.tsx"
+          "target": "hoogin/ui/forms/form-checkbox.field.tsx"
         },
         {
-          "path": "registry/ui/form-select.field.tsx",
+          "path": "registry/ui/forms/form-select.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-select.field.tsx"
+          "target": "hoogin/ui/forms/form-select.field.tsx"
         },
         {
-          "path": "registry/ui/form-textarea.field.tsx",
+          "path": "registry/ui/forms/form-textarea.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-textarea.field.tsx"
+          "target": "hoogin/ui/forms/form-textarea.field.tsx"
         },
         {
-          "path": "registry/ui/form-strong-password.field.tsx",
+          "path": "registry/ui/forms/form-strong-password.field.tsx",
           "type": "registry:ui",
-          "target": "hoogin/ui/form-strong-password.field.tsx"
+          "target": "hoogin/ui/forms/form-strong-password.field.tsx"
         }
       ],
       "type": "registry:ui"
@@ -389,7 +389,7 @@
       ],
       "files": [
         {
-          "path": "registry/ui/sidebar-layout.tsx",
+          "path": "registry/ui/blocks/sidebar-layout.tsx",
           "type": "registry:block",
           "target": "hoogin/blocks/sidebar-layout/sidebar-layout.tsx"
         }
@@ -411,7 +411,7 @@
       ],
       "files": [
         {
-          "path": "registry/ui/admin-page.tsx",
+          "path": "registry/ui/blocks/admin-page.tsx",
           "type": "registry:block",
           "target": "hoogin/blocks/admin-page/admin-page.tsx"
         }
@@ -432,12 +432,12 @@
       ],
       "files": [
         {
-          "path": "registry/ui/signup-page.tsx",
+          "path": "registry/ui/blocks/signup-page.tsx",
           "type": "registry:block",
           "target": "hoogin/blocks/signup-page/signup-page.tsx"
         },
         {
-          "path": "registry/ui/signup-form.tsx",
+          "path": "registry/ui/blocks/signup-form.tsx",
           "type": "registry:block",
           "target": "hoogin/blocks/signup-page/signup-form.tsx"
         }
@@ -458,12 +458,12 @@
       ],
       "files": [
         {
-          "path": "registry/ui/signin-page.tsx",
+          "path": "registry/ui/blocks/signin-page.tsx",
           "type": "registry:block",
           "target": "hoogin/blocks/signin-page/signin-page.tsx"
         },
         {
-          "path": "registry/ui/signin-form.tsx",
+          "path": "registry/ui/blocks/signin-form.tsx",
           "type": "registry:block",
           "target": "hoogin/blocks/signin-page/signin-form.tsx"
         }

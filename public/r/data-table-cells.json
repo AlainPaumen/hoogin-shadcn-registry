@@ -13,58 +13,58 @@
   ],
   "files": [
     {
-      "path": "registry/ui/formatted.cell.tsx",
+      "path": "registry/ui/data-table/cells/formatted.cell.tsx",
       "content": "interface FormattedCellProps<T extends React.ReactNode> {\n    value: T;\n    format?: (value: T) => React.ReactNode;\n    align?: 'left' | 'right' | 'center';\n}\n\nexport function FormattedCell<T extends React.ReactNode>({\n    value,\n    format,\n    align = 'left'\n}: FormattedCellProps<T>) {\n    const alignmentClass = align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left';\n\n    return (\n        <div className={alignmentClass}>\n            <p className=\"text-muted-foreground text-sm font-light\">\n                {format ? format(value) : value}\n            </p>\n        </div>\n    );\n}",
       "type": "registry:ui",
-      "target": "hoogin/ui/formatted.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/formatted.cell.tsx"
     },
     {
-      "path": "registry/ui/text.cell.tsx",
+      "path": "registry/ui/data-table/cells/text.cell.tsx",
       "content": "import { FormattedCell } from \"./formatted.cell\";\n\nexport function TextCell({ value }: { value: string }) {\n    return <FormattedCell value={value} align=\"left\" />\n}",
       "type": "registry:ui",
-      "target": "hoogin/ui/text.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/text.cell.tsx"
     },
     {
-      "path": "registry/ui/email.cell.tsx",
+      "path": "registry/ui/data-table/cells/email.cell.tsx",
       "content": "import { FormattedCell } from \"./formatted.cell\";\n\nexport function EmailCell({ value }: { value: string }) {\n    return <FormattedCell value={value} align=\"left\" />\n}\n",
       "type": "registry:ui",
-      "target": "hoogin/ui/email.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/email.cell.tsx"
     },
     {
-      "path": "registry/ui/date.cell.tsx",
+      "path": "registry/ui/data-table/cells/date.cell.tsx",
       "content": "import { FormattedCell } from \"./formatted.cell\";\nimport { dateFormatter } from \"./formatters.utils\";\n\nexport function DateCell({ value }: { value: string }) {\n    return <FormattedCell value={value} align=\"left\" format={(value) => dateFormatter(value)} />\n}   ",
       "type": "registry:ui",
-      "target": "hoogin/ui/date.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/date.cell.tsx"
     },
     {
-      "path": "registry/ui/currency.cell.tsx",
+      "path": "registry/ui/data-table/cells/currency.cell.tsx",
       "content": "import { FormattedCell } from \"./formatted.cell\";\nimport { currencyFormatter } from \"./formatters.utils\";\n\nexport function CurrencyCell({ value }: { value: number }) {\n    return <FormattedCell value={value} align=\"right\" format={(value) => currencyFormatter(value)} />\n}\n",
       "type": "registry:ui",
-      "target": "hoogin/ui/currency.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/currency.cell.tsx"
     },
     {
-      "path": "registry/ui/checkbox.cell.tsx",
+      "path": "registry/ui/data-table/cells/checkbox.cell.tsx",
       "content": "import { FormattedCell } from \"./formatted.cell\";\nimport { checkBoxFormatter } from \"./formatters.utils\";\n\nexport function CheckboxCell({ value }: { value?: boolean }) {\n    return <FormattedCell value={value} align=\"center\" format={(value) => checkBoxFormatter(value)} />\n}\n",
       "type": "registry:ui",
-      "target": "hoogin/ui/checkbox.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/checkbox.cell.tsx"
     },
     {
-      "path": "registry/ui/badge.cell.tsx",
+      "path": "registry/ui/data-table/cells/badge.cell.tsx",
       "content": "import type { VariantProps } from 'class-variance-authority';\nimport { Badge, badgeVariants } from '@/components/ui/badge';\n\ntype BadgeVariant = VariantProps<typeof badgeVariants>['variant'];\n\ntype BadgeCellProps = {\n    value: string;\n    variant?: BadgeVariant;\n    variantByValue?: Record<string, BadgeVariant>;\n};\n\nexport function BadgeCell({ value, variant = 'secondary', variantByValue }: BadgeCellProps) {\n    return <Badge variant={variantByValue?.[value] ?? variant}>{value}</Badge>;\n}\n",
       "type": "registry:ui",
-      "target": "hoogin/ui/badge.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/badge.cell.tsx"
     },
     {
-      "path": "registry/ui/action.cell.tsx",
+      "path": "registry/ui/data-table/cells/action.cell.tsx",
       "content": "import { MoreHorizontalIcon, EyeIcon, PencilIcon, Trash2Icon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\n\ntype ActionCellProps = {\n  onDetail?: () => void\n  onEdit?: () => void\n  onDelete?: () => void\n}\n\nexport function ActionCell({ onDetail, onEdit, onDelete }: ActionCellProps) {\n  return (\n    <DropdownMenu modal={false}>\n      <DropdownMenuTrigger render={<Button variant=\"ghost\" size=\"icon\" />}>\n        <MoreHorizontalIcon />\n        <span className=\"sr-only\">Open menu</span>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\" className=\"w-40\">\n        <DropdownMenuGroup>\n          <DropdownMenuItem className=\"justify-between\" onClick={onDetail}>\n            Detail\n            <EyeIcon className=\"text-muted-foreground\" />\n          </DropdownMenuItem>\n          <DropdownMenuItem className=\"justify-between\" onClick={onEdit}>\n            Edit\n            <PencilIcon className=\"text-muted-foreground\" />\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n        <DropdownMenuSeparator />\n        <DropdownMenuGroup>\n          <DropdownMenuItem\n            variant=\"destructive\"\n            className=\"justify-between\"\n            onClick={onDelete}\n          >\n            Delete\n            <Trash2Icon />\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
       "type": "registry:ui",
-      "target": "hoogin/ui/action.cell.tsx"
+      "target": "hoogin/ui/data-table/cells/action.cell.tsx"
     },
     {
-      "path": "registry/ui/formatters.utils.tsx",
+      "path": "registry/ui/data-table/cells/formatters.utils.tsx",
       "content": "import { Square, SquareCheck } from \"lucide-react\";\n\nexport function checkBoxFormatter(value: boolean | undefined) {\n    return value ? <SquareCheck /> : <Square />;\n}\n\nexport function currencyFormatter(value: number, symbol?: string) {\n    const currencySymbol = symbol ?? import.meta.env.VITE_CURRENCY_SYMBOL ?? \"€\";\n    return `${currencySymbol} ${(value / 100).toFixed(2)}`;\n}\n\nexport function minutesFormatter(value: number) {\n    const hours = Math.floor(value / 60);\n    const minutes = value % 60;\n\n    if (hours === 0) {\n        return `${minutes}m`;\n    }\n    return `${hours}h ${minutes}m`;\n}\n\nexport function nationalNumberFormatter(value: string) {\n    if (!value || value.trim().length == 0) return '';\n\n    const formattedString = value.slice(0, 2) + '.' + value.slice(2, 4) + '.' + value.slice(4, 6) + '-' + value.slice(6, 9) + '.' + value.slice(9);\n    return formattedString;\n}\n\nexport function dateFormatter(value: string) {\n    const format = import.meta.env.VITE_DATE_FORMAT ?? \"YYYY/MM/DD\";\n    return formatDate(new Date(value), format);\n}\n\nfunction formatDate(date: Date, format: string) {\n    const year = String(date.getFullYear());\n    const month = String(date.getMonth() + 1).padStart(2, \"0\");\n    const day = String(date.getDate()).padStart(2, \"0\");\n\n    return format\n        .replace(\"YYYY\", year)\n        .replace(\"MM\", month)\n        .replace(\"DD\", day);\n}",
       "type": "registry:file",
-      "target": "hoogin/ui/formatters.utils.tsx"
+      "target": "hoogin/ui/data-table/cells/formatters.utils.tsx"
     }
   ],
   "type": "registry:ui"

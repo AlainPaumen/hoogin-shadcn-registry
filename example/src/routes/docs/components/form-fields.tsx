@@ -16,18 +16,18 @@ import {
   FormError,
   FormFooter,
   FormHeader,
-} from "@/hoogin/ui/form"
-import { isRequiredField } from "@/hoogin/ui/form.utils"
-import { FormCheckboxField } from "@/hoogin/ui/form-checkbox.field"
-import { FormCurrencyField } from "@/hoogin/ui/form-currency.field"
-import { FormDateField } from "@/hoogin/ui/form-date.field"
-import { FormEmailField } from "@/hoogin/ui/form-email.field"
-import { FormNumberField } from "@/hoogin/ui/form-number.field"
-import { FormPasswordField } from "@/hoogin/ui/form-password.field"
-import { FormSelectField } from "@/hoogin/ui/form-select.field"
-import { FormTextareaField } from "@/hoogin/ui/form-textarea.field"
-import { FormTextField } from "@/hoogin/ui/form-text.field"
-import { FormTimeField } from "@/hoogin/ui/form-time.field"
+} from "@/hoogin/ui/forms/form"
+import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
+import { FormCheckboxField } from "@/hoogin/ui/forms/form-checkbox.field"
+import { FormCurrencyField } from "@/hoogin/ui/forms/form-currency.field"
+import { FormDateField } from "@/hoogin/ui/forms/form-date.field"
+import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
+import { FormNumberField } from "@/hoogin/ui/forms/form-number.field"
+import { FormPasswordField } from "@/hoogin/ui/forms/form-password.field"
+import { FormSelectField } from "@/hoogin/ui/forms/form-select.field"
+import { FormTextareaField } from "@/hoogin/ui/forms/form-textarea.field"
+import { FormTextField } from "@/hoogin/ui/forms/form-text.field"
+import { FormTimeField } from "@/hoogin/ui/forms/form-time.field"
 
 export const Route = createFileRoute("/docs/components/form-fields")({
   component: FormFieldsPage,
@@ -207,17 +207,17 @@ function FormFieldsPreview() {
 
 const usageSource = `// form.tsx
 import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormError, FormFooter, FormHeader } from "@/hoogin/ui/form"
-import { isRequiredField } from "@/hoogin/ui/form.utils"
-import { FormTextField } from "@/hoogin/ui/form-text.field"
-import { FormEmailField } from "@/hoogin/ui/form-email.field"
-import { FormPasswordField } from "@/hoogin/ui/form-password.field"
-import { FormSelectField } from "@/hoogin/ui/form-select.field"
-import { FormDateField } from "@/hoogin/ui/form-date.field"
-import { FormTimeField } from "@/hoogin/ui/form-time.field"
-import { FormTextareaField } from "@/hoogin/ui/form-textarea.field"
-import { FormCheckboxField } from "@/hoogin/ui/form-checkbox.field"
-import { FormCurrencyField } from "@/hoogin/ui/form-currency.field"
+import { Form, FormBody, FormError, FormFooter, FormHeader } from "@/hoogin/ui/forms/form"
+import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
+import { FormTextField } from "@/hoogin/ui/forms/form-text.field"
+import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
+import { FormPasswordField } from "@/hoogin/ui/forms/form-password.field"
+import { FormSelectField } from "@/hoogin/ui/forms/form-select.field"
+import { FormDateField } from "@/hoogin/ui/forms/form-date.field"
+import { FormTimeField } from "@/hoogin/ui/forms/form-time.field"
+import { FormTextareaField } from "@/hoogin/ui/forms/form-textarea.field"
+import { FormCheckboxField } from "@/hoogin/ui/forms/form-checkbox.field"
+import { FormCurrencyField } from "@/hoogin/ui/forms/form-currency.field"
 import { z } from "zod"
 
 const signUpSchema = z.object({

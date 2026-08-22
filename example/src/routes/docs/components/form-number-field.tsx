@@ -7,15 +7,15 @@ import { FieldDemo } from "@/hoogin/docs/field-demo"
 import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
-import { FormNumberField } from "@/hoogin/ui/form-number.field"
+import { FormNumberField } from "@/hoogin/ui/forms/form-number.field"
 
 export const Route = createFileRoute("/docs/components/form-number-field")({
   component: FormNumberFieldPage,
 })
 
 const usageSource = `import { useForm } from "@tanstack/react-form"
-import { Form, FormBody, FormFooter } from "@/hoogin/ui/form"
-import { FormNumberField } from "@/hoogin/ui/form-number.field"
+import { Form, FormBody, FormFooter } from "@/hoogin/ui/forms/form"
+import { FormNumberField } from "@/hoogin/ui/forms/form-number.field"
 
 function Example() {
   const form = useForm({

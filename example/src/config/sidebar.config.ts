@@ -4,7 +4,7 @@ import type {
   SidebarSecondaryItem,
   SidebarUser,
   SidebarUserMenu,
-} from "@/hoogin/ui/sidebar.types"
+} from "@/hoogin/ui/navigation/sidebar.types"
 
 import favicon from "@/assets/favicon.svg"
 
