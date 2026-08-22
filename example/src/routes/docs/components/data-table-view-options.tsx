@@ -1,10 +1,6 @@
 import { useMemo } from "react"
 import { createFileRoute } from "@tanstack/react-router"
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
+import { flexRender, useTable } from "@tanstack/react-table"
 
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { ComponentDoc } from "@/hoogin/docs/doc-page"
@@ -19,8 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import type { DataTableColumnDef } from "@/hoogin/ui/data-table.types"
-import { DataTableViewOptions } from "@/hoogin/ui/data-table-view-options"
+import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
+import { dataTableFeatures } from "@/hoogin/ui/data-table/data-table.types"
+import { DataTableViewOptions } from "@/hoogin/ui/data-table/data-table-view-options"
 
 export const Route = createFileRoute("/docs/components/data-table-view-options")(
   {
@@ -35,12 +32,12 @@ type Person = {
 }
 
 const usageSource = `// The DataTable component includes view options by default:
-import { DataTable } from "@/hoogin/ui/data-table"
+import { DataTable } from "@/hoogin/ui/data-table/data-table"
 
 <DataTable columns={columns} data={data} />
 
 // Use it standalone with any TanStack Table instance:
-import { DataTableViewOptions } from "@/hoogin/ui/data-table-view-options"
+import { DataTableViewOptions } from "@/hoogin/ui/data-table/data-table-view-options"
 
 <DataTableViewOptions table={table} />`
 
@@ -63,10 +60,10 @@ function ViewOptionsPreview() {
     []
   )
 
-  const table = useReactTable({
+  const table = useTable({
+    features: dataTableFeatures,
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
   })
 
   return (
