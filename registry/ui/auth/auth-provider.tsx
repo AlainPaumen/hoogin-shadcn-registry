@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import * as React from "react"
 import { FetchError, initClient } from "trailbase"
 import type { Client, Tokens, User } from "trailbase"
@@ -176,6 +175,7 @@ export function AuthProvider({
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = React.useContext(AuthProviderContext)
 
