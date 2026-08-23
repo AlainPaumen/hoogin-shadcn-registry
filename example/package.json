@@ -9,7 +9,7 @@
     "build": "tsr generate && tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsr generate && tsc --noEmit",
+    "typecheck": "tsr generate && tsc --noEmit -p tsconfig.app.json",
     "preview": "vite preview"
   },
   "dependencies": {

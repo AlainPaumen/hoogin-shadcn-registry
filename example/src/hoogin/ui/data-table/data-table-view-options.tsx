@@ -10,10 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { dataTableFeatures } from '@/hoogin/ui/data-table/data-table.types'
+import type { DataTableFeatures } from '@/hoogin/ui/data-table/data-table-features'
 
 type DataTableViewOptionsProps<TData extends RowData> = {
-  table: ReactTable<typeof dataTableFeatures, TData>
+  table: ReactTable<DataTableFeatures, TData>
 }
 
 export function DataTableViewOptions<TData extends RowData>({

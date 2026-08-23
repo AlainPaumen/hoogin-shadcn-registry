@@ -18,7 +18,7 @@ import {
 } from "@/hoogin/ui/data-table/data-table-faceted-filter"
 import { DataTableViewOptions } from "@/hoogin/ui/data-table/data-table-view-options"
 import type { FilterableColumn } from "@/hoogin/ui/data-table/data-table.types"
-import { dataTableFeatures } from "@/hoogin/ui/data-table/data-table.types"
+import type { DataTableFeatures } from "@/hoogin/ui/data-table/data-table-features"
 
 export type GlobalFilterValue = {
   value: string
@@ -34,7 +34,7 @@ export type FacetedFilter = {
 const ALL_COLUMNS = "__all__"
 
 type DataTableToolbarProps<TData extends RowData> = {
-  table: ReactTable<typeof dataTableFeatures, TData>
+  table: ReactTable<DataTableFeatures, TData>
   filterableColumns?: FilterableColumn[]
   filters?: FacetedFilter[]
   placeholder?: string

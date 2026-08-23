@@ -170,6 +170,11 @@ export const registryItems: RegistryItem[] = [
         "target": "hoogin/ui/data-table/data-table.tsx"
       },
       {
+        "path": "data-table/data-table-features.ts",
+        "type": "registry:file",
+        "target": "hoogin/ui/data-table/data-table-features.ts"
+      },
+      {
         "path": "data-table/data-table-pagination.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/data-table/data-table-pagination.tsx"

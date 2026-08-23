@@ -12,10 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { dataTableFeatures } from "@/hoogin/ui/data-table/data-table.types"
+import type { DataTableFeatures } from "@/hoogin/ui/data-table/data-table-features"
 
 type DataTablePaginationProps<TData extends RowData> = {
-  table: ReactTable<typeof dataTableFeatures, TData>
+  table: ReactTable<DataTableFeatures, TData>
   pageSizeOptions?: number[]
   showSelectedCount?: boolean
 }

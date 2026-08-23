@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
-import { dataTableFeatures } from "@/hoogin/ui/data-table/data-table.types"
+import { dataTableFeatures } from "@/hoogin/ui/data-table/data-table-features"
 import { DataTableViewOptions } from "@/hoogin/ui/data-table/data-table-view-options"
 
 export const Route = createFileRoute("/docs/components/data-table-view-options")(

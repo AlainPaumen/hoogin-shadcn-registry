@@ -21,7 +21,7 @@ import type {
   DataTableColumnDef,
   FilterableColumn,
 } from "@/hoogin/ui/data-table/data-table.types"
-import { dataTableFeatures } from "@/hoogin/ui/data-table/data-table.types"
+import { dataTableFeatures, type DataTableFeatures } from "@/hoogin/ui/data-table/data-table-features"
 import { DataTablePagination } from "@/hoogin/ui/data-table/data-table-pagination"
 import {
   DataTableToolbar,
@@ -203,7 +203,7 @@ function DataTableColumnHeader<TData extends RowData, TValue>({
   header,
   className,
 }: {
-  header: Header<typeof dataTableFeatures, TData, TValue>
+  header: Header<DataTableFeatures, TData, TValue>
   className?: string
 }) {
   if (!header.column.getCanSort()) {

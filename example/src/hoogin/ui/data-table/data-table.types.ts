@@ -1,39 +1,10 @@
-import {
-  columnFacetingFeature,
-  columnFilteringFeature,
-  columnVisibilityFeature,
-  createFacetedRowModel,
-  createFacetedUniqueValues,
-  createFilteredRowModel,
-  createPaginatedRowModel,
-  createSortedRowModel,
-  globalFilteringFeature,
-  rowPaginationFeature,
-  rowSelectionFeature,
-  rowSortingFeature,
-  tableFeatures,
-} from "@tanstack/react-table"
 import type { ColumnDef, RowData } from "@tanstack/react-table"
-
-export const dataTableFeatures = tableFeatures({
-  columnVisibilityFeature,
-  columnFilteringFeature,
-  filteredRowModel: createFilteredRowModel(),
-  globalFilteringFeature,
-  columnFacetingFeature,
-  facetedRowModel: createFacetedRowModel(),
-  facetedUniqueValues: createFacetedUniqueValues(),
-  rowSortingFeature,
-  sortedRowModel: createSortedRowModel(),
-  rowPaginationFeature,
-  paginatedRowModel: createPaginatedRowModel(),
-  rowSelectionFeature,
-})
+import type { DataTableFeatures } from "@/hoogin/ui/data-table/data-table-features"
 
 export type DataTableColumnDef<
   TData extends RowData,
   TValue = unknown,
-> = ColumnDef<typeof dataTableFeatures, TData, TValue>
+> = ColumnDef<DataTableFeatures, TData, TValue>
 
 export type FilterableColumn = {
   caption: string

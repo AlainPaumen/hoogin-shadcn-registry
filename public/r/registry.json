@@ -154,6 +154,11 @@
           "target": "hoogin/ui/data-table/data-table.tsx"
         },
         {
+          "path": "registry/ui/data-table/data-table-features.ts",
+          "type": "registry:file",
+          "target": "hoogin/ui/data-table/data-table-features.ts"
+        },
+        {
           "path": "registry/ui/data-table/data-table-pagination.tsx",
           "type": "registry:ui",
           "target": "hoogin/ui/data-table/data-table-pagination.tsx"
