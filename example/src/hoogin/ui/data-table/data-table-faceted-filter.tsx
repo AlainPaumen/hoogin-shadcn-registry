@@ -46,8 +46,6 @@ function DataTableFacetedFilter({
   const filterValue = column?.getFilterValue()
   const selectedValues = Array.isArray(filterValue) ? new Set(filterValue) : new Set()
 
-  const setFilterValue = column?.setFilterValue
-
   function handleSelect(value: string) {
     const newSet = new Set(selectedValues)
     if (newSet.has(value)) {
@@ -55,11 +53,11 @@ function DataTableFacetedFilter({
     } else {
       newSet.add(value)
     }
-    setFilterValue?.(Array.from(newSet))
+    column?.setFilterValue(Array.from(newSet))
   }
 
   function handleClear() {
-    setFilterValue?.([])
+    column?.setFilterValue([])
   }
 
   const filteredOptions = options.filter((option) =>
