@@ -28,6 +28,35 @@ Promotion rule: when a component inside a block is reused elsewhere, promote it 
 - `skills/`, `workflows/`, `conventions/`, `packages/design/` — reserved for agent skills, agent workflows, coding conventions, and design tokens/packages (skeletons, content pending).
 - `scan.mjs` + `dashboard.html` — OpenCode skill/session scanner and its report (repo-local tooling). `traildepot/` is its data dir — gitignored, never commit.
 
+## Database traceability
+
+Every application table carries four traceability columns (SQLite / TrailBase; column types of the `_by` fields must match `user.id`):
+
+```sql
+_created_at text not null default current_timestamp,
+_updated_at text not null default current_timestamp,
+_created_by          references user(id),
+_updated_by          references user(id),
+```
+
+Rules:
+
+- On INSERT all four are populated: both timestamps share the same `current_timestamp` default (`_created_at = _updated_at` at creation), and the application supplies `_created_by` and `_updated_by` (the inserting user).
+- Each table gets an AFTER UPDATE trigger that owns `_updated_at`. The application never writes `_updated_at` itself; it only supplies `_updated_by` in every UPDATE statement:
+
+```sql
+create trigger {table}_touch
+after update on {table}
+begin
+  update {table}
+    set _updated_at = current_timestamp
+  where id = new.id;
+end;
+```
+
+- The self-update does not recurse: SQLite leaves `recursive_triggers` off by default. If you enable it, guard the WHERE clause with `and _updated_at = old._updated_at`.
+- Enable `pragma foreign_keys = on` so the `_by` foreign keys actually enforce.
+
 ## Development workflow (example ↔ registry)
 
 - The example app is both the development site (HMR) and the documentation site. Docs routes live in `example/src/routes/docs/` and render live components from `example/src/hoogin/`.
@@ -44,7 +73,7 @@ Promotion rule: when a component inside a block is reused elsewhere, promote it 
 Run from the repo root unless noted:
 
 1. `bun run scripts/sync.ts` — keep example ↔ registry in sync before checking anything
-2. `cd example && bun run typecheck` — `tsr generate && tsc --noEmit`; also run `tsc -b` (declaration emit) when touching table types — it catches variance errors `--noEmit` misses
+2. `cd example && bun run typecheck` — `tsr generate && tsc --noEmit -p tsconfig.app.json`; also run `tsc -b` (declaration emit) when touching table types — it catches variance errors `--noEmit` misses
 3. `cd example && bun run lint`
 4. `cd example && bun run build` — full production build
 5. `bunx --bun shadcn@latest build` + `bunx --bun shadcn@latest registry validate ./registry.json`
