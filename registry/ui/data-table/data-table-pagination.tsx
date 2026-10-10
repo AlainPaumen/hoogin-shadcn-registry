@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { m } from "@/paraglide/messages.js"
 import type { DataTableFeatures } from "@/hoogin/ui/data-table/data-table-features"
 
 type DataTablePaginationProps<TData extends RowData> = {
@@ -35,7 +36,7 @@ function DataTablePagination<TData extends RowData>({
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       {showSelectedCount ? (
         <p className="text-sm text-muted-foreground">
-          {selectedCount} of {rowCount} row(s) selected.
+          {m.dataTable_rowsSelected({ selected: selectedCount, total: rowCount })}
         </p>
       ) : (
         <span />
@@ -43,13 +44,13 @@ function DataTablePagination<TData extends RowData>({
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex items-center gap-2">
           <span className="text-sm text-muted-foreground">
-            Rows per page
+            {m.dataTable_rowsPerPage()}
           </span>
           <Select
             value={`${pageSize}`}
             onValueChange={(value) => table.setPageSize(Number(value))}
           >
-            <SelectTrigger className="h-8 w-16" aria-label="Rows per page">
+            <SelectTrigger className="h-8 w-16" aria-label={m.dataTable_rowsPerPage()}>
               <SelectValue placeholder={`${pageSize}`} />
             </SelectTrigger>
             <SelectContent side="top">
@@ -64,7 +65,7 @@ function DataTablePagination<TData extends RowData>({
           </Select>
         </div>
         <p className="text-sm text-muted-foreground">
-          Page {pageIndex + 1} of {pageCount}
+          {m.dataTable_pageOf({ page: pageIndex + 1, total: pageCount })}
         </p>
         <div className="flex items-center gap-1">
           <Button
@@ -73,7 +74,7 @@ function DataTablePagination<TData extends RowData>({
             className="h-8 w-8 p-0"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            aria-label="Previous page"
+            aria-label={m.dataTable_previousPage()}
           >
             <ChevronLeft className="size-4" />
           </Button>
@@ -83,7 +84,7 @@ function DataTablePagination<TData extends RowData>({
             className="h-8 w-8 p-0"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            aria-label="Next page"
+            aria-label={m.dataTable_nextPage()}
           >
             <ChevronRight className="size-4" />
           </Button>

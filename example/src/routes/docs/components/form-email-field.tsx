@@ -8,6 +8,7 @@ import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/form-email-field")({
   component: FormEmailFieldPage,
@@ -36,7 +37,7 @@ function Example() {
 function FormEmailFieldPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FieldDemo defaultValues={{ email: "" }}>
             {(form) => (
@@ -56,7 +57,7 @@ function FormEmailFieldPage() {
       >
         <CodeBlock language="tsx" code={usageSource} />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             ...baseFieldProps,

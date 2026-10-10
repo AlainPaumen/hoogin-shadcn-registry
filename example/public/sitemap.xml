@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://shadcn.hoogin.be/</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/installation</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/introduction</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/app-sidebar</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/auth-provider</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/data-table</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/data-table-cells</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/data-table-view-options</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-checkbox-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-currency-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-date-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-email-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-fields</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-number-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-password-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-select-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-strong-password-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-textarea-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-text-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/form-time-field</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/sidebar</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/spinner</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/theme-provider</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/components/theme-toggle</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/blocks/admin-page</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/blocks/sidebar-layout</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/blocks/signin-page</loc></url>
-  <url><loc>https://shadcn.hoogin.be/docs/blocks/signup-page</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://shadcn.hoogin.be/</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/installation</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/installatie" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/introduction</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/introductie" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/app-sidebar</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/app-sidebar" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/auth-provider</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/auth-provider" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/data-table</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/data-table" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/data-table-cells</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/data-table-cells" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/data-table-view-options</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/data-table-view-options" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-checkbox-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-checkbox-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-currency-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-currency-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-date-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-date-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-email-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-email-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-fields</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-fields" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-number-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-number-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-password-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-password-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-select-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-select-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-strong-password-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-strong-password-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-textarea-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-textarea-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-text-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-text-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/form-time-field</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/form-time-field" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/sidebar</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/sidebar" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/spinner</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/spinner" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/theme-provider</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/theme-provider" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/components/theme-toggle</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/componenten/theme-toggle" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/admin-page</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/blocks/admin-page" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/sidebar-layout</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/blocks/sidebar-layout" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/signin-page</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/blocks/signin-page" /></url>
+  <url><loc>https://shadcn.hoogin.be/docs/blocks/signup-page</loc><xhtml:link rel="alternate" hreflang="nl" href="https://shadcn.hoogin.be/nl/documentatie/blocks/signup-page" /></url>
 </urlset>

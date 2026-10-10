@@ -4,6 +4,7 @@ import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import { CheckIcon, CopyIcon } from "lucide-react"
 
 export function CodeBlock({
@@ -34,7 +35,7 @@ export function CodeBlock({
           size="icon-sm"
           className="size-6"
           onClick={copy}
-          aria-label="Copy code"
+          aria-label={m.docs_copyCode()}
         >
           {copied ? (
             <CheckIcon className="size-3.5" />

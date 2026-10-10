@@ -6,6 +6,7 @@ import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { Spinner } from "@/hoogin/ui/spinner"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/spinner")({
   component: SpinnerPage,
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/docs/components/spinner")({
 function SpinnerPage() {
   return (
     <ComponentDoc name="spinner">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <div className="flex items-center gap-3">
             <Spinner />
@@ -23,7 +24,7 @@ function SpinnerPage() {
           </div>
         </Preview>
       </DocSection>
-      <DocSection title="Usage">
+      <DocSection title={m.docs_usage()}>
         <CodeBlock
           language="tsx"
           code={`import { Spinner } from "@/hoogin/ui/spinner"
@@ -38,7 +39,7 @@ export function LoadingButton() {
 }`}
         />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

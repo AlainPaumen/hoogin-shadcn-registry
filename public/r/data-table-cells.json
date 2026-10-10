@@ -9,7 +9,8 @@
   "registryDependencies": [
     "badge",
     "button",
-    "dropdown-menu"
+    "dropdown-menu",
+    "@hoogin/i18n"
   ],
   "files": [
     {
@@ -56,15 +57,27 @@
     },
     {
       "path": "registry/ui/data-table/cells/action.cell.tsx",
-      "content": "import { MoreHorizontalIcon, EyeIcon, PencilIcon, Trash2Icon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\n\ntype ActionCellProps = {\n  onDetail?: () => void\n  onEdit?: () => void\n  onDelete?: () => void\n}\n\nexport function ActionCell({ onDetail, onEdit, onDelete }: ActionCellProps) {\n  return (\n    <DropdownMenu modal={false}>\n      <DropdownMenuTrigger render={<Button variant=\"ghost\" size=\"icon\" />}>\n        <MoreHorizontalIcon />\n        <span className=\"sr-only\">Open menu</span>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\" className=\"w-40\">\n        <DropdownMenuGroup>\n          <DropdownMenuItem className=\"justify-between\" onClick={onDetail}>\n            Detail\n            <EyeIcon className=\"text-muted-foreground\" />\n          </DropdownMenuItem>\n          <DropdownMenuItem className=\"justify-between\" onClick={onEdit}>\n            Edit\n            <PencilIcon className=\"text-muted-foreground\" />\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n        <DropdownMenuSeparator />\n        <DropdownMenuGroup>\n          <DropdownMenuItem\n            variant=\"destructive\"\n            className=\"justify-between\"\n            onClick={onDelete}\n          >\n            Delete\n            <Trash2Icon />\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
+      "content": "import { MoreHorizontalIcon, EyeIcon, PencilIcon, Trash2Icon } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\nimport { m } from \"@/paraglide/messages.js\"\n\ntype ActionCellProps = {\n  onDetail?: () => void\n  onEdit?: () => void\n  onDelete?: () => void\n}\n\nexport function ActionCell({ onDetail, onEdit, onDelete }: ActionCellProps) {\n  return (\n    <DropdownMenu modal={false}>\n      <DropdownMenuTrigger render={<Button variant=\"ghost\" size=\"icon\" />}>\n        <MoreHorizontalIcon />\n        <span className=\"sr-only\">{m.actionCell_openMenu()}</span>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\" className=\"w-40\">\n        <DropdownMenuGroup>\n          <DropdownMenuItem className=\"justify-between\" onClick={onDetail}>\n            {m.actionCell_detail()}\n            <EyeIcon className=\"text-muted-foreground\" />\n          </DropdownMenuItem>\n          <DropdownMenuItem className=\"justify-between\" onClick={onEdit}>\n            {m.actionCell_edit()}\n            <PencilIcon className=\"text-muted-foreground\" />\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n        <DropdownMenuSeparator />\n        <DropdownMenuGroup>\n          <DropdownMenuItem\n            variant=\"destructive\"\n            className=\"justify-between\"\n            onClick={onDelete}\n          >\n            {m.actionCell_delete()}\n            <Trash2Icon />\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
       "type": "registry:ui",
       "target": "hoogin/ui/data-table/cells/action.cell.tsx"
     },
     {
       "path": "registry/ui/data-table/cells/formatters.utils.tsx",
-      "content": "import { Square, SquareCheck } from \"lucide-react\";\n\nexport function checkBoxFormatter(value: boolean | undefined) {\n    return value ? <SquareCheck /> : <Square />;\n}\n\nexport function currencyFormatter(value: number, symbol?: string) {\n    const currencySymbol = symbol ?? import.meta.env.VITE_CURRENCY_SYMBOL ?? \"€\";\n    return `${currencySymbol} ${(value / 100).toFixed(2)}`;\n}\n\nexport function minutesFormatter(value: number) {\n    const hours = Math.floor(value / 60);\n    const minutes = value % 60;\n\n    if (hours === 0) {\n        return `${minutes}m`;\n    }\n    return `${hours}h ${minutes}m`;\n}\n\nexport function nationalNumberFormatter(value: string) {\n    if (!value || value.trim().length == 0) return '';\n\n    const formattedString = value.slice(0, 2) + '.' + value.slice(2, 4) + '.' + value.slice(4, 6) + '-' + value.slice(6, 9) + '.' + value.slice(9);\n    return formattedString;\n}\n\nexport function dateFormatter(value: string) {\n    const format = import.meta.env.VITE_DATE_FORMAT ?? \"YYYY/MM/DD\";\n    return formatDate(new Date(value), format);\n}\n\nfunction formatDate(date: Date, format: string) {\n    const year = String(date.getFullYear());\n    const month = String(date.getMonth() + 1).padStart(2, \"0\");\n    const day = String(date.getDate()).padStart(2, \"0\");\n\n    return format\n        .replace(\"YYYY\", year)\n        .replace(\"MM\", month)\n        .replace(\"DD\", day);\n}",
+      "content": "import { Square, SquareCheck } from \"lucide-react\";\n\nimport { formatCurrency, formatDate } from \"@/lib/i18n/format\";\n\nexport function checkBoxFormatter(value: boolean | undefined) {\n    return value ? <SquareCheck /> : <Square />;\n}\n\nexport function currencyFormatter(value: number, currency = \"EUR\") {\n    return formatCurrency(value / 100, currency);\n}\n\nexport function minutesFormatter(value: number) {\n    const hours = Math.floor(value / 60);\n    const minutes = value % 60;\n\n    if (hours === 0) {\n        return `${minutes}m`;\n    }\n    return `${hours}h ${minutes}m`;\n}\n\nexport function nationalNumberFormatter(value: string) {\n    if (!value || value.trim().length == 0) return '';\n\n    const formattedString = value.slice(0, 2) + '.' + value.slice(2, 4) + '.' + value.slice(4, 6) + '-' + value.slice(6, 9) + '.' + value.slice(9);\n    return formattedString;\n}\n\nexport function dateFormatter(value: string) {\n    return formatDate(new Date(value));\n}\n",
       "type": "registry:file",
       "target": "hoogin/ui/data-table/cells/formatters.utils.tsx"
+    },
+    {
+      "path": "registry/ui/messages/data-table-cells/en.json",
+      "content": "{\n  \"$schema\": \"https://inlang.com/schema/inlang-message-format\",\n  \"actionCell_openMenu\": \"Open menu\",\n  \"actionCell_detail\": \"Detail\",\n  \"actionCell_edit\": \"Edit\",\n  \"actionCell_delete\": \"Delete\"\n}",
+      "type": "registry:file",
+      "target": "messages/registry/data-table-cells/en.json"
+    },
+    {
+      "path": "registry/ui/messages/data-table-cells/nl.json",
+      "content": "{\n  \"$schema\": \"https://inlang.com/schema/inlang-message-format\",\n  \"actionCell_openMenu\": \"Menu openen\",\n  \"actionCell_detail\": \"Details\",\n  \"actionCell_edit\": \"Bewerken\",\n  \"actionCell_delete\": \"Verwijderen\"\n}",
+      "type": "registry:file",
+      "target": "messages/registry/data-table-cells/nl.json"
     }
   ],
   "type": "registry:ui"

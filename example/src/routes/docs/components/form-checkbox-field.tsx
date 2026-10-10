@@ -8,6 +8,7 @@ import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { FormCheckboxField } from "@/hoogin/ui/forms/form-checkbox.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/form-checkbox-field")({
   component: FormCheckboxFieldPage,
@@ -41,7 +42,7 @@ function Example() {
 function FormCheckboxFieldPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FieldDemo defaultValues={{ agree: false }}>
             {(form) => (

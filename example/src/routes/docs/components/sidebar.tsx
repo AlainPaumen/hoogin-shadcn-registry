@@ -15,6 +15,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "@/hoogin/ui/navigation/sidebar"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/sidebar")({
   component: SidebarPage,
@@ -55,7 +56,7 @@ export function SidebarDemo() {
 function SidebarPage() {
   return (
     <ComponentDoc name="sidebar">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview className="p-0">
           <SidebarProvider
             storageKey="hoogin-preview-sidebar"
@@ -83,7 +84,7 @@ function SidebarPage() {
           </SidebarProvider>
         </Preview>
       </DocSection>
-      <DocSection title="Usage">
+      <DocSection title={m.docs_usage()}>
         <CodeBlock language="tsx" code={DEMO_CODE} />
       </DocSection>
       <DocSection title="SidebarProvider props">

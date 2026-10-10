@@ -1,4 +1,5 @@
 import { sidebarData } from "@/config/sidebar.config"
+import { deLocalizeUrl } from "@/paraglide/runtime.js"
 import type { SidebarNavSubItem } from "@/hoogin/ui/navigation/sidebar.types"
 
 export type Crumb = {
@@ -30,7 +31,12 @@ function collectCrumbs(
 
 export function getBreadcrumbs(fullPath: string): Crumb[] {
   const groups = sidebarData.navMain
-  const path = fullPath.replace(/\/$/, "")
+  // sidebar URLs are de-localized; the matched path is localized.
+  // deLocalizeUrl needs an absolute URL, and fullPath is "" before matching.
+  const path = deLocalizeUrl(new URL(fullPath || "/", location.origin)).pathname.replace(
+    /(.+)\/$/,
+    "$1"
+  )
 
   for (const group of groups) {
     if (group.url === path) {

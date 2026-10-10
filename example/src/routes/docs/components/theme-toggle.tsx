@@ -6,6 +6,7 @@ import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { ThemeToggle } from "@/hoogin/ui/theme/theme-toggle"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/theme-toggle")({
   component: ThemeTogglePage,
@@ -14,12 +15,12 @@ export const Route = createFileRoute("/docs/components/theme-toggle")({
 function ThemeTogglePage() {
   return (
     <ComponentDoc name="theme-toggle">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <ThemeToggle />
         </Preview>
       </DocSection>
-      <DocSection title="Usage">
+      <DocSection title={m.docs_usage()}>
         <CodeBlock
           language="tsx"
           code={`import { ThemeToggle } from "@/hoogin/ui/theme/theme-toggle"

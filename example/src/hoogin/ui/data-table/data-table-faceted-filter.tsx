@@ -17,6 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
+import { m } from "@/paraglide/messages.js"
 
 export type FacetedOption = {
   label: string
@@ -83,7 +84,7 @@ function DataTableFacetedFilter({
                 variant="secondary"
                 className="hidden rounded-sm px-1 font-normal sm:inline-flex"
               >
-                {selectedValues.size} selected
+                {m.dataTableFacetedFilter_selected({ count: selectedValues.size })}
               </Badge>
             ) : (
               <div className="hidden space-x-1 sm:flex">
@@ -112,7 +113,7 @@ function DataTableFacetedFilter({
           />
           <CommandList>
             {filteredOptions.length === 0 && (
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>{m.dataTableFacetedFilter_noResults()}</CommandEmpty>
             )}
             <CommandGroup>
               {filteredOptions.map((option) => (
@@ -149,7 +150,7 @@ function DataTableFacetedFilter({
                     onSelect={handleClear}
                     className="justify-center text-center"
                   >
-                    Clear Filter
+                    {m.dataTableFacetedFilter_clear()}
                   </CommandItem>
                 </CommandGroup>
               </>

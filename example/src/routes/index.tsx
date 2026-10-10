@@ -4,6 +4,8 @@ import favicon from "@/assets/favicon.svg"
 import { Button } from "@/components/ui/button"
 import { registryItems } from "@/config/registry"
 import { CodeBlock } from "@/hoogin/docs/code-block"
+import { m } from "@/paraglide/messages.js"
+import { localizeHref } from "@/paraglide/runtime.js"
 
 export const Route = createFileRoute("/")({
   component: HomeComponent,
@@ -21,24 +23,32 @@ function HomeComponent() {
       <div className="flex flex-col items-center gap-4">
         <img src={favicon} alt="@hoogin" className="size-14" />
         <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight">
-          @hoogin — shadcn registry
+          {m.home_title()}
         </h1>
         <p className="max-w-xl text-muted-foreground">
-          A collection of shadcn components and blocks maintained by Hoogin.
-          Collapsible sidebars, theme switching, and full application layouts —
-          install them with one command.
+          {m.home_tagline()}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Button
-            render={<Link to="/docs/introduction" aria-label="Get started" />}
+            render={
+              <Link
+                to="/docs/introduction"
+                aria-label={m.home_getStarted()}
+              />
+            }
           >
-            Get started
+            {m.home_getStarted()}
           </Button>
           <Button
             variant="outline"
-            render={<Link to="/docs/components" aria-label="Browse components" />}
+            render={
+              <Link
+                to="/docs/components"
+                aria-label={m.home_browseComponents()}
+              />
+            }
           >
-            Browse components
+            {m.home_browseComponents()}
           </Button>
         </div>
       </div>
@@ -57,7 +67,7 @@ function HomeComponent() {
           .map((item) => (
             <a
               key={item.name}
-              href={`/docs/components/${item.name}`}
+              href={localizeHref(`/docs/components/${item.name}`)}
               className="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
             >
               <span className="font-medium">{item.title}</span>
@@ -69,14 +79,16 @@ function HomeComponent() {
       </div>
 
       <div className="w-full space-y-3 text-left">
-        <h2 className="text-sm font-medium text-muted-foreground">Blocks</h2>
+        <h2 className="text-sm font-medium text-muted-foreground">
+          {m.nav_blocks()}
+        </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {registryItems
             .filter((item) => item.type === "registry:block")
             .map((item) => (
               <a
                 key={item.name}
-                href={`/docs/blocks/${item.name}`}
+                href={localizeHref(`/docs/blocks/${item.name}`)}
                 className="group rounded-lg border p-4 transition-colors hover:bg-muted/50"
               >
                 <span className="font-medium">{item.title}</span>

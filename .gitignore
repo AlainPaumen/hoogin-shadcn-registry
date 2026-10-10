@@ -5,3 +5,5 @@ dist/
 .codegraph/
 .tanstack/
 traildepot/
+example/messages/.generated/
+example/src/paraglide/

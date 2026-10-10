@@ -1,0 +1,30 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "dataTable_selectAllRows": "Select all rows",
+  "dataTable_selectRow": "Select row",
+  "dataTable_noResults": "No results.",
+  "dataTable_filterPlaceholder": "Filter...",
+  "dataTable_searchColumns": "Search columns",
+  "dataTable_allColumns": "All columns",
+  "dataTable_searchInColumns": "Search in columns",
+  "dataTable_filter": "Filter",
+  "dataTable_resetFilters": "Reset filters",
+  "dataTable_rowsPerPage": "Rows per page",
+  "dataTable_pageOf": "Page {page} of {total}",
+  "dataTable_previousPage": "Previous page",
+  "dataTable_nextPage": "Next page",
+  "dataTable_rowsSelected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local countPlural = selected: plural"
+      ],
+      "selectors": ["countPlural"],
+      "match": {
+        "countPlural=one": "{selected} of {total} row selected.",
+        "countPlural=other": "{selected} of {total} rows selected."
+      }
+    }
+  ]
+}

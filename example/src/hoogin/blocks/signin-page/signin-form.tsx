@@ -5,14 +5,15 @@ import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import { Form, FormBody, FormError } from "@/hoogin/ui/forms/form"
 import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
 import { FormPasswordField } from "@/hoogin/ui/forms/form-password.field"
 import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
 
 const signinSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(1, "Required"),
+  email: z.string().email(m.signinForm_invalidEmail()),
+  password: z.string().min(1, m.signinForm_required()),
 })
 
 export type SigninValues = z.infer<typeof signinSchema>
@@ -42,7 +43,7 @@ export function SigninForm({ error, onSubmit, className }: SigninFormProps) {
         <FormEmailField
           form={form}
           name="email"
-          label="Email"
+          label={m.signinForm_email()}
           placeholder="jane@acme.com"
           required={isRequiredField(signinSchema.shape.email)}
           validators={{ onChange: signinSchema.shape.email }}
@@ -50,7 +51,7 @@ export function SigninForm({ error, onSubmit, className }: SigninFormProps) {
         <FormPasswordField
           form={form}
           name="password"
-          label="Password"
+          label={m.signinForm_password()}
           required={isRequiredField(signinSchema.shape.password)}
           autoComplete="current-password"
           validators={{ onChange: signinSchema.shape.password }}
@@ -58,7 +59,7 @@ export function SigninForm({ error, onSubmit, className }: SigninFormProps) {
       </FormBody>
       <FormError form={form} error={error} />
       <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Signing In..." : "Sign In"}
+        {isSubmitting ? m.signinForm_signingIn() : m.signinForm_signIn()}
       </Button>
     </Form>
   )

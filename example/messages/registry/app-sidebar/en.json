@@ -1,0 +1,10 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "navMain_label": "Platform",
+  "navMain_toggle": "Toggle",
+  "navProjects_label": "Projects",
+  "navProjects_more": "More",
+  "navProjects_view": "View Project",
+  "navProjects_share": "Share Project",
+  "navProjects_delete": "Delete Project"
+}

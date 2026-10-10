@@ -1,0 +1,14 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "signinPage_title": "Welcome back",
+  "signinPage_subtitle": "Enter your credentials to sign in.",
+  "signinPage_noAccount": "Don't have an account?",
+  "signinPage_signUp": "Sign Up",
+  "signinPage_forgotPassword": "Forgot your password?",
+  "signinForm_email": "Email",
+  "signinForm_password": "Password",
+  "signinForm_invalidEmail": "Invalid email address",
+  "signinForm_required": "Required",
+  "signinForm_signIn": "Sign In",
+  "signinForm_signingIn": "Signing In..."
+}

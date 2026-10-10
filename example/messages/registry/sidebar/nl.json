@@ -1,0 +1,6 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "sidebar_mobileTitle": "Zijbalk",
+  "sidebar_mobileDescription": "Toont de mobiele zijbalk.",
+  "sidebar_toggle": "Zijbalk in- of uitschakelen"
+}

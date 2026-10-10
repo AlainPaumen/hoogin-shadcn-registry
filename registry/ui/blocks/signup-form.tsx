@@ -5,6 +5,7 @@ import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import { Form, FormBody, FormError } from "@/hoogin/ui/forms/form"
 import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
 import { FormPasswordField } from "@/hoogin/ui/forms/form-password.field"
@@ -13,11 +14,11 @@ import { FormTextField } from "@/hoogin/ui/forms/form-text.field"
 import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
 
 const signupSchema = z.object({
-  firstName: z.string().min(1, "Required"),
-  lastName: z.string().min(1, "Required"),
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(1, "Required"),
-  confirmPassword: z.string().min(1, "Required"),
+  firstName: z.string().min(1, m.signupForm_required()),
+  lastName: z.string().min(1, m.signupForm_required()),
+  email: z.string().email(m.signupForm_invalidEmail()),
+  password: z.string().min(1, m.signupForm_required()),
+  confirmPassword: z.string().min(1, m.signupForm_required()),
 })
 
 export type SignupValues = z.infer<typeof signupSchema>
@@ -51,16 +52,16 @@ export function SignupForm({ error, onSubmit, className }: SignupFormProps) {
           <FormTextField
             form={form}
             name="firstName"
-            label="First Name"
-            placeholder="Jane"
+            label={m.signupForm_firstName()}
+            placeholder={m.signupForm_firstNamePlaceholder()}
             required={isRequiredField(signupSchema.shape.firstName)}
             validators={{ onChange: signupSchema.shape.firstName }}
           />
           <FormTextField
             form={form}
             name="lastName"
-            label="Last Name"
-            placeholder="Doe"
+            label={m.signupForm_lastName()}
+            placeholder={m.signupForm_lastNamePlaceholder()}
             required={isRequiredField(signupSchema.shape.lastName)}
             validators={{ onChange: signupSchema.shape.lastName }}
           />
@@ -68,7 +69,7 @@ export function SignupForm({ error, onSubmit, className }: SignupFormProps) {
         <FormEmailField
           form={form}
           name="email"
-          label="Email"
+          label={m.signupForm_email()}
           placeholder="jane@acme.com"
           required={isRequiredField(signupSchema.shape.email)}
           validators={{ onChange: signupSchema.shape.email }}
@@ -76,27 +77,27 @@ export function SignupForm({ error, onSubmit, className }: SignupFormProps) {
         <FormStrongPasswordField
           form={form}
           name="password"
-          label="Strong Password"
+          label={m.signupForm_strongPassword()}
           required={isRequiredField(signupSchema.shape.password)}
           validators={{ onChange: signupSchema.shape.password }}
         />
         <FormPasswordField
           form={form}
           name="confirmPassword"
-          label="Confirm Password"
+          label={m.signupForm_confirmPassword()}
           required={isRequiredField(signupSchema.shape.confirmPassword)}
           autoComplete="new-password"
           validators={{
             onChange: ({ value }) =>
               value && value !== form.state.values.password
-                ? "Passwords do not match"
+                ? m.signupForm_passwordsDoNotMatch()
                 : undefined,
           }}
         />
       </FormBody>
       <FormError form={form} error={error} />
       <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Creating Account..." : "Create Account"}
+        {isSubmitting ? m.signupForm_creatingAccount() : m.signupForm_createAccount()}
       </Button>
     </Form>
   )

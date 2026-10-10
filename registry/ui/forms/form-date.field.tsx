@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { format } from "date-fns"
+import { enUS, nl } from "date-fns/locale"
 import { Calendar as CalendarIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -12,11 +13,16 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
+import { getLocale } from "@/paraglide/runtime.js"
 import {
   FormField,
   type FormFieldProps,
   type KeysOfType,
 } from "@/hoogin/ui/forms/form.field"
+
+// ponytail: one line per locale — extract a map when a third locale lands.
+const dayPickerLocale = getLocale() === "nl" ? nl : enUS
 
 function parseDateValue(value: string): Date | undefined {
   const [year, month, day] = value.split("-").map(Number)
@@ -36,7 +42,7 @@ export function FormDateField<
   validators,
   disabled,
   dateFormat = "dd/MM/yyyy",
-  placeholder = "Select a date",
+  placeholder = m.formDate_placeholder(),
   showMonthYearDropdowns = false,
   className,
 }: Omit<FormFieldProps<TFormData, TName>, "children"> & {
@@ -87,13 +93,14 @@ export function FormDateField<
               <CalendarIcon data-icon="inline-start" />
               {value
                 ? selected
-                  ? format(selected, dateFormat)
+                  ? format(selected, dateFormat, { locale: dayPickerLocale })
                   : value
                 : placeholder}
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
+                locale={dayPickerLocale}
                 captionLayout={showMonthYearDropdowns ? "dropdown" : "label"}
                 selected={selected}
                 onSelect={(date) => {

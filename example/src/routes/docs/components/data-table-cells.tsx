@@ -12,6 +12,7 @@ import { CurrencyCell } from "@/hoogin/ui/data-table/cells/currency.cell"
 import { DateCell } from "@/hoogin/ui/data-table/cells/date.cell"
 import { EmailCell } from "@/hoogin/ui/data-table/cells/email.cell"
 import { TextCell } from "@/hoogin/ui/data-table/cells/text.cell"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/data-table-cells")({
   component: DataTableCellsPage,
@@ -73,7 +74,7 @@ export const columns: DataTableColumnDef<Payment>[] = [
 function DataTableCellsPage() {
   return (
     <ComponentDoc name="data-table-cells">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <div className="flex flex-col gap-4">
             <TextCell value="jane.doe" />
@@ -116,7 +117,7 @@ function DataTableCellsPage() {
           <code className="font-mono">DD</code> tokens.
         </p>
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

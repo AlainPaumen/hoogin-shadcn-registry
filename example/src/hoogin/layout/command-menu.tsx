@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/sheet"
 import { router } from "@/router"
 import { sidebarData } from "@/config/sidebar.config"
+import { m } from "@/paraglide/messages.js"
 import type { SidebarNavSubItem } from "@/hoogin/ui/navigation/sidebar.types"
 
 type CommandEntry = {
@@ -55,7 +56,7 @@ function CommandDialog({
         className="inset-x-0 top-24! mx-auto max-w-xl gap-0 overflow-hidden rounded-lg p-0"
       >
         <SheetHeader className="sr-only">
-          <SheetTitle>Search</SheetTitle>
+          <SheetTitle>{m.search_title()}</SheetTitle>
         </SheetHeader>
         <Command className="rounded-lg border">{children}</Command>
       </SheetContent>
@@ -84,10 +85,10 @@ export function CommandMenu() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search docs..." />
+      <CommandInput placeholder={m.search_placeholder()} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Navigation">
+        <CommandEmpty>{m.search_noResults()}</CommandEmpty>
+        <CommandGroup heading={m.search_navigation()}>
           {items.map((item) => (
             <CommandItem
               key={item.url}

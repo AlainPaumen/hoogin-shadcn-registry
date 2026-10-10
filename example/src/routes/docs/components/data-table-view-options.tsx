@@ -18,6 +18,7 @@ import {
 import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
 import { dataTableFeatures } from "@/hoogin/ui/data-table/data-table-features"
 import { DataTableViewOptions } from "@/hoogin/ui/data-table/data-table-view-options"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/data-table-view-options")(
   {
@@ -109,7 +110,7 @@ function ViewOptionsPreview() {
 function DataTableViewOptionsPage() {
   return (
     <ComponentDoc name="data-table-view-options">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <ViewOptionsPreview />
         </Preview>
@@ -120,7 +121,7 @@ function DataTableViewOptionsPage() {
       >
         <CodeBlock language="tsx" code={usageSource} />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

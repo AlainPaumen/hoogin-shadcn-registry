@@ -12,6 +12,7 @@ import { DateCell } from "@/hoogin/ui/data-table/cells/date.cell"
 import { EmailCell } from "@/hoogin/ui/data-table/cells/email.cell"
 import { TextCell } from "@/hoogin/ui/data-table/cells/text.cell"
 import { BadgeCell } from "@/hoogin/ui/data-table/cells/badge.cell"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/data-table")({
   component: DataTablePage,
@@ -226,7 +227,7 @@ export function App() {
 function DataTablePage() {
   return (
     <ComponentDoc name="data-table">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <DataTable
             columns={columns}
@@ -322,7 +323,7 @@ function DataTablePage() {
           reference between renders to avoid churn.
         </p>
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

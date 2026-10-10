@@ -4,10 +4,14 @@ import { createRoot } from "react-dom/client"
 import { RouterProvider } from "@tanstack/react-router"
 
 import "./index.css"
+import { getLocale, getTextDirection } from "@/paraglide/runtime"
 import { ErrorBoundary } from "@/hoogin/layout/error-boundary"
 import { CommandMenu } from "@/hoogin/layout/command-menu"
 import { ThemeProvider } from "@/hoogin/ui/theme/theme-provider"
 import { router } from "./router"
+
+document.documentElement.lang = getLocale()
+document.documentElement.dir = getTextDirection()
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

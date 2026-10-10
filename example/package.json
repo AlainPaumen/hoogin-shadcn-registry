@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "vite",
     "gen": "tsr generate",
-    "build": "tsr generate && tsc -b && vite build",
+    "i18n": "bun src/i18n/merge-messages.ts && paraglide-js compile --project ./project.inlang --outdir ./src/paraglide --emit-ts-declarations",
+    "build": "bun run i18n && tsr generate && tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsr generate && tsc --noEmit -p tsconfig.app.json",
+    "typecheck": "bun run i18n && tsr generate && tsc --noEmit -p tsconfig.app.json",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10",
+    "@inlang/paraglide-js": "^2.25.4",
     "@tanstack/react-router-devtools": "^1.167.0",
     "@tanstack/router-cli": "^1.167.21",
     "@tanstack/router-plugin": "^1.168.23",

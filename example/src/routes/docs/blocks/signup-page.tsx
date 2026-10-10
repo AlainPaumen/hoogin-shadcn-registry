@@ -9,6 +9,7 @@ import { PropsTable } from "@/hoogin/docs/props-table"
 import { SignupPage } from "@/hoogin/blocks/signup-page/signup-page"
 
 import favicon from "@/assets/favicon.svg"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/blocks/signup-page")({
   component: SignupPagePage,
@@ -47,7 +48,7 @@ export function SignupRoute() {
 function SignupPagePage() {
   return (
     <ComponentDoc name="signup-page">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <SignupPagePreview />
         </Preview>
@@ -68,7 +69,7 @@ function SignupPagePage() {
           with the logo prop.
         </p>
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

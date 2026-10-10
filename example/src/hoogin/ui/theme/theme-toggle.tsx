@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { MoonIcon, SunIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { m } from "@/paraglide/messages.js"
 import { useTheme } from "@/hoogin/ui/theme/theme-provider"
 
 export function ThemeToggle() {
@@ -36,7 +37,9 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={
+        isDark ? m.themeToggle_switchToLight() : m.themeToggle_switchToDark()
+      }
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       {isDark ? <SunIcon /> : <MoonIcon />}

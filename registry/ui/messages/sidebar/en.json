@@ -1,0 +1,6 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "sidebar_mobileTitle": "Sidebar",
+  "sidebar_mobileDescription": "Displays the mobile sidebar.",
+  "sidebar_toggle": "Toggle Sidebar"
+}

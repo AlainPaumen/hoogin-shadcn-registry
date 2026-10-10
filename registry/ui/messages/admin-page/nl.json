@@ -1,0 +1,15 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "adminPage_actions": "Acties",
+  "adminPage_new": "Nieuw {entity}",
+  "adminPage_edit": "{entity} bewerken",
+  "adminPage_details": "Details van {entity}",
+  "adminPage_deleteTitle": "{entity} verwijderen?",
+  "adminPage_irreversibleWarning": "Deze actie kan niet ongedaan worden gemaakt.",
+  "adminPage_deleteDescription": "Weet je zeker dat je deze {entity} wilt verwijderen?",
+  "adminPage_cancel": "Annuleren",
+  "adminPage_delete": "Verwijderen",
+  "adminPage_deleting": "Bezig met verwijderen...",
+  "adminPage_invalidValues": "Ongeldige waarden.",
+  "adminPage_error": "Er is een fout opgetreden."
+}

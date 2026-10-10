@@ -28,12 +28,19 @@ import { FormSelectField } from "@/hoogin/ui/forms/form-select.field"
 import { FormTextareaField } from "@/hoogin/ui/forms/form-textarea.field"
 import { FormTextField } from "@/hoogin/ui/forms/form-text.field"
 import { FormTimeField } from "@/hoogin/ui/forms/form-time.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/form-fields")({
   component: FormFieldsPage,
 })
 
 const roles = ["user", "admin", "editor"] as const
+
+const roleLabels = {
+  user: m.role_user(),
+  admin: m.role_admin(),
+  editor: m.role_editor(),
+}
 
 const signUpSchema = z.object({
   fullName: z.string().min(3, "Full name must be at least 3 characters"),
@@ -118,10 +125,10 @@ function SignUpForm({
         <FormSelectField
           form={form}
           name="role"
-          label="Role"
+          label={m.role_label()}
           required={isRequiredField(signUpSchema.shape.role)}
           validators={{ onChange: signUpSchema.shape.role }}
-          options={roles.map((role) => ({ value: role, label: role }))}
+          options={roles.map((role) => ({ value: role, label: roleLabels[role] }))}
         />
         <FormDateField
           form={form}
@@ -322,7 +329,7 @@ export function SignUpForm({
 function FormFieldsPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FormFieldsPreview />
         </Preview>
@@ -374,7 +381,7 @@ function FormFieldsPage() {
           {"{ ... }"}.
         </p>
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

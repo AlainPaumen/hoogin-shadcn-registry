@@ -22,6 +22,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import {
   FormField,
   type FormFieldProps,
@@ -34,10 +35,10 @@ type StrongPasswordRule = {
 }
 
 const STRONG_PASSWORD_RULES: StrongPasswordRule[] = [
-  { test: (value) => value.length >= 8, message: "8+ characters" },
-  { test: (value) => /\d/.test(value), message: "a number" },
-  { test: (value) => /[A-Z]/.test(value), message: "an uppercase letter" },
-  { test: (value) => /[!@#$%^&*()§{}]/.test(value), message: "a special character" },
+  { test: (value) => value.length >= 8, message: m.form_ruleCharacters() },
+  { test: (value) => /\d/.test(value), message: m.form_ruleNumber() },
+  { test: (value) => /[A-Z]/.test(value), message: m.form_ruleUppercase() },
+  { test: (value) => /[!@#$%^&*()§{}]/.test(value), message: m.form_ruleSpecial() },
 ]
 
 function strongPasswordScore(value: string): number {
@@ -53,12 +54,12 @@ function mergeStrongPasswordValidator<
     | FieldValidateOrFn<TFormData, TName, DeepValue<TFormData, TName>>
 ): FieldValidateFn<TFormData, TName, DeepValue<TFormData, TName>> {
   return ({ value, fieldApi }) => {
-    if (value === "") return "Required"
+    if (value === "") return m.form_required()
     const unmet = STRONG_PASSWORD_RULES.filter(
       (rule) => !rule.test(String(value))
     )
     if (unmet.length > 0) {
-      return `Password must contain ${unmet.map((rule) => rule.message).join(", ")}`
+      return m.form_mustContain({ rules: unmet.map((rule) => rule.message).join(", ") })
     }
     if (typeof consumer === "function") {
       return consumer({ value, fieldApi })
@@ -81,10 +82,10 @@ function strengthColor(score: number): string {
 }
 
 function strengthText(score: number): string {
-  if (score <= 1) return "Weak"
-  if (score <= 2) return "Moderate"
-  if (score <= 3) return "Strong"
-  return "Very Strong"
+  if (score <= 1) return m.form_strengthWeak()
+  if (score <= 2) return m.form_strengthModerate()
+  if (score <= 3) return m.form_strengthStrong()
+  return m.form_strengthVeryStrong()
 }
 
 function strengthTextColor(score: number): string {
@@ -161,7 +162,7 @@ export function FormStrongPasswordField<
               <InputGroupButton
                 tabIndex={-1}
                 size="icon-xs"
-                aria-label={show ? "Hide password" : "Show password"}
+                aria-label={show ? m.form_hidePassword() : m.form_showPassword()}
                 onClick={() => setShow((visible) => !visible)}
               >
                 {show ? <EyeOffIcon /> : <EyeIcon />}

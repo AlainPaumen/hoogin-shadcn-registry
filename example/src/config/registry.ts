@@ -43,13 +43,24 @@ export const registryItems: RegistryItem[] = [
       "sheet",
       "skeleton",
       "tooltip",
-      "use-mobile"
+      "use-mobile",
+      "@hoogin/i18n"
     ],
     "files": [
       {
         "path": "navigation/sidebar.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/navigation/sidebar.tsx"
+      },
+      {
+        "path": "messages/sidebar/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/sidebar/en.json"
+      },
+      {
+        "path": "messages/sidebar/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/sidebar/nl.json"
       }
     ]
   },
@@ -62,7 +73,8 @@ export const registryItems: RegistryItem[] = [
       "@hoogin/sidebar",
       "avatar",
       "collapsible",
-      "dropdown-menu"
+      "dropdown-menu",
+      "@hoogin/i18n"
     ],
     "files": [
       {
@@ -94,6 +106,16 @@ export const registryItems: RegistryItem[] = [
         "path": "navigation/sidebar.types.ts",
         "type": "registry:file",
         "target": "hoogin/ui/navigation/sidebar.types.ts"
+      },
+      {
+        "path": "messages/app-sidebar/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/app-sidebar/en.json"
+      },
+      {
+        "path": "messages/app-sidebar/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/app-sidebar/nl.json"
       }
     ]
   },
@@ -133,13 +155,41 @@ export const registryItems: RegistryItem[] = [
     "description": "A dark/light mode toggle button that uses the theme provider.",
     "registryDependencies": [
       "button",
-      "@hoogin/theme-provider"
+      "@hoogin/theme-provider",
+      "@hoogin/i18n"
     ],
     "files": [
       {
         "path": "theme/theme-toggle.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/theme/theme-toggle.tsx"
+      },
+      {
+        "path": "messages/theme-toggle/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/theme-toggle/en.json"
+      },
+      {
+        "path": "messages/theme-toggle/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/theme-toggle/nl.json"
+      }
+    ]
+  },
+  {
+    "name": "locale-toggle",
+    "type": "registry:ui",
+    "title": "Locale Toggle",
+    "description": "A language switcher dropdown for Paraglide JS locales.",
+    "registryDependencies": [
+      "button",
+      "dropdown-menu"
+    ],
+    "files": [
+      {
+        "path": "locale-toggle.tsx",
+        "type": "registry:ui",
+        "target": "hoogin/ui/locale-toggle.tsx"
       }
     ]
   },
@@ -161,7 +211,8 @@ export const registryItems: RegistryItem[] = [
       "select",
       "checkbox",
       "dropdown-menu",
-      "input"
+      "input",
+      "@hoogin/i18n"
     ],
     "files": [
       {
@@ -188,6 +239,16 @@ export const registryItems: RegistryItem[] = [
         "path": "data-table/data-table-toolbar.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/data-table/data-table-toolbar.tsx"
+      },
+      {
+        "path": "messages/data-table/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table/en.json"
+      },
+      {
+        "path": "messages/data-table/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table/nl.json"
       }
     ]
   },
@@ -202,7 +263,8 @@ export const registryItems: RegistryItem[] = [
     "registryDependencies": [
       "badge",
       "button",
-      "dropdown-menu"
+      "dropdown-menu",
+      "@hoogin/i18n"
     ],
     "files": [
       {
@@ -249,6 +311,16 @@ export const registryItems: RegistryItem[] = [
         "path": "data-table/cells/formatters.utils.tsx",
         "type": "registry:file",
         "target": "hoogin/ui/data-table/cells/formatters.utils.tsx"
+      },
+      {
+        "path": "messages/data-table-cells/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table-cells/en.json"
+      },
+      {
+        "path": "messages/data-table-cells/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table-cells/nl.json"
       }
     ]
   },
@@ -263,13 +335,24 @@ export const registryItems: RegistryItem[] = [
     ],
     "registryDependencies": [
       "button",
-      "dropdown-menu"
+      "dropdown-menu",
+      "@hoogin/i18n"
     ],
     "files": [
       {
         "path": "data-table/data-table-view-options.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/data-table/data-table-view-options.tsx"
+      },
+      {
+        "path": "messages/data-table-view-options/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table-view-options/en.json"
+      },
+      {
+        "path": "messages/data-table-view-options/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table-view-options/nl.json"
       }
     ]
   },
@@ -287,13 +370,24 @@ export const registryItems: RegistryItem[] = [
       "checkbox",
       "command",
       "popover",
-      "separator"
+      "separator",
+      "@hoogin/i18n"
     ],
     "files": [
       {
         "path": "data-table/data-table-faceted-filter.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/data-table/data-table-faceted-filter.tsx"
+      },
+      {
+        "path": "messages/data-table-faceted-filter/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table-faceted-filter/en.json"
+      },
+      {
+        "path": "messages/data-table-faceted-filter/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/data-table-faceted-filter/nl.json"
       }
     ]
   },
@@ -316,7 +410,8 @@ export const registryItems: RegistryItem[] = [
       "textarea",
       "button",
       "calendar",
-      "popover"
+      "popover",
+      "@hoogin/i18n"
     ],
     "files": [
       {
@@ -393,6 +488,16 @@ export const registryItems: RegistryItem[] = [
         "path": "forms/form-strong-password.field.tsx",
         "type": "registry:ui",
         "target": "hoogin/ui/forms/form-strong-password.field.tsx"
+      },
+      {
+        "path": "messages/form-fields/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/form-fields/en.json"
+      },
+      {
+        "path": "messages/form-fields/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/form-fields/nl.json"
       }
     ]
   },
@@ -428,13 +533,24 @@ export const registryItems: RegistryItem[] = [
       "@hoogin/data-table",
       "@hoogin/data-table-cells",
       "sheet",
-      "button"
+      "button",
+      "@hoogin/i18n"
     ],
     "files": [
       {
         "path": "blocks/admin-page.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/admin-page/admin-page.tsx"
+      },
+      {
+        "path": "messages/admin-page/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/admin-page/en.json"
+      },
+      {
+        "path": "messages/admin-page/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/admin-page/nl.json"
       }
     ]
   },
@@ -449,7 +565,8 @@ export const registryItems: RegistryItem[] = [
     "registryDependencies": [
       "@hoogin/form-fields",
       "card",
-      "button"
+      "button",
+      "@hoogin/i18n"
     ],
     "files": [
       {
@@ -461,6 +578,16 @@ export const registryItems: RegistryItem[] = [
         "path": "blocks/signup-form.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/signup-page/signup-form.tsx"
+      },
+      {
+        "path": "messages/signup-page/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/signup-page/en.json"
+      },
+      {
+        "path": "messages/signup-page/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/signup-page/nl.json"
       }
     ]
   },
@@ -475,7 +602,8 @@ export const registryItems: RegistryItem[] = [
     "registryDependencies": [
       "@hoogin/form-fields",
       "card",
-      "button"
+      "button",
+      "@hoogin/i18n"
     ],
     "files": [
       {
@@ -487,6 +615,42 @@ export const registryItems: RegistryItem[] = [
         "path": "blocks/signin-form.tsx",
         "type": "registry:block",
         "target": "hoogin/blocks/signin-page/signin-form.tsx"
+      },
+      {
+        "path": "messages/signin-page/en.json",
+        "type": "registry:file",
+        "target": "messages/registry/signin-page/en.json"
+      },
+      {
+        "path": "messages/signin-page/nl.json",
+        "type": "registry:file",
+        "target": "messages/registry/signin-page/nl.json"
+      }
+    ]
+  },
+  {
+    "name": "i18n",
+    "type": "registry:lib",
+    "title": "I18n",
+    "description": "Paraglide JS setup for translated registry components: a Vite plugin that merges per-component message bundles into the Paraglide project, a standalone merge script, and locale-aware date, number, and currency formatters.",
+    "dependencies": [
+      "@inlang/paraglide-js"
+    ],
+    "files": [
+      {
+        "path": "i18n/vite-plugin-registry-messages.ts",
+        "type": "registry:lib",
+        "target": "i18n/vite-plugin-registry-messages.ts"
+      },
+      {
+        "path": "i18n/merge-messages.ts",
+        "type": "registry:lib",
+        "target": "i18n/merge-messages.ts"
+      },
+      {
+        "path": "i18n/format.ts",
+        "type": "registry:lib",
+        "target": "lib/i18n/format.ts"
       }
     ]
   }

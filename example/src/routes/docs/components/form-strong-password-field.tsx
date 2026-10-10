@@ -8,6 +8,7 @@ import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { FormStrongPasswordField } from "@/hoogin/ui/forms/form-strong-password.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute(
   "/docs/components/form-strong-password-field"
@@ -43,7 +44,7 @@ function Example() {
 function FormStrongPasswordFieldPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FieldDemo defaultValues={{ password: "" }}>
             {(form) => (

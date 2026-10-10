@@ -1,0 +1,7 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "actionCell_openMenu": "Menu openen",
+  "actionCell_detail": "Details",
+  "actionCell_edit": "Bewerken",
+  "actionCell_delete": "Verwijderen"
+}

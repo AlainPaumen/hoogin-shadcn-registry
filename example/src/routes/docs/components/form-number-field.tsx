@@ -8,6 +8,7 @@ import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { FormNumberField } from "@/hoogin/ui/forms/form-number.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/form-number-field")({
   component: FormNumberFieldPage,
@@ -36,7 +37,7 @@ function Example() {
 function FormNumberFieldPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FieldDemo defaultValues={{ favoriteNumber: 0 }}>
             {(form) => (
@@ -55,7 +56,7 @@ function FormNumberFieldPage() {
       >
         <CodeBlock language="tsx" code={usageSource} />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             ...baseFieldProps,

@@ -5,6 +5,7 @@ import { useSelector } from "@tanstack/react-form"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import {
   fieldErrorMessage,
   isFieldLevelErrorMap,
@@ -87,9 +88,9 @@ export function FormBody({
 export function FormFooter({
   form,
   onCancel,
-  cancelLabel = "Cancel",
-  submitLabel = "Save",
-  resetLabel = "Reset",
+  cancelLabel = m.form_cancel(),
+  submitLabel = m.form_save(),
+  resetLabel = m.form_reset(),
   showReset = true,
   readOnly = false,
   showActions = true,
@@ -113,7 +114,7 @@ export function FormFooter({
   return (
     <footer className={cn("mt-2 flex justify-end gap-2", className)}>
       <Button type="button" variant="outline" onClick={onCancel}>
-        {readOnly ? "Close" : cancelLabel}
+        {readOnly ? m.form_close() : cancelLabel}
       </Button>
       {!readOnly ? (
         <>
@@ -123,7 +124,7 @@ export function FormFooter({
             </Button>
           ) : null}
           <Button type="submit" disabled={!canSubmit || isSubmitting}>
-            {isSubmitting ? "Saving..." : submitLabel}
+            {isSubmitting ? m.form_saving() : submitLabel}
           </Button>
         </>
       ) : null}

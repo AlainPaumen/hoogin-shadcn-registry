@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import {
   SigninForm,
   type SigninFormProps,
@@ -27,8 +28,8 @@ export type SigninPageProps = Omit<SigninFormProps, "onSubmit"> & {
 
 export function SigninPage({
   logo,
-  title = "Welcome back",
-  subtitle = "Enter your credentials to sign in.",
+  title = m.signinPage_title(),
+  subtitle = m.signinPage_subtitle(),
   signUpHref = "/auth/signup",
   forgotPasswordHref = "/auth/forgot-password",
   error,
@@ -51,12 +52,12 @@ export function SigninPage({
         <CardContent className="flex flex-col gap-4">
           <SigninForm error={error} onSubmit={onSubmit} />
           <p className="text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
+            {m.signinPage_noAccount()}{" "}
             <a
               href={signUpHref}
               className="font-medium text-primary underline-offset-4 hover:underline"
             >
-              Sign Up
+              {m.signinPage_signUp()}
             </a>
           </p>
         </CardContent>
@@ -66,7 +67,7 @@ export function SigninPage({
           href={forgotPasswordHref}
           className="text-foreground underline-offset-4 hover:underline"
         >
-          Forgot your password?
+          {m.signinPage_forgotPassword()}
         </a>
       </p>
     </main>

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "dataTableViewOptions_view": "View",
+  "dataTableViewOptions_toggleColumns": "Toggle columns"
+}

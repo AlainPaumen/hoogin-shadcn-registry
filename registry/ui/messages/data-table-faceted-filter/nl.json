@@ -1,0 +1,15 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "dataTableFacetedFilter_noResults": "Geen resultaten gevonden.",
+  "dataTableFacetedFilter_clear": "Filter wissen",
+  "dataTableFacetedFilter_selected": [
+    {
+      "declarations": ["input count", "local countPlural = count: plural"],
+      "selectors": ["countPlural"],
+      "match": {
+        "countPlural=one": "{count} geselecteerd",
+        "countPlural=other": "{count} geselecteerd"
+      }
+    }
+  ]
+}

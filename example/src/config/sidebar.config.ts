@@ -7,6 +7,7 @@ import type {
 } from "@/hoogin/ui/navigation/sidebar.types"
 
 import favicon from "@/assets/favicon.svg"
+import { m } from "@/paraglide/messages.js"
 
 import {
   BlocksIcon,
@@ -26,31 +27,31 @@ export const sidebarData = {
     description: `shadcn registry v${__LIB_VERSION__}`,
     logo: favicon,
   },
-  navMainLabel: "Docs",
+  navMainLabel: m.nav_docs(),
   navMain: [
     {
-      title: "Getting Started",
+      title: m.nav_gettingStarted(),
       url: "/docs/introduction",
       icon: CompassIcon,
       isActive: true,
       items: [
         {
-          title: "Introduction",
+          title: m.nav_introduction(),
           url: "/docs/introduction",
         },
         {
-          title: "Installation",
+          title: m.nav_installation(),
           url: "/docs/installation",
         },
       ],
     },
     {
-      title: "Components",
+      title: m.nav_components(),
       url: "/docs/components",
       icon: BlocksIcon,
       items: [
         {
-          title: "Overview",
+          title: m.nav_overview(),
           url: "/docs/components",
         },
         {
@@ -74,7 +75,7 @@ export const sidebarData = {
           url: "/docs/components/form-fields",
           items: [
             {
-              title: "Overview",
+              title: m.nav_overview(),
               url: "/docs/components/form-fields",
             },
             {
@@ -143,10 +144,14 @@ export const sidebarData = {
           title: "Theme Toggle",
           url: "/docs/components/theme-toggle",
         },
+        {
+          title: "Locale Toggle",
+          url: "/docs/components/locale-toggle",
+        },
       ],
     },
     {
-      title: "Blocks",
+      title: m.nav_blocks(),
       url: "/docs/blocks/sidebar-layout",
       icon: LayoutTemplateIcon,
       items: [
@@ -171,12 +176,12 @@ export const sidebarData = {
   ],
   navSecondary: [
     {
-      title: "Star on GitHub",
+      title: m.nav_starGithub(),
       url: "https://github.com/AlainPaumen/hoogin-shadcn-registry",
       icon: StarIcon,
     },
     {
-      title: "Open an issue",
+      title: m.nav_openIssue(),
       url: "https://github.com/AlainPaumen/hoogin-shadcn-registry/issues",
       icon: MessageSquareIcon,
     },
@@ -189,13 +194,13 @@ export const sidebarData = {
   userMenu: [
     {
       items: [
-        { label: "Account", url: "/", icon: UserIcon },
-        { label: "Billing", url: "/", icon: CreditCardIcon },
-        { label: "Notifications", url: "/", icon: BellIcon },
+        { label: m.nav_account(), url: "/", icon: UserIcon },
+        { label: m.nav_billing(), url: "/", icon: CreditCardIcon },
+        { label: m.nav_notifications(), url: "/", icon: BellIcon },
       ],
     },
     {
-      items: [{ label: "Log out", url: "/", icon: LogOutIcon }],
+      items: [{ label: m.nav_logOut(), url: "/", icon: LogOutIcon }],
     },
   ],
 } satisfies {

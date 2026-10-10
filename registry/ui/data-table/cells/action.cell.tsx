@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { m } from "@/paraglide/messages.js"
 
 type ActionCellProps = {
   onDetail?: () => void
@@ -20,16 +21,16 @@ export function ActionCell({ onDetail, onEdit, onDelete }: ActionCellProps) {
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger render={<Button variant="ghost" size="icon" />}>
         <MoreHorizontalIcon />
-        <span className="sr-only">Open menu</span>
+        <span className="sr-only">{m.actionCell_openMenu()}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40">
         <DropdownMenuGroup>
           <DropdownMenuItem className="justify-between" onClick={onDetail}>
-            Detail
+            {m.actionCell_detail()}
             <EyeIcon className="text-muted-foreground" />
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-between" onClick={onEdit}>
-            Edit
+            {m.actionCell_edit()}
             <PencilIcon className="text-muted-foreground" />
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -40,7 +41,7 @@ export function ActionCell({ onDetail, onEdit, onDelete }: ActionCellProps) {
             className="justify-between"
             onClick={onDelete}
           >
-            Delete
+            {m.actionCell_delete()}
             <Trash2Icon />
           </DropdownMenuItem>
         </DropdownMenuGroup>

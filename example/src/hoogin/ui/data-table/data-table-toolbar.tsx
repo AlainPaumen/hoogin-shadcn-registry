@@ -4,6 +4,7 @@ import type { ReactTable, RowData } from "@tanstack/react-table"
 import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { m } from "@/paraglide/messages.js"
 import {
   Select,
   SelectContent,
@@ -44,7 +45,7 @@ function DataTableToolbar<TData extends RowData>({
   table,
   filterableColumns,
   filters,
-  placeholder = "Filter...",
+  placeholder = m.dataTable_filterPlaceholder(),
 }: DataTableToolbarProps<TData>) {
   const filter = (table.state.globalFilter as GlobalFilterValue | undefined) ?? {
     value: "",
@@ -68,7 +69,11 @@ function DataTableToolbar<TData extends RowData>({
   const filterValue = filter.columns.length > 0 ? filter.columns[0] : ALL_COLUMNS
 
   const items = [
-    { value: ALL_COLUMNS, label: "Search columns", optionLabel: "All columns" },
+    {
+      value: ALL_COLUMNS,
+      label: m.dataTable_searchColumns(),
+      optionLabel: m.dataTable_allColumns(),
+    },
     ...columns.map((column) => ({
       value: column.id,
       label: column.caption,
@@ -123,7 +128,7 @@ function DataTableToolbar<TData extends RowData>({
         <div className="flex flex-wrap items-center gap-2">
           {columns.length > 1 ? (
             <Select value={filterValue} onValueChange={handleColumnChange} items={items}>
-              <SelectTrigger className="h-8 w-36" aria-label="Search in columns">
+              <SelectTrigger className="h-8 w-36" aria-label={m.dataTable_searchInColumns()}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent align="start">
@@ -141,7 +146,7 @@ function DataTableToolbar<TData extends RowData>({
             value={filter.value}
             onChange={(event) => updateFilter({ ...filter, value: event.target.value })}
             placeholder={placeholder}
-            aria-label="Filter"
+            aria-label={m.dataTable_filter()}
             className="h-8 w-48 sm:w-64"
           />
           {showReset ? (
@@ -150,7 +155,7 @@ function DataTableToolbar<TData extends RowData>({
               size="sm"
               className="h-8 w-8 p-0"
               onClick={resetFilters}
-              aria-label="Reset filters"
+              aria-label={m.dataTable_resetFilters()}
             >
               <X className="size-4" />
             </Button>

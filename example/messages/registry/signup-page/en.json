@@ -1,0 +1,23 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "signupPage_title": "Create an account",
+  "signupPage_subtitle": "Enter your details to get started.",
+  "signupPage_hasAccount": "Already have an account?",
+  "signupPage_signIn": "Sign In",
+  "signupPage_termsIntro": "By clicking continue, you agree to our",
+  "signupPage_terms": "Terms of Service",
+  "signupPage_and": "and",
+  "signupPage_privacy": "Privacy Policy",
+  "signupForm_firstName": "First Name",
+  "signupForm_lastName": "Last Name",
+  "signupForm_firstNamePlaceholder": "Jane",
+  "signupForm_lastNamePlaceholder": "Doe",
+  "signupForm_email": "Email",
+  "signupForm_strongPassword": "Strong Password",
+  "signupForm_confirmPassword": "Confirm Password",
+  "signupForm_passwordsDoNotMatch": "Passwords do not match",
+  "signupForm_createAccount": "Create Account",
+  "signupForm_creatingAccount": "Creating Account...",
+  "signupForm_required": "Required",
+  "signupForm_invalidEmail": "Invalid email address"
+}

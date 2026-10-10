@@ -15,6 +15,7 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import {
   FormField,
   type FormFieldProps,
@@ -84,7 +85,7 @@ export function FormPasswordField<
           <InputGroupButton
             tabIndex={-1}
             size="icon-xs"
-            aria-label={show ? "Hide password" : "Show password"}
+            aria-label={show ? m.form_hidePassword() : m.form_showPassword()}
             onClick={() => setShow((visible) => !visible)}
           >
             {show ? <EyeOffIcon /> : <EyeIcon />}

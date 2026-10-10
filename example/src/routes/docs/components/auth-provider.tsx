@@ -6,6 +6,7 @@ import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { AuthProvider, useAuth } from "@/hoogin/ui/auth/auth-provider"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/auth-provider")({
   component: AuthProviderPage,
@@ -80,7 +81,7 @@ async function handleSignup({ email, password, confirmPassword }) {
 function AuthProviderPage() {
   return (
     <ComponentDoc name="auth-provider">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <AuthProvider>
             <AuthStatusPreview />
@@ -109,7 +110,7 @@ function AuthProviderPage() {
           session across tabs or devices.
         </p>
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "themeToggle_switchToLight": "Switch to light mode",
+  "themeToggle_switchToDark": "Switch to dark mode"
+}

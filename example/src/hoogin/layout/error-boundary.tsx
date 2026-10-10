@@ -1,6 +1,7 @@
 import { Component, type ReactNode } from "react"
 
 import { Button } from "@/components/ui/button"
+import { m } from "@/paraglide/messages.js"
 
 type ErrorBoundaryProps = {
   children: ReactNode
@@ -27,11 +28,11 @@ export class ErrorBoundary extends Component<
 
     return (
       <main className="flex min-h-dvh flex-col items-center justify-center gap-4 p-8 text-center">
-        <h1 className="font-heading text-xl font-medium">Something went wrong</h1>
+        <h1 className="font-heading text-xl font-medium">{m.error_title()}</h1>
         <p className="max-w-md text-sm text-muted-foreground">
           {this.state.error.message}
         </p>
-        <Button onClick={this.reset}>Try again</Button>
+        <Button onClick={this.reset}>{m.error_retry()}</Button>
       </main>
     )
   }

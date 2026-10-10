@@ -8,6 +8,7 @@ import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { AppSidebar } from "@/hoogin/ui/navigation/app-sidebar"
 import { SidebarProvider } from "@/hoogin/ui/navigation/sidebar"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/app-sidebar")({
   component: AppSidebarPage,
@@ -16,11 +17,11 @@ export const Route = createFileRoute("/docs/components/app-sidebar")({
 function AppSidebarPage() {
   return (
     <ComponentDoc name="app-sidebar">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview className="p-0">
           <SidebarProvider
             storageKey="hoogin-preview-app-sidebar"
-            className="h-[480px] min-h-0 w-full overflow-hidden rounded-lg border"
+            className="h-120 min-h-0 w-full overflow-hidden rounded-lg border"
           >
             <AppSidebar
               collapsible="none"
@@ -34,7 +35,7 @@ function AppSidebarPage() {
           </SidebarProvider>
         </Preview>
       </DocSection>
-      <DocSection title="Usage">
+      <DocSection title={m.docs_usage()}>
         <CodeBlock
           language="tsx"
           code={`import { AppSidebar } from "@/hoogin/ui/navigation/app-sidebar"
@@ -51,7 +52,7 @@ import { SidebarProvider } from "@/hoogin/ui/navigation/sidebar"
 </SidebarProvider>`}
         />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

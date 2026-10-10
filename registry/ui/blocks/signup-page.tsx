@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import {
   SignupForm,
   type SignupFormProps,
@@ -28,8 +29,8 @@ export type SignupPageProps = Omit<SignupFormProps, "onSubmit"> & {
 
 export function SignupPage({
   logo,
-  title = "Create an account",
-  subtitle = "Enter your details to get started.",
+  title = m.signupPage_title(),
+  subtitle = m.signupPage_subtitle(),
   signInHref = "/auth/signin",
   termsHref = "/terms",
   privacyHref = "/privacy",
@@ -53,30 +54,30 @@ export function SignupPage({
         <CardContent className="flex flex-col gap-4">
           <SignupForm error={error} onSubmit={onSubmit} />
           <p className="text-center text-sm text-muted-foreground">
-            Already have an account?{" "}
+            {m.signupPage_hasAccount()}{" "}
             <a
               href={signInHref}
               className="font-medium text-primary underline-offset-4 hover:underline"
             >
-              Sign In
+              {m.signupPage_signIn()}
             </a>
           </p>
         </CardContent>
       </Card>
       <p className="max-w-md text-center text-xs text-muted-foreground">
-        By clicking continue, you agree to our{" "}
+        {m.signupPage_termsIntro()}{" "}
         <a
           href={termsHref}
           className="text-foreground underline-offset-4 hover:underline"
         >
-          Terms of Service
+          {m.signupPage_terms()}
         </a>{" "}
-        and{" "}
+        {m.signupPage_and()}{" "}
         <a
           href={privacyHref}
           className="text-foreground underline-offset-4 hover:underline"
         >
-          Privacy Policy
+          {m.signupPage_privacy()}
         </a>
         .
       </p>

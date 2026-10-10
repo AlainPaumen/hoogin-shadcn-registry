@@ -1,0 +1,23 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "signupPage_title": "Maak een account aan",
+  "signupPage_subtitle": "Voer je gegevens in om te beginnen.",
+  "signupPage_hasAccount": "Heb je al een account?",
+  "signupPage_signIn": "Inloggen",
+  "signupPage_termsIntro": "Door op continue te klikken, ga je akkoord met onze",
+  "signupPage_terms": "Servicevoorwaarden",
+  "signupPage_and": "en",
+  "signupPage_privacy": "Privacybeleid",
+  "signupForm_firstName": "Voornaam",
+  "signupForm_lastName": "Achternaam",
+  "signupForm_firstNamePlaceholder": "Jan",
+  "signupForm_lastNamePlaceholder": "Jansen",
+  "signupForm_email": "E-mail",
+  "signupForm_strongPassword": "Sterk wachtwoord",
+  "signupForm_confirmPassword": "Bevestig wachtwoord",
+  "signupForm_passwordsDoNotMatch": "Wachtwoorden komen niet overeen",
+  "signupForm_createAccount": "Account aanmaken",
+  "signupForm_creatingAccount": "Bezig met account aanmaken...",
+  "signupForm_required": "Verplicht",
+  "signupForm_invalidEmail": "Ongeldig e-mailadres"
+}

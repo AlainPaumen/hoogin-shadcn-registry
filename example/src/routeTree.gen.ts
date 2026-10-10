@@ -35,6 +35,7 @@ import { Route as DocsComponentsFormStrongPasswordFieldRouteImport } from './rou
 import { Route as DocsComponentsFormTextFieldRouteImport } from './routes/docs/components/form-text-field'
 import { Route as DocsComponentsFormTextareaFieldRouteImport } from './routes/docs/components/form-textarea-field'
 import { Route as DocsComponentsFormTimeFieldRouteImport } from './routes/docs/components/form-time-field'
+import { Route as DocsComponentsLocaleToggleRouteImport } from './routes/docs/components/locale-toggle'
 import { Route as DocsComponentsSidebarRouteImport } from './routes/docs/components/sidebar'
 import { Route as DocsComponentsSpinnerRouteImport } from './routes/docs/components/spinner'
 import { Route as DocsComponentsThemeProviderRouteImport } from './routes/docs/components/theme-provider'
@@ -186,6 +187,12 @@ const DocsComponentsFormTimeFieldRoute =
     path: '/docs/components/form-time-field',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DocsComponentsLocaleToggleRoute =
+  DocsComponentsLocaleToggleRouteImport.update({
+    id: '/docs/components/locale-toggle',
+    path: '/docs/components/locale-toggle',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DocsComponentsSidebarRoute = DocsComponentsSidebarRouteImport.update({
   id: '/docs/components/sidebar',
   path: '/docs/components/sidebar',
@@ -235,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
   '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
   '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
+  '/docs/components/locale-toggle': typeof DocsComponentsLocaleToggleRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -267,6 +275,7 @@ export interface FileRoutesByTo {
   '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
   '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
   '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
+  '/docs/components/locale-toggle': typeof DocsComponentsLocaleToggleRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -300,6 +309,7 @@ export interface FileRoutesById {
   '/docs/components/form-text-field': typeof DocsComponentsFormTextFieldRoute
   '/docs/components/form-textarea-field': typeof DocsComponentsFormTextareaFieldRoute
   '/docs/components/form-time-field': typeof DocsComponentsFormTimeFieldRoute
+  '/docs/components/locale-toggle': typeof DocsComponentsLocaleToggleRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
@@ -334,6 +344,7 @@ export interface FileRouteTypes {
     | '/docs/components/form-text-field'
     | '/docs/components/form-textarea-field'
     | '/docs/components/form-time-field'
+    | '/docs/components/locale-toggle'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -366,6 +377,7 @@ export interface FileRouteTypes {
     | '/docs/components/form-text-field'
     | '/docs/components/form-textarea-field'
     | '/docs/components/form-time-field'
+    | '/docs/components/locale-toggle'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -398,6 +410,7 @@ export interface FileRouteTypes {
     | '/docs/components/form-text-field'
     | '/docs/components/form-textarea-field'
     | '/docs/components/form-time-field'
+    | '/docs/components/locale-toggle'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
     | '/docs/components/theme-provider'
@@ -431,6 +444,7 @@ export interface RootRouteChildren {
   DocsComponentsFormTextFieldRoute: typeof DocsComponentsFormTextFieldRoute
   DocsComponentsFormTextareaFieldRoute: typeof DocsComponentsFormTextareaFieldRoute
   DocsComponentsFormTimeFieldRoute: typeof DocsComponentsFormTimeFieldRoute
+  DocsComponentsLocaleToggleRoute: typeof DocsComponentsLocaleToggleRoute
   DocsComponentsSidebarRoute: typeof DocsComponentsSidebarRoute
   DocsComponentsSpinnerRoute: typeof DocsComponentsSpinnerRoute
   DocsComponentsThemeProviderRoute: typeof DocsComponentsThemeProviderRoute
@@ -622,6 +636,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsComponentsFormTimeFieldRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/components/locale-toggle': {
+      id: '/docs/components/locale-toggle'
+      path: '/docs/components/locale-toggle'
+      fullPath: '/docs/components/locale-toggle'
+      preLoaderRoute: typeof DocsComponentsLocaleToggleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs/components/sidebar': {
       id: '/docs/components/sidebar'
       path: '/docs/components/sidebar'
@@ -681,6 +702,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsComponentsFormTextFieldRoute: DocsComponentsFormTextFieldRoute,
   DocsComponentsFormTextareaFieldRoute: DocsComponentsFormTextareaFieldRoute,
   DocsComponentsFormTimeFieldRoute: DocsComponentsFormTimeFieldRoute,
+  DocsComponentsLocaleToggleRoute: DocsComponentsLocaleToggleRoute,
   DocsComponentsSidebarRoute: DocsComponentsSidebarRoute,
   DocsComponentsSpinnerRoute: DocsComponentsSpinnerRoute,
   DocsComponentsThemeProviderRoute: DocsComponentsThemeProviderRoute,

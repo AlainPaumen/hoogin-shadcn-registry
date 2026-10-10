@@ -20,6 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import {
   FormField,
   type FormFieldProps,
@@ -214,7 +215,7 @@ function TimeInput({
               <InputGroupButton
                 size="icon-xs"
                 type="button"
-                aria-label="Pick time"
+                aria-label={m.formTime_pickTime()}
                 className="text-foreground"
               />
             }
@@ -224,13 +225,13 @@ function TimeInput({
           <PopoverContent className="w-auto p-0" align="start">
             <div className="flex gap-1 p-1">
               <TimeColumn
-                label="Hours"
+                label={m.formTime_hours()}
                 values={HOURS}
                 active={matchedValue(mask, 0)}
                 onSelect={(hour) => update(setPart(mask, 0, hour))}
               />
               <TimeColumn
-                label="Minutes"
+                label={m.formTime_minutes()}
                 values={MINUTES}
                 active={matchedValue(mask, 2)}
                 onSelect={(minute) => {

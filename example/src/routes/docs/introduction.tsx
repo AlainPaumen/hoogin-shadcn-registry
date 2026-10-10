@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { DocSection } from "@/hoogin/docs/doc-section"
 import { DocsHeader, DocsShell } from "@/hoogin/docs/doc-page"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/introduction")({
   component: IntroductionPage,
@@ -12,56 +13,36 @@ function IntroductionPage() {
   return (
     <DocsShell>
       <DocsHeader
-        title="Introduction"
-        description="What is @hoogin and how the registry is organized."
+        title={m.nav_introduction()}
+        description={m.docsIntroduction_description()}
       />
-      <DocSection title="What is @hoogin?">
+      <DocSection title={m.docsIntroduction_whatIs()}>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          @hoogin is a shadcn component registry maintained by Hoogin. Every
-          item is plain source code installed into your project by the shadcn
-          CLI — no wrapper libraries, no runtime, just components you own and
-          can edit.
+          {m.docsIntroduction_whatIsBody()}
         </p>
       </DocSection>
       <DocSection
-        title="Components and blocks"
-        description="Items come in two flavors."
+        title={m.docsIntroduction_componentsAndBlocks()}
+        description={m.docsIntroduction_componentsAndBlocksDescription()}
       >
         <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
           <li>
             <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
               registry:ui
             </code>{" "}
-            — standalone reusable components such as the collapsible{" "}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-              sidebar
-            </code>{" "}
-            and{" "}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-              theme-provider
-            </code>
-            .
+            {m.docsIntroduction_componentsBody()}
           </li>
           <li>
             <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
               registry:block
             </code>{" "}
-            — cohesive layouts that compose several components, like{" "}
-            <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-              sidebar-layout
-            </code>
-            .
+            {m.docsIntroduction_blocksBody()}
           </li>
         </ul>
       </DocSection>
-      <DocSection title="Development workflow">
+      <DocSection title={m.docsIntroduction_development()}>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          This very site is the development environment. Every component page
-          renders the live component — edit the source in{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-            example/src/hoogin/
-          </code>{" "}
-          and the preview updates with hot module replacement.
+          {m.docsIntroduction_developmentBody()}
         </p>
         <CodeBlock
           language="bash"

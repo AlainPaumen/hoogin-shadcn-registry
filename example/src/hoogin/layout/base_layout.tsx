@@ -12,6 +12,7 @@ import {
 import { sidebarData } from "@/config/sidebar.config"
 import { SidebarLayout } from "@/hoogin/blocks/sidebar-layout/sidebar-layout"
 import { getBreadcrumbs } from "@/hoogin/docs/breadcrumbs"
+import { LocaleToggle } from "@/hoogin/ui/locale-toggle"
 
 export function BaseLayout() {
   const matches = useMatches()
@@ -24,6 +25,7 @@ export function BaseLayout() {
       dataMain={sidebarData.navMain}
       dataSecondary={sidebarData.navSecondary}
       dataMainLabel={sidebarData.navMainLabel}
+      headerActions={<LocaleToggle />}
       breadcrumb={
         crumbs.length ? (
           <Breadcrumb>

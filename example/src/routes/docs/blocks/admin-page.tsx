@@ -28,12 +28,20 @@ import { DateCell } from "@/hoogin/ui/data-table/cells/date.cell"
 import { EmailCell } from "@/hoogin/ui/data-table/cells/email.cell"
 import { currencyFormatter } from "@/hoogin/ui/data-table/cells/formatters.utils"
 import { TextCell } from "@/hoogin/ui/data-table/cells/text.cell"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/blocks/admin-page")({
   component: AdminPagePage,
 })
 
 const statuses = ["active", "pending", "refunded", "cancelled"] as const
+
+const statusLabels = {
+  active: m.status_active(),
+  pending: m.status_pending(),
+  refunded: m.status_refunded(),
+  cancelled: m.status_cancelled(),
+}
 
 type PaymentStatus = (typeof statuses)[number]
 
@@ -165,13 +173,13 @@ function PaymentForm({
         <FormSelectField
           form={form}
           name="status"
-          label="Status"
+          label={m.status_label()}
           required={isRequiredField(paymentSchema.shape.status)}
           validators={{ onChange: paymentSchema.shape.status }}
           disabled={readOnly}
           options={statuses.map((status) => ({
             value: status,
-            label: status,
+            label: statusLabels[status],
           }))}
         />
         <FormDateField
@@ -402,7 +410,7 @@ export function AdminPage() {
 function AdminPagePage() {
   return (
     <ComponentDoc name="admin-page">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <AdminPagePreview />
         </Preview>
@@ -423,7 +431,7 @@ function AdminPagePage() {
           forwarded through AdminPage.
         </p>
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             {

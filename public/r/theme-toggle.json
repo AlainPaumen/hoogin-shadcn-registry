@@ -5,14 +5,27 @@
   "description": "A dark/light mode toggle button that uses the theme provider.",
   "registryDependencies": [
     "button",
-    "@hoogin/theme-provider"
+    "@hoogin/theme-provider",
+    "@hoogin/i18n"
   ],
   "files": [
     {
       "path": "registry/ui/theme/theme-toggle.tsx",
-      "content": "import { useEffect } from \"react\"\nimport { MoonIcon, SunIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { useTheme } from \"@/hoogin/ui/theme/theme-provider\"\n\nexport function ThemeToggle() {\n  const { theme, setTheme } = useTheme()\n\n  const isDark =\n    theme === \"dark\" ||\n    (theme === \"system\" &&\n      window.matchMedia(\"(prefers-color-scheme: dark)\").matches)\n\n  useEffect(() => {\n    const onKeyDown = (event: KeyboardEvent) => {\n      if (\n        event.target instanceof HTMLInputElement ||\n        event.target instanceof HTMLTextAreaElement ||\n        event.target instanceof HTMLSelectElement ||\n        (event.target instanceof HTMLElement && event.target.isContentEditable)\n      ) {\n        return\n      }\n\n      if (event.key.toLowerCase() === \"d\") {\n        setTheme(isDark ? \"light\" : \"dark\")\n      }\n    }\n\n    window.addEventListener(\"keydown\", onKeyDown)\n    return () => window.removeEventListener(\"keydown\", onKeyDown)\n  }, [isDark, setTheme])\n\n  return (\n    <Button\n      variant=\"ghost\"\n      size=\"icon\"\n      aria-label={isDark ? \"Switch to light mode\" : \"Switch to dark mode\"}\n      onClick={() => setTheme(isDark ? \"light\" : \"dark\")}\n    >\n      {isDark ? <SunIcon /> : <MoonIcon />}\n    </Button>\n  )\n}\n",
+      "content": "import { useEffect } from \"react\"\nimport { MoonIcon, SunIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { m } from \"@/paraglide/messages.js\"\nimport { useTheme } from \"@/hoogin/ui/theme/theme-provider\"\n\nexport function ThemeToggle() {\n  const { theme, setTheme } = useTheme()\n\n  const isDark =\n    theme === \"dark\" ||\n    (theme === \"system\" &&\n      window.matchMedia(\"(prefers-color-scheme: dark)\").matches)\n\n  useEffect(() => {\n    const onKeyDown = (event: KeyboardEvent) => {\n      if (\n        event.target instanceof HTMLInputElement ||\n        event.target instanceof HTMLTextAreaElement ||\n        event.target instanceof HTMLSelectElement ||\n        (event.target instanceof HTMLElement && event.target.isContentEditable)\n      ) {\n        return\n      }\n\n      if (event.key.toLowerCase() === \"d\") {\n        setTheme(isDark ? \"light\" : \"dark\")\n      }\n    }\n\n    window.addEventListener(\"keydown\", onKeyDown)\n    return () => window.removeEventListener(\"keydown\", onKeyDown)\n  }, [isDark, setTheme])\n\n  return (\n    <Button\n      variant=\"ghost\"\n      size=\"icon\"\n      aria-label={\n        isDark ? m.themeToggle_switchToLight() : m.themeToggle_switchToDark()\n      }\n      onClick={() => setTheme(isDark ? \"light\" : \"dark\")}\n    >\n      {isDark ? <SunIcon /> : <MoonIcon />}\n    </Button>\n  )\n}\n",
       "type": "registry:ui",
       "target": "hoogin/ui/theme/theme-toggle.tsx"
+    },
+    {
+      "path": "registry/ui/messages/theme-toggle/en.json",
+      "content": "{\n  \"$schema\": \"https://inlang.com/schema/inlang-message-format\",\n  \"themeToggle_switchToLight\": \"Switch to light mode\",\n  \"themeToggle_switchToDark\": \"Switch to dark mode\"\n}",
+      "type": "registry:file",
+      "target": "messages/registry/theme-toggle/en.json"
+    },
+    {
+      "path": "registry/ui/messages/theme-toggle/nl.json",
+      "content": "{\n  \"$schema\": \"https://inlang.com/schema/inlang-message-format\",\n  \"themeToggle_switchToLight\": \"Overschakelen naar lichte modus\",\n  \"themeToggle_switchToDark\": \"Overschakelen naar donkere modus\"\n}",
+      "type": "registry:file",
+      "target": "messages/registry/theme-toggle/nl.json"
     }
   ],
   "type": "registry:ui"

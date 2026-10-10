@@ -1,3 +1,5 @@
+import { m } from "@/paraglide/messages.js"
+
 export type PropRow = {
   prop: string
   type: string
@@ -11,10 +13,10 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b bg-muted/50 text-left">
-            <th className="px-4 py-2 font-medium">Prop</th>
-            <th className="px-4 py-2 font-medium">Type</th>
-            <th className="px-4 py-2 font-medium">Default</th>
-            <th className="px-4 py-2 font-medium">Description</th>
+            <th className="px-4 py-2 font-medium">{m.docs_propHeader()}</th>
+            <th className="px-4 py-2 font-medium">{m.docs_typeHeader()}</th>
+            <th className="px-4 py-2 font-medium">{m.docs_defaultHeader()}</th>
+            <th className="px-4 py-2 font-medium">{m.docs_descriptionHeader()}</th>
           </tr>
         </thead>
         <tbody>
@@ -24,7 +26,7 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
                 colSpan={4}
                 className="px-4 py-8 text-center text-muted-foreground"
               >
-                No props documented.
+                {m.docs_noProps()}
               </td>
             </tr>
           ) : (

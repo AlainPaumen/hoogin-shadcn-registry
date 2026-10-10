@@ -5,7 +5,9 @@ import { dirname, join } from "node:path"
 const root = join(import.meta.dir, "..")
 const registryDir = join(root, "registry", "ui")
 const registryJson = join(registryDir, "registry.json")
-const exampleSrc = join(root, "example", "src")
+const exampleDir = join(root, "example")
+const exampleSrc = join(exampleDir, "src")
+const exampleMessages = join(exampleDir, "messages")
 const hooginDir = join(exampleSrc, "hoogin")
 
 const watchMode = process.argv.includes("--watch")
@@ -21,10 +23,17 @@ async function loadFiles(): Promise<RegistryFile[]> {
 
 // example path derives from the install target: hoogin/... → example/src/hoogin/...
 // registry path is the declared payload path relative to registry/ui/.
+// message bundles target the project root (messages/...), everything else lands in src/.
+function examplePathFor(target: string) {
+  return target.startsWith("messages/")
+    ? join(exampleDir, target)
+    : join(exampleSrc, target)
+}
+
 function pairFor(file: RegistryFile) {
   return {
     name: file.path,
-    example: join(exampleSrc, file.target),
+    example: examplePathFor(file.target),
     registry: join(registryDir, file.path),
   }
 }
@@ -70,7 +79,7 @@ async function generateRegistryConfig() {
 
 async function warnUnregistered() {
   const files = await loadFiles()
-  const registered = new Set(files.map((f) => join(exampleSrc, f.target)))
+  const registered = new Set(files.map((f) => examplePathFor(f.target)))
   async function walk(dir: string): Promise<string[]> {
     const out: string[] = []
     for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -105,14 +114,16 @@ async function syncAll() {
 if (watchMode) {
   await syncAll()
   let timer: ReturnType<typeof setTimeout> | undefined
-  // ponytail: debounced full re-sync on any change under the watched tree —
-  // ~50 file copies, cheap; per-file watchers not worth the complexity.
-  const source = reverse ? registryDir : hooginDir
+  // ponytail: debounced full re-sync on any change under the watched trees —
+  // ~60 file copies, cheap; per-file watchers not worth the complexity.
+  const source = reverse ? registryDir : [hooginDir, exampleMessages]
   console.log(`Watching ${source} for changes...`)
-  watch(source, { recursive: true }, () => {
-    clearTimeout(timer)
-    timer = setTimeout(() => syncAll().catch((err) => console.error(err)), 100)
-  })
+  for (const dir of Array.isArray(source) ? source : [source]) {
+    watch(dir, { recursive: true }, () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => syncAll().catch((err) => console.error(err)), 100)
+    })
+  }
 } else {
   await syncAll()
 }

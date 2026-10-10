@@ -8,6 +8,7 @@ import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { FormTextareaField } from "@/hoogin/ui/forms/form-textarea.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/form-textarea-field")({
   component: FormTextareaFieldPage,
@@ -36,7 +37,7 @@ function Example() {
 function FormTextareaFieldPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FieldDemo defaultValues={{ bio: "" }}>
             {(form) => (
@@ -57,7 +58,7 @@ function FormTextareaFieldPage() {
       >
         <CodeBlock language="tsx" code={usageSource} />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             ...baseFieldProps,

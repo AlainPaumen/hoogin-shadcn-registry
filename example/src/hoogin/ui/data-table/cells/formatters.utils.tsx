@@ -1,12 +1,13 @@
 import { Square, SquareCheck } from "lucide-react";
 
+import { formatCurrency, formatDate } from "@/lib/i18n/format";
+
 export function checkBoxFormatter(value: boolean | undefined) {
     return value ? <SquareCheck /> : <Square />;
 }
 
-export function currencyFormatter(value: number, symbol?: string) {
-    const currencySymbol = symbol ?? import.meta.env.VITE_CURRENCY_SYMBOL ?? "€";
-    return `${currencySymbol} ${(value / 100).toFixed(2)}`;
+export function currencyFormatter(value: number, currency = "EUR") {
+    return formatCurrency(value / 100, currency);
 }
 
 export function minutesFormatter(value: number) {
@@ -27,17 +28,5 @@ export function nationalNumberFormatter(value: string) {
 }
 
 export function dateFormatter(value: string) {
-    const format = import.meta.env.VITE_DATE_FORMAT ?? "YYYY/MM/DD";
-    return formatDate(new Date(value), format);
-}
-
-function formatDate(date: Date, format: string) {
-    const year = String(date.getFullYear());
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return format
-        .replace("YYYY", year)
-        .replace("MM", month)
-        .replace("DD", day);
+    return formatDate(new Date(value));
 }

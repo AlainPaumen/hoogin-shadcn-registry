@@ -30,11 +30,13 @@ export function FormSelectField<
   validators,
   disabled,
   placeholder,
+  ariaLabel,
   options,
   className,
 }: Omit<FormFieldProps<TFormData, TName>, "children"> & {
   disabled?: boolean
   placeholder?: string
+  ariaLabel?: string
   options: SelectOption[]
 }) {
   return (
@@ -60,6 +62,7 @@ export function FormSelectField<
           <SelectTrigger
             aria-invalid={field.invalid || undefined}
             aria-labelledby={label ? `${field.name}-label` : undefined}
+            aria-label={label ? undefined : ariaLabel}
             aria-describedby={field.invalid ? `${field.name}-error` : undefined}
             className={cn("w-full", className)}
           >

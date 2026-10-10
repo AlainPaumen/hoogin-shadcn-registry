@@ -17,6 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
+import { m } from "@/paraglide/messages.js"
 import type {
   DataTableColumnDef,
   FilterableColumn,
@@ -79,7 +80,7 @@ function DataTable<TData extends RowData, TValue>({
             !table.getIsAllPageRowsSelected()
           }
           onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all rows"
+          aria-label={m.dataTable_selectAllRows()}
         />
       ),
       cell: ({ row }) => (
@@ -87,7 +88,7 @@ function DataTable<TData extends RowData, TValue>({
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
           disabled={!row.getCanSelect()}
-          aria-label="Select row"
+          aria-label={m.dataTable_selectRow()}
         />
       ),
     }),
@@ -183,7 +184,7 @@ function DataTable<TData extends RowData, TValue>({
                   colSpan={table.getVisibleLeafColumns().length}
                   className="h-24 text-center text-muted-foreground"
                 >
-                  {emptyState ?? "No results."}
+                  {emptyState ?? m.dataTable_noResults()}
                 </TableCell>
               </TableRow>
             )}

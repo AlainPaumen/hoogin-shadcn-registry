@@ -8,6 +8,7 @@ import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { FormDateField } from "@/hoogin/ui/forms/form-date.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/form-date-field")({
   component: FormDateFieldPage,
@@ -42,7 +43,7 @@ function Example() {
 function FormDateFieldPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FieldDemo defaultValues={{ birthDate: "" }}>
             {(form) => (
@@ -63,7 +64,7 @@ function FormDateFieldPage() {
       >
         <CodeBlock language="tsx" code={usageSource} />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             ...baseFieldProps,

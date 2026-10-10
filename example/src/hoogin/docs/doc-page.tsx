@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 
 import type { RegistryItem } from "@/config/registry"
 import { getRegistryItem } from "@/config/registry"
+import { m } from "@/paraglide/messages.js"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { DocSection } from "@/hoogin/docs/doc-section"
 import { InstallCommand } from "@/hoogin/docs/install-command"
@@ -51,20 +52,16 @@ export function DocPage({
       <DocsHeader title={item.title} description={item.description} />
       {children}
       <DocSection
-        title="Installation"
-        description="Add the component to your project with the shadcn CLI."
+        title={m.docs_installation()}
+        description={m.docs_installationDescription()}
       >
         <InstallCommand name={item.name} />
         <p className="text-sm text-muted-foreground">
-          Make sure the @hoogin registry is configured in your{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-            components.json
-          </code>
-          :
+          {m.docs_registrySetup()}
         </p>
         <CodeBlock code={REGISTRY_JSON} language="json" />
       </DocSection>
-      <DocSection title="Registry metadata">
+      <DocSection title={m.docs_registryMetadata()}>
         <div className="flex flex-wrap gap-2">
           <span className="rounded-full border px-2.5 py-0.5 text-xs font-medium">
             {item.type}

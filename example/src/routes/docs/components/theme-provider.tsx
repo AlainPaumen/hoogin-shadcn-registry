@@ -7,6 +7,7 @@ import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { useTheme } from "@/hoogin/ui/theme/theme-provider"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/theme-provider")({
   component: ThemeProviderPage,
@@ -41,12 +42,12 @@ function ThemePreview() {
 function ThemeProviderPage() {
   return (
     <ComponentDoc name="theme-provider">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <ThemePreview />
         </Preview>
       </DocSection>
-      <DocSection title="Usage">
+      <DocSection title={m.docs_usage()}>
         <CodeBlock
           language="tsx"
           code={`import { ThemeProvider, useTheme } from "@/hoogin/ui/theme/theme-provider"

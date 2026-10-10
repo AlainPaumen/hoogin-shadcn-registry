@@ -7,6 +7,7 @@ import { CodeBlock } from "@/hoogin/docs/code-block"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { SidebarLayout } from "@/hoogin/blocks/sidebar-layout/sidebar-layout"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/blocks/sidebar-layout")({
   component: SidebarLayoutPage,
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/docs/blocks/sidebar-layout")({
 function SidebarLayoutPage() {
   return (
     <ComponentDoc name="sidebar-layout">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview className="p-0">
           <SidebarLayout
             collapsible="none"
@@ -32,7 +33,7 @@ function SidebarLayoutPage() {
           </SidebarLayout>
         </Preview>
       </DocSection>
-      <DocSection title="Usage">
+      <DocSection title={m.docs_usage()}>
         <CodeBlock
           language="tsx"
           code={`import { SidebarLayout } from "@/hoogin/blocks/sidebar-layout/sidebar-layout"

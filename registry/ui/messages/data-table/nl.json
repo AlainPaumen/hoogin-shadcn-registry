@@ -1,0 +1,30 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "dataTable_selectAllRows": "Alle rijen selecteren",
+  "dataTable_selectRow": "Rij selecteren",
+  "dataTable_noResults": "Geen resultaten.",
+  "dataTable_filterPlaceholder": "Filteren...",
+  "dataTable_searchColumns": "Kolommen doorzoeken",
+  "dataTable_allColumns": "Alle kolommen",
+  "dataTable_searchInColumns": "Zoeken in kolommen",
+  "dataTable_filter": "Filteren",
+  "dataTable_resetFilters": "Filters wissen",
+  "dataTable_rowsPerPage": "Rijen per pagina",
+  "dataTable_pageOf": "Pagina {page} van {total}",
+  "dataTable_previousPage": "Vorige pagina",
+  "dataTable_nextPage": "Volgende pagina",
+  "dataTable_rowsSelected": [
+    {
+      "declarations": [
+        "input selected",
+        "input total",
+        "local countPlural = selected: plural"
+      ],
+      "selectors": ["countPlural"],
+      "match": {
+        "countPlural=one": "{selected} van {total} rij geselecteerd.",
+        "countPlural=other": "{selected} van {total} rijen geselecteerd."
+      }
+    }
+  ]
+}

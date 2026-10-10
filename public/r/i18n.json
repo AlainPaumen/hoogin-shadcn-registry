@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "i18n",
+  "title": "I18n",
+  "description": "Paraglide JS setup for translated registry components: a Vite plugin that merges per-component message bundles into the Paraglide project, a standalone merge script, and locale-aware date, number, and currency formatters.",
+  "dependencies": [
+    "@inlang/paraglide-js"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/i18n/vite-plugin-registry-messages.ts",
+      "content": "import fs from \"node:fs\"\nimport path from \"node:path\"\nimport type { Plugin } from \"vite\"\n\nexport type Options = {\n  root?: string\n  srcDir?: string\n  outDir?: string\n  settings?: string\n}\n\nexport function mergeRegistryMessages({\n  root = process.cwd(),\n  srcDir = \"messages/registry\",\n  outDir = \"messages/.generated\",\n  settings = \"project.inlang/settings.json\",\n}: Options = {}) {\n  const src = path.resolve(root, srcDir)\n  const out = path.resolve(root, outDir)\n  const { locales = [] } = JSON.parse(\n    fs.readFileSync(path.resolve(root, settings), \"utf8\")\n  )\n\n  const merged: Record<string, Record<string, unknown>> = {}\n  const owner: Record<string, string> = {}\n  for (const l of locales) merged[l] = {}\n\n  if (fs.existsSync(src)) {\n    for (const component of fs.readdirSync(src)) {\n      const dir = path.join(src, component)\n      if (!fs.statSync(dir).isDirectory()) continue\n      for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(\".json\"))) {\n        const locale = path.basename(file, \".json\")\n        const messages = JSON.parse(\n          fs.readFileSync(path.join(dir, file), \"utf8\")\n        ) as Record<string, unknown>\n        delete messages.$schema\n        merged[locale] ??= {}\n        for (const [key, value] of Object.entries(messages)) {\n          if (owner[key] && owner[key] !== component) {\n            throw new Error(\n              `[i18n] Key \"${key}\" defined by both \"${owner[key]}\" and \"${component}\"`\n            )\n          }\n          owner[key] = component\n          merged[locale][key] = value\n        }\n      }\n    }\n  }\n\n  fs.mkdirSync(out, { recursive: true })\n  for (const [locale, messages] of Object.entries(merged)) {\n    const target = path.join(out, `${locale}.json`)\n    const next = JSON.stringify(\n      { $schema: \"https://inlang.com/schema/inlang-message-format\", ...messages },\n      null,\n      2\n    )\n    // Only write on change, so Paraglide doesn't recompile in a loop\n    if (!fs.existsSync(target) || fs.readFileSync(target, \"utf8\") !== next) {\n      fs.writeFileSync(target, next)\n    }\n  }\n}\n\nexport function registryMessages(options: Options = {}): Plugin {\n  let opts = options\n  return {\n    name: \"registry-messages\",\n    // `config` runs before any plugin's buildStart, so files exist before Paraglide compiles\n    config(userConfig) {\n      opts = {\n        root: path.resolve(userConfig.root ?? process.cwd()),\n        ...options,\n      }\n      mergeRegistryMessages(opts)\n    },\n    configureServer(server) {\n      const src = path.resolve(opts.root!, opts.srcDir ?? \"messages/registry\")\n      server.watcher.add(src)\n      const onChange = (f: string) => {\n        if (f.startsWith(src) && f.endsWith(\".json\")) mergeRegistryMessages(opts)\n      }\n      server.watcher.on(\"add\", onChange)\n      server.watcher.on(\"change\", onChange)\n      server.watcher.on(\"unlink\", onChange)\n    },\n  }\n}",
+      "type": "registry:lib",
+      "target": "i18n/vite-plugin-registry-messages.ts"
+    },
+    {
+      "path": "registry/ui/i18n/merge-messages.ts",
+      "content": "import { mergeRegistryMessages } from \"./vite-plugin-registry-messages\"\nmergeRegistryMessages()",
+      "type": "registry:lib",
+      "target": "i18n/merge-messages.ts"
+    },
+    {
+      "path": "registry/ui/i18n/format.ts",
+      "content": "import { getLocale } from \"@/paraglide/runtime\"\n\nexport const formatDate = (d: Date, opts?: Intl.DateTimeFormatOptions) =>\n  new Intl.DateTimeFormat(getLocale(), { dateStyle: \"medium\", ...opts }).format(d)\n\nexport const formatNumber = (n: number, opts?: Intl.NumberFormatOptions) =>\n  new Intl.NumberFormat(getLocale(), opts).format(n)\n\nexport const formatCurrency = (n: number, currency = \"EUR\") =>\n  new Intl.NumberFormat(getLocale(), { style: \"currency\", currency }).format(n)",
+      "type": "registry:lib",
+      "target": "lib/i18n/format.ts"
+    }
+  ],
+  "type": "registry:lib"
+}

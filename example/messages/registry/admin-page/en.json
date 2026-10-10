@@ -1,0 +1,15 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "adminPage_actions": "Actions",
+  "adminPage_new": "New {entity}",
+  "adminPage_edit": "Edit {entity}",
+  "adminPage_details": "{entity} details",
+  "adminPage_deleteTitle": "Delete {entity}?",
+  "adminPage_irreversibleWarning": "This action cannot be undone.",
+  "adminPage_deleteDescription": "Are you sure you want to delete this {entity}?",
+  "adminPage_cancel": "Cancel",
+  "adminPage_delete": "Delete",
+  "adminPage_deleting": "Deleting...",
+  "adminPage_invalidValues": "Invalid values.",
+  "adminPage_error": "An error occurred."
+}

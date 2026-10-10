@@ -24,6 +24,7 @@ import { ThemeToggle } from "@/hoogin/ui/theme/theme-toggle"
 type SidebarLayoutProps = {
   children: React.ReactNode
   breadcrumb?: React.ReactNode
+  headerActions?: React.ReactNode
   brand: SidebarBrand
   user?: SidebarUser
   dataMain: SidebarNavItem[]
@@ -41,6 +42,7 @@ type SidebarLayoutProps = {
 export function SidebarLayout({
   children,
   breadcrumb,
+  headerActions,
   brand,
   user,
   dataMain,
@@ -92,6 +94,7 @@ export function SidebarLayout({
               {breadcrumb}
             </div>
             <div className="ml-auto flex items-center gap-2 px-4">
+              {headerActions}
               <ThemeToggle />
             </div>
           </header>

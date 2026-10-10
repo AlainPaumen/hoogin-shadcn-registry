@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "locale-toggle",
+  "title": "Locale Toggle",
+  "description": "A language switcher dropdown for Paraglide JS locales.",
+  "registryDependencies": [
+    "button",
+    "dropdown-menu"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/locale-toggle.tsx",
+      "content": "import { LanguagesIcon } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuRadioGroup,\n  DropdownMenuRadioItem,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\nimport { getLocale, setLocale, type Locale } from \"@/paraglide/runtime.js\"\n\nconst DEFAULT_LOCALES: Locale[] = [\"en\", \"nl\"]\n\nexport function LocaleToggle({\n  locales = DEFAULT_LOCALES,\n}: {\n  locales?: Locale[]\n}) {\n  const current = getLocale()\n\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger\n        render={\n          <Button\n            variant=\"ghost\"\n            size=\"icon\"\n            aria-label={current.toUpperCase()}\n            className=\"aria-expanded:bg-muted\"\n          />\n        }\n      >\n        <LanguagesIcon />\n      </DropdownMenuTrigger>\n      <DropdownMenuContent align=\"end\" className=\"w-24\">\n        <DropdownMenuRadioGroup\n          value={current}\n          onValueChange={(locale) => setLocale(locale)}\n        >\n          {locales.map((locale) => (\n            <DropdownMenuRadioItem\n              key={locale}\n              value={locale}\n              closeOnClick\n            >\n              {locale.toUpperCase()}\n            </DropdownMenuRadioItem>\n          ))}\n        </DropdownMenuRadioGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "hoogin/ui/locale-toggle.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

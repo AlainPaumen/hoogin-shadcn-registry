@@ -17,6 +17,8 @@ import {
 } from "@/hoogin/ui/navigation/sidebar"
 import { ChevronRightIcon } from "lucide-react"
 import { Link, useMatches } from "@tanstack/react-router"
+import { m } from "@/paraglide/messages.js"
+import { deLocalizeUrl } from "@/paraglide/runtime.js"
 import type {
   SidebarNavItem,
   SidebarNavSubItem,
@@ -68,7 +70,7 @@ function NavSubItem({
         }
       >
         <ChevronRightIcon />
-        <span className="sr-only">Toggle</span>
+        <span className="sr-only">{m.navMain_toggle()}</span>
       </CollapsibleTrigger>
       <CollapsibleContent>
         <SidebarMenuSub>
@@ -109,7 +111,7 @@ function NavMenuItem({
             }
           >
             <ChevronRightIcon />
-            <span className="sr-only">Toggle</span>
+            <span className="sr-only">{m.navMain_toggle()}</span>
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
@@ -130,13 +132,17 @@ function NavMenuItem({
 
 export function NavMain({
   items,
-  label = "Platform",
+  label = m.navMain_label(),
 }: {
   items: SidebarNavItem[]
   label?: string
 }) {
   const matches = useMatches()
-  const fullPath = matches[matches.length - 1]?.fullPath ?? ""
+  // nav URLs are de-localized; the matched path is localized.
+  // deLocalizeUrl needs an absolute URL, and fullPath is "" before matching.
+  const fullPath = deLocalizeUrl(
+    new URL(matches[matches.length - 1]?.fullPath || "/", location.origin)
+  ).pathname.replace(/(.+)\/$/, "$1")
   if (items.length === 0) {
     return null
   }

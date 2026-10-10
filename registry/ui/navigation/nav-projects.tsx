@@ -18,6 +18,7 @@ import {
   useSidebar,
 } from "@/hoogin/ui/navigation/sidebar"
 import { MoreHorizontalIcon, FolderIcon, ShareIcon, Trash2Icon } from "lucide-react"
+import { m } from "@/paraglide/messages.js"
 import type {
   SidebarMore,
   SidebarProject,
@@ -25,7 +26,7 @@ import type {
 
 export function NavProjects({
   projects,
-  label = "Projects",
+  label = m.navProjects_label(),
   more,
 }: {
   projects: SidebarProject[]
@@ -59,7 +60,7 @@ export function NavProjects({
               >
                 <MoreHorizontalIcon
                 />
-                <span className="sr-only">More</span>
+                <span className="sr-only">{m.navProjects_more()}</span>
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 className="w-48"
@@ -69,18 +70,18 @@ export function NavProjects({
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
                     <FolderIcon className="text-muted-foreground" />
-                    <span>View Project</span>
+                    <span>{m.navProjects_view()}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <ShareIcon className="text-muted-foreground" />
-                    <span>Share Project</span>
+                    <span>{m.navProjects_share()}</span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
                     <Trash2Icon className="text-muted-foreground" />
-                    <span>Delete Project</span>
+                    <span>{m.navProjects_delete()}</span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>

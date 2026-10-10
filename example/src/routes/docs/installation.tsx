@@ -4,6 +4,7 @@ import { registryItems } from "@/config/registry"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { DocSection } from "@/hoogin/docs/doc-section"
 import { DocsHeader, DocsShell } from "@/hoogin/docs/doc-page"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/installation")({
   component: InstallationPage,
@@ -15,16 +16,12 @@ function InstallationPage() {
   return (
     <DocsShell>
       <DocsHeader
-        title="Installation"
-        description="Add the @hoogin registry to your shadcn project and install items."
+        title={m.nav_installation()}
+        description={m.docsInstallation_description()}
       />
-      <DocSection title="1. Register the registry">
+      <DocSection title={m.docsInstallation_step1()}>
         <p className="text-sm text-muted-foreground">
-          Add the @hoogin registry to your{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-            components.json
-          </code>
-          :
+          {m.docsInstallation_step1Body()}
         </p>
         <CodeBlock
           language="json"
@@ -35,30 +32,21 @@ function InstallationPage() {
 }`}
         />
       </DocSection>
-      <DocSection title="2. Add an item">
+      <DocSection title={m.docsInstallation_step2()}>
         <CodeBlock
           language="bash"
           code={`npx shadcn@latest add @hoogin/sidebar-layout`}
         />
         <p className="text-sm text-muted-foreground">
-          The CLI resolves registry dependencies automatically — for example{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-            @hoogin/sidebar-layout
-          </code>{" "}
-          pulls in the base shadcn components it needs.
+          {m.docsInstallation_step2Body()}
         </p>
       </DocSection>
-      <DocSection title="Add everything at once">
+      <DocSection title={m.docsInstallation_all()}>
         <CodeBlock language="bash" code={`npx shadcn@latest add ${allNames}`} />
       </DocSection>
-      <DocSection title="Updates">
+      <DocSection title={m.docsInstallation_updates()}>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Re-run the add command to pull the latest version. Existing files are
-          left untouched — pass{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 text-[12px]">
-            --overwrite
-          </code>{" "}
-          to replace them.
+          {m.docsInstallation_updatesBody()}
         </p>
       </DocSection>
     </DocsShell>

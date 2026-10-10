@@ -8,6 +8,7 @@ import { baseFieldProps } from "@/hoogin/docs/field-props"
 import { Preview } from "@/hoogin/docs/preview"
 import { PropsTable } from "@/hoogin/docs/props-table"
 import { FormCurrencyField } from "@/hoogin/ui/forms/form-currency.field"
+import { m } from "@/paraglide/messages.js"
 
 export const Route = createFileRoute("/docs/components/form-currency-field")({
   component: FormCurrencyFieldPage,
@@ -36,7 +37,7 @@ function Example() {
 function FormCurrencyFieldPage() {
   return (
     <ComponentDoc name="form-fields">
-      <DocSection title="Preview">
+      <DocSection title={m.docs_preview()}>
         <Preview>
           <FieldDemo defaultValues={{ price: 0 }}>
             {(form) => (
@@ -51,7 +52,7 @@ function FormCurrencyFieldPage() {
       >
         <CodeBlock language="tsx" code={usageSource} />
       </DocSection>
-      <DocSection title="Props">
+      <DocSection title={m.docs_props()}>
         <PropsTable
           rows={[
             ...baseFieldProps,

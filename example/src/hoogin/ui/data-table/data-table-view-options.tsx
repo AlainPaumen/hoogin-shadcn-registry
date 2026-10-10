@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { m } from '@/paraglide/messages.js'
 import type { DataTableFeatures } from '@/hoogin/ui/data-table/data-table-features'
 
 type DataTableViewOptionsProps<TData extends RowData> = {
@@ -31,11 +32,13 @@ export function DataTableViewOptions<TData extends RowData>({
         }
       >
         <SlidersHorizontal className='size-4' />
-        View
+        {m.dataTableViewOptions_view()}
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-37.5'>
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+          <DropdownMenuLabel>
+            {m.dataTableViewOptions_toggleColumns()}
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           {table
             .getAllColumns()

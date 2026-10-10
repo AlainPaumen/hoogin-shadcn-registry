@@ -15,6 +15,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { ActionCell } from "@/hoogin/ui/data-table/cells/action.cell"
+import { m } from "@/paraglide/messages.js"
 import { DataTable } from "@/hoogin/ui/data-table/data-table"
 import type { DataTableProps } from "@/hoogin/ui/data-table/data-table"
 import type { DataTableColumnDef } from "@/hoogin/ui/data-table/data-table.types"
@@ -84,7 +85,7 @@ export function AdminPage<TData extends RowData>({
     if (sheetState.mode !== "create" && sheetState.mode !== "edit") return
     const result = schema.safeParse(values)
     if (!result.success) {
-      setError(result.error.issues[0]?.message ?? "Invalid values.")
+      setError(result.error.issues[0]?.message ?? m.adminPage_invalidValues())
       return
     }
     try {
@@ -96,7 +97,7 @@ export function AdminPage<TData extends RowData>({
       }
       close()
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred.")
+      setError(err instanceof Error ? err.message : m.adminPage_error())
       setPending(false)
     }
   }
@@ -108,7 +109,7 @@ export function AdminPage<TData extends RowData>({
       await onDelete(sheetState.row)
       close()
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred.")
+      setError(err instanceof Error ? err.message : m.adminPage_error())
       setPending(false)
     }
   }
@@ -118,7 +119,7 @@ export function AdminPage<TData extends RowData>({
       id: "actions",
       enableSorting: false,
       enableHiding: false,
-      header: () => <span className="sr-only">Actions</span>,
+      header: () => <span className="sr-only">{m.adminPage_actions()}</span>,
       cell: ({ row }) => (
         <div className="flex justify-end">
           <ActionCell
@@ -138,12 +139,12 @@ export function AdminPage<TData extends RowData>({
   )
 
   const heading = isDelete
-    ? `Delete ${entityName}?`
+    ? m.adminPage_deleteTitle({ entity: entityName })
     : sheetState.mode === "create"
-      ? `New ${entityName}`
+      ? m.adminPage_new({ entity: entityName })
       : sheetState.mode === "detail"
-        ? `${entityName} details`
-        : `Edit ${entityName}`
+        ? m.adminPage_details({ entity: entityName })
+        : m.adminPage_edit({ entity: entityName })
 
   return (
     <div className="w-full space-y-4">
@@ -157,7 +158,7 @@ export function AdminPage<TData extends RowData>({
           ) : null}
         </div>
         <Button onClick={() => setSheetState({ mode: "create" })}>
-          New {entityName}
+          {m.adminPage_new({ entity: entityName })}
         </Button>
       </div>
       <DataTable
@@ -171,7 +172,9 @@ export function AdminPage<TData extends RowData>({
           <SheetHeader>
             <SheetTitle>{heading}</SheetTitle>
             {isDelete ? (
-              <SheetDescription>This action cannot be undone.</SheetDescription>
+              <SheetDescription>
+                {m.adminPage_irreversibleWarning()}
+              </SheetDescription>
             ) : null}
           </SheetHeader>
           {sheetState.mode === "closed" ? null : (
@@ -188,20 +191,20 @@ export function AdminPage<TData extends RowData>({
           )}
           {isDelete ? (
             <p className="px-4 text-sm">
-              Are you sure you want to delete this {entityName}?
+              {m.adminPage_deleteDescription({ entity: entityName })}
             </p>
           ) : null}
           {isDelete ? (
             <SheetFooter>
               <Button variant="outline" onClick={close} disabled={pending}>
-                Cancel
+                {m.adminPage_cancel()}
               </Button>
               <Button
                 variant="destructive"
                 onClick={handleDelete}
                 disabled={pending}
               >
-                {pending ? "Deleting..." : "Delete"}
+                {pending ? m.adminPage_deleting() : m.adminPage_delete()}
               </Button>
             </SheetFooter>
           ) : null}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "signinPage_title": "Welkom terug",
+  "signinPage_subtitle": "Voer je gegevens in om in te loggen.",
+  "signinPage_noAccount": "Nog geen account?",
+  "signinPage_signUp": "Registreren",
+  "signinPage_forgotPassword": "Wachtwoord vergeten?",
+  "signinForm_email": "E-mail",
+  "signinForm_password": "Wachtwoord",
+  "signinForm_invalidEmail": "Ongeldig e-mailadres",
+  "signinForm_required": "Verplicht",
+  "signinForm_signIn": "Inloggen",
+  "signinForm_signingIn": "Bezig met inloggen..."
+}
