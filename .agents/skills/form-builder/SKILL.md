@@ -9,6 +9,18 @@ user-invocable: true
 Composes forms out of `@hoogin/form-fields`. Do not hand-roll `<input>` +
 validation — every control, label, error slot and a11y wiring already exists.
 
+## Contents
+
+- [Requires](#requires)
+- [Setup](#setup)
+- [Recipe](#recipe)
+- [Fields](#fields)
+- [Rules](#rules)
+- [Inside AdminPage](#inside-adminpage)
+- [Verification](#verification)
+
+---
+
 ## Requires
 
 - `@tanstack/react-form` **v1** (`^1.x`) — v0's `mode: "onSubmit"` API is not
