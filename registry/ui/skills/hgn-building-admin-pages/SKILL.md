@@ -155,14 +155,14 @@ import { AdminPage } from "@/hoogin/blocks/admin-page/admin-page"
 | `columns` | `DataTableColumnDef<TData>[]` | your columns; AdminPage appends the actions column |
 | `data` | `TData[]` | all rows (the table is client-side) |
 | `getRowId` | `(row) => string` | **required** |
-| `schema` | `z.ZodType<TData>` | checked before `onCreate` / `onUpdate` |
+| `schema` | `z.ZodType<TData>` | checked before `onCreate` / `onUpdate`, which get its parsed output |
 | `form` | `ComponentType<EntityFormProps<TData>>` | the component, not an element: `form={NoteForm}` |
 | `onCreate` | `(values) => void \| Promise<void>` | |
 | `onUpdate` | `(row, values) => void \| Promise<void>` | `row` is the record as it was |
 | `onDelete` | `(row) => void \| Promise<void>` | |
 | `title`, `description` | `string` | page heading |
-| `entityName` | `string` | fills "New {entity}", "Edit {entity}", …; default is the English `"record"`, so always pass a message |
-| every other `DataTable` prop | | `filterableColumns`, `filters`, `initialSorting`, `initialPageSize`, `emptyState`, … — see hgn-building-data-tables |
+| `entityName` | `string` | fills "New {entity}", "Edit {entity}", …; defaults to a translated "record", but pass your own message |
+| every other `DataTable` prop | | `filterableColumns`, `filters`, `initialSorting`, `initialPageSize`, `emptyState`, `enableRowSelection`, `bulkActions`, `onRowSelectionChange`, … — see hgn-building-data-tables |
 
 ## The entity form
 
@@ -192,8 +192,10 @@ Forward them as in the recipe:
 
 - **Create / edit**: the form's `onSubmit` calls AdminPage, which runs
   `schema.safeParse(values)`. On failure it shows the first issue's message in
-  `error`; on success it awaits `onCreate(values)` / `onUpdate(row, values)` and
-  closes the sheet. A thrown error stays in the sheet as `error` (its
+  `error`; on success it awaits `onCreate(result.data)` /
+  `onUpdate(row, result.data)` and closes the sheet. The callbacks get the
+  parsed output, so zod transforms, coercions and defaults (`.trim()`,
+  `z.coerce.number()`, `.default(…)`) are already applied. A thrown error stays in the sheet as `error` (its
   `message`).
 - **Delete**: the form is shown read-only with a warning and Cancel / Delete
   buttons; Delete awaits `onDelete(row)` and closes, or shows the error.
@@ -222,17 +224,13 @@ Forward them as in the recipe:
 Current gaps in `@hoogin/admin-page`; work around them, don't patch
 `src/hoogin/`:
 
-- **Values are not the parsed result.** AdminPage validates with
-  `schema.safeParse` but passes the **form values** to `onCreate` / `onUpdate`,
-  not `result.data` — zod transforms, coercions and defaults are not applied.
-  Apply them in the callback or API layer (`noteSchema.parse(values)` there is
-  fine).
 - **Server errors land in `FormError`, never on a field**: AdminPage catches
   them before the form sees them.
 - **Every row gets Detail, Edit and Delete**; there's no per-row permission or
   hiding an action. Enforce permissions on the server and show the error.
-- **Client-side table** with all of DataTable's limits (no server paging, no
-  bulk actions).
+- **Client-side table** with all of DataTable's limits (no server paging).
+  Bulk actions work through DataTable's `bulkActions` prop, next to the
+  per-row actions.
 
 ## Troubleshooting
 
@@ -244,5 +242,4 @@ Current gaps in `@hoogin/admin-page`; work around them, don't patch
 | Two button rows in Delete view | `showActions` not forwarded to `FormFooter` | pass `showActions={showActions}` |
 | "Invalid input" or English error text | default zod message, or untranslated thrown error | messages in the schema, `m.*()` in thrown errors |
 | Form fields touch the sheet edges | no padding on `Form` | `className="flex flex-col gap-4 px-4 pb-4"` |
-| Saved record lacks a zod default/transform | AdminPage passes raw form values | apply `schema.parse` in the callback |
-| Headings say "New record" | `entityName` not set | pass `entityName={m.x_entity()}` |
+| Headings say "New record" / "Nieuw item" | `entityName` not set | pass `entityName={m.x_entity()}` |

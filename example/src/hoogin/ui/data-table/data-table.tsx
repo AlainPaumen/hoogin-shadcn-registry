@@ -3,7 +3,13 @@
 import { useMemo, useState } from "react"
 import type { ComponentProps, ReactNode } from "react"
 import { flexRender, useTable } from "@tanstack/react-table"
-import type { Header, RowData, SortingState } from "@tanstack/react-table"
+import type {
+  Header,
+  RowData,
+  RowSelectionState,
+  SortingState,
+  Updater,
+} from "@tanstack/react-table"
 import { ChevronDown, ChevronUp, ChevronsUpDown } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -40,10 +46,17 @@ export type DataTableProps<TData extends RowData, TValue> = {
   initialPageSize?: number
   pageSizeOptions?: number[]
   enableRowSelection?: boolean
+  onRowSelectionChange?: (selectedRows: TData[]) => void
+  bulkActions?: (context: DataTableBulkActionsContext<TData>) => ReactNode
   getRowId?: (row: TData) => string
   emptyState?: ReactNode
   className?: string
   tableProps?: ComponentProps<typeof Table>
+}
+
+export type DataTableBulkActionsContext<TData> = {
+  selectedRows: TData[]
+  clearSelection: () => void
 }
 
 function DataTable<TData extends RowData, TValue>({
@@ -56,6 +69,8 @@ function DataTable<TData extends RowData, TValue>({
   initialPageSize = 10,
   pageSizeOptions,
   enableRowSelection = false,
+  onRowSelectionChange,
+  bulkActions,
   getRowId,
   emptyState,
   className,
@@ -66,6 +81,7 @@ function DataTable<TData extends RowData, TValue>({
     value: "",
     columns: [],
   })
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   const selectionColumn = useMemo<DataTableColumnDef<TData, unknown>>(
     () => ({
@@ -108,8 +124,9 @@ function DataTable<TData extends RowData, TValue>({
     data,
     columns: allColumns,
     getRowId,
-    state: { sorting, globalFilter },
+    state: { sorting, globalFilter, rowSelection },
     onSortingChange: setSorting,
+    onRowSelectionChange: handleRowSelectionChange,
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: (row, _columnId, filterValue) => {
       const filter = (filterValue as GlobalFilterValue | undefined) ?? {
@@ -141,6 +158,23 @@ function DataTable<TData extends RowData, TValue>({
     enableRowSelection,
   })
 
+  function handleRowSelectionChange(updater: Updater<RowSelectionState>) {
+    const next = typeof updater === "function" ? updater(rowSelection) : updater
+    setRowSelection(next)
+    onRowSelectionChange?.(
+      table
+        .getCoreRowModel()
+        .rows.filter((row) => next[row.id])
+        .map((row) => row.original)
+    )
+  }
+
+  // Selected row model skips ids whose rows left `data`, so this stays
+  // accurate after a bulk delete even before the selection is cleared.
+  const selectedRows = enableRowSelection
+    ? table.getSelectedRowModel().rows.map((row) => row.original)
+    : []
+
   return (
     <div className={cn("w-full space-y-3", className)}>
       <DataTableToolbar
@@ -149,6 +183,14 @@ function DataTable<TData extends RowData, TValue>({
         filters={filters}
         placeholder={filterPlaceholder}
       />
+      {bulkActions && selectedRows.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-2">
+          {bulkActions({
+            selectedRows,
+            clearSelection: () => handleRowSelectionChange({}),
+          })}
+        </div>
+      ) : null}
       <div className="rounded-lg border">
         <Table {...tableProps}>
           <TableHeader>

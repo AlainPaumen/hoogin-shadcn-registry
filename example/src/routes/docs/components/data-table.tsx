@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 
+import { Button } from "@/components/ui/button"
 import { CodeBlock } from "@/hoogin/docs/code-block"
 import { ComponentDoc } from "@/hoogin/docs/doc-page"
 import { DocSection } from "@/hoogin/docs/doc-section"
@@ -183,6 +184,7 @@ export const columns: DataTableColumnDef<Payment>[] = [
 ]`
 
 const usageSource = `// app.tsx
+import { Button } from "@/components/ui/button"
 import { DataTable } from "@/hoogin/ui/data-table/data-table"
 import { columns } from "./columns"
 
@@ -219,6 +221,11 @@ export function App() {
       ]}
       filterPlaceholder="Search payments..."
       enableRowSelection
+      bulkActions={({ selectedRows, clearSelection }) => (
+        <Button variant="outline" size="sm" onClick={clearSelection}>
+          Clear {selectedRows.length} selected
+        </Button>
+      )}
       initialPageSize={10}
     />
   )
@@ -260,6 +267,11 @@ function DataTablePage() {
             ]}
             filterPlaceholder="Search payments..."
             enableRowSelection
+            bulkActions={({ selectedRows, clearSelection }) => (
+              <Button variant="outline" size="sm" onClick={clearSelection}>
+                Clear {selectedRows.length} selected
+              </Button>
+            )}
             initialPageSize={10}
           />
         </Preview>
@@ -374,6 +386,18 @@ function DataTablePage() {
               type: "boolean",
               description:
                 "Prepend a selectable checkbox column and show a selected-row count. Defaults to false.",
+            },
+            {
+              prop: "onRowSelectionChange",
+              type: "(selectedRows: TData[]) => void",
+              description:
+                "Called with the selected rows (across pages) whenever the selection changes. Needs enableRowSelection.",
+            },
+            {
+              prop: "bulkActions",
+              type: "({ selectedRows, clearSelection }) => ReactNode",
+              description:
+                "Render prop for a bulk-action bar shown between the toolbar and the table while at least one row is selected. Needs enableRowSelection.",
             },
             {
               prop: "getRowId",

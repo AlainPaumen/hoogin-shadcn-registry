@@ -56,7 +56,7 @@ export type AdminPageProps<TData extends RowData> = Omit<
 export function AdminPage<TData extends RowData>({
   title,
   description,
-  entityName = "record",
+  entityName = m.adminPage_defaultEntityName(),
   columns,
   data,
   getRowId,
@@ -91,9 +91,9 @@ export function AdminPage<TData extends RowData>({
     try {
       setPending(true)
       if (sheetState.mode === "create") {
-        await onCreate(values)
+        await onCreate(result.data)
       } else {
-        await onUpdate(sheetState.row, values)
+        await onUpdate(sheetState.row, result.data)
       }
       close()
     } catch (err) {

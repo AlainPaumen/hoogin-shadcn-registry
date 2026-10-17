@@ -11,5 +11,6 @@
   "adminPage_delete": "Verwijderen",
   "adminPage_deleting": "Bezig met verwijderen...",
   "adminPage_invalidValues": "Ongeldige waarden.",
-  "adminPage_error": "Er is een fout opgetreden."
+  "adminPage_error": "Er is een fout opgetreden.",
+  "adminPage_defaultEntityName": "item"
 }

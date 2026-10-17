@@ -129,6 +129,12 @@ function DataTableViewOptionsPage() {
               type: "Table<TData>",
               description: "The TanStack Table instance used to toggle column visibility.",
             },
+            {
+              prop: "filterableColumns",
+              type: "FilterableColumn[]",
+              description:
+                "Optional captions for the menu items. Without a caption an item shows the column's header when it is a string, else the column id. DataTable passes its own filterableColumns.",
+            },
           ]}
         />
       </DocSection>

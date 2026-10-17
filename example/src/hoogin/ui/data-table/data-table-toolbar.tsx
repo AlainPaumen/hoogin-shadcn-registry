@@ -161,7 +161,7 @@ function DataTableToolbar<TData extends RowData>({
             </Button>
           ) : null}
         </div>
-        <DataTableViewOptions table={table} />
+        <DataTableViewOptions table={table} filterableColumns={filterableColumns} />
       </div>
     </div>
   )

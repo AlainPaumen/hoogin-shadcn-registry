@@ -141,6 +141,16 @@ function DataTableCellsPage() {
               description: "The value from the select list to display in a badge for BadgeCell.",
             },
             {
+              prop: "label",
+              type: "string",
+              description: "Text shown instead of the raw value in BadgeCell, e.g. a translated message.",
+            },
+            {
+              prop: "labelByValue",
+              type: "Record<string, string>",
+              description: "Maps specific values to the text shown in BadgeCell. Wins over label; unmapped values fall back to label, then the raw value.",
+            },
+            {
               prop: "variant",
               type: "BadgeVariant",
               description: "Badge variant for BadgeCell. Defaults to \"secondary\".",

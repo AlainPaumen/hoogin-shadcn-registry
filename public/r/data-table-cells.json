@@ -51,7 +51,7 @@
     },
     {
       "path": "registry/ui/data-table/cells/badge.cell.tsx",
-      "content": "import type { VariantProps } from 'class-variance-authority';\nimport { Badge, badgeVariants } from '@/components/ui/badge';\n\ntype BadgeVariant = VariantProps<typeof badgeVariants>['variant'];\n\ntype BadgeCellProps = {\n    value: string;\n    variant?: BadgeVariant;\n    variantByValue?: Record<string, BadgeVariant>;\n};\n\nexport function BadgeCell({ value, variant = 'secondary', variantByValue }: BadgeCellProps) {\n    return <Badge variant={variantByValue?.[value] ?? variant}>{value}</Badge>;\n}\n",
+      "content": "import type { VariantProps } from 'class-variance-authority';\nimport { Badge, badgeVariants } from '@/components/ui/badge';\n\ntype BadgeVariant = VariantProps<typeof badgeVariants>['variant'];\n\ntype BadgeCellProps = {\n    value: string;\n    label?: string;\n    labelByValue?: Record<string, string>;\n    variant?: BadgeVariant;\n    variantByValue?: Record<string, BadgeVariant>;\n};\n\nexport function BadgeCell({ value, label, labelByValue, variant = 'secondary', variantByValue }: BadgeCellProps) {\n    return <Badge variant={variantByValue?.[value] ?? variant}>{labelByValue?.[value] ?? label ?? value}</Badge>;\n}\n",
       "type": "registry:ui",
       "target": "hoogin/ui/data-table/cells/badge.cell.tsx"
     },

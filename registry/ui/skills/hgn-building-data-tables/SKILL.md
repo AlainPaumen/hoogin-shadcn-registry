@@ -18,6 +18,7 @@ You write the columns; the table brings the rest.
 - [DataTable props](#datatable-props)
 - [Cells](#cells)
 - [Custom cells](#custom-cells)
+- [Row selection and bulk actions](#row-selection-and-bulk-actions)
 - [Search and faceted filters](#search-and-faceted-filters)
 - [Sorting](#sorting)
 - [Rules](#rules)
@@ -89,6 +90,11 @@ export const invoiceColumns: DataTableColumnDef<Invoice>[] = [
     cell: ({ row }) => (
       <BadgeCell
         value={row.original.status}
+        labelByValue={{
+          open: m.invoices_statusOpen(),
+          paid: m.invoices_statusPaid(),
+          void: m.invoices_statusVoid(),
+        }}
         variantByValue={{ open: "secondary", paid: "default", void: "outline" }}
       />
     ),
@@ -141,13 +147,15 @@ import { DataTable } from "@/hoogin/ui/data-table/data-table"
 | `columns` | `DataTableColumnDef<TData>[]` | — | required |
 | `data` | `TData[]` | — | required; **all** rows |
 | `getRowId` | `(row) => string` | row index | pass it whenever rows have an id — selection and re-renders key on it |
-| `filterableColumns` | `{ caption, column }[]` | every searchable column | limits the search box and names the columns in its column picker |
+| `filterableColumns` | `{ caption, column }[]` | every searchable column | limits the search box; its captions name the columns in the column picker and the View menu |
 | `filterPlaceholder` | `string` | translated "Filter…" | search box placeholder |
 | `filters` | `{ columnId, title, options: { value, label, icon? }[] }[]` | none | faceted filters above the search row |
 | `initialSorting` | `{ id, desc }[]` | none | initial sort only; the user can change it |
 | `initialPageSize` | `number` | `10` | |
 | `pageSizeOptions` | `number[]` | `[10, 20, 50, 100]` | |
 | `enableRowSelection` | `boolean` | `false` | adds a checkbox column and a "n of m selected" count |
+| `onRowSelectionChange` | `(selectedRows: TData[]) => void` | none | called on every selection change with the selected rows across pages; needs `enableRowSelection` |
+| `bulkActions` | `({ selectedRows, clearSelection }) => ReactNode` | none | render prop for a bar between the toolbar and the table, shown while rows are selected; needs `enableRowSelection` |
 | `emptyState` | `ReactNode` | translated "No results." | shown when nothing matches |
 | `className` | `string` | | on the wrapper |
 | `tableProps` | props of shadcn `Table` | | passed to the `<table>` |
@@ -163,7 +171,7 @@ Every cell takes `value`; use `row.original.<field>` for a typed value.
 | `DateCell` | `string` (ISO / anything `new Date()` parses) | `formatDate`, active locale | — |
 | `CurrencyCell` | `number` — integer cents | `formatCurrency(value / 100, "EUR")`, right-aligned | — |
 | `CheckboxCell` | `boolean \| undefined` | checked / empty square icon, centered | — |
-| `BadgeCell` | `string` | shadcn `Badge` showing `value` as-is | `variant` (default `secondary`), `variantByValue: Record<string, variant>` |
+| `BadgeCell` | `string` | shadcn `Badge` showing `labelByValue[value]`, else `label`, else `value` as-is | `label: string`, `labelByValue: Record<string, string>`, `variant` (default `secondary`), `variantByValue: Record<string, variant>` |
 | `FormattedCell` | any `ReactNode` | muted text | `format: (value) => ReactNode`, `align: "left" \| "right" \| "center"` |
 | `ActionCell` | — | "⋯" menu with Detail, Edit, Delete | `onDetail`, `onEdit`, `onDelete` |
 
@@ -182,8 +190,9 @@ cell: ({ row }) => (
 )
 ```
 
-`BadgeCell` shows the raw `value`, so it suits codes and names. For a
-translated label, write a custom cell (below).
+`BadgeCell` shows the raw `value` unless you give it text: pass
+`labelByValue` with a message per value (as in the recipe), or `label` when
+you compute the text yourself. `variantByValue` still keys on the raw value.
 
 ## Custom cells
 
@@ -211,6 +220,41 @@ export function InvoiceStatusCell({ value }: { value: Invoice["status"] }) {
 
 Keep cells presentational: no data fetching, no row mutations — pass
 callbacks in from the page (as `ActionCell` does).
+
+## Row selection and bulk actions
+
+`enableRowSelection` adds the checkbox column (the header box selects the
+current page). Pass `getRowId` so the selection follows the record, not its
+index. Act on the selection with `bulkActions`:
+
+```tsx
+<DataTable
+  columns={invoiceColumns}
+  data={invoices}
+  getRowId={(row) => row.id}
+  enableRowSelection
+  bulkActions={({ selectedRows, clearSelection }) => (
+    <Button
+      variant="destructive"
+      size="sm"
+      onClick={async () => {
+        await voidInvoices.mutateAsync(selectedRows.map((row) => row.id))
+        clearSelection()
+      }}
+    >
+      {m.invoices_voidSelected({ count: selectedRows.length })}
+    </Button>
+  )}
+/>
+```
+
+- `selectedRows` holds only rows still in `data`, so it stays correct after
+  a refetch removes some; call `clearSelection()` once the action is done.
+- Need the selection outside the table (a page header, a dialog)? Use
+  `onRowSelectionChange` and keep the rows in state. It fires when the user
+  changes the selection, not when `data` changes.
+- The selection survives sorting, filtering and paging; rows hidden by a
+  filter stay selected.
 
 ## Search and faceted filters
 
@@ -253,7 +297,7 @@ callbacks in from the page (as `ActionCell` does).
    wrong id or type compiles; keep it for generic code such as `filterFn`.
 4. **Stable ids.** Use `accessorKey` for a plain field; use `id` +
    `accessorFn` for a derived value. The id is what `filterableColumns`,
-   `filters`, `initialSorting` and the View menu refer to.
+   `filters` and `initialSorting` refer to.
 5. **Money is integer cents** end to end, like `FormCurrencyField` in the
    forms skill. `CurrencyCell` divides by 100.
 6. **Display columns** (no accessor, e.g. a custom actions column) need an
@@ -272,12 +316,10 @@ These are current gaps in `@hoogin/data-table`; work around them, don't patch
   few thousand rows; for more, filter on the server before passing `data`
   (e.g. a date range or status in your query). A server-side mode is designed
   but not built.
-- **Selection is display-only.** `enableRowSelection` shows checkboxes and a
-  count, but `DataTable` doesn't expose the selected rows, so bulk actions
-  aren't possible yet.
-- **The View menu lists column ids**, not headers. Choose readable ids
-  (`issuedAt`, not `col3`), or hide technical columns with `enableHiding: false`.
-- **`BadgeCell` doesn't translate** its value — use a custom cell for labels.
+- **The View menu needs a string label.** It shows the column's
+  `filterableColumns` caption, else its `header` when that is a string, else
+  the column id. A column whose `header` is a function falls back to its id:
+  add it to `filterableColumns` or set `enableHiding: false`.
 
 ## Troubleshooting
 
@@ -286,6 +328,8 @@ These are current gaps in `@hoogin/data-table`; work around them, don't patch
 | A facet filters out every row | the column has no array-aware `filterFn` | add the `filterFn` from the recipe |
 | `Type '"arrIncludesSome"' is not assignable` | filter fn names aren't registered in the @hoogin feature set | pass a function as `filterFn` |
 | A column is missing from search | its first value isn't a string/number, or `enableGlobalFilter: false`, or it's not in `filterableColumns` | add it to `filterableColumns`, or search on a string column |
+| The View menu shows a column id | the column's `header` is a function and it has no `filterableColumns` caption | add a caption, or `enableHiding: false` |
+| `bulkActions` never shows | `enableRowSelection` not set | set it |
 | Dates sort in the wrong order | string sort on non-ISO dates | store ISO strings and set `sortFn: "datetime"` |
 | Amount shows 100× too large/small | value isn't in cents | convert to integer cents at the API boundary |
 | `getState is not a function` / v8 types in errors | v8 example code | use the v9 API (`table.state.*`, `DataTableColumnDef`) |

@@ -11,5 +11,6 @@
   "adminPage_delete": "Delete",
   "adminPage_deleting": "Deleting...",
   "adminPage_invalidValues": "Invalid values.",
-  "adminPage_error": "An error occurred."
+  "adminPage_error": "An error occurred.",
+  "adminPage_defaultEntityName": "record"
 }

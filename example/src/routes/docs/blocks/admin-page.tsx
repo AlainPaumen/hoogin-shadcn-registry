@@ -454,7 +454,7 @@ function AdminPagePage() {
               prop: "schema",
               type: "z.ZodType<TData>",
               description:
-                "Validates submitted values before onCreate / onUpdate fire.",
+                "Validates submitted values before onCreate / onUpdate fire; those receive the parsed output, so transforms, coercions and defaults apply.",
             },
             {
               prop: "form",
@@ -466,13 +466,13 @@ function AdminPagePage() {
               prop: "onCreate",
               type: "(values: TData) => void | Promise<void>",
               description:
-                "Called with validated values from the create sheet.",
+                "Called with the schema's parsed values from the create sheet.",
             },
             {
               prop: "onUpdate",
               type: "(row: TData, values: TData) => void | Promise<void>",
               description:
-                "Called with the original row and validated values from the edit sheet.",
+                "Called with the original row and the schema's parsed values from the edit sheet.",
             },
             {
               prop: "onDelete",
@@ -483,7 +483,7 @@ function AdminPagePage() {
               prop: "entityName",
               type: "string",
               description:
-                'Used in the New button and sheet headings, e.g. "payment". Defaults to "record".',
+                'Used in the New button and sheet headings, e.g. "payment". Defaults to a translated "record".',
             },
             {
               prop: "title",
