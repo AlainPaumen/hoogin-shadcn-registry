@@ -1,6 +1,6 @@
 ---
 name: hgn-building-forms
-description: Use when building or changing a form, a form field or form validation with the @hoogin form components (TanStack Form v1 + zod v4) — auth, settings, create/edit entity forms, and forms inside AdminPage. Also applies when the work touches useForm, FormBody/FormFooter/FormError, or any Form*Field component.
+description: Use when building or changing a form, a form field or form validation with the @hoogin form components (TanStack Form v1 + zod v4) — auth, settings and create/edit entity forms (for forms inside AdminPage, also see hgn-building-admin-pages). Also applies when the work touches useForm, FormBody/FormFooter/FormError, or any Form*Field component.
 user-invocable: true
 ---
 
@@ -240,37 +240,9 @@ error — map backend errors there, not in each form.
 
 ## Inside AdminPage
 
-`@hoogin/admin-page` renders your form in a sheet and drives create / detail /
-edit / delete. Accept `EntityFormProps<TData>` and forward it:
-
-```tsx
-import type { EntityFormProps } from "@/hoogin/blocks/admin-page/admin-page"
-
-export function PaymentForm({
-  initialValues,
-  readOnly,
-  showActions = true,
-  error,
-  onSubmit,
-  onCancel,
-}: EntityFormProps<Payment>) {
-  const form = useForm({
-    defaultValues: (initialValues ?? { /* create defaults */ }) satisfies Payment,
-    onSubmit: async ({ value }) => { await onSubmit(value) },
-  })
-  // Form > FormBody > fields (disabled={readOnly}) > FormError error={error} > FormFooter
-}
-```
-
-- `initialValues` is `undefined` while creating, so gate id-only-on-edit fields
-  with `{initialValues ? <FormTextField ... /> : null}`.
-- `AdminPage` re-parses your schema before `onCreate` / `onUpdate` and shows a
-  failure in `error` — the schema it takes must be the one the fields validate
-  against, and the form needs no re-parse of its own.
-- `AdminPage` catches errors thrown by `onCreate` / `onUpdate` and shows their
-  message through `error`, so the form's own `onSubmit` never sees them. Inside
-  AdminPage, server errors therefore appear in `FormError`, not on a field;
-  throw an `Error` whose message is already translated.
+A form rendered by `@hoogin/admin-page` takes `EntityFormProps<TData>` and has a
+few extra rules (read-only modes, where errors appear, no re-parse). They live
+in the `hgn-building-admin-pages` skill.
 
 ## Verification
 

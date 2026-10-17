@@ -197,7 +197,7 @@ export const registryItems: RegistryItem[] = [
     "name": "data-table",
     "type": "registry:ui",
     "title": "Data Table",
-    "description": "A sortable, paginated, selectable data table built on TanStack Table.",
+    "description": "A sortable, paginated, selectable data table built on TanStack Table. Ships the hgn-building-data-tables agent skill.",
     "dependencies": [
       "@tanstack/react-table",
       "lucide-react"
@@ -249,6 +249,11 @@ export const registryItems: RegistryItem[] = [
         "path": "messages/data-table/nl.json",
         "type": "registry:file",
         "target": "messages/registry/data-table/nl.json"
+      },
+      {
+        "path": "skills/hgn-building-data-tables/SKILL.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-data-tables/SKILL.md"
       }
     ]
   },
@@ -530,7 +535,7 @@ export const registryItems: RegistryItem[] = [
     "name": "admin-page",
     "type": "registry:block",
     "title": "Admin Page",
-    "description": "A generic CRUD admin page built on the data table with a sheet-based create, detail, edit, and delete workflow.",
+    "description": "A generic CRUD admin page built on the data table with a sheet-based create, detail, edit, and delete workflow. Ships the hgn-building-admin-pages agent skill.",
     "dependencies": [
       "zod"
     ],
@@ -556,6 +561,11 @@ export const registryItems: RegistryItem[] = [
         "path": "messages/admin-page/nl.json",
         "type": "registry:file",
         "target": "messages/registry/admin-page/nl.json"
+      },
+      {
+        "path": "skills/hgn-building-admin-pages/SKILL.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-admin-pages/SKILL.md"
       }
     ]
   },
