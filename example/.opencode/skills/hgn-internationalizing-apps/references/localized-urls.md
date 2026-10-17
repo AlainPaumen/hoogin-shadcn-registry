@@ -1,7 +1,7 @@
 # Localized URLs
 
 Optional. Only applies when `strategy` includes `"url"` and the router rewrite
-from the main skill's step 5 is in place — a cookie/browser-language setup has
+from step 5 of `setup.md` is in place — a cookie/browser-language setup has
 no locale in the URL and needs none of this.
 
 With the URL strategy, Paraglide only *prefixes* the locale (`/nl/docs`). This reference adds
@@ -54,7 +54,7 @@ Rules:
 - Keep `emitTsDeclarations: true` on the plugin so `@/paraglide/runtime.js` and
   `@/paraglide/messages.js` have types.
 
-With the router rewrite in place (see the skill's setup step 5), internal links
+With the router rewrite in place (step 5 of `setup.md`), internal links
 stay canonical and TanStack Router resolves routes on the de-localized path while
 publishing localized hrefs.
 
@@ -83,10 +83,9 @@ needs; `/(.+)` requires at least one character before the slash, so `/` survives
 Apply it in both the breadcrumbs builder and the sidebar's nav-main active check —
 patching only one leaves the other's highlight broken on `/nl/...` routes.
 
-## Trap: `setLocale` reloads the page
+## `setLocale` under the URL strategy
 
-Under the `url` strategy, `setLocale(locale)` performs a **full page reload**
-(`src/paraglide/runtime.js`). That is why it is safe to call `m.*()` at module
-scope (e.g. for zod messages) and to read `getLocale()` in render without
-subscribing to a store — a locale change never re-renders in place, it reloads.
-A locale switcher just calls `setLocale`; see the shipped `@hoogin/locale-toggle`.
+With `"url"` in the strategy, `setLocale(locale)` navigates to the localized URL
+— a full page load, like the reload it does under every other strategy (see the
+main skill's "Switching locale"). A locale switcher just calls `setLocale`; see
+the shipped `@hoogin/locale-toggle`.

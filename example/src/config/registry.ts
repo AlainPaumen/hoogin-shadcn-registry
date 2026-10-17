@@ -671,6 +671,11 @@ export const registryItems: RegistryItem[] = [
         "path": "skills/hgn-internationalizing-apps/references/localized-urls.md",
         "type": "registry:file",
         "target": "~/.opencode/skills/hgn-internationalizing-apps/references/localized-urls.md"
+      },
+      {
+        "path": "skills/hgn-internationalizing-apps/references/setup.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-internationalizing-apps/references/setup.md"
       }
     ]
   }

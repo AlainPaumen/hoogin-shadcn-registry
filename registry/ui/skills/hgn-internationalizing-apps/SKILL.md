@@ -1,25 +1,27 @@
 ---
 name: hgn-internationalizing-apps
-description: Add internationalization to a Vite + TanStack Router app with Paraglide JS and the @hoogin/i18n registry item (locale from cookie/browser, or optionally locale-prefixed URLs) — install translatable components, add a language, override wording, and format dates and numbers by locale. Use when asked to add i18n/localization, add or switch a language/locale, install a translatable @hoogin component, or debug strings stuck in the wrong language.
+description: Use when adding or changing user-facing text, adding or switching a language/locale, overriding the wording of a @hoogin component, formatting dates/numbers/currency by locale, installing a translatable @hoogin component, setting up i18n, or debugging strings stuck in the wrong language — in a Vite + TanStack Router app with Paraglide JS and the @hoogin/i18n registry item.
 user-invocable: true
 ---
 
-# Add i18n
+# Internationalizing apps
 
-Wire Paraglide JS into a Vite + TanStack Router app so that @hoogin registry
-components and your own strings render in the active locale. The locale comes
+Every user-facing string in the app — @hoogin components and your own code —
+comes from Paraglide messages and renders in the active locale. The locale comes
 from a cookie and the browser language by default (a locale in the URL is an
-optional extra), and every translatable component ships its own message bundles.
+optional extra), and every translatable @hoogin component ships its own message
+bundles.
 
 ## Contents
 
 - [Requires](#requires)
 - [How it works](#how-it-works)
-- [One-time setup](#one-time-setup)
-- [Install a translatable component](#install-a-translatable-component)
+- [Is it set up?](#is-it-set-up)
+- [Use messages in your own code](#use-messages-in-your-own-code)
 - [Add a language](#add-a-language)
 - [Override a component's wording](#override-a-components-wording)
-- [Use messages in your own code](#use-messages-in-your-own-code)
+- [Switching locale](#switching-locale)
+- [Install a translatable component](#install-a-translatable-component)
 - [Conventions](#conventions)
 - [Troubleshooting](#troubleshooting)
 - [References](#references)
@@ -36,102 +38,101 @@ optional extra), and every translatable component ships its own message bundles.
 A translatable component ships one message bundle per locale (a `registry:file`
 that installs to `src/messages/registry/<component>/<locale>.json` — or
 `messages/registry/...` in a project without `src/`). A Vite plugin merges those
-with your app's `messages/<locale>.json` into `messages/.generated/`,
-and Paraglide compiles the result into typed functions in `src/paraglide/`. Your
+with your app's `messages/<locale>.json` into `messages/.generated/`, and
+Paraglide compiles the result into typed functions in `src/paraglide/`. Your
 app's `messages/<locale>.json` is the last path pattern, so it overrides any
-component string and survives reinstalling the component.
-
-The merge flow and the three files the base item ships live in
+component string and survives reinstalling the component. Details:
 `references/architecture.md`.
 
-## One-time setup
+## Is it set up?
 
-Do this once, before the first translatable component. The shadcn CLI can't patch
-config, so only steps 1–2 are commands; the rest are edits.
+It is when `project.inlang/settings.json` exists and `vite.config.ts` lists
+`registryMessages()` above `paraglideVitePlugin(...)`. If not, follow
+`references/setup.md` once, then come back here.
 
-1. **Init Paraglide.** `bunx @inlang/paraglide-js@latest init` — creates
-   `project.inlang/` and `messages/en.json`. Done when both exist.
-2. **Add the base item.** `bunx --bun shadcn@latest add @hoogin/i18n` — installs
-   `src/i18n/vite-plugin-registry-messages.ts`, `src/i18n/merge-messages.ts`,
-   `src/lib/i18n/format.ts`, `@inlang/paraglide-js`, and this skill
-   (`.opencode/skills/hgn-internationalizing-apps/`).
-3. **Register the merge plugin before Paraglide** in `vite.config.ts`:
+## Use messages in your own code
 
-   ```ts
-   import { paraglideVitePlugin } from "@inlang/paraglide-js"
-   import { registryMessages } from "./src/i18n/vite-plugin-registry-messages"
+Import `m` from `@/paraglide/messages.js` — shadcn doesn't rewrite this path:
 
-   export default defineConfig({
-     plugins: [
-       registryMessages(), // first — it writes the files Paraglide compiles
-       paraglideVitePlugin({
-         project: "./project.inlang",
-         outdir: "./src/paraglide",
-         emitTsDeclarations: true,
-         // Stored choice, then the browser language. Prepend "url" for
-         // locale-prefixed URLs (step 5).
-         strategy: ["cookie", "preferredLanguage", "baseLocale"],
-       }),
-     ],
-   })
-   ```
+```tsx
+import { m } from "@/paraglide/messages.js"
 
-   Done when `registryMessages()` is listed above `paraglideVitePlugin`. It needs
-   no options: it reads the bundles from where `shadcn add` puts them
-   (`src/messages/registry`, or `messages/registry` without `src/`).
+<h1>{m.notesPage_title()}</h1>
+<span>{m.notesPage_count({ count })}</span>
+```
 
-4. **Point Paraglide at both message sources** in `project.inlang/settings.json`.
-   The last pattern wins:
+Rules for your own keys:
+
+1. **Every user-facing string is a message**: visible text, `aria-label`,
+   `placeholder`, titles, toasts, and validation messages in zod schemas (see
+   the `hgn-building-forms` skill).
+2. **Prefix keys by feature or component** in camelCase: `notesPage_title`,
+   `profileForm_save`. One flat namespace — a key that a @hoogin component
+   already uses overrides that component's wording (see below), so never reuse
+   a component's prefix by accident.
+3. **Add every key to every locale's `messages/<locale>.json`.** A key missing
+   from one locale doesn't fail the build; those users silently get the base
+   locale's text.
+4. **Parameters** go in braces: `"notesPage_count": "{count} notes"` →
+   `m.notesPage_count({ count })`.
+5. **Plurals** use Paraglide variants. Copy this shape (it compiles with
+   Paraglide 2.x; `one`/`other` cover English and Dutch, other locales add
+   categories such as `few` or `many` in their own file):
 
    ```json
-   "plugin.inlang.messageFormat": {
-     "pathPattern": ["./messages/.generated/{locale}.json", "./messages/{locale}.json"]
-   }
+   "notesPage_count": [
+     {
+       "declarations": ["input count", "local countPlural = count: plural"],
+       "selectors": ["countPlural"],
+       "match": {
+         "countPlural=one": "{count} note",
+         "countPlural=other": "{count} notes"
+       }
+     }
+   ]
    ```
 
-5. **Optional — locale in the URL.** Skip this unless you want `/nl/...` URLs
-   (shareable, crawlable per locale). Prepend `"url"` to `strategy` in step 3,
-   then rewrite the router's URLs in `router.tsx`:
+Format dates, numbers, and currency with the shipped helpers, so output follows
+the active locale — not `toLocaleDateString()`, which reads the system locale:
 
-   ```ts
-   import { deLocalizeUrl, localizeUrl } from "@/paraglide/runtime.js"
+```ts
+import { formatDate, formatNumber, formatCurrency } from "@/lib/i18n/format"
+```
 
-   export const router = createRouter({
-     routeTree,
-     rewrite: {
-       input: ({ url }) => deLocalizeUrl(url),
-       output: ({ url }) => localizeUrl(url),
-     },
-   })
-   ```
+## Add a language
 
-   The base locale (`en`) stays unprefixed; every other locale gets `/nl/...`. To
-   translate the path segments themselves, see `references/localized-urls.md`.
-   Without this step, switch locales with `setLocale()` from
-   `@/paraglide/runtime.js` (the `@hoogin/locale-toggle` item does that).
+1. Add the locale to `locales` in `project.inlang/settings.json`.
+2. Create `messages/<locale>.json` with every key your app's base-locale file
+   has, starting from
+   `{ "$schema": "https://inlang.com/schema/inlang-message-format" }`.
+3. Restart `dev`.
 
-6. **Ignore generated output** in `.gitignore`: `messages/.generated/` and
-   `src/paraglide/`.
+@hoogin components already translated into that locale switch over; the rest
+fall back to the base locale until the registry ships a bundle (or you override
+their keys, below).
 
-7. **Add scripts** to `package.json`:
+## Override a component's wording
 
-   ```json
-   "i18n": "bun src/i18n/merge-messages.ts && paraglide-js compile --project ./project.inlang --outdir ./src/paraglide --emit-ts-declarations",
-   "typecheck": "bun run i18n && tsc --noEmit"
-   ```
+Add the component's key to your app's `messages/<locale>.json`. It's the last
+path pattern, so it wins and survives reinstalling the component:
 
-   `typecheck` merges and compiles first, so a component referencing a missing key
-   fails the build.
+```json
+{ "dataTable_next": "Next page" }
+```
 
-8. **Tag the document language** in your entry file:
+## Switching locale
 
-   ```ts
-   document.documentElement.lang = getLocale()
-   document.documentElement.dir = getTextDirection()
-   ```
+Call `setLocale(locale)` from `@/paraglide/runtime.js` (the
+`@hoogin/locale-toggle` item does). By default it **reloads the page** under
+every strategy — with the URL strategy it navigates to the localized URL. Two
+consequences:
 
-Done when `bun run dev` starts clean and `import { m } from
-"@/paraglide/messages.js"` typechecks.
+- `m.*()` calls at module scope (e.g. messages in a zod schema defined outside
+  the component) are safe: they run again after the reload.
+- `getLocale()` can be read in render without subscribing to anything.
+
+Only `setLocale(locale, { reload: false })` breaks this: then module-level
+messages stay in the old language, so build such schemas inside the component.
 
 ## Install a translatable component
 
@@ -139,50 +140,12 @@ Done when `bun run dev` starts clean and `import { m } from
 bunx --bun shadcn@latest add @hoogin/data-table
 ```
 
-The CLI copies the component and its message bundles; the first install also pulls
-`@hoogin/i18n`. With `dev` running, the merge plugin picks up the files;
+The CLI copies the component and its message bundles; the first install also
+pulls `@hoogin/i18n`. With `dev` running, the merge plugin picks up the files;
 otherwise restart it.
-
-## Add a language
-
-1. Add the locale to `locales` in `project.inlang/settings.json`.
-2. Create `messages/<locale>.json` for your own strings, starting from
-   `{ "$schema": "https://inlang.com/schema/inlang-message-format" }`.
-3. Restart `dev`.
-
-Components already translated into that locale appear; the rest fall back to `en`.
-
-## Override a component's wording
-
-Add the key to your app's `messages/<locale>.json`. It's the last path pattern, so
-it wins and survives reinstalling the component:
-
-```json
-{ "dataTable_next": "Next page" }
-```
-
-## Use messages in your own code
-
-Import from `@/paraglide/messages.js` — shadcn doesn't rewrite this path:
-
-```tsx
-import { m } from "@/paraglide/messages.js"
-
-<Button>{m.dataTable_previous()}</Button>
-<span>{m.dataTable_pageOf({ page, total })}</span>
-```
-
-Format dates, numbers, and currency through the shipped helpers so output follows
-the active locale. Reach for these over `toLocaleDateString()`, which reads the
-system locale instead:
-
-```ts
-import { formatDate, formatNumber, formatCurrency } from "@/lib/i18n/format"
-```
 
 ## Conventions
 
-- Keys are flat and prefixed by component name: `dataTable_next`, `signinForm_email`.
 - Override wording in `messages/<locale>.json`. Never edit installed bundles under
   `src/messages/registry/` — `shadcn add --overwrite` replaces them; change the
   wording in the registry instead.
@@ -197,14 +160,14 @@ import { formatDate, formatNumber, formatCurrency } from "@/lib/i18n/format"
 | Can't resolve `@/paraglide/messages` | `outdir` or `@` alias differs | use `outdir: "./src/paraglide"` and map `@` → `src` |
 | Plugin can't find `project.inlang/settings.json` | Vite started from a workspace root | pass `root` in the plugin options |
 | `[i18n] Key "x" defined by both "a" and "b"` | two components share a key | rename one with its component prefix |
-| A string stays English in another locale | component has no bundle for that locale | add the translation in the registry, or override it in the app |
+| A string stays in the base language in another locale | key missing from that locale's file, or the component has no bundle for it | add the key to `messages/<locale>.json` |
+| Text stays in the old language after switching | `setLocale(…, { reload: false })` with module-level messages | let `setLocale` reload, or build those messages in the component |
 | Dev server recompiles in a loop | something else writes `messages/.generated/` | let only the merge plugin write there |
 
 ## References
 
-- `references/architecture.md` — the merge flow, the base item's three files, and
-  why your app's messages win.
-- `references/localized-urls.md` — translate path segments, plus the
-  `deLocalizeUrl` absolute-URL gotcha and nav active-state.
-- Authoring or shipping a translatable component inside the registry repo is a
-  different job — use the `hgn-translating-components` skill.
+- `references/setup.md` — the one-time setup, for an app without Paraglide yet.
+- `references/architecture.md` — the merge flow, the base item's three files,
+  and why your app's messages win.
+- `references/localized-urls.md` — optional locale-prefixed and translated URLs,
+  plus the `deLocalizeUrl` absolute-URL gotcha and nav active-state.
