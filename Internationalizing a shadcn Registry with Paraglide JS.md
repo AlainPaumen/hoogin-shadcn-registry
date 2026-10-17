@@ -50,9 +50,17 @@ import type { Plugin } from "vite"
 
 export type Options = { root?: string; srcDir?: string; outDir?: string; settings?: string }
 
+// Where `shadcn add` installs the bundles: like the CLI, `src/messages/registry`
+// in projects with a `src/` dir, `messages/registry` otherwise.
+export function defaultSrcDir(root: string) {
+  return fs.existsSync(path.resolve(root, "src"))
+    ? "src/messages/registry"
+    : "messages/registry"
+}
+
 export function mergeRegistryMessages({
   root = process.cwd(),
-  srcDir = "messages/registry",
+  srcDir = defaultSrcDir(root),
   outDir = "messages/.generated",
   settings = "project.inlang/settings.json",
 }: Options = {}) {
@@ -108,7 +116,7 @@ export function registryMessages(options: Options = {}): Plugin {
       mergeRegistryMessages(opts)
     },
     configureServer(server) {
-      const src = path.resolve(opts.root!, opts.srcDir ?? "messages/registry")
+      const src = path.resolve(opts.root!, opts.srcDir ?? defaultSrcDir(opts.root!))
       server.watcher.add(src)
       const onChange = (f: string) => {
         if (f.startsWith(src) && f.endsWith(".json")) mergeRegistryMessages(opts)
@@ -231,7 +239,7 @@ Components import messages from `@/paraglide/messages`. shadcn rewrites its own 
 
 ## Authoring a translatable component
 
-A translatable component is a normal registry item plus one `registry:file` entry per locale, each with a `target` under `messages/registry/<component>/`.
+A translatable component is a normal registry item plus one `registry:file` entry per locale, each with a `target` under `messages/registry/<component>/`. Like any target without a `~/` prefix, the CLI resolves it under `src/` in projects that have one, so the bundles land in `src/messages/registry/<component>/` there — the folder the merge plugin reads by default.
 
 ### Registry item
 
@@ -314,7 +322,7 @@ The registry repo runs the same Paraglide setup as a consumer, so components com
 registryMessages({ srcDir: "registry/messages" })
 ```
 
-Because `registry/messages/<component>/<locale>.json` has the same shape as the install target `messages/registry/<component>/<locale>.json`, paths map one-to-one. The registry's `project.inlang/settings.json` lists every locale we ship, and a newly added locale simply falls back to \`en\` until its translations arrive.
+Because `registry/messages/<component>/<locale>.json` has the same shape as the install target `messages/registry/<component>/<locale>.json` (under `src/` in a `src/` project), paths map one-to-one. The registry's `project.inlang/settings.json` lists every locale we ship, and a newly added locale simply falls back to \`en\` until its translations arrive.
 
 Registry layout:
 
@@ -378,7 +386,7 @@ Add the same key to the app's `messages/<locale>.json`. Because it is the last p
 
 ### Update a component
 
-Re-run `shadcn add` for the component and accept the overwrite prompts. Message files in `messages/registry/` are replaced, while app-level overrides in `messages/<locale>.json` stay intact.
+Re-run `shadcn add` for the component and accept the overwrite prompts. Message files in `src/messages/registry/` (`messages/registry/` without `src/`) are replaced, while app-level overrides in `messages/<locale>.json` stay intact.
 
 ### CI
 

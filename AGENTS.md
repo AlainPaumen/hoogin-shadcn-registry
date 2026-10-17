@@ -15,9 +15,9 @@ Promotion rule: when a component inside a block is reused elsewhere, promote it 
 
 ### TanStack Table (v9)
 
-- Tables use the v9 API: `useTable({ features, ... })`. Features + row models are declared once per functional area via `tableFeatures({...})` — the shared set for data-table lives in `ui/data-table/data-table.types.ts` (`dataTableFeatures`) and is embedded in `DataTableColumnDef`, so consumers define columns without touching features.
+- Tables use the v9 API: `useTable({ features, ... })`. Features + row models are declared once per functional area via `tableFeatures({...})` — the shared set for data-table lives in `ui/data-table/data-table-features.ts` (`dataTableFeatures`, type `DataTableFeatures`) and is embedded in `DataTableColumnDef` (`ui/data-table/data-table.types.ts`), so consumers define columns without touching features.
 - New table-based components should reuse `dataTableFeatures` or declare their own minimal `tableFeatures({...})`; never import row-model factories as table options (v8 style).
-- All generic table types require `TData extends RowData`; components that receive a table instance take `ReactTable<typeof dataTableFeatures, TData>`; read state via `table.state.*`, never `table.getState()`.
+- All generic table types require `TData extends RowData`; components that receive a table instance take `ReactTable<DataTableFeatures, TData>`; read state via `table.state.*`, never `table.getState()`.
 
 - Components pulled in from shadcn (official registry, blocks, or other third-party registries) stay wherever the CLI installs them (`src/components/ui/`, `src/components/`).
 - Anything under `src/hoogin/` is own code; anything outside it is third-party shadcn code.
