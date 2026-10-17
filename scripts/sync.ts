@@ -91,9 +91,43 @@ async function warnUnregistered() {
     }
     return out
   }
-  for (const file of await walk(join(hooginDir, "ui"))) {
+  const bundles = join(exampleMessages, "registry")
+  for (const file of [...(await walk(join(hooginDir, "ui"))), ...(await walk(bundles))]) {
     if (!registered.has(file) && !file.endsWith("registry.json")) {
       console.log(`  ! ${file} is not registered in registry/ui/registry.json`)
+    }
+  }
+}
+
+// Every component ships a bundle for every locale in the example's inlang
+// settings, with the base locale's keys; a gap only shows up as English text.
+async function warnMessageBundles() {
+  const settings = JSON.parse(
+    await readFile(join(exampleDir, "project.inlang", "settings.json"), "utf8")
+  )
+  const locales: string[] = settings.locales ?? []
+  const base: string = settings.baseLocale ?? "en"
+  const bundles = join(exampleMessages, "registry")
+  const keysOf = async (file: string) =>
+    Object.keys(JSON.parse(await readFile(file, "utf8")))
+      .filter((key) => key !== "$schema")
+      .sort()
+      .join(",")
+  for (const entry of await readdir(bundles, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+    const dir = join(bundles, entry.name)
+    const present = new Set(await readdir(dir))
+    const baseKeys = present.has(`${base}.json`)
+      ? await keysOf(join(dir, `${base}.json`))
+      : undefined
+    for (const locale of locales) {
+      if (!present.has(`${locale}.json`)) {
+        console.log(`  ! ${entry.name}: missing locale ${locale}.json`)
+      } else if (baseKeys !== undefined && locale !== base) {
+        if ((await keysOf(join(dir, `${locale}.json`))) !== baseKeys) {
+          console.log(`  ! ${entry.name}: keys differ between ${base}.json and ${locale}.json`)
+        }
+      }
     }
   }
 }
@@ -108,7 +142,10 @@ async function syncAll() {
         : { name: pair.name, from: pair.example, to: pair.registry }
     )
   }
-  if (!reverse) await warnUnregistered()
+  if (!reverse) {
+    await warnUnregistered()
+    await warnMessageBundles()
+  }
   await generateRegistryConfig()
   console.log(`Synced ${files.length} file(s) (${reverse ? "registry → example" : "example → registry"}).`)
 }

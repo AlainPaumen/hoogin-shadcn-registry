@@ -14,26 +14,35 @@ m.dataTable_pageOf({ page, total })
 
 ## Plurals
 
-Plurals use Paraglide **variants**, backed by `Intl.PluralRules`. The selector name
-and categories come from the number of plural forms the target locale needs.
+Plurals use Paraglide **variants**, backed by `Intl.PluralRules`. This is the
+shipped `dataTable_rowsSelected` message
+(`example/src/messages/registry/data-table/en.json`), which compiles with
+Paraglide 2.x — copy its shape:
 
 ```json
 "dataTable_rowsSelected": [
   {
-    "declarations": ["input count", "local countPlural = count: plural"],
+    "declarations": [
+      "input selected",
+      "input total",
+      "local countPlural = selected: plural"
+    ],
     "selectors": ["countPlural"],
     "match": {
-      "countPlural=one": "{count} row selected",
-      "countPlural=other": "{count} rows selected"
+      "countPlural=one": "{selected} of {total} row selected.",
+      "countPlural=other": "{selected} of {total} rows selected."
     }
   }
 ]
 ```
 
-`one` and `other` are the categories English needs; other locales add their own
-(`few`, `many`, …). Verify the exact syntax against the current inlang
-message-format docs before relying on it — it has changed between Paraglide
-versions.
+```tsx
+m.dataTable_rowsSelected({ selected: selectedCount, total: rowCount })
+```
+
+Every `input` becomes a parameter; the `local … : plural` declaration picks the
+plural category of one of them. `one` and `other` are the categories English and
+Dutch need; other locales add their own (`few`, `many`, …) in their own bundle.
 
 ## Strings hidden in shadcn primitives
 

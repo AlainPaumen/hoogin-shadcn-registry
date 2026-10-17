@@ -4,7 +4,7 @@ description: Make a @hoogin registry component translatable — add per-locale m
 user-invocable: true
 ---
 
-# Translate a component
+# Translating components
 
 A translatable component is a normal registry item plus **one message bundle per
 locale** (a `registry:file`), read through type-safe `m.*()` calls.
@@ -23,8 +23,11 @@ locale** (a `registry:file`), read through type-safe `m.*()` calls.
 ## Steps
 
 1. **Write the bundles** under `example/src/messages/registry/<component>/` — one
-   `<locale>.json` per locale, `en.json` always (it is the fallback). Keys are
-   flat and prefixed with the component name.
+   `<locale>.json` for **every** locale in `example/project.inlang/settings.json`
+   (today `en` and `nl`), all with the same keys. A missing locale doesn't fail
+   anything: those users silently get the English fallback. `scripts/sync.ts`
+   warns about missing locale files and mismatched keys. Keys are flat and
+   prefixed with the component name.
 2. **Read them** with `m.*()`, importing from `@/paraglide/messages.js`:
 
    ```tsx
@@ -37,7 +40,9 @@ locale** (a `registry:file`), read through type-safe `m.*()` calls.
    ```
 
    Replace every user-facing string — visible text, `aria-label`, `placeholder`,
-   screen-reader text, and titles.
+   screen-reader text, titles, and the validation messages in the component's
+   zod schemas (`z.email(m.signinForm_invalidEmail())`; see the
+   `hgn-building-forms` skill for the form rules).
 3. **Register the bundles** on the item in `registry/ui/registry.json` (shape
    below) and add `@hoogin/i18n` to `registryDependencies`.
 4. **Sync and verify** (below).
@@ -90,8 +95,8 @@ Every locale gets its own entry. `scripts/sync.ts` copies the source
   key.
 - Values take params: `"dataTable_pageOf": "Page {page} of {total}"` →
   `m.dataTable_pageOf({ page, total })`.
-- Ship `en` for every component — it is the fallback for any locale missing the
-  key.
+- Ship every configured locale for every component, with identical keys. `en`
+  is the base locale: it is what users of a missing locale fall back to.
 
 Plural/variant syntax and the English hidden inside shadcn primitives:
 `references/message-format.md`.
@@ -119,7 +124,8 @@ From the repo root, in order:
 3. `bunx --bun shadcn@latest build` then
    `bunx --bun shadcn@latest registry validate ./registry.json`
 
-Done when every step passes.
+Done when every step passes and `sync.ts` printed no `missing locale` or
+`keys differ` warnings.
 
 ## References
 
