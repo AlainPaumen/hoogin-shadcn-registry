@@ -1,5 +1,5 @@
 ---
-name: translate-component
+name: hgn-translating-components
 description: Make a @hoogin registry component translatable — add per-locale message bundles, register them on the registry item, and read them with type-safe m.*() calls, including plurals and the English hidden inside shadcn primitives. Use when authoring or shipping a translatable component inside the hoogin registry repo, or when a component's strings are still hardcoded English.
 user-invocable: true
 ---
@@ -101,7 +101,7 @@ Plural/variant syntax and the English hidden inside shadcn primitives:
 From the repo root:
 
 ```bash
-bun .agents/skills/translate-component/scripts/add-locale.ts nl --root example
+bun .agents/skills/hgn-translating-components/scripts/add-locale.ts nl --root example
 ```
 
 Adds the locale to `example/project.inlang/settings.json`, creates

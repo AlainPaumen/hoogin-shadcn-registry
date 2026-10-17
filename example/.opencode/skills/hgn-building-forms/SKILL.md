@@ -1,5 +1,5 @@
 ---
-name: form-builder
+name: hgn-building-forms
 description: Build a form with the @hoogin form components (TanStack Form v1 + zod v4) — auth, settings, create/edit entity forms, and forms driven by AdminPage. Use when asked to build/add a form or a form field, wire validation, or when the work touches useForm, FormBody/FormFooter/FormError, or any Form*Field component.
 user-invocable: true
 ---
@@ -40,7 +40,7 @@ bunx --bun shadcn@latest add @hoogin/form-fields
 15 files land in `src/hoogin/ui/forms/`; deps pull `input`, `input-group`,
 `checkbox`, `select`, `textarea`, `button`, `calendar`, `popover` plus
 `@tanstack/react-form`, `date-fns`, `lucide-react`, `react-day-picker`.
-The same item installs this skill to `.opencode/skills/form-builder/`; re-run
+The same item installs this skill to `.opencode/skills/hgn-building-forms/`; re-run
 the command with `--overwrite` to update both the components and the skill.
 
 ## Recipe

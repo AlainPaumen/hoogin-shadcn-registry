@@ -1,1 +1,0 @@
-../../../example/.opencode/skills/form-builder/SKILL.md

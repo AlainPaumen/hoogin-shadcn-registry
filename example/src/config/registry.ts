@@ -395,7 +395,7 @@ export const registryItems: RegistryItem[] = [
     "name": "form-fields",
     "type": "registry:ui",
     "title": "Form Fields",
-    "description": "Form layout and field components for TanStack Form with zod validation. Ships the form-builder agent skill.",
+    "description": "Form layout and field components for TanStack Form with zod validation. Ships the hgn-building-forms agent skill.",
     "dependencies": [
       "@tanstack/react-form",
       "date-fns",
@@ -500,9 +500,9 @@ export const registryItems: RegistryItem[] = [
         "target": "messages/registry/form-fields/nl.json"
       },
       {
-        "path": "skills/form-builder/SKILL.md",
+        "path": "skills/hgn-building-forms/SKILL.md",
         "type": "registry:file",
-        "target": "~/.opencode/skills/form-builder/SKILL.md"
+        "target": "~/.opencode/skills/hgn-building-forms/SKILL.md"
       }
     ]
   },
@@ -637,7 +637,7 @@ export const registryItems: RegistryItem[] = [
     "name": "i18n",
     "type": "registry:lib",
     "title": "I18n",
-    "description": "Paraglide JS setup for translated registry components: a Vite plugin that merges per-component message bundles into the Paraglide project, a standalone merge script, and locale-aware date, number, and currency formatters. Ships the add-i18n agent skill.",
+    "description": "Paraglide JS setup for translated registry components: a Vite plugin that merges per-component message bundles into the Paraglide project, a standalone merge script, and locale-aware date, number, and currency formatters. Ships the hgn-internationalizing-apps agent skill.",
     "dependencies": [
       "@inlang/paraglide-js"
     ],
@@ -658,19 +658,19 @@ export const registryItems: RegistryItem[] = [
         "target": "lib/i18n/format.ts"
       },
       {
-        "path": "skills/add-i18n/SKILL.md",
+        "path": "skills/hgn-internationalizing-apps/SKILL.md",
         "type": "registry:file",
-        "target": "~/.opencode/skills/add-i18n/SKILL.md"
+        "target": "~/.opencode/skills/hgn-internationalizing-apps/SKILL.md"
       },
       {
-        "path": "skills/add-i18n/references/architecture.md",
+        "path": "skills/hgn-internationalizing-apps/references/architecture.md",
         "type": "registry:file",
-        "target": "~/.opencode/skills/add-i18n/references/architecture.md"
+        "target": "~/.opencode/skills/hgn-internationalizing-apps/references/architecture.md"
       },
       {
-        "path": "skills/add-i18n/references/localized-urls.md",
+        "path": "skills/hgn-internationalizing-apps/references/localized-urls.md",
         "type": "registry:file",
-        "target": "~/.opencode/skills/add-i18n/references/localized-urls.md"
+        "target": "~/.opencode/skills/hgn-internationalizing-apps/references/localized-urls.md"
       }
     ]
   }

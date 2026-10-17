@@ -1,5 +1,5 @@
 ---
-name: add-i18n
+name: hgn-internationalizing-apps
 description: Add internationalization to a Vite + TanStack Router app with Paraglide JS and the @hoogin/i18n registry item (locale from cookie/browser, or optionally locale-prefixed URLs) — install translatable components, add a language, override wording, and format dates and numbers by locale. Use when asked to add i18n/localization, add or switch a language/locale, install a translatable @hoogin component, or debug strings stuck in the wrong language.
 user-invocable: true
 ---
@@ -54,7 +54,7 @@ config, so only steps 1–2 are commands; the rest are edits.
 2. **Add the base item.** `bunx --bun shadcn@latest add @hoogin/i18n` — installs
    `src/i18n/vite-plugin-registry-messages.ts`, `src/i18n/merge-messages.ts`,
    `src/lib/i18n/format.ts`, `@inlang/paraglide-js`, and this skill
-   (`.opencode/skills/add-i18n/`).
+   (`.opencode/skills/hgn-internationalizing-apps/`).
 3. **Register the merge plugin before Paraglide** in `vite.config.ts`:
 
    ```ts
@@ -207,4 +207,4 @@ import { formatDate, formatNumber, formatCurrency } from "@/lib/i18n/format"
 - `references/localized-urls.md` — translate path segments, plus the
   `deLocalizeUrl` absolute-URL gotcha and nav active-state.
 - Authoring or shipping a translatable component inside the registry repo is a
-  different job — use the `translate-component` skill.
+  different job — use the `hgn-translating-components` skill.
