@@ -16,7 +16,7 @@ import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
 const signupSchema = z.object({
   firstName: z.string().min(1, m.signupForm_required()),
   lastName: z.string().min(1, m.signupForm_required()),
-  email: z.string().email(m.signupForm_invalidEmail()),
+  email: z.email(m.signupForm_invalidEmail()),
   password: z.string().min(1, m.signupForm_required()),
   confirmPassword: z.string().min(1, m.signupForm_required()),
 })

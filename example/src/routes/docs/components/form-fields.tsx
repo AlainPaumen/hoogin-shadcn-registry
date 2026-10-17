@@ -44,7 +44,7 @@ const roleLabels = {
 
 const signUpSchema = z.object({
   fullName: z.string().min(3, "Full name must be at least 3 characters"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
   role: z.enum(roles),
   birthDate: z.string().min(1, "Required"),
@@ -229,7 +229,7 @@ import { z } from "zod"
 
 const signUpSchema = z.object({
   fullName: z.string().min(3),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(8),
   role: z.enum(["user", "admin", "editor"]),
   birthDate: z.string().min(1),

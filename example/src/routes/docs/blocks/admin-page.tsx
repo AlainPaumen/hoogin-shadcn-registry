@@ -57,7 +57,7 @@ type Payment = {
 const paymentSchema = z.object({
   id: z.string().min(1, "Required"),
   username: z.string().min(3, "Username must be at least 3 characters"),
-  email: z.string().email("Invalid email address"),
+  email: z.email("Invalid email address"),
   status: z.enum(statuses),
   createdAt: z.string().min(1, "Required"),
   amount: z.number().positive("Amount must be greater than zero"),
@@ -315,7 +315,7 @@ import { z } from "zod"
 
 export const paymentSchema = z.object({
   username: z.string().min(3),
-  email: z.string().email(),
+  email: z.email(),
   status: z.enum(["active", "pending", "refunded", "cancelled"]),
   createdAt: z.string().min(1),
   amount: z.number().positive(),

@@ -12,7 +12,7 @@ import { FormPasswordField } from "@/hoogin/ui/forms/form-password.field"
 import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
 
 const signinSchema = z.object({
-  email: z.string().email(m.signinForm_invalidEmail()),
+  email: z.email(m.signinForm_invalidEmail()),
   password: z.string().min(1, m.signinForm_required()),
 })
 
