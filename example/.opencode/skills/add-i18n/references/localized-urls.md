@@ -1,6 +1,10 @@
 # Localized URLs
 
-By default Paraglide only *prefixes* the locale (`/nl/docs`). This reference adds
+Optional. Only applies when `strategy` includes `"url"` and the router rewrite
+from the main skill's step 5 is in place — a cookie/browser-language setup has
+no locale in the URL and needs none of this.
+
+With the URL strategy, Paraglide only *prefixes* the locale (`/nl/docs`). This reference adds
 **translated path segments** (`/nl/documentatie/introductie`) via the router
 rewrite, and covers the two traps that come with it.
 

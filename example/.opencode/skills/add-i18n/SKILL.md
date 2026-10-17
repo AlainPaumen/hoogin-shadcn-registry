@@ -1,14 +1,15 @@
 ---
 name: add-i18n
-description: Add internationalization to a Vite + TanStack Router app with Paraglide JS, wiring locale-prefixed URLs and the @hoogin/i18n registry item — install translatable components, add a language, override wording, and format dates and numbers by locale. Use when asked to add i18n/localization, add or switch a language/locale, install a translatable @hoogin component, or debug strings stuck in the wrong language.
+description: Add internationalization to a Vite + TanStack Router app with Paraglide JS and the @hoogin/i18n registry item (locale from cookie/browser, or optionally locale-prefixed URLs) — install translatable components, add a language, override wording, and format dates and numbers by locale. Use when asked to add i18n/localization, add or switch a language/locale, install a translatable @hoogin component, or debug strings stuck in the wrong language.
 user-invocable: true
 ---
 
 # Add i18n
 
 Wire Paraglide JS into a Vite + TanStack Router app so that @hoogin registry
-components and your own strings render in the active locale. The locale lives in
-the URL, and every translatable component ships its own message bundles.
+components and your own strings render in the active locale. The locale comes
+from a cookie and the browser language by default (a locale in the URL is an
+optional extra), and every translatable component ships its own message bundles.
 
 ## Contents
 
@@ -33,8 +34,9 @@ the URL, and every translatable component ships its own message bundles.
 ## How it works
 
 A translatable component ships one message bundle per locale (a `registry:file`
-that installs to `messages/registry/<component>/<locale>.json`). A Vite plugin
-merges those with your app's `messages/<locale>.json` into `messages/.generated/`,
+that installs to `src/messages/registry/<component>/<locale>.json` — or
+`messages/registry/...` in a project without `src/`). A Vite plugin merges those
+with your app's `messages/<locale>.json` into `messages/.generated/`,
 and Paraglide compiles the result into typed functions in `src/paraglide/`. Your
 app's `messages/<locale>.json` is the last path pattern, so it overrides any
 component string and survives reinstalling the component.
@@ -51,7 +53,8 @@ config, so only steps 1–2 are commands; the rest are edits.
    `project.inlang/` and `messages/en.json`. Done when both exist.
 2. **Add the base item.** `bunx --bun shadcn@latest add @hoogin/i18n` — installs
    `src/i18n/vite-plugin-registry-messages.ts`, `src/i18n/merge-messages.ts`,
-   `src/lib/i18n/format.ts`, and `@inlang/paraglide-js`.
+   `src/lib/i18n/format.ts`, `@inlang/paraglide-js`, and this skill
+   (`.opencode/skills/add-i18n/`).
 3. **Register the merge plugin before Paraglide** in `vite.config.ts`:
 
    ```ts
@@ -65,13 +68,17 @@ config, so only steps 1–2 are commands; the rest are edits.
          project: "./project.inlang",
          outdir: "./src/paraglide",
          emitTsDeclarations: true,
-         strategy: ["url", "baseLocale"],
+         // Stored choice, then the browser language. Prepend "url" for
+         // locale-prefixed URLs (step 5).
+         strategy: ["cookie", "preferredLanguage", "baseLocale"],
        }),
      ],
    })
    ```
 
-   Done when `registryMessages()` is listed above `paraglideVitePlugin`.
+   Done when `registryMessages()` is listed above `paraglideVitePlugin`. It needs
+   no options: it reads the bundles from where `shadcn add` puts them
+   (`src/messages/registry`, or `messages/registry` without `src/`).
 
 4. **Point Paraglide at both message sources** in `project.inlang/settings.json`.
    The last pattern wins:
@@ -82,7 +89,9 @@ config, so only steps 1–2 are commands; the rest are edits.
    }
    ```
 
-5. **Locale-prefix the router** in `router.tsx`:
+5. **Optional — locale in the URL.** Skip this unless you want `/nl/...` URLs
+   (shareable, crawlable per locale). Prepend `"url"` to `strategy` in step 3,
+   then rewrite the router's URLs in `router.tsx`:
 
    ```ts
    import { deLocalizeUrl, localizeUrl } from "@/paraglide/runtime.js"
@@ -98,6 +107,8 @@ config, so only steps 1–2 are commands; the rest are edits.
 
    The base locale (`en`) stays unprefixed; every other locale gets `/nl/...`. To
    translate the path segments themselves, see `references/localized-urls.md`.
+   Without this step, switch locales with `setLocale()` from
+   `@/paraglide/runtime.js` (the `@hoogin/locale-toggle` item does that).
 
 6. **Ignore generated output** in `.gitignore`: `messages/.generated/` and
    `src/paraglide/`.
@@ -172,9 +183,9 @@ import { formatDate, formatNumber, formatCurrency } from "@/lib/i18n/format"
 ## Conventions
 
 - Keys are flat and prefixed by component name: `dataTable_next`, `signinForm_email`.
-- Override wording in `messages/<locale>.json`. Edit installed bundles under
-  `messages/registry/` only when you mean to change the registry's default — a
-  re-install replaces that folder.
+- Override wording in `messages/<locale>.json`. Never edit installed bundles under
+  `src/messages/registry/` — `shadcn add --overwrite` replaces them; change the
+  wording in the registry instead.
 - `messages/.generated/` and `src/paraglide/` are build output; the merge plugin
   and Paraglide own them.
 

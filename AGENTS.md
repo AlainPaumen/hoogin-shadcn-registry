@@ -7,6 +7,8 @@ Own (hoogin) code lives in `example/src/hoogin/` in the example app, grouped by 
 - `src/hoogin/ui/<group>/` — reusable `registry:ui` components, one folder per functional group: `navigation/` (sidebar, app-sidebar, nav-*), `data-table/` (table + toolbar/pagination/view-options/faceted-filter + `cells/`), `forms/` (form + all `*.field.tsx`), `theme/`, `auth/`. Ungroupable singletons sit at the `ui/` root (currently `spinner.tsx`). Start a new group when ≥3 related files accumulate.
 - `src/hoogin/blocks/<name>/` — more complex layouts (`sidebar-layout`, `admin-page`, `signin-page`, `signup-page`). These are the `registry:block` items.
 - `src/hoogin/layout/` — example-app-only layout pieces (`base_layout`, `command-menu`, `error-boundary`). Not registered.
+- `src/messages/registry/<item>/<locale>.json` — per-item message bundles, exactly where `shadcn add` installs them in a consumer (`registry:file` targets `messages/registry/...` resolve under `src/`). The `@hoogin/i18n` merge plugin defaults to this folder (`messages/registry` in projects without `src/`).
+- `.opencode/skills/<skill>/` (in `example/`) — agent skills shipped to consumers as `registry:file` items with `~/`-prefixed targets (`~/` = consumer project root): `form-builder` (in `form-fields`), `add-i18n` (in `i18n`). Consumer content only; registry-maintainer notes stay in the repo-root `.agents/skills/` (which symlinks the shared files, e.g. `.agents/skills/add-i18n` → `example/.opencode/skills/add-i18n`).
 - `src/hoogin/docs/` — documentation-site building blocks (`doc-page`, `code-block`, `preview`, `props-table`, ...). Dev/docs only — never registered or synced.
 
 Promotion rule: when a component inside a block is reused elsewhere, promote it to the matching `ui/<group>/` if that makes sense.
@@ -60,7 +62,7 @@ end;
 ## Development workflow (example ↔ registry)
 
 - The example app is both the development site (HMR) and the documentation site. Docs routes live in `example/src/routes/docs/` and render live components from `example/src/hoogin/`.
-- `bun run scripts/sync.ts` — syncs every file declared in `registry/ui/registry.json` between `example/src/hoogin/` (derived from each file's install `target`) and its payload path in `registry/ui/`, **and regenerates `example/src/config/registry.ts`** (typed item metadata from `registry/ui/registry.json`, used to drive docs install commands + descriptions). No per-file mappings are hardcoded — register a new item and it syncs automatically.
+- `bun run scripts/sync.ts` — syncs every file declared in `registry/ui/registry.json` between `example/src/hoogin/` (derived from each file's install `target`) and its payload path in `registry/ui/`, **and regenerates `example/src/config/registry.ts`** (typed item metadata from `registry/ui/registry.json`, used to drive docs install commands + descriptions). No per-file mappings are hardcoded — register a new item and it syncs automatically. Example paths follow the CLI's resolution in a `src/` project: `~/x` → `example/x`, anything else → `example/src/x`.
 - `bun run scripts/sync.ts --watch` — watch (recursively) and re-sync on save
 - `bun run scripts/sync.ts --reverse` — copy registry → example
 - Only files referenced by items in `registry/ui/registry.json` are registry payloads; the script warns when a `ui/` file is not part of any registered item. Register new items there (multi-file items list every file with a `target`) before building.

@@ -395,7 +395,7 @@ export const registryItems: RegistryItem[] = [
     "name": "form-fields",
     "type": "registry:ui",
     "title": "Form Fields",
-    "description": "Form layout and field components for TanStack Form with zod validation.",
+    "description": "Form layout and field components for TanStack Form with zod validation. Ships the form-builder agent skill.",
     "dependencies": [
       "@tanstack/react-form",
       "date-fns",
@@ -498,6 +498,11 @@ export const registryItems: RegistryItem[] = [
         "path": "messages/form-fields/nl.json",
         "type": "registry:file",
         "target": "messages/registry/form-fields/nl.json"
+      },
+      {
+        "path": "skills/form-builder/SKILL.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/form-builder/SKILL.md"
       }
     ]
   },
@@ -632,7 +637,7 @@ export const registryItems: RegistryItem[] = [
     "name": "i18n",
     "type": "registry:lib",
     "title": "I18n",
-    "description": "Paraglide JS setup for translated registry components: a Vite plugin that merges per-component message bundles into the Paraglide project, a standalone merge script, and locale-aware date, number, and currency formatters.",
+    "description": "Paraglide JS setup for translated registry components: a Vite plugin that merges per-component message bundles into the Paraglide project, a standalone merge script, and locale-aware date, number, and currency formatters. Ships the add-i18n agent skill.",
     "dependencies": [
       "@inlang/paraglide-js"
     ],
@@ -651,6 +656,21 @@ export const registryItems: RegistryItem[] = [
         "path": "i18n/format.ts",
         "type": "registry:lib",
         "target": "lib/i18n/format.ts"
+      },
+      {
+        "path": "skills/add-i18n/SKILL.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/add-i18n/SKILL.md"
+      },
+      {
+        "path": "skills/add-i18n/references/architecture.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/add-i18n/references/architecture.md"
+      },
+      {
+        "path": "skills/add-i18n/references/localized-urls.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/add-i18n/references/localized-urls.md"
       }
     ]
   }
