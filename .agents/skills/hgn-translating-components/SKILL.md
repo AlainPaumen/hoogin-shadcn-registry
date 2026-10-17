@@ -1,6 +1,6 @@
 ---
 name: hgn-translating-components
-description: Make a @hoogin registry component translatable — add per-locale message bundles, register them on the registry item, and read them with type-safe m.*() calls, including plurals and the English hidden inside shadcn primitives. Use when authoring or shipping a translatable component inside the hoogin registry repo, or when a component's strings are still hardcoded English.
+description: Makes @hoogin registry components translatable — per-locale message bundles for every configured locale, registry.json entries, type-safe m.*() calls, plurals, and the English hidden in shadcn primitives. Use when authoring or shipping a translatable component inside the hoogin registry repo, adding a locale to the registry, or when a component still has hardcoded English.
 user-invocable: true
 ---
 
@@ -8,17 +8,6 @@ user-invocable: true
 
 A translatable component is a normal registry item plus **one message bundle per
 locale** (a `registry:file`), read through type-safe `m.*()` calls.
-
-## Contents
-
-- [Steps](#steps)
-- [Registry item shape](#registry-item-shape)
-- [Key conventions](#key-conventions)
-- [Add a locale across the registry](#add-a-locale-across-the-registry)
-- [Verification](#verification)
-- [References](#references)
-
----
 
 ## Steps
 

@@ -1,73 +1,26 @@
 ---
 name: hgn-building-forms
-description: Use when building or changing a form, a form field or form validation with the @hoogin form components (TanStack Form v1 + zod v4) — auth, settings and create/edit entity forms (for forms inside AdminPage, also see hgn-building-admin-pages). Also applies when the work touches useForm, FormBody/FormFooter/FormError, or any Form*Field component.
+description: Builds forms with the @hoogin form components (TanStack Form v1, zod v4) — typed Form*Field controls, field-level zod validation, translated messages, server errors. Use when building or changing a form, a form field or form validation (sign-in, settings, create/edit entity forms), or when code touches useForm, Form/FormBody/FormFooter/FormError or a Form*Field. For forms inside AdminPage, also use hgn-building-admin-pages.
 user-invocable: true
 ---
 
 # Building forms
 
-Composes forms out of `@hoogin/form-fields`. Do not hand-roll `<input>` +
-validation — every control, label, error slot and a11y wiring already exists.
+Compose forms from `@hoogin/form-fields`: every control, label, error slot and
+a11y wiring exists already — never hand-roll `<input>` + validation.
 
-## Contents
-
-- [Requires](#requires)
-- [Setup](#setup)
-- [Recipe](#recipe)
-- [Fields](#fields)
-- [Rules](#rules)
-- [Server errors](#server-errors)
-- [Inside AdminPage](#inside-adminpage)
-- [Verification](#verification)
-
----
-
-## Requires
-
-- `@tanstack/react-form` **v1** (`^1.x`) — v0's `mode: "onSubmit"` API is not
-  compatible; the recipe and every rule below are v1-only.
-- `zod` **v4** (`^4.x`) — `z.email()`, `z.number({ error: "…" })` and
-  `z.enum(values, { error: "…" })` are v4 syntax (v3 wants
-  `z.string().email()` and `invalid_type_error`).
-- A **client-rendered SPA**: React + Vite, no server entry, no RSC. Form files
-  are plain client components, so no `"use client"` directive — add one only if
-  the host app renders them through a server component boundary.
-- Paraglide JS for messages (`@/paraglide/messages.js`), set up as in the
-  `hgn-internationalizing-apps` skill.
-
-## Setup
-
-```bash
-bunx --bun shadcn@latest add @hoogin/form-fields
-```
-
-The form components land in `src/hoogin/ui/forms/` (plus a shared
-`src/hoogin/ui/data-table/cells/formatters.utils.tsx`); deps pull `input`,
-`input-group`, `checkbox`, `select`, `textarea`, `button`, `calendar`,
-`popover` plus `@tanstack/react-form`, `date-fns`, `lucide-react`,
-`react-day-picker`. The same item installs this skill to
-`.opencode/skills/hgn-building-forms/`; re-run the command with `--overwrite`
-to update both the components and the skill. Never edit files under
-`src/hoogin/` — the next `--overwrite` replaces them.
+**TanStack Form v1 and zod v4.** v0 form code and zod v3 syntax
+(`z.string().email()`, `invalid_type_error`) don't apply: use `z.email()`,
+`z.number({ error })`, `z.enum(values, { error })`.
 
 ## Recipe
-
-Every user-facing string — labels, descriptions, validation messages — is a
-message from `m`, never an English literal. Add the keys to the app's
-`messages/<locale>.json`, prefixed with the form's name.
 
 ```tsx
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
 
 import { m } from "@/paraglide/messages.js"
-import {
-  Form,
-  FormBody,
-  FormError,
-  FormFooter,
-  FormHeader,
-} from "@/hoogin/ui/forms/form"
+import { Form, FormBody, FormError, FormFooter, FormHeader } from "@/hoogin/ui/forms/form"
 import { isRequiredField } from "@/hoogin/ui/forms/form.utils"
 import { FormEmailField } from "@/hoogin/ui/forms/form-email.field"
 import { FormTextField } from "@/hoogin/ui/forms/form-text.field"
@@ -79,13 +32,15 @@ const profileSchema = z.object({
 
 type ProfileValues = z.infer<typeof profileSchema>
 
-export type ProfileFormProps = {
+export function ProfileForm({
+  error,
+  onSubmit,
+  onCancel,
+}: {
   error?: string | null
-  onSubmit: (values: ProfileValues) => void | Promise<void>
+  onSubmit: (values: ProfileValues) => Promise<void>
   onCancel: () => void
-}
-
-export function ProfileForm({ error, onSubmit, onCancel }: ProfileFormProps) {
+}) {
   const form = useForm({
     defaultValues: { name: "", email: "" } satisfies ProfileValues,
     onSubmit: async ({ value }) => {
@@ -95,10 +50,7 @@ export function ProfileForm({ error, onSubmit, onCancel }: ProfileFormProps) {
 
   return (
     <Form form={form} className="flex w-full max-w-sm flex-col gap-4">
-      <FormHeader
-        title={m.profileForm_title()}
-        description={m.profileForm_description()}
-      />
+      <FormHeader title={m.profileForm_title()} />
       <FormBody>
         <FormTextField
           form={form}
@@ -122,129 +74,43 @@ export function ProfileForm({ error, onSubmit, onCancel }: ProfileFormProps) {
 }
 ```
 
-A module-level schema reads its messages once, at import. That is fine with
-Paraglide's default `setLocale()`, which reloads the page. If the app switches
-locale without a reload, build the schema inside the component body instead
-(it is cheap), so each render picks up the current locale's messages.
+## Checklist
 
-## Fields
-
-Every field takes `form`, `name`, `label`, `description`, `required`,
-`validators`, `className`, `disabled`. The rest:
-
-| Field | Value type | Extra props |
-| --- | --- | --- |
-| `FormTextField` | `string \| number` | `type`, `placeholder` |
-| `FormEmailField` | `string` | `emailIcon`, `placeholder` |
-| `FormPasswordField` | `string` | `keyIcon`, `autoComplete` (`current-password`), `placeholder` |
-| `FormStrongPasswordField` | `string` | `keyIcon`, `autoComplete` (`new-password`), `placeholder` |
-| `FormNumberField` | `number` | `placeholder` |
-| `FormCurrencyField` | `number` — integer cents | `currencyIcon`, `placeholder` (`0.00`) |
-| `FormDateField` | `string` — `yyyy-MM-dd` | `dateFormat` (`dd/MM/yyyy`), `showMonthYearDropdowns`, `placeholder` |
-| `FormTimeField` | `string` — `HH:MM` | — |
-| `FormSelectField` | `string` | `options: { value: string; label: string }[]` (required), `placeholder` |
-| `FormTextareaField` | `string` | `rows`, `placeholder` |
-| `FormCheckboxField` | `boolean` | — (label goes beside the box) |
-
-**Relations** (a foreign key to another table): no relation field ships. For a
-short list, load the rows with a query and pass them to `FormSelectField` as
-`options` (`value` = the id as a string, `label` = the display name). For a
-long or searchable list, write a custom field (below) around a combobox.
-
-**No field fits?** Write your own: wrap `FormField`, forward
-`Omit<FormFieldProps<TFormData, TName>, "children">`, cast the value, call
-`field.handleChange` on change and `field.handleBlur` on blur (popover controls:
-when the popover closes) — without the blur, its errors never show. Set
-`aria-invalid={field.invalid || undefined}`. Keep it in your app, e.g.
-`src/components/forms/form-<name>.field.tsx`.
+```
+- [ ] One zod schema; each field validates with validators={{ onChange: schema.shape.x }}
+- [ ] required={isRequiredField(schema.shape.x)} on each field
+- [ ] Field component matches the value type (see references/fields.md)
+- [ ] Labels, titles and validation messages are m.*() keys in every locale
+- [ ] FormError gets the error; FormFooter gets onCancel
+- [ ] Typecheck and lint pass — fix and re-run until clean (field-type errors only show there)
+```
 
 ## Rules
 
-1. **Type the value.** `name` is constrained to keys whose value matches the
-   control — a string key on `FormCheckboxField` does not compile. So does the
-   schema: `z.enum` for a select, `z.string()` for date/time, `z.number()` for
-   number/currency, `z.boolean()` for checkbox.
-2. **Messages live in the schema.** Never hand-roll a validator message when
-   zod can say it: `z.email(m.x_invalidEmail())`. Cross-field rules stay inline
-   on the dependent field, which re-validates when the other one changes:
+1. **Validators are field-level only.** Never pass `validators` to `useForm`:
+   such a form no longer matches the type the `Form*Field`s accept. For a
+   whole-object rule, `schema.safeParse(value)` in `onSubmit` and report the
+   failure through `FormError`.
+2. **Cross-field rules** go on the dependent field:
    `validators={{ onChangeListenTo: ["password"], onChange: ({ value, fieldApi }) => value !== fieldApi.form.getFieldValue("password") ? m.x_passwordsDoNotMatch() : undefined }}`.
-3. **`required` is derived, never hardcoded**: `isRequiredField(schema.shape.x)`
-   (`form.utils.ts`).
-4. **Errors show after a touch.** A field shows its message once it has been
-   blurred, or after a submit attempt — not while the user is still typing in
-   a fresh field.
-5. **Number/currency go `NaN` while empty.** `z.number()` then reports
-   `Invalid input: expected number, received NaN`. Use
-   `z.number({ error: m.x_required() })` for the empty state, and
-   `z.enum(roles, { error: m.x_selectRole() })` to replace the default
-   `Invalid option: expected one of …`. `FormCurrencyField` stores cents —
-   validate `z.number().int()` when whole cents are required.
-6. **`Form` is the `<form>`.** No second `onSubmit`, no `action`; it is
-   `noValidate` and calls `form.handleSubmit()`. Layout: put the gap classes on
-   `Form` (`className="flex flex-col gap-4"`), `FormBody` owns the field stack,
-   and pair fields in `<div className="flex flex-col gap-4 sm:flex-row">`.
-7. **`FormFooter` needs `onCancel`.** It renders Cancel, Reset and Submit;
-   relabel them with `cancelLabel`, `resetLabel`, `submitLabel`, hide Reset with
-   `showReset={false}`. `readOnly` swaps to a lone "Close" button,
-   `showActions={false}` renders nothing (use it when the parent owns the
-   destructive confirmation). Submit is disabled until `canSubmit`.
-8. **Validators are field-level only.** Never pass `validators` to `useForm`:
-   a form with form-level validators no longer matches the form type the
-   `Form*Field` components accept, so it does not type-check. Put each rule on
-   its field (rule 2 for cross-field ones). For whole-object rules, re-parse in
-   `onSubmit` — `const parsed = schema.safeParse(value)` — and report a failure
-   through `FormError` (AdminPage already does this for you).
-9. **`FormError` shows form-level errors via `error`** — the message your
-   `onSubmit` catch produced, or the failed re-parse from rule 8.
-10. **`FormTimeField` and `FormStrongPasswordField` validate themselves**
-    (`HH:MM`, strength rules) and compose with whatever `validators.onChange`
-    you pass, so you can skip those checks in the schema.
-11. **Async submit**: `onSubmit: async ({ value }) => { await onSubmit(value) }`.
-    Read `isSubmitting` via `useSelector(form.store, (s) => s.isSubmitting)` when
-    you need a custom button instead of `FormFooter`.
-12. **`defaultValues` are read once**, when the form mounts. A form that is
-    reused for different records must remount per record: render it with
-    `key={record.id}`. AdminPage already remounts its form each time the sheet
-    opens.
+3. **`name` must match the control's value type** — a string key on
+   `FormCheckboxField` doesn't compile. Schema: `z.enum` for select,
+   `z.string()` for date/time, `z.number()` for number/currency (integer
+   cents), `z.boolean()` for checkbox.
+4. **Empty number fields are `NaN`**: use `z.number({ error: m.x_required() })`;
+   replace the default enum message with `z.enum(values, { error: m.x_pick() })`.
+5. **`Form` is the `<form>`**: no own `onSubmit`/`action`. Gap classes go on
+   `Form`; pair fields in `<div className="flex flex-col gap-4 sm:flex-row">`.
+6. **Errors appear after blur or a submit attempt**, not while typing.
+7. **`defaultValues` are read once.** A form reused for another record needs
+   `key={record.id}`.
+8. **Never edit `src/hoogin/`**: `shadcn add @hoogin/form-fields --overwrite`
+   replaces it. Custom fields go in your app.
 
-## Server errors
+## References
 
-Errors from the backend (a taken email, a failed constraint) belong on the
-field they are about when you can tell which one; everything else goes to
-`FormError`. Catch in the form's `onSubmit`, put field errors on the field's
-`onSubmit` error slot — TanStack clears it as soon as the user edits that
-field — and pass the rest up:
-
-```tsx
-const form = useForm({
-  defaultValues,
-  onSubmit: async ({ value, formApi }) => {
-    try {
-      await onSubmit(value)
-    } catch (err) {
-      if (isUniqueViolation(err, "email")) {
-        formApi.setFieldMeta("email", (meta) => ({
-          ...meta,
-          errorMap: { ...meta.errorMap, onSubmit: m.profileForm_emailTaken() },
-        }))
-        return
-      }
-      setError(m.profileForm_saveFailed()) // shown by <FormError error={error} />
-    }
-  },
-})
-```
-
-`isUniqueViolation` stands for whatever your API layer exposes to recognise the
-error — map backend errors there, not in each form.
-
-## Inside AdminPage
-
-A form rendered by `@hoogin/admin-page` takes `EntityFormProps<TData>` and has a
-few extra rules (read-only modes, where errors appear, no re-parse). They live
-in the `hgn-building-admin-pages` skill.
-
-## Verification
-
-Run the host app's own typecheck and lint — the field-type rules (1–5) and the
-`useForm` generics only fail there, so a form is not done until it compiles.
+- `references/fields.md` — every field and its value type, `FormFooter` props,
+  relation (foreign key) fields, writing a custom field.
+- `references/server-errors.md` — showing a backend error on the field it is
+  about.
+- `references/troubleshooting.md` — symptom → cause → fix.

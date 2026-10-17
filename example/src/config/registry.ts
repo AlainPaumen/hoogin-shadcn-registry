@@ -254,6 +254,26 @@ export const registryItems: RegistryItem[] = [
         "path": "skills/hgn-building-data-tables/SKILL.md",
         "type": "registry:file",
         "target": "~/.opencode/skills/hgn-building-data-tables/SKILL.md"
+      },
+      {
+        "path": "skills/hgn-building-data-tables/references/props.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-data-tables/references/props.md"
+      },
+      {
+        "path": "skills/hgn-building-data-tables/references/cells.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-data-tables/references/cells.md"
+      },
+      {
+        "path": "skills/hgn-building-data-tables/references/search-and-sorting.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-data-tables/references/search-and-sorting.md"
+      },
+      {
+        "path": "skills/hgn-building-data-tables/references/troubleshooting.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-data-tables/references/troubleshooting.md"
       }
     ]
   },
@@ -508,6 +528,21 @@ export const registryItems: RegistryItem[] = [
         "path": "skills/hgn-building-forms/SKILL.md",
         "type": "registry:file",
         "target": "~/.opencode/skills/hgn-building-forms/SKILL.md"
+      },
+      {
+        "path": "skills/hgn-building-forms/references/fields.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-forms/references/fields.md"
+      },
+      {
+        "path": "skills/hgn-building-forms/references/server-errors.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-forms/references/server-errors.md"
+      },
+      {
+        "path": "skills/hgn-building-forms/references/troubleshooting.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-forms/references/troubleshooting.md"
       }
     ]
   },
@@ -566,6 +601,16 @@ export const registryItems: RegistryItem[] = [
         "path": "skills/hgn-building-admin-pages/SKILL.md",
         "type": "registry:file",
         "target": "~/.opencode/skills/hgn-building-admin-pages/SKILL.md"
+      },
+      {
+        "path": "skills/hgn-building-admin-pages/references/props.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-admin-pages/references/props.md"
+      },
+      {
+        "path": "skills/hgn-building-admin-pages/references/troubleshooting.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-building-admin-pages/references/troubleshooting.md"
       }
     ]
   },
@@ -686,6 +731,11 @@ export const registryItems: RegistryItem[] = [
         "path": "skills/hgn-internationalizing-apps/references/setup.md",
         "type": "registry:file",
         "target": "~/.opencode/skills/hgn-internationalizing-apps/references/setup.md"
+      },
+      {
+        "path": "skills/hgn-internationalizing-apps/references/troubleshooting.md",
+        "type": "registry:file",
+        "target": "~/.opencode/skills/hgn-internationalizing-apps/references/troubleshooting.md"
       }
     ]
   }

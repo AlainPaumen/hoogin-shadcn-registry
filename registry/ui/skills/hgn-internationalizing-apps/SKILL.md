@@ -1,6 +1,6 @@
 ---
 name: hgn-internationalizing-apps
-description: Use when adding or changing user-facing text, adding or switching a language/locale, overriding the wording of a @hoogin component, formatting dates/numbers/currency by locale, installing a translatable @hoogin component, setting up i18n, or debugging strings stuck in the wrong language — in a Vite + TanStack Router app with Paraglide JS and the @hoogin/i18n registry item.
+description: Translates @hoogin apps with Paraglide JS and the @hoogin/i18n item — typed m.*() messages, per-component message bundles merged into the app, locale switching, locale-aware date/number/currency formatting. Use when adding or changing user-facing text, adding or switching a language, overriding a @hoogin component's wording, formatting values by locale, setting up i18n, or debugging text in the wrong language.
 user-invocable: true
 ---
 
@@ -11,27 +11,6 @@ comes from Paraglide messages and renders in the active locale. The locale comes
 from a cookie and the browser language by default (a locale in the URL is an
 optional extra), and every translatable @hoogin component ships its own message
 bundles.
-
-## Contents
-
-- [Requires](#requires)
-- [How it works](#how-it-works)
-- [Is it set up?](#is-it-set-up)
-- [Use messages in your own code](#use-messages-in-your-own-code)
-- [Add a language](#add-a-language)
-- [Override a component's wording](#override-a-components-wording)
-- [Switching locale](#switching-locale)
-- [Install a translatable component](#install-a-translatable-component)
-- [Conventions](#conventions)
-- [Troubleshooting](#troubleshooting)
-- [References](#references)
-
----
-
-## Requires
-
-- Bun as package manager and runtime, Vite, TanStack Router, a client SPA.
-- `@inlang/paraglide-js` — installed by the base item, not by hand.
 
 ## How it works
 
@@ -99,6 +78,15 @@ the active locale — not `toLocaleDateString()`, which reads the system locale:
 import { formatDate, formatNumber, formatCurrency } from "@/lib/i18n/format"
 ```
 
+## Checklist for new text
+
+```
+- [ ] Key prefixed by feature or component (notesPage_title)
+- [ ] Key added to every messages/<locale>.json
+- [ ] Used as m.key() — no literal strings left in JSX, aria-labels, placeholders or zod messages
+- [ ] bun run i18n (or dev) compiles, typecheck passes — fix and re-run until clean
+```
+
 ## Add a language
 
 1. Add the locale to `locales` in `project.inlang/settings.json`.
@@ -152,21 +140,10 @@ otherwise restart it.
 - `messages/.generated/` and `src/paraglide/` are build output; the merge plugin
   and Paraglide own them.
 
-## Troubleshooting
-
-| Symptom | Cause | Fix |
-| --- | --- | --- |
-| `Property 'x' does not exist` on `m` | messages not merged or compiled | run `bun run i18n`, or restart `dev` |
-| Can't resolve `@/paraglide/messages` | `outdir` or `@` alias differs | use `outdir: "./src/paraglide"` and map `@` → `src` |
-| Plugin can't find `project.inlang/settings.json` | Vite started from a workspace root | pass `root` in the plugin options |
-| `[i18n] Key "x" defined by both "a" and "b"` | two components share a key | rename one with its component prefix |
-| A string stays in the base language in another locale | key missing from that locale's file, or the component has no bundle for it | add the key to `messages/<locale>.json` |
-| Text stays in the old language after switching | `setLocale(…, { reload: false })` with module-level messages | let `setLocale` reload, or build those messages in the component |
-| Dev server recompiles in a loop | something else writes `messages/.generated/` | let only the merge plugin write there |
-
 ## References
 
 - `references/setup.md` — the one-time setup, for an app without Paraglide yet.
+- `references/troubleshooting.md` — symptom → cause → fix.
 - `references/architecture.md` — the merge flow, the base item's three files,
   and why your app's messages win.
 - `references/localized-urls.md` — optional locale-prefixed and translated URLs,

@@ -1,0 +1,1 @@
+../../../../example/.opencode/skills/hgn-building-forms/references/server-errors.md
