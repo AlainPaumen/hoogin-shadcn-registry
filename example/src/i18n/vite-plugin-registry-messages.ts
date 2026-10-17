@@ -9,9 +9,17 @@ export type Options = {
   settings?: string
 }
 
+// Where `shadcn add` installs the bundles: like the CLI, `src/messages/registry`
+// in projects with a `src/` dir, `messages/registry` otherwise.
+export function defaultSrcDir(root: string) {
+  return fs.existsSync(path.resolve(root, "src"))
+    ? "src/messages/registry"
+    : "messages/registry"
+}
+
 export function mergeRegistryMessages({
   root = process.cwd(),
-  srcDir = "messages/registry",
+  srcDir = defaultSrcDir(root),
   outDir = "messages/.generated",
   settings = "project.inlang/settings.json",
 }: Options = {}) {
@@ -77,7 +85,7 @@ export function registryMessages(options: Options = {}): Plugin {
       mergeRegistryMessages(opts)
     },
     configureServer(server) {
-      const src = path.resolve(opts.root!, opts.srcDir ?? "messages/registry")
+      const src = path.resolve(opts.root!, opts.srcDir ?? defaultSrcDir(opts.root!))
       server.watcher.add(src)
       const onChange = (f: string) => {
         if (f.startsWith(src) && f.endsWith(".json")) mergeRegistryMessages(opts)

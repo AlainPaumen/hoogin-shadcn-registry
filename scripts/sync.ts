@@ -7,7 +7,8 @@ const registryDir = join(root, "registry", "ui")
 const registryJson = join(registryDir, "registry.json")
 const exampleDir = join(root, "example")
 const exampleSrc = join(exampleDir, "src")
-const exampleMessages = join(exampleDir, "messages")
+const exampleMessages = join(exampleSrc, "messages")
+const exampleI18n = join(exampleSrc, "i18n")
 const hooginDir = join(exampleSrc, "hoogin")
 
 const watchMode = process.argv.includes("--watch")
@@ -21,12 +22,13 @@ async function loadFiles(): Promise<RegistryFile[]> {
   return (raw.items ?? []).flatMap((item: RegistryItem) => item.files ?? [])
 }
 
-// example path derives from the install target: hoogin/... → example/src/hoogin/...
+// example path derives from the install target the way the shadcn CLI resolves it
+// in a src/ project: `~/x` → example/x (project root), anything else → example/src/x
+// (hoogin/..., messages/registry/..., i18n/...).
 // registry path is the declared payload path relative to registry/ui/.
-// message bundles target the project root (messages/...), everything else lands in src/.
 function examplePathFor(target: string) {
-  return target.startsWith("messages/")
-    ? join(exampleDir, target)
+  return target.startsWith("~/")
+    ? join(exampleDir, target.slice(2))
     : join(exampleSrc, target)
 }
 
@@ -116,7 +118,7 @@ if (watchMode) {
   let timer: ReturnType<typeof setTimeout> | undefined
   // ponytail: debounced full re-sync on any change under the watched trees —
   // ~60 file copies, cheap; per-file watchers not worth the complexity.
-  const source = reverse ? registryDir : [hooginDir, exampleMessages]
+  const source = reverse ? registryDir : [hooginDir, exampleMessages, exampleI18n]
   console.log(`Watching ${source} for changes...`)
   for (const dir of Array.isArray(source) ? source : [source]) {
     watch(dir, { recursive: true }, () => {

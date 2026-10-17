@@ -22,7 +22,7 @@ locale** (a `registry:file`), read through type-safe `m.*()` calls.
 
 ## Steps
 
-1. **Write the bundles** under `example/messages/registry/<component>/` — one
+1. **Write the bundles** under `example/src/messages/registry/<component>/` — one
    `<locale>.json` per locale, `en.json` always (it is the fallback). Keys are
    flat and prefixed with the component name.
 2. **Read them** with `m.*()`, importing from `@/paraglide/messages.js`:
@@ -48,8 +48,9 @@ green.
 ## Registry item shape
 
 Paths are relative to `registry/ui/`; `target` is relative to the consumer's `src/`
-— except `messages/...` targets, which land in the project root (`example/` here,
-the consumer's root on install):
+(the CLI prefixes `src/` when the project has one), so `messages/registry/...`
+lands in `src/messages/registry/...` — `example/src/messages/registry/` here. Only
+`~/`-prefixed targets land in the project root:
 
 ```json
 {
@@ -77,7 +78,7 @@ the consumer's root on install):
 ```
 
 Every locale gets its own entry. `scripts/sync.ts` copies the source
-(`example/messages/registry/<component>/<locale>.json`) to
+(`example/src/messages/registry/<component>/<locale>.json`) to
 `registry/ui/messages/<component>/<locale>.json`, and back.
 
 ## Key conventions
@@ -105,7 +106,7 @@ bun .agents/skills/translate-component/scripts/add-locale.ts nl --root example
 
 Adds the locale to `example/project.inlang/settings.json`, creates
 `example/messages/<locale>.json`, and stubs
-`example/messages/registry/<component>/<locale>.json` for every component by
+`example/src/messages/registry/<component>/<locale>.json` for every component by
 copying the `en` keys as placeholders. Idempotent — a second run is all skips.
 Then `bun run scripts/sync.ts` to publish the stubs into `registry/ui/messages/`.
 

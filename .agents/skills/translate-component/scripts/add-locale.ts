@@ -4,7 +4,8 @@
 //
 //   1. adds the locale to project.inlang/settings.json
 //   2. creates messages/<locale>.json for the app's own strings
-//   3. stubs messages/registry/<component>/<locale>.json for every component,
+//   3. stubs src/messages/registry/<component>/<locale>.json (messages/registry
+//      without src/) for every component,
 //      copying the en keys as placeholders
 //
 // Idempotent: existing locales and files are left untouched, so re-running is a
@@ -15,12 +16,16 @@ import path from "node:path"
 const SCHEMA = "https://inlang.com/schema/inlang-message-format"
 
 function parseArgs(argv: string[]) {
-  const args = { locale: "", root: process.cwd(), src: "messages/registry" }
+  const args = { locale: "", root: process.cwd(), src: "" }
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--root") args.root = path.resolve(argv[++i])
     else if (argv[i] === "--src") args.src = argv[++i]
     else if (!args.locale && !argv[i].startsWith("--")) args.locale = argv[i]
   }
+  // where `shadcn add` installs the bundles, like the merge plugin's default
+  args.src ||= fs.existsSync(path.join(args.root, "src"))
+    ? "src/messages/registry"
+    : "messages/registry"
   return args
 }
 
