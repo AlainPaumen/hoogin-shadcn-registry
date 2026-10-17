@@ -201,7 +201,28 @@ function Sidebar({
             <SheetTitle>{m.sidebar_mobileTitle()}</SheetTitle>
             <SheetDescription>{m.sidebar_mobileDescription()}</SheetDescription>
           </SheetHeader>
-          <div className="flex h-full w-full flex-col">{children}</div>
+          {/* Close the sheet once a link inside it is followed. React events bubble
+              through portals, so this also covers links in menus opened from the
+              sheet (e.g. the user dropdown). New-tab clicks keep it open. */}
+          <div
+            className="flex h-full w-full flex-col"
+            onClick={(event) => {
+              const link = (event.target as Element).closest("a[href]")
+              if (
+                link &&
+                event.button === 0 &&
+                !event.metaKey &&
+                !event.ctrlKey &&
+                !event.shiftKey &&
+                !event.altKey &&
+                link.getAttribute("target") !== "_blank"
+              ) {
+                setOpenMobile(false)
+              }
+            }}
+          >
+            {children}
+          </div>
         </SheetContent>
       </Sheet>
     )
