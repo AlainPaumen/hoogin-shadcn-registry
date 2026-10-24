@@ -103,6 +103,38 @@
       ]
     },
     {
+      "name": "subject-switcher",
+      "type": "registry:ui",
+      "title": "Subject Switcher",
+      "description": "A switcher for the current subject, styled like the sidebar brand: title on the first line, selected subject below, with a searchable dropdown to switch.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "command",
+        "popover",
+        "@hoogin/i18n"
+      ],
+      "files": [
+        {
+          "path": "navigation/subject-switcher.tsx",
+          "type": "registry:ui",
+          "target": "hoogin/ui/navigation/subject-switcher.tsx"
+        },
+        {
+          "path": "messages/subject-switcher/en.json",
+          "type": "registry:file",
+          "target": "messages/registry/subject-switcher/en.json"
+        },
+        {
+          "path": "messages/subject-switcher/nl.json",
+          "type": "registry:file",
+          "target": "messages/registry/subject-switcher/nl.json"
+        }
+      ]
+    },
+    {
       "name": "auth-provider",
       "type": "registry:ui",
       "title": "Auth Provider",

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "subject-switcher",
+  "title": "Subject Switcher",
+  "description": "A switcher for the current subject, styled like the sidebar brand: title on the first line, selected subject below, with a searchable dropdown to switch.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "command",
+    "popover",
+    "@hoogin/i18n"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/navigation/subject-switcher.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"@/components/ui/command\"\nimport { Popover, PopoverContent, PopoverTrigger } from \"@/components/ui/popover\"\nimport { CheckIcon, ChevronsUpDownIcon } from \"lucide-react\"\nimport { m } from \"@/paraglide/messages.js\"\n\nexport type SubjectOption = {\n  name: string\n}\n\ntype SubjectSwitcherProps = {\n  /** First line, describing what kind of subject this is. */\n  title: string\n  /** The selectable subjects; each option is one subject. */\n  subjects: SubjectOption[]\n  /** Name of the selected subject, controlled by the caller. */\n  value: string | undefined\n  onSelect?: (subject: SubjectOption) => void\n}\n\nexport function SubjectSwitcher({\n  title,\n  subjects,\n  value,\n  onSelect,\n}: SubjectSwitcherProps) {\n  const [isOpen, setIsOpen] = React.useState(false)\n  const [search, setSearch] = React.useState(\"\")\n\n  const selected = subjects.find((subject) => subject.name === value) ?? subjects[0]\n\n  if (subjects.length === 0 || !selected) {\n    return null\n  }\n\n  function handleOpenChange(next: boolean) {\n    setIsOpen(next)\n    if (!next) {\n      setSearch(\"\")\n    }\n  }\n\n  function handleSelect(subject: SubjectOption) {\n    onSelect?.(subject)\n    setIsOpen(false)\n  }\n\n  // Only one subject: nothing to switch, render the trigger statically.\n  if (subjects.length === 1) {\n    return (\n      <div className=\"grid min-w-56 py-2 pl-2.5 text-sm leading-tight\">\n        <span className=\"truncate text-xs text-muted-foreground\">{title}</span>\n        <span className=\"truncate font-medium\">{selected.name}</span>\n      </div>\n    )\n  }\n\n  const visibleSubjects = subjects\n    .filter((subject) =>\n      subject.name.toLowerCase().includes(search.toLowerCase())\n    )\n    .sort((a, b) => a.name.localeCompare(b.name))\n\n  return (\n    <Popover open={isOpen} onOpenChange={handleOpenChange}>\n      <PopoverTrigger\n        render={\n          <Button\n            variant=\"ghost\"\n            className=\"h-auto w-full min-w-56 justify-stretch px-2.5 py-2\"\n            aria-label={title}\n          />\n        }\n      >\n        <div className=\"grid flex-1 text-left text-sm leading-tight\">\n          <span className=\"truncate text-xs text-muted-foreground\">{title}</span>\n          <span className=\"truncate font-medium\">{selected.name}</span>\n        </div>\n        <ChevronsUpDownIcon className=\"ml-auto size-4 text-muted-foreground\" />\n      </PopoverTrigger>\n      <PopoverContent className=\"w-(--anchor-width) min-w-56 p-0\" align=\"start\">\n        <Command shouldFilter={false}>\n          <CommandInput\n            value={search}\n            onValueChange={setSearch}\n            placeholder={title}\n          />\n          <CommandList>\n            {visibleSubjects.length === 0 ? (\n              <CommandEmpty>{m.subjectSwitcher_noResults()}</CommandEmpty>\n            ) : (\n              <CommandGroup>\n                {visibleSubjects.map((subject) => (\n                  <CommandItem\n                    key={subject.name}\n                    value={subject.name}\n                    onSelect={() => handleSelect(subject)}\n                  >\n                    {subject.name}\n                    {subject.name === selected.name ? (\n                      <CheckIcon className=\"ml-auto\" />\n                    ) : null}\n                  </CommandItem>\n                ))}\n              </CommandGroup>\n            )}\n          </CommandList>\n        </Command>\n      </PopoverContent>\n    </Popover>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "hoogin/ui/navigation/subject-switcher.tsx"
+    },
+    {
+      "path": "registry/ui/messages/subject-switcher/en.json",
+      "content": "{\n  \"$schema\": \"https://inlang.com/schema/inlang-message-format\",\n  \"subjectSwitcher_noResults\": \"No results found.\"\n}\n",
+      "type": "registry:file",
+      "target": "messages/registry/subject-switcher/en.json"
+    },
+    {
+      "path": "registry/ui/messages/subject-switcher/nl.json",
+      "content": "{\n  \"$schema\": \"https://inlang.com/schema/inlang-message-format\",\n  \"subjectSwitcher_noResults\": \"Geen resultaten gevonden.\"\n}\n",
+      "type": "registry:file",
+      "target": "messages/registry/subject-switcher/nl.json"
+    }
+  ],
+  "type": "registry:ui"
+}

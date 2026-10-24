@@ -38,6 +38,7 @@ import { Route as DocsComponentsFormTimeFieldRouteImport } from './routes/docs/c
 import { Route as DocsComponentsLocaleToggleRouteImport } from './routes/docs/components/locale-toggle'
 import { Route as DocsComponentsSidebarRouteImport } from './routes/docs/components/sidebar'
 import { Route as DocsComponentsSpinnerRouteImport } from './routes/docs/components/spinner'
+import { Route as DocsComponentsSubjectSwitcherRouteImport } from './routes/docs/components/subject-switcher'
 import { Route as DocsComponentsThemeProviderRouteImport } from './routes/docs/components/theme-provider'
 import { Route as DocsComponentsThemeToggleRouteImport } from './routes/docs/components/theme-toggle'
 
@@ -203,6 +204,12 @@ const DocsComponentsSpinnerRoute = DocsComponentsSpinnerRouteImport.update({
   path: '/docs/components/spinner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocsComponentsSubjectSwitcherRoute =
+  DocsComponentsSubjectSwitcherRouteImport.update({
+    id: '/docs/components/subject-switcher',
+    path: '/docs/components/subject-switcher',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DocsComponentsThemeProviderRoute =
   DocsComponentsThemeProviderRouteImport.update({
     id: '/docs/components/theme-provider',
@@ -245,6 +252,7 @@ export interface FileRoutesByFullPath {
   '/docs/components/locale-toggle': typeof DocsComponentsLocaleToggleRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
+  '/docs/components/subject-switcher': typeof DocsComponentsSubjectSwitcherRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
   '/docs/components/theme-toggle': typeof DocsComponentsThemeToggleRoute
   '/docs/components/': typeof DocsComponentsIndexRoute
@@ -278,6 +286,7 @@ export interface FileRoutesByTo {
   '/docs/components/locale-toggle': typeof DocsComponentsLocaleToggleRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
+  '/docs/components/subject-switcher': typeof DocsComponentsSubjectSwitcherRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
   '/docs/components/theme-toggle': typeof DocsComponentsThemeToggleRoute
   '/docs/components': typeof DocsComponentsIndexRoute
@@ -312,6 +321,7 @@ export interface FileRoutesById {
   '/docs/components/locale-toggle': typeof DocsComponentsLocaleToggleRoute
   '/docs/components/sidebar': typeof DocsComponentsSidebarRoute
   '/docs/components/spinner': typeof DocsComponentsSpinnerRoute
+  '/docs/components/subject-switcher': typeof DocsComponentsSubjectSwitcherRoute
   '/docs/components/theme-provider': typeof DocsComponentsThemeProviderRoute
   '/docs/components/theme-toggle': typeof DocsComponentsThemeToggleRoute
   '/docs/components/': typeof DocsComponentsIndexRoute
@@ -347,6 +357,7 @@ export interface FileRouteTypes {
     | '/docs/components/locale-toggle'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
+    | '/docs/components/subject-switcher'
     | '/docs/components/theme-provider'
     | '/docs/components/theme-toggle'
     | '/docs/components/'
@@ -380,6 +391,7 @@ export interface FileRouteTypes {
     | '/docs/components/locale-toggle'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
+    | '/docs/components/subject-switcher'
     | '/docs/components/theme-provider'
     | '/docs/components/theme-toggle'
     | '/docs/components'
@@ -413,6 +425,7 @@ export interface FileRouteTypes {
     | '/docs/components/locale-toggle'
     | '/docs/components/sidebar'
     | '/docs/components/spinner'
+    | '/docs/components/subject-switcher'
     | '/docs/components/theme-provider'
     | '/docs/components/theme-toggle'
     | '/docs/components/'
@@ -447,6 +460,7 @@ export interface RootRouteChildren {
   DocsComponentsLocaleToggleRoute: typeof DocsComponentsLocaleToggleRoute
   DocsComponentsSidebarRoute: typeof DocsComponentsSidebarRoute
   DocsComponentsSpinnerRoute: typeof DocsComponentsSpinnerRoute
+  DocsComponentsSubjectSwitcherRoute: typeof DocsComponentsSubjectSwitcherRoute
   DocsComponentsThemeProviderRoute: typeof DocsComponentsThemeProviderRoute
   DocsComponentsThemeToggleRoute: typeof DocsComponentsThemeToggleRoute
   DocsComponentsIndexRoute: typeof DocsComponentsIndexRoute
@@ -657,6 +671,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocsComponentsSpinnerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/docs/components/subject-switcher': {
+      id: '/docs/components/subject-switcher'
+      path: '/docs/components/subject-switcher'
+      fullPath: '/docs/components/subject-switcher'
+      preLoaderRoute: typeof DocsComponentsSubjectSwitcherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/docs/components/theme-provider': {
       id: '/docs/components/theme-provider'
       path: '/docs/components/theme-provider'
@@ -705,6 +726,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocsComponentsLocaleToggleRoute: DocsComponentsLocaleToggleRoute,
   DocsComponentsSidebarRoute: DocsComponentsSidebarRoute,
   DocsComponentsSpinnerRoute: DocsComponentsSpinnerRoute,
+  DocsComponentsSubjectSwitcherRoute: DocsComponentsSubjectSwitcherRoute,
   DocsComponentsThemeProviderRoute: DocsComponentsThemeProviderRoute,
   DocsComponentsThemeToggleRoute: DocsComponentsThemeToggleRoute,
   DocsComponentsIndexRoute: DocsComponentsIndexRoute,

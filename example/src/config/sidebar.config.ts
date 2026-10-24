@@ -133,6 +133,10 @@ export const sidebarData = {
           url: "/docs/components/app-sidebar",
         },
         {
+          title: "Subject Switcher",
+          url: "/docs/components/subject-switcher",
+        },
+        {
           title: "Auth Provider",
           url: "/docs/components/auth-provider",
         },
