@@ -5,6 +5,7 @@ import {
   type FormFieldProps,
   type KeysOfType,
 } from "@/hoogin/ui/forms/form.field"
+import { inputAutofillClasses } from "@/hoogin/ui/forms/form.utils"
 
 export type FormTextInputType = "text" | "email" | "number" | "date"
 
@@ -66,7 +67,7 @@ export function FormTextField<
           aria-labelledby={label ? `${field.name}-label` : undefined}
           aria-describedby={field.invalid ? `${field.name}-error` : undefined}
           placeholder={placeholder}
-          className={cn("w-full", className)}
+          className={cn(inputAutofillClasses, "w-full", className)}
         />
       )}
     </FormField>

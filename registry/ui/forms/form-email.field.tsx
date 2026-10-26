@@ -11,6 +11,7 @@ import {
   type FormFieldProps,
   type KeysOfType,
 } from "@/hoogin/ui/forms/form.field"
+import { inputAutofillClasses } from "@/hoogin/ui/forms/form.utils"
 
 export type FormEmailFieldProps<
   TFormData,
@@ -65,7 +66,7 @@ export function FormEmailField<
             disabled={disabled}
             aria-invalid={field.invalid || undefined}
             placeholder={placeholder}
-            className={cn("w-full", className)}
+            className={cn(inputAutofillClasses, "h-full w-full", className)}
           />
         </InputGroup>
       )}

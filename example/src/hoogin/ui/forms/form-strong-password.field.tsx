@@ -28,6 +28,7 @@ import {
   type FormFieldProps,
   type KeysOfType,
 } from "@/hoogin/ui/forms/form.field"
+import { inputAutofillClasses } from "@/hoogin/ui/forms/form.utils"
 
 type StrongPasswordRule = {
   test: (value: string) => boolean
@@ -157,7 +158,7 @@ export function FormStrongPasswordField<
                 autoComplete={autoComplete}
                 aria-invalid={field.invalid || undefined}
                 placeholder={placeholder}
-                className={cn("w-full", className)}
+                className={cn(inputAutofillClasses, "h-full w-full", className)}
               />
               <InputGroupButton
                 tabIndex={-1}

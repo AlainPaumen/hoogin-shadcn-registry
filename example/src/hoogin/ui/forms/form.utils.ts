@@ -1,3 +1,12 @@
+// Chrome/Chromium paint autofill with background-color !important (it cannot
+// be overridden) — cover it with an opaque inset box-shadow and freeze the
+// background change with a huge transition. This is the only known override.
+export const inputAutofillClasses =
+  "[&:-webkit-autofill]:[box-shadow:inset_0_0_0_1000px_var(--background)] " +
+  "dark:[&:autofill]:[box-shadow:inset_0_0_0_1000px_var(--card)] " +
+  "[&:-webkit-autofill]:[-webkit-text-fill-color:var(--foreground)]! " +
+  "[&:-webkit-autofill]:[transition:background-color_9999s_ease-out]"
+
 export function fieldErrorMessage(error: unknown): string {
   if (typeof error === "string") return error
   if (typeof error === "object" && error !== null && "message" in error) {
